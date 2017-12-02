@@ -1,6 +1,6 @@
 var AV = require("leanengine");
 
-AV.Cloud.define('youpin_1', function(request) {
+AV.Cloud.define("youpin_1", function(request) {
     var rp = require('request-promise');
     var Promise = require("bluebird");
     var nodemailer = require('nodemailer');
