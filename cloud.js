@@ -18,7 +18,7 @@ AV.Cloud.define('youpin_1', function(request) {
     }).then(function(results) {
         var data = results.result.BuildHome.data;
 
-        if (process.env.runtime != "production") {
+        if (process.env.LEANCLOUD_APP_ENV != "production") {
             console.log(data);
         }
 
@@ -52,7 +52,7 @@ AV.Cloud.define('youpin_1', function(request) {
         });
     }).then(function(data) {
         if (data.length > 0) {
-            if (process.env.runtime == "production") {
+            if (process.env.LEANCLOUD_APP_ENV == "production") {
                 var transporter = nodemailer.createTransport({
                     service: 'qq',
                     auth: {
