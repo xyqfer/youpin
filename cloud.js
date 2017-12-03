@@ -114,10 +114,6 @@ AV.Cloud.define("ele_restaurant", function (request) {
     }).then((data) => {
         return flatten(data);
     }).then((results) => {
-        if (process.env.LEANCLOUD_APP_ENV != "production") {
-            console.log(results);
-        }
-
         return Promise.filter(results, (item) => {
             const query = new AV.Query(dbName);
             query.equalTo("restaurantId", item.id);
