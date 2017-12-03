@@ -95,7 +95,8 @@ AV.Cloud.define("ele_restaurant", function (request) {
     const dbName = "Ele_restaurant";
     const latitude = process.env.latitude || 30.30489;
     const longitude = process.env.longitude || 120.10598;
-    const offsetList = [];
+
+    let offsetList = [];
 
     for (let offset = 0; offset <= 500; offset += 20) {
         offsetList.push(offset);
@@ -104,9 +105,9 @@ AV.Cloud.define("ele_restaurant", function (request) {
     return Promise.mapSeries(offsetList, (offset) => {
         return rp.get({
             json: true,
-            uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&terminal=h5`,
+            uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
             headers: {
-                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60"
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1",
             }
         }).then((data) => {
             return data;
@@ -125,15 +126,23 @@ AV.Cloud.define("ele_restaurant", function (request) {
             concurrency: 1
         });
     }).then((data) => {
-        console.log(data);
-
         return Promise.mapSeries(data, (item) => {
             const RestaurantStore = AV.Object.extend(dbName);
             const store = new RestaurantStore();
 
+            let discountTip = "";
+
+            for (let i = 0; i < item.activities.length; i++) {
+                if (item.activities[i].type == 102) {
+                    discountTip = item.activities[i].tips || "";
+                    break;
+                }
+            }
+
             store.set("restaurantId", item.id);
             store.set("rate", item.rating);
             store.set("name", item.name);
+            store.set("discountTip", discountTip);
 
             return store.save(null, {
                 useMasterKey: false
