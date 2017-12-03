@@ -86,3 +86,62 @@ AV.Cloud.define("youpin_1", function(request) {
         return data;
     });
 });
+
+AV.Cloud.define("ele_restaurant", function (request) {
+    const rp = require("request-promise");
+    const Promise = require("bluebird");
+    const flatten = require("lodash/flatten");
+
+    const dbName = "Ele_restaurant";
+    const latitude = process.env.latitude || 30.30489;
+    const longitude = process.env.longitude || 120.10598;
+    const offsetList = [];
+
+    for (let offset = 0; offset <= 500; offset += 20) {
+        offsetList.push(offset);
+    }
+
+    return Promise.mapSeries(offsetList, (offset) => {
+        return rp.get({
+            json: true,
+            uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&terminal=h5`,
+            headers: {
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60"
+            }
+        }).then((data) => {
+            return data;
+        });
+    }).then((data) => {
+        return flatten(data);
+    }).then((results) => {
+        return Promise.filter(results, (item) => {
+            const query = new AV.Query(dbName);
+            query.equalTo("restaurantId", item.id);
+
+            return query.find().then((results) => {
+                return results.length == 0;
+            });
+        }, {
+            concurrency: 1
+        });
+    }).then((data) => {
+        console.log(data);
+
+        return Promise.mapSeries(data, (item) => {
+            const RestaurantStore = AV.Object.extend(dbName);
+            const store = new RestaurantStore();
+
+            store.set("restaurantId", item.id);
+            store.set("rate", item.rating);
+            store.set("name", item.name);
+
+            return store.save(null, {
+                useMasterKey: false
+            }).then((post) => {
+                return item;
+            }, (error) => {
+                return error;
+            });
+        });
+    });
+});
