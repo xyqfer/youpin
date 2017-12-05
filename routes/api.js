@@ -10,6 +10,8 @@ router.get('/v1/restaurant', (req, res, next) => {
     let query = new AV.Query(Restaurant);
     let limit = req.query.limit || 5;
 
+    query.limit(1000);
+
     query.find().then((results) => {
         let data = [];
         let resultsLength = results.length;
