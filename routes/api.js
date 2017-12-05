@@ -10,12 +10,20 @@ router.get('/v1/restaurant', (req, res, next) => {
     let query = new AV.Query(Restaurant);
     let limit = req.query.limit || 5;
 
+    query.limit(2000);
+
     query.find().then((results) => {
         let data = [];
         let resultsLength = results.length;
+        let count = 0;
 
-        for (let i = 1; i <= limit; i++) {
-            data.push(results[Math.floor(Math.random() * resultsLength)]);
+        while (limit > count) {
+            let restaurant = results[Math.floor(Math.random() * resultsLength)];
+
+            if (restaurant.get('rate') >= 4) {
+                data.push(restaurant);
+                count++;
+            }
         }
 
         res.json({
