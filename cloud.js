@@ -24,76 +24,72 @@ AV.Cloud.define("youpin_1", function(request) {
             },
             body: {"BuildHome":{"model":"Homepage","action":"BuildHome","parameters":{"id":153}}}
         }),
-        getAllDbData()])
-        .then(function (results) {
-            var youmiData = results[0].result.BuildHome.data;
-            var dbData = results[1];
+        getAllDbData()
+    ]).then(function (results) {
+        var youpinData = results[0].result.BuildHome.data;
+        var dbData = results[1];
+        var dbDataLength = dbData.length;
 
-            return Promise.filter(youmiData, function (item) {
-                var gid = item.gid;
+        return youpinData.filter((item) => {
+            var gid = item.gid;
 
-                for (var i = 0; i < dbData.length; i++) {
-                    if (gid == dbData[i].get("gid")) {
-                        return false;
-                    }
+            for (var i = 0; i < dbDataLength; i++) {
+                if (gid == dbData[i].get("gid")) {
+                    return false;
                 }
-
-                return true;
-            }, {
-                concurrency: 1
-            });
-        })
-        .then(function(data) {
-            return Promise.mapSeries(data, function(item) {
-                var MiStore = AV.Object.extend(dbName);
-                var store = new MiStore();
-                store.set('gid', item.gid);
-                store.set('url', item.url);
-                store.set('name', item.name);
-
-                return store.save(null, { useMasterKey: false }).then(function (post) {
-                    return item;
-                }, function (error) {
-                    // 异常处理
-                });
-            });
-        })
-        .then(function(data) {
-            if (data.length > 0) {
-                if (process.env.LEANCLOUD_APP_ENV == "production") {
-                    var transporter = nodemailer.createTransport({
-                        service: 'qq',
-                        auth: {
-                            user: process.env.mailSender,
-                            pass: process.env.mailPass //授权码,通过QQ获取
-                        }
-                    });
-
-                    var mailHtml = "";
-                    data.forEach(function (item) {
-                        mailHtml += ("<a href='" + item.url + "'>" + item.name + "</a>" + "<br><br>");
-                    });
-
-                    var mailOptions = {
-                        from: process.env.mailSender, // 发送者
-                        to: process.env.mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
-                        subject: '米家上新品啦', // 标题
-                        html: mailHtml
-                    };
-
-                    return transporter.sendMail(mailOptions);
-                } else {
-                    console.log(data);
-                    return data;
-                }
-            } else {
-                return {};
             }
-        })
-        .then(function(data) {
-            console.log(data);
-            return data;
+
+            return true;
         });
+    }).then(function(data) {
+        return Promise.mapSeries(data, function(item) {
+            var MiStore = AV.Object.extend(dbName);
+            var store = new MiStore();
+            store.set('gid', item.gid);
+            store.set('url', item.url);
+            store.set('name', item.name);
+
+            return store.save(null, { useMasterKey: false }).then(function (post) {
+                return item;
+            }, function (error) {
+                // 异常处理
+            });
+        });
+    }).then(function(data) {
+        if (data.length > 0) {
+            if (process.env.LEANCLOUD_APP_ENV == "production") {
+                var transporter = nodemailer.createTransport({
+                    service: 'qq',
+                    auth: {
+                        user: process.env.mailSender,
+                        pass: process.env.mailPass //授权码,通过QQ获取
+                    }
+                });
+
+                var mailHtml = "";
+                data.forEach(function (item) {
+                    mailHtml += ("<a href='" + item.url + "'>" + item.name + "</a>" + "<br><br>");
+                });
+
+                var mailOptions = {
+                    from: process.env.mailSender, // 发送者
+                    to: process.env.mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
+                    subject: '米家上新品啦', // 标题
+                    html: mailHtml
+                };
+
+                return transporter.sendMail(mailOptions);
+            } else {
+                console.log(data);
+                return data;
+            }
+        } else {
+            return {};
+        }
+    }).then(function(data) {
+        console.log(data);
+        return data;
+    });
 });
 
 AV.Cloud.define("ele_restaurant", function (request) {
@@ -107,32 +103,43 @@ AV.Cloud.define("ele_restaurant", function (request) {
 
     let offsetList = [];
 
-    for (let offset = 0; offset <= 500; offset += 20) {
+    for (let offset = 0; offset <= 20; offset += 20) {
         offsetList.push(offset);
     }
 
-    return Promise.mapSeries(offsetList, (offset) => {
-        return rp.get({
-            json: true,
-            uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
-            headers: {
-                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1",
-            }
-        }).then((data) => {
-            return data;
-        });
-    }).then((data) => {
-        return flatten(data);
-    }).then((results) => {
-        return Promise.filter(results, (item) => {
-            const query = new AV.Query(dbName);
-            query.equalTo("restaurantId", item.id);
+    function getAllDbData() {
+        let query = new AV.Query(dbName);
 
-            return query.find().then((results) => {
-                return results.length == 0;
+        query.limit(2000);
+        return query.find();
+    }
+
+    return Promise.all([
+        Promise.mapSeries(offsetList, (offset) => {
+            return rp.get({
+                json: true,
+                uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
+                headers: {
+                    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1",
+                }
+            }).then((data) => {
+                return data;
             });
-        }, {
-            concurrency: 1
+        }),
+        getAllDbData()
+    ]).then((results) => {
+        let eleData = flatten(results[0]);
+        let dbData = results[1];
+        const dbDataLength = dbData.length;
+
+        return eleData.filter((item) => {
+            for (let i = 0; i < dbDataLength; i++) {
+                if (item.id == dbData[i].get("restaurantId")) {
+                    return false;
+                }
+            }
+
+            return true;
         });
     }).then((data) => {
         return Promise.mapSeries(data, (item) => {
