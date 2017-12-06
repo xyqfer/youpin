@@ -150,7 +150,7 @@ AV.Cloud.define("ele_restaurant", function (request) {
                 }
             }
 
-            return true;
+            return item.type == 0;
         });
     }).then((data) => {
         return Promise.mapSeries(data, (item) => {
