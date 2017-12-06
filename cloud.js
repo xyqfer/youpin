@@ -103,7 +103,7 @@ AV.Cloud.define("ele_restaurant", function (request) {
 
     let offsetList = [];
 
-    for (let offset = 0; offset <= 20; offset += 20) {
+    for (let offset = 0; offset <= 500; offset += 20) {
         offsetList.push(offset);
     }
 
@@ -133,9 +133,20 @@ AV.Cloud.define("ele_restaurant", function (request) {
         const dbDataLength = dbData.length;
 
         return eleData.filter((item) => {
+            let discountTip = "";
+
+            for (let i = 0; i < item.activities.length; i++) {
+                if (item.activities[i].type == 102) {
+                    discountTip = item.activities[i].tips || "";
+                    break;
+                }
+            }
+
             for (let i = 0; i < dbDataLength; i++) {
                 if (item.id == dbData[i].get("restaurantId")) {
-                    return false;
+                    return item.name == dbData[i].get("name") &&
+                        item.rating == dbData[i].get("rate") &&
+                        discountTip == dbData[i].get("discountTip");
                 }
             }
 
