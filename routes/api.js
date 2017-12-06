@@ -20,7 +20,9 @@ router.get('/v1/restaurant', (req, res, next) => {
         while (limit > count) {
             let restaurant = results[Math.floor(Math.random() * resultsLength)];
 
-            if (restaurant.get('rate') >= 4) {
+            if (restaurant.get('rate') >= 4 &&
+                !restaurant.get('name').includes('超市') &&
+                !restaurant.get('name').includes('商行')) {
                 data.push(restaurant);
                 count++;
             }
@@ -60,16 +62,21 @@ router.get('/v1/menu/:name', (req, res, next) => {
                 if (data && data.length > 0) {
                     let menuList = [];
                     let menuLength = data.length;
+                    let count = 0;
 
-                    for (let i = 1; i <= limit; i++) {
+                    while (limit > count) {
                         let menuItem = data[Math.floor(Math.random() * menuLength)];
                         let foodItem = menuItem.foods[Math.floor(Math.random() * menuItem.foods.length)];
 
-                        menuList.push({
-                            name: foodItem.name,
-                            rate: foodItem.rating,
-                            price: foodItem.specfoods[0].price
-                        });
+                        if (foodItem.rating >= 4) {
+                            menuList.push({
+                                name: foodItem.name,
+                                rate: foodItem.rating,
+                                price: foodItem.specfoods[0].price
+                            });
+
+                            count++;
+                        }
                     }
 
                     res.json({
