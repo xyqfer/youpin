@@ -20,7 +20,8 @@ router.get('/v1/restaurant', (req, res, next) => {
         while (limit > count) {
             let restaurant = results[Math.floor(Math.random() * resultsLength)];
 
-            if (restaurant.get('rate') >= 4) {
+            if (restaurant.get('rate') >= 4 &&
+                !restaurant.get('name').includes('超市')) {
                 data.push(restaurant);
                 count++;
             }
