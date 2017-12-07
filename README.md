@@ -1,5 +1,16 @@
 # 米家有品上新邮件提醒工具+吃什么机器人
 
+## 米家有品上新邮件提醒工具
+
+![](https://github.com/xyqfer/blog/raw/master/img/youpin_1.png)
+
+## 吃什么机器人
+
+![](https://github.com/xyqfer/blog/raw/master/img/ele_1.png)
+
+![](https://github.com/xyqfer/blog/raw/master/img/ele_2.png)
+
+
 ## 本地运行
 
 安装依赖：
