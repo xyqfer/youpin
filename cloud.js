@@ -45,11 +45,27 @@ AV.Cloud.define("youpin_1", function(request) {
         return Promise.mapSeries(data, function(item) {
             var MiStore = AV.Object.extend(dbName);
             var store = new MiStore();
+
             store.set('gid', item.gid);
             store.set('url', item.url);
             store.set('name', item.name);
 
-            return store.save(null, { useMasterKey: false }).then(function (post) {
+            return rp.post({
+                json: true,
+                uri: 'https://www.mijiayoupin.com/app/shop/pipe',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60',
+                    'Referer': 'https://www.mijiayoupin.com/detail?gid=505'
+                },
+                form: {
+                    data: `{"detail":{"model":"Shopv2","action":"getDetail","parameters":{"gid":"${item.gid}"}},"comment":{"model":"Comment","action":"getList","parameters":{"goods_id":"${item.gid}","orderby":"1","pageindex":"0","pagesize":3}},"activity":{"model":"Activity","action":"getAct","parameters":{"gid":"${item.gid}"}}}`
+                }
+            }).then((data) => {
+                let ctime = data.result.detail.data.good.ctime;
+
+                store.set('createTime', new Date(ctime * 1000));
+                store.save(null, { useMasterKey: false });
+            }).then(function (post) {
                 return item;
             }, function (error) {
                 // 异常处理
