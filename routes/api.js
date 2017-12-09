@@ -120,17 +120,20 @@ router.get('/v2/menu/:name', (req, res, next) => {
         let restaurantList = [];
 
         try {
-            let dataKey = Object.keys(data.inside)[0];
+            for (let key in data.inside) {
+                let restaurantWithFoods = data['inside'][key]['restaurant_with_foods'];
 
-            if (data.inside[dataKey]['restaurant_with_foods'].length > 0) {
-                for (let i = 0; i < restaurantLimit; i++) {
-                    if (data.inside[dataKey]['restaurant_with_foods'][i] &&
-                        data.inside[dataKey]['restaurant_with_foods'][i]['restaurant'].type == 0) {
-                        restaurantList.push({
-                            id: data.inside[dataKey]['restaurant_with_foods'][i]['restaurant'].id,
-                            name: data.inside[dataKey]['restaurant_with_foods'][i]['restaurant'].name
-                        });
-                    }
+                if (restaurantWithFoods.length > 0) {
+                    restaurantWithFoods.forEach((item) => {
+                        if (restaurantList.length < restaurantLimit) {
+                            if (item && item.restaurant.type == 0) {
+                                restaurantList.push({
+                                    id: item.restaurant.id,
+                                    name: item.restaurant.name
+                                });
+                            }
+                        }
+                    });
                 }
             }
         } catch (e) {
