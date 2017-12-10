@@ -219,8 +219,7 @@ router.get('/v1/activities', (req, res, next) => {
     let limit = req.query.limit || 5;
 
     query.limit(limit);
-    query.greaterThanOrEqualTo('startTime', new Date());
-    query.lessThanOrEqualTo('endTime', new Date());
+    query.greaterThanOrEqualTo('endTime', new Date());
 
     query.find().then((results) => {
         res.json({
