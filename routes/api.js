@@ -3,10 +3,9 @@ const router = require('express').Router();
 const AV = require('leanengine');
 const rp = require('request-promise');
 
-const dbName = 'Ele_restaurant';
-const Restaurant = AV.Object.extend(dbName);
-
 router.get('/v1/restaurant', (req, res, next) => {
+    const dbName = 'Ele_restaurant';
+    const Restaurant = AV.Object.extend(dbName);
     let query = new AV.Query(Restaurant);
     let limit = req.query.limit || 5;
 
@@ -43,6 +42,8 @@ router.get('/v1/restaurant', (req, res, next) => {
 });
 
 router.get('/v1/menu/:name', (req, res, next) => {
+    const dbName = 'Ele_restaurant';
+    const Restaurant = AV.Object.extend(dbName);
     let query = new AV.Query(Restaurant);
     let limit = req.query.limit || 5;
 
@@ -208,6 +209,31 @@ router.get('/v2/menu/:name', (req, res, next) => {
                 msg: '查询成功'
             });
         }
+    });
+});
+
+router.get('/v1/activities', (req, res, next) => {
+    const dbName = 'Activities';
+    const Activities = AV.Object.extend(dbName);
+    let query = new AV.Query(Activities);
+    let limit = req.query.limit || 5;
+
+    query.limit(limit);
+    query.greaterThanOrEqualTo('startTime', new Date());
+    query.lessThanOrEqualTo('endTime', new Date());
+
+    query.find().then((results) => {
+        res.json({
+            success: true,
+            data: results,
+            msg: '查询成功'
+        });
+    }, () => {
+        res.json({
+            success: false,
+            data: null,
+            msg: '查询失败'
+        });
     });
 });
 
