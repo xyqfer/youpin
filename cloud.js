@@ -149,6 +149,10 @@ AV.Cloud.define("ele_restaurant", function (request) {
         const dbDataLength = dbData.length;
 
         return eleData.filter((item) => {
+            if (item.rating < 4) {
+                return false;
+            }
+
             let discountTip = "";
 
             for (let i = 0; i < item.activities.length; i++) {
