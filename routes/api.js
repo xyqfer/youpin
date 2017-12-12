@@ -180,7 +180,7 @@ router.get('/v2/menu/:name', (req, res, next) => {
                             foodList.push({
                                 name: food.name,
                                 rate: food.rating,
-                                price: food.specfoods[0].price
+                                price: food.specfoods[0].price.toFixed(1)
                             });
                         }
                     });
