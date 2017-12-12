@@ -174,8 +174,10 @@ router.get('/v2/menu/:name', (req, res, next) => {
                 let foodList = [];
                 let resultList = [];
 
-                menuList.forEach((item) => {
-                    item.foods.forEach((food) => {
+                if (menuList.length > 0 &&
+                    menuList[0]['id'] == -1 &&
+                    menuList[0]['type'] == 2) {
+                    menuList[0]['foods'].forEach((food) => {
                         if (food.rating >= 4 && food.specfoods[0].price > 1) {
                             foodList.push({
                                 name: food.name,
@@ -184,7 +186,19 @@ router.get('/v2/menu/:name', (req, res, next) => {
                             });
                         }
                     });
-                });
+                } else {
+                    menuList.forEach((item) => {
+                        item.foods.forEach((food) => {
+                            if (food.rating >= 4 && food.specfoods[0].price > 1) {
+                                foodList.push({
+                                    name: food.name,
+                                    rate: food.rating,
+                                    price: food.specfoods[0].price.toFixed(1)
+                                });
+                            }
+                        });
+                    });
+                }
 
                 if (foodList.length <= menuLimit) {
                     resultList = foodList;
