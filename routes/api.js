@@ -104,7 +104,7 @@ router.get('/v1/menu/:name', (req, res, next) => {
 
 router.get('/v2/menu/:name', (req, res, next) => {
     let name = encodeURIComponent(req.params.name);
-    let menuLimt = req.query.menuLimt || 5;
+    let menuLimit = req.query.menuLimit || 5;
     let restaurantLimit = req.query.restaurantLimit || 5;
 
     const latitude = process.env.latitude || 30.30489;
@@ -176,7 +176,7 @@ router.get('/v2/menu/:name', (req, res, next) => {
 
                 menuList.forEach((item) => {
                     item.foods.forEach((food) => {
-                        if (food.rating >= 4) {
+                        if (food.rating >= 4 && food.specfoods[0].price > 1) {
                             foodList.push({
                                 name: food.name,
                                 rate: food.rating,
@@ -186,13 +186,16 @@ router.get('/v2/menu/:name', (req, res, next) => {
                     });
                 });
 
-                let foodCount = foodList.length;
+                if (foodList.length <= menuLimit) {
+                    resultList = foodList;
+                } else {
+                    for (let i = 0; i < menuLimit; i++) {
+                        let randomIndex = Math.floor(Math.random() * foodList.length);
+                        let food = foodList.splice(randomIndex, 1);
 
-                for (let i = 0; i < menuLimt; i++) {
-                    let food = foodList[Math.floor(Math.random() * foodCount)];
-
-                    if (food && food.price > 1) {
-                        resultList.push(food);
+                        if (food) {
+                            resultList.push(food);
+                        }
                     }
                 }
 
