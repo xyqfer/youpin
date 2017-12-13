@@ -207,8 +207,8 @@ router.get('/v2/menu/:name', (req, res, next) => {
                         let randomIndex = Math.floor(Math.random() * foodList.length);
                         let food = foodList.splice(randomIndex, 1);
 
-                        if (food) {
-                            resultList.push(food);
+                        if (food.length > 0) {
+                            resultList.push(food[0]);
                         }
                     }
                 }
