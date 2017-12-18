@@ -254,4 +254,84 @@ router.get('/v1/activities', (req, res, next) => {
     });
 });
 
+router.get('/v1/books/update', (req, res, next) => {
+    var rp = require('request-promise');
+    var Promise = require("bluebird");
+    var nodemailer = require('nodemailer');
+    var cheerio = require('cheerio');
+    var iconv = require('iconv-lite');
+
+    var dbName = "Books";
+
+    function getChinaPubBook() {
+        return rp.get({
+            uri: 'http://www.china-pub.com/xinshu/',
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+            }
+        }).then((htmlString) => {
+            var $ = cheerio.load(htmlString);
+            var targetUrlList = [];
+
+            $('.nb_sec1').each(function () {
+                targetUrlList.push($(this).find('.nb_sec1_left h1 a').attr('href'));
+            });
+
+            return Promise.map(targetUrlList, (url) => {
+                return rp.get({
+                    uri: url,
+                    encoding : null,
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                    }
+                });
+            });
+
+        }).then((result) => {
+            var bookList = [];
+
+            result.forEach((htmlString) => {
+                var $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
+
+                $('.bookshow').each(function () {
+                    bookList.push({
+                        name: $(this).find('.bookName a').attr('title'),
+                        url: $(this).find('.bookName a').attr('href')
+                    });
+                });
+            });
+
+            return bookList;
+        }).then((bookList) => {
+            return Promise.map(bookList, (book) => {
+                return rp.get({
+                    uri: book.url,
+                    encoding: null,
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                    }
+                }).then((htmlString) => {
+                    var $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
+
+                    $("#con_a_1 > .pro_r_deta").eq(0).find("li").each(function () {
+                        if ($(this).text().includes("ISBN")) {
+                            book.isbn = $(this).text().replace("ISBN：", "");
+                        }
+                    });
+
+                    return book;
+                });
+            }, {
+                concurrency: 3
+            });
+        });
+    }
+
+    Promise.all([
+        getChinaPubBook()
+    ]).then((data) => {
+        res.json(data);
+    });
+});
+
 module.exports = router;
