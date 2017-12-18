@@ -199,5 +199,7 @@ AV.Cloud.define("ele_restaurant", function (request) {
                 return error;
             });
         });
+    }).then((data) => {
+        return data || {};
     });
 });
