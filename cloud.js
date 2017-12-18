@@ -187,7 +187,7 @@ AV.Cloud.define("ele_restaurant", function (request) {
             }
 
             store.set("restaurantId", item.id);
-            store.set("rate", item.rating.toFix(1));
+            store.set("rate", item.rating.toFixed(1));
             store.set("name", item.name);
             store.set("discountTip", discountTip);
 
