@@ -260,77 +260,145 @@ router.get('/v1/books/update', (req, res, next) => {
     var nodemailer = require('nodemailer');
     var cheerio = require('cheerio');
     var iconv = require('iconv-lite');
+    const flatten = require("lodash/flatten");
 
-    var dbName = "Books";
+    function updateChinaPubBook() {
+        var dbName = "ChinaPubBooks";
 
-    function getChinaPubBook() {
-        return rp.get({
-            uri: 'http://www.china-pub.com/xinshu/',
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
-            }
-        }).then((htmlString) => {
-            var $ = cheerio.load(htmlString);
-            var targetUrlList = [];
+        function getAllDbData() {
+            var query = new AV.Query(dbName);
 
-            $('.nb_sec1').each(function () {
-                targetUrlList.push($(this).find('.nb_sec1_left h1 a').attr('href'));
-            });
+            query.limit(1000);
+            return query.find();
+        }
 
-            return Promise.map(targetUrlList, (url) => {
-                return rp.get({
-                    uri: url,
-                    encoding : null,
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
-                    }
+        function getBookData() {
+            return rp.get({
+                uri: 'http://www.china-pub.com/xinshu/',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                }
+            }).then((htmlString) => {
+                var $ = cheerio.load(htmlString);
+                var targetUrlList = [];
+
+                $('.nb_sec1').each(function () {
+                    targetUrlList.push($(this).find('.nb_sec1_left h1 a').attr('href'));
                 });
-            });
 
-        }).then((result) => {
-            var bookList = [];
-
-            result.forEach((htmlString) => {
-                var $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
-
-                $('.bookshow').each(function () {
-                    bookList.push({
-                        name: $(this).find('.bookName a').attr('title'),
-                        url: $(this).find('.bookName a').attr('href')
-                    });
-                });
-            });
-
-            return bookList;
-        }).then((bookList) => {
-            return Promise.map(bookList, (book) => {
-                return rp.get({
-                    uri: book.url,
-                    encoding: null,
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
-                    }
-                }).then((htmlString) => {
-                    var $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
-
-                    $("#con_a_1 > .pro_r_deta").eq(0).find("li").each(function () {
-                        if ($(this).text().includes("ISBN")) {
-                            book.isbn = $(this).text().replace("ISBN：", "");
+                return Promise.map(targetUrlList, (url) => {
+                    return rp.get({
+                        uri: url,
+                        encoding : null,
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
                         }
                     });
-
-                    return book;
                 });
-            }, {
-                concurrency: 3
+
+            }).then((result) => {
+                var bookList = [];
+
+                result.forEach((htmlString) => {
+                    var $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
+
+                    $('.bookshow').each(function () {
+                        bookList.push({
+                            name: $(this).find('.bookName a').attr('title'),
+                            url: $(this).find('.bookName a').attr('href')
+                        });
+                    });
+                });
+
+                return bookList;
+            });
+        }
+
+        return Promise.all([
+            getAllDbData(),
+            getBookData()
+        ]).then((data) => {
+            var dbData = data[0];
+            var booksData = data[1];
+
+            return booksData.filter((book) => {
+                var sameBook = dbData.filter((item) => {
+                    return item.get('url') == book.url;
+                });
+
+                return sameBook.length == 0;
+            });
+        }).then((data) => {
+            return Promise.mapSeries(data, (item) => {
+                var BookStore = AV.Object.extend(dbName);
+                var store = new BookStore();
+
+                store.set('name', item.name);
+                store.set('url', item.url);
+
+                return store.save(null, {
+                    useMasterKey: false
+                }).then(function (post) {
+                    return item;
+                }, function (error) {
+                    // 异常处理
+                });
             });
         });
     }
 
     Promise.all([
-        getChinaPubBook()
+        updateChinaPubBook()
     ]).then((data) => {
-        res.json(data);
+        res.end();
+    });
+});
+
+router.get('/v1/books/notify', (req, res, next) => {
+    var dbName = "ChinaPubBooks";
+    var query = new AV.Query(dbName);
+
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    month = month < 10 ? "0" + month : month;
+
+    var date = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
+
+    query.greaterThanOrEqualTo("updatedAt", new Date(`${year}-${month}-${date} 00:00:00`));
+
+    query.limit(1000);
+    query.find().then((data) => {
+       if (data.length > 0) {
+           if (process.env.LEANCLOUD_APP_ENV == "production") {
+               var transporter = nodemailer.createTransport({
+                   service: 'qq',
+                   auth: {
+                       user: process.env.mailSender,
+                       pass: process.env.mailPass //授权码,通过QQ获取
+                   }
+               });
+
+               var mailHtml = "";
+               data.forEach(function (item) {
+                   mailHtml += ("<a href='" + item.get("url") + "'>" + item.get("name") + "</a>" + "<br><br>");
+               });
+
+               var mailOptions = {
+                   from: process.env.mailSender, // 发送者
+                   to: process.env.mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
+                   subject: '有新书啦', // 标题
+                   html: mailHtml
+               };
+
+               return transporter.sendMail(mailOptions);
+           } else {
+               console.log(data);
+               return data;
+           }
+       }
+    }).then((data) => {
+        res.end();
     });
 });
 
