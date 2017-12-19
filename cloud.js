@@ -203,3 +203,25 @@ AV.Cloud.define("ele_restaurant", function (request) {
         return data || {};
     });
 });
+
+AV.Cloud.define("update_book", function(request) {
+    var rp = require('request-promise');
+    var basePath = process.env.LEANCLOUD_APP_ENV == "production" ? process.env.hostName : "http://localhost:3000";
+
+    rp.get({
+        uri: `${basePath}/api/v1/books/update`
+    });
+
+    return {};
+});
+
+AV.Cloud.define("book_notify", (request) => {
+    var rp = require('request-promise');
+    var basePath = process.env.LEANCLOUD_APP_ENV == "production" ? process.env.hostName : "http://localhost:3000";
+
+    rp.get({
+        uri: `${basePath}/api/v1/books/notify`
+    });
+
+    return {};
+});
