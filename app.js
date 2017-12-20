@@ -1,16 +1,16 @@
 'use strict';
 
-var express = require('express');
-var timeout = require('connect-timeout');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var AV = require('leanengine');
+const express = require('express');
+const timeout = require('connect-timeout');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const AV = require('leanengine');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./cloud');
 
-var app = express();
+let app = express();
 
 // 设置模板引擎
 app.set('views', path.join(__dirname, 'views'));
@@ -36,12 +36,13 @@ app.get('/', function (req, res) {
     res.render('index', {});
 });
 
-app.use('/api', require('./routes/api'));
+app.use('/api', require('./api/index'));
 
 app.use(function (req, res, next) {
     // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
     if (!res.headersSent) {
-        var err = new Error('Not Found');
+        let err = new Error('Not Found');
+
         err.status = 404;
         next(err);
     }
@@ -54,20 +55,21 @@ app.use(function (err, req, res, next) {
         return;
     }
 
-    var statusCode = err.status || 500;
+    let statusCode = err.status || 500;
 
     if (statusCode === 500) {
         console.error(err.stack || err);
     }
 
     if (req.timedout) {
-        console.error('请求超时: url=%s, timeout=%d, 请确认方法执行耗时很长，或没有正确的 response 回调。', req.originalUrl, err.timeout);
+        console.error(`请求超时: url=${req.originalUrl}, timeout=${err.timeout}, 请确认方法执行耗时很长，或没有正确的 response 回调。`);
     }
 
     res.status(statusCode);
 
     // 默认不输出异常详情
-    var error = {};
+    let error = {};
+
     if (app.get('env') === 'development') {
         // 如果是开发环境，则将异常堆栈输出到页面，方便开发调试
         error = err;
