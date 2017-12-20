@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = (req, res, next) => {
+    const Promise = require('bluebird');
     const rp = require('request-promise');
 
     let name = encodeURIComponent(req.params.name);
