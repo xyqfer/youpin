@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = (req, res, next) => {
+    const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const nodemailer = require('nodemailer');
@@ -39,9 +40,9 @@ module.exports = (req, res, next) => {
         const dbDataLength = dbData.length;
 
         return youpinData.filter((item) => {
-            var gid = item.gid;
+            let gid = item.gid;
 
-            for (var i = 0; i < dbDataLength; i++) {
+            for (let i = 0; i < dbDataLength; i++) {
                 if (gid == dbData[i].get('gid')) {
                     return false;
                 }

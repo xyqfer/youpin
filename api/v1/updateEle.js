@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = (req, res, next) => {
+    const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const flatten = require('lodash/flatten');
