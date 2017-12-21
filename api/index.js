@@ -1,4 +1,5 @@
 'use strict';
+
 const router = require('express').Router();
 const apiV1 = require('./v1/index');
 const apiV2 = require('./v2/index');
