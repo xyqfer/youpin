@@ -9,21 +9,37 @@ module.exports = (req, res, next) => {
     const iconv = require('iconv-lite');
     const flatten = require('lodash/flatten');
 
-    function updateChinaPubBook() {
-        let dbName = 'ChinaPubBooks';
+    class Book {
+        constructor() {
+            console.log('update_book');
 
-        function getAllDbData() {
-            let query = new AV.Query(dbName);
+            this._dbName = 'ChinaPubBooks';
+            this._dbData = [];
+            this._bookData = [];
+            this._newData = [];
+            this._ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) ' +
+                'AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60';
+        }
+
+        async start() {
+            this._dbData = await this._getDbData();
+            this._bookData = await this._getBookData();
+            this._filterData();
+            await this._updateData();
+        }
+
+        _getDbData() {
+            let query = new AV.Query(this._dbName);
 
             query.limit(1000);
             return query.find();
         }
 
-        function getBookData() {
+        _getBookData() {
             return rp.get({
                 uri: 'http://www.china-pub.com/xinshu/',
                 headers: {
-                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                    'User-Agent': this._ua
                 }
             }).then((htmlString) => {
                 const $ = cheerio.load(htmlString);
@@ -38,7 +54,7 @@ module.exports = (req, res, next) => {
                         uri: url,
                         encoding : null,
                         headers: {
-                            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                            'User-Agent': this._ua
                         }
                     });
                 });
@@ -61,23 +77,24 @@ module.exports = (req, res, next) => {
             });
         }
 
-        return Promise.all([
-            getAllDbData(),
-            getBookData()
-        ]).then((data) => {
-            let dbData = data[0];
-            let booksData = data[1];
-
-            return booksData.filter((book) => {
-                let sameBook = dbData.filter((item) => {
+        _filterData() {
+            this._newData = this._bookData.filter((book) => {
+                let sameBook = this._dbData.filter((item) => {
                     return item.get('url') == book.url;
                 });
 
                 return sameBook.length == 0;
             });
-        }).then((data) => {
-            return Promise.mapSeries(data, (item) => {
-                const BookStore = AV.Object.extend(dbName);
+
+            console.log(this._newData);
+
+            this._bookData = null;
+            this._dbData = null;
+        }
+
+        _updateData() {
+            return Promise.mapSeries(this._newData, (item) => {
+                const BookStore = AV.Object.extend(this._dbName);
                 let store = new BookStore();
 
                 store.set('name', item.name);
@@ -91,15 +108,10 @@ module.exports = (req, res, next) => {
                     // 异常处理
                 });
             });
-        });
+        }
     }
 
-    console.log('update_book');
-
-    Promise.all([
-        updateChinaPubBook()
-    ]).then((data) => {
-        console.log(data);
-        res.end();
-    });
+    let book = new Book();
+    book.start();
+    res.end();
 };

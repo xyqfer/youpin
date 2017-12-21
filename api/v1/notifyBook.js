@@ -2,8 +2,9 @@
 
 module.exports = (req, res, next) => {
     const AV = require('leanengine');
+    const sendMail = require('../lib/mail');
 
-    let dbName = 'ChinaPubBooks';
+    const dbName = 'ChinaPubBooks';
     let query = new AV.Query(dbName);
 
     let today = new Date();
@@ -19,27 +20,15 @@ module.exports = (req, res, next) => {
     query.find().then((data) => {
         if (data.length > 0) {
             if (process.env.LEANCLOUD_APP_ENV == 'production') {
-                let transporter = nodemailer.createTransport({
-                    service: 'qq',
-                    auth: {
-                        user: process.env.mailSender,
-                        pass: process.env.mailPass //授权码,通过QQ获取
-                    }
+                return sendMail({
+                    data: data.map((item) => {
+                        return {
+                            name: item.get('name'),
+                            url: item.get('url')
+                        }
+                    }),
+                    title: '有新书啦'
                 });
-
-                let mailHtml = "";
-                data.forEach(function (item) {
-                    mailHtml += (`<a href="${item.get("url")}">${item.get("name")}</a><br><br>`);
-                });
-
-                const mailOptions = {
-                    from: process.env.mailSender, // 发送者
-                    to: process.env.mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
-                    subject: '有新书啦', // 标题
-                    html: mailHtml
-                };
-
-                return transporter.sendMail(mailOptions);
             } else {
                 console.log(data);
                 return data;
