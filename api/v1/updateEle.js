@@ -80,7 +80,7 @@ module.exports = (req, res, next) => {
             }
 
             store.set('restaurantId', item.id);
-            store.set('rate', item.rating.toFixed(1));
+            store.set('rate', +item.rating.toFixed(1));
             store.set('name', item.name);
             store.set('discountTip', discountTip);
 
