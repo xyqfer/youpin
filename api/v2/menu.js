@@ -10,12 +10,14 @@ module.exports = (req, res, next) => {
 
     const latitude = process.env.latitude || 30.30489;
     const longitude = process.env.longitude || 120.10598;
+    const ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) ' +
+        'AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60';
 
     rp.get({
         json: true,
         uri: `https://restapi.ele.me/shopping/v2/restaurants/search?offset=0&limit=20&keyword=${name}&latitude=${latitude}&longitude=${longitude}&is_rewrite=1&extras[]=activities&extras[]=coupon&terminal=h5`,
         headers: {
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+            'User-Agent': ua
         }
     }).then((data) => {
         let restaurantList = [];
@@ -57,7 +59,9 @@ module.exports = (req, res, next) => {
                         json: true,
                         uri: `https://restapi.ele.me/shopping/v2/menu?restaurant_id=${item.id}`,
                         headers: {
-                            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                            'User-Agent': ua,
+                            'Referer': 'https://h5.ele.me/shop/',
+                            'x-shard': `shopid=${item.id}`
                         }
                     })
                 ]);
