@@ -4,42 +4,41 @@ module.exports = (req, res, next) => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
-    const nodemailer = require('nodemailer');
     const cheerio = require('cheerio');
     const iconv = require('iconv-lite');
     const flatten = require('lodash/flatten');
 
     class Book {
         constructor() {
-            console.log('update_book');
+            console.log('updateBook');
 
-            this._dbName = 'ChinaPubBooks';
-            this._dbData = [];
-            this._bookData = [];
-            this._newData = [];
-            this._ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) ' +
+            this.dbName = 'ChinaPubBooks';
+            this.dbData = [];
+            this.bookData = [];
+            this.newData = [];
+            this.ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) ' +
                 'AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60';
         }
 
         async start() {
-            this._dbData = await this._getDbData();
-            this._bookData = await this._getBookData();
-            this._filterData();
-            await this._updateData();
+            this.dbData = await this.getDbData();
+            this.bookData = await this.getBookData();
+            this.filterData();
+            await this.updateData();
         }
 
-        _getDbData() {
-            let query = new AV.Query(this._dbName);
+        getDbData() {
+            let query = new AV.Query(this.dbName);
 
             query.limit(1000);
             return query.find();
         }
 
-        _getBookData() {
+        getBookData() {
             return rp.get({
                 uri: 'http://www.china-pub.com/xinshu/',
                 headers: {
-                    'User-Agent': this._ua
+                    'User-Agent': this.ua
                 }
             }).then((htmlString) => {
                 const $ = cheerio.load(htmlString);
@@ -54,7 +53,7 @@ module.exports = (req, res, next) => {
                         uri: url,
                         encoding : null,
                         headers: {
-                            'User-Agent': this._ua
+                            'User-Agent': this.ua
                         }
                     });
                 });
@@ -77,24 +76,24 @@ module.exports = (req, res, next) => {
             });
         }
 
-        _filterData() {
-            this._newData = this._bookData.filter((book) => {
-                let sameBook = this._dbData.filter((item) => {
+        filterData() {
+            this.newData = this.bookData.filter((book) => {
+                let sameBook = this.dbData.filter((item) => {
                     return item.get('url') == book.url;
                 });
 
                 return sameBook.length == 0;
             });
 
-            console.log(this._newData);
+            console.log(this.newData);
 
-            this._bookData = null;
-            this._dbData = null;
+            this.bookData = null;
+            this.dbData = null;
         }
 
-        _updateData() {
-            return Promise.mapSeries(this._newData, (item) => {
-                const BookStore = AV.Object.extend(this._dbName);
+        updateData() {
+            return Promise.mapSeries(this.newData, (item) => {
+                const BookStore = AV.Object.extend(this.dbName);
                 let store = new BookStore();
 
                 store.set('name', item.name);

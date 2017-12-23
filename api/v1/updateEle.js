@@ -8,40 +8,44 @@ module.exports = (req, res, next) => {
 
     class Ele {
         constructor() {
-            this._dbName = 'Ele_restaurant';
-            this._latitude = process.env.latitude || 30.30489;
-            this._longitude = process.env.longitude || 120.10598;
-            this._dbData = [];
-            this._eleData = [];
-            this._newData = [];
-            this._offsetList = [];
+            console.log('updateEle');
+
+            this.dbName = 'Ele_restaurant';
+            this.ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) ' +
+                'AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1';
+            this.latitude = process.env.latitude || 30.30489;
+            this.longitude = process.env.longitude || 120.10598;
+            this.dbData = [];
+            this.eleData = [];
+            this.newData = [];
+            this.offsetList = [];
 
             for (let offset = 0; offset <= 500; offset += 20) {
-                this._offsetList.push(offset);
+                this.offsetList.push(offset);
             }
         }
 
         async start() {
-            this._dbData = await this._getDbData();
-            this._eleData = flatten(await this._getEleData());
-            this._filterEleData();
-            await this._updateData();
+            this.dbData = await this.getDbData();
+            this.eleData = flatten(await this.getEleData());
+            this.filterEleData();
+            await this.updateData();
         }
 
-        _getDbData() {
-            let query = new AV.Query(this._dbName);
+        getDbData() {
+            let query = new AV.Query(this.dbName);
 
             query.limit(2000);
             return query.find();
         }
 
-        _getEleData() {
-            return Promise.mapSeries(this._offsetList, (offset) => {
+        getEleData() {
+            return Promise.mapSeries(this.offsetList, (offset) => {
                 return rp.get({
                     json: true,
-                    uri: `https://restapi.ele.me/shopping/restaurants?latitude=${this._latitude}&longitude=${this._longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
+                    uri: `https://restapi.ele.me/shopping/restaurants?latitude=${this.latitude}&longitude=${this.longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
                     headers: {
-                        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1',
+                        'User-Agent': this.ua,
                     }
                 }).then((data) => {
                     return data;
@@ -49,10 +53,10 @@ module.exports = (req, res, next) => {
             });
         }
 
-        _filterEleData() {
-            const dbDataLength = this._dbData.length;
+        filterEleData() {
+            const dbDataLength = this.dbData.length;
 
-            this._newData = this._eleData.filter((item) => {
+            this.newData = this.eleData.filter((item) => {
                 if (item.rating < 4) {
                     return false;
                 }
@@ -67,7 +71,7 @@ module.exports = (req, res, next) => {
                 }
 
                 for (let i = 0; i < dbDataLength; i++) {
-                    let dbData = this._dbData[i];
+                    let dbData = this.dbData[i];
 
                     if (item.id == dbData.get('restaurantId')) {
                         return item.name == dbData.get('name') &&
@@ -79,13 +83,15 @@ module.exports = (req, res, next) => {
                 return item.type == 0;
             });
 
-            this._dbData = null;
-            this._eleData = null;
+            this.dbData = null;
+            this.eleData = null;
         }
 
-        _updateData() {
-            return Promise.mapSeries(this._newData, (item) => {
-                const RestaurantStore = AV.Object.extend(this._dbName);
+        updateData() {
+            console.log(this.eleData);
+
+            return Promise.mapSeries(this.newData, (item) => {
+                const RestaurantStore = AV.Object.extend(this.dbName);
                 const store = new RestaurantStore();
 
                 let discountTip = '';
