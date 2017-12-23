@@ -2,21 +2,25 @@ const AV = require('leanengine');
 
 const cloudFuncConfig = [
     {
-        name: 'youpin_1',
+        name: 'updateYoupin',
         url: '/api/v1/youpin/update',
-        info: 'update_youpin 定时任务'
+        info: 'updateYoupin 定时任务'
     }, {
-        name: 'ele_restaurant',
+        name: 'updateEle',
         url: '/api/v1/ele/update',
-        info: 'update_ele 定时任务'
+        info: 'updateEle 定时任务'
     }, {
-        name: 'update_book',
+        name: 'updateBook',
         url: '/api/v1/book/update',
-        info: 'update_book 定时任务'
+        info: 'updateBook 定时任务'
     }, {
-        name: 'book_notify',
+        name: 'notifyBook',
         url: '/api/v1/book/notify',
-        info: 'notify_book 定时任务'
+        info: 'notifyBook 定时任务'
+    }, {
+        name: 'traceBook',
+        url: '/api/v1/book/trace',
+        info: 'traceBook 定时任务'
     }
 ];
 
