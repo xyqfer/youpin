@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = (req, res, next) => {
-    const Promise = require('bluebird');
     const rp = require('request-promise');
 
     let name = encodeURIComponent(req.params.name);
@@ -20,7 +19,7 @@ module.exports = (req, res, next) => {
             'User-Agent': ua
         }
     }).then((data) => {
-        let restaurantList = [];
+        let resultList = [];
 
         try {
             for (let key in data.inside) {
@@ -28,105 +27,46 @@ module.exports = (req, res, next) => {
 
                 if (restaurantWithFoods.length > 0) {
                     restaurantWithFoods.forEach((item) => {
-                        if (restaurantList.length < restaurantLimit) {
+                        if (resultList.length < restaurantLimit) {
                             if (item && item.restaurant.type == 0) {
-                                restaurantList.push({
-                                    id: item.restaurant.id,
-                                    name: item.restaurant.name
-                                });
+                                let menu = [];
+
+                                for (let i = 0; i < menuLimit; i++) {
+                                    let food = item.foods[i];
+
+                                    if (food) {
+                                        menu.push({
+                                            name: food.name,
+                                            price: food.price
+                                        });
+                                    }
+                                }
+
+                                if (menu.length > 0) {
+                                    resultList.push({
+                                        name: item.restaurant.name,
+                                        menu: menu
+                                    });
+                                }
                             }
                         }
                     });
                 }
             }
         } catch (e) {
-            restaurantList = [];
+            resultList = [];
         }
 
-        if (restaurantList.length == 0) {
+        if (resultList.length == 0) {
             res.json({
                 success: false,
                 data: null,
                 msg: '查询失败'
             });
-
-            return 0;
         } else {
-            let menuTaskList = restaurantList.map((item) => {
-                return Promise.all([
-                    item.name,
-                    rp.get({
-                        json: true,
-                        uri: `https://restapi.ele.me/shopping/v2/menu?restaurant_id=${item.id}`,
-                        headers: {
-                            'User-Agent': ua,
-                            'Referer': 'https://h5.ele.me/shop/',
-                            'x-shard': `shopid=${item.id}`
-                        }
-                    })
-                ]);
-            });
-
-            return Promise.all(menuTaskList);
-        }
-    }).then((data) => {
-        if (data != 0) {
-            let result = [];
-
-            data.forEach((item) => {
-                let restaurantName = item[0];
-                let menuList = item[1];
-                let foodList = [];
-                let resultList = [];
-
-                if (menuList.length > 0 &&
-                    menuList[0]['id'] == -1 &&
-                    menuList[0]['type'] == 2) {
-                    menuList[0]['foods'].forEach((food) => {
-                        if (food.rating >= 4 && food.specfoods[0].price > 1) {
-                            foodList.push({
-                                name: food.name,
-                                rate: food.rating,
-                                price: food.specfoods[0].price.toFixed(1)
-                            });
-                        }
-                    });
-                } else {
-                    menuList.forEach((item) => {
-                        item.foods.forEach((food) => {
-                            if (food.rating >= 4 && food.specfoods[0].price > 1) {
-                                foodList.push({
-                                    name: food.name,
-                                    rate: food.rating,
-                                    price: food.specfoods[0].price.toFixed(1)
-                                });
-                            }
-                        });
-                    });
-                }
-
-                if (foodList.length <= menuLimit) {
-                    resultList = foodList;
-                } else {
-                    for (let i = 0; i < menuLimit; i++) {
-                        let randomIndex = Math.floor(Math.random() * foodList.length);
-                        let food = foodList.splice(randomIndex, 1);
-
-                        if (food.length > 0) {
-                            resultList.push(food[0]);
-                        }
-                    }
-                }
-
-                result.push({
-                    name: restaurantName,
-                    menu: resultList
-                });
-            });
-
             res.json({
                 success: true,
-                data: result,
+                data: resultList,
                 msg: '查询成功'
             });
         }
