@@ -17,7 +17,9 @@ module.exports = (req, res, next) => {
     let date = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
 
     query.greaterThanOrEqualTo('updatedAt', new Date(`${year}-${month}-${date} 00:00:00`));
+    query.doesNotExist('isbn');
     query.limit(1000);
+
     query.find().then((data) => {
         console.log(data);
 

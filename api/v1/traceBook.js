@@ -38,6 +38,7 @@ module.exports = (req, res, next) => {
             return query.find().then((data) => {
                 this.traceBook = data.map((item) => {
                     return {
+                        id: item.id,
                         name: item.get('name'),
                         url: item.get('url'),
                         isbn: item.get('isbn')
@@ -124,15 +125,11 @@ module.exports = (req, res, next) => {
 
         updateData() {
             let taskList = this.traceBook.map((book) => {
-                const Book = AV.Object.extend(this.dbName);
-                const bookStore = new Book();
+                let bookStore = AV.Object.createWithoutData(this.dbName, book.id);
 
                 bookStore.set('isbn', book.isbn);
                 bookStore.set('trace', !book.onSale);
-
-                return bookStore.save(null, {
-                    useMasterKey: false
-                });
+                return bookStore.save();
             });
 
             return Promise.all(taskList);
