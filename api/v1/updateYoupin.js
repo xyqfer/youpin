@@ -82,7 +82,7 @@ module.exports = (req, res, next) => {
         updateData() {
             console.log('updateYoupin');
 
-            return Promise.mapSeries(this.newData, function(item) {
+            return Promise.mapSeries(this.newData, (item) => {
                 const MiStore = AV.Object.extend(this.dbName);
                 const store = new MiStore();
 
