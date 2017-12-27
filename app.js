@@ -81,4 +81,17 @@ app.use(function (err, req, res, next) {
     });
 });
 
+process.on('unhandledRejection', (reason) => {
+    const sendMail = require('./api/lib/mail');
+
+    console.log(reason);
+
+    if (process.env.LEANCLOUD_APP_ENV == 'production') {
+        sendMail({
+            title: '报错啦~\(≧▽≦)/~',
+            mailContent: reason.toString()
+        });
+    }
+});
+
 module.exports = app;
