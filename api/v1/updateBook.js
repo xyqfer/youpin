@@ -108,8 +108,13 @@ module.exports = (req, res, next) => {
                         let year = +time.split("-")[0];
 
                         if (year <= 2016) {
-                            return false
+                            return false;
                         } else {
+                            let cover = $('.gray12a img').attr('src');
+                            let intro = $(".pro_name_intr").text();
+
+                            book.cover = cover;
+                            book.intro = intro;
                             return book;
                         }
                     } else {
@@ -137,6 +142,8 @@ module.exports = (req, res, next) => {
 
                 store.set('name', item.name);
                 store.set('url', item.url);
+                store.set('cover', item.cover);
+                store.set('intro', item.intro);
 
                 return store.save(null, {
                     useMasterKey: false
