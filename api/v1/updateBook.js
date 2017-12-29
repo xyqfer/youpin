@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
         async start() {
             this.dbData = await this.getDbData();
             this.bookData = await this.getBookData();
-            this.filterData();
+            await this.filterData();
             await this.updateData();
         }
 
@@ -85,10 +85,49 @@ module.exports = (req, res, next) => {
                 return sameBook.length == 0;
             });
 
-            console.log(this.newData);
+            let taskList = this.newData.map((book) => {
+                return rp.get({
+                    uri: book.url,
+                    encoding : null,
+                    headers: {
+                        'User-Agent': this.ua
+                    }
+                }).then((htmlString) => {
+                    const $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
+                    let time;
 
-            this.bookData = null;
-            this.dbData = null;
+                    $('#con_a_1 .pro_r_deta').eq(0).find('li').each(function () {
+                        let text = $(this).text();
+
+                        if (text.includes('上架时间')) {
+                            time = text.replace('上架时间：', '');
+                        }
+                    });
+
+                    if (time) {
+                        let year = +time.split("-")[0];
+
+                        if (year <= 2016) {
+                            return false
+                        } else {
+                            return book;
+                        }
+                    } else {
+                        return false;
+                    }
+                });
+            });
+
+            return Promise.all(taskList).then((result) => {
+                this.newData = result.filter((book) => {
+                    return book;
+                });
+
+                console.log(this.newData);
+
+                this.bookData = null;
+                this.dbData = null;
+            });
         }
 
         updateData() {
