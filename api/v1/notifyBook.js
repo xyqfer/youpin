@@ -29,7 +29,22 @@ module.exports = (req, res, next) => {
 
                 data.forEach((item) => {
                     let bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(item.get('url'))}`;
-                    mailContent += `<a href='${bookUrl}'>${item.get('name')}</a><br><br>`;
+                    mailContent += `
+
+                    <div style="margin-bottom: 60px">
+                        <a href="${bookUrl}">
+                            <h4>${item.get('name')}</h4>
+                        </a>
+                        <p>
+                            ${item.get('intro')}
+                        </p>
+                        <div>
+                            <img src="${item.get('cover')}" 
+                                alt="">
+                        </div>
+                    </div>
+                    <br><br>
+                    `;
                 });
 
                 return sendMail({
