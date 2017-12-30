@@ -7,6 +7,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const AV = require('leanengine');
 
+let fundebug = require('fundebug-nodejs');
+fundebug.apikey = process.env.fundebugKey || '';
+
+if (process.env.LEANCLOUD_APP_ENV != 'production') {
+    fundebug.silent = true;
+}
+
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./cloud');
 
@@ -31,6 +38,7 @@ app.use(AV.Cloud.HttpsRedirect());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(fundebug.ExpressErrorHandler);
 
 app.get('/', function (req, res) {
     res.render('index', {});
@@ -79,19 +87,6 @@ app.use(function (err, req, res, next) {
         message: err.message,
         error: error
     });
-});
-
-process.on('unhandledRejection', (reason) => {
-    const sendMail = require('./api/lib/mail');
-
-    console.log(reason);
-
-    if (process.env.LEANCLOUD_APP_ENV == 'production') {
-        sendMail({
-            title: '报错啦~\(≧▽≦)/~',
-            mailContent: reason.toString()
-        });
-    }
 });
 
 module.exports = app;
