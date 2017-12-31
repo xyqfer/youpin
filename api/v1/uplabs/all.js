@@ -3,8 +3,10 @@
 module.exports = (req, res, next) => {
     const rp = require('request-promise');
     const offset = parseInt(req.query.offset);
+    const platform = req.query.platform;
+    const supportWebp = platform.toLowerCase() == 'android';
     const assetReg = /^https:\/\/assets\.materialup\.com/g;
-    const cdnHost = 'https://uplabscompress-1252013833.file.myqcloud.com';
+    const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
 
     rp.get({
         json: true,
@@ -15,11 +17,25 @@ module.exports = (req, res, next) => {
     }).then((data) => {
         data = data.map((item) => {
             item.animated_teaser_url = item.animated_teaser_url.replace(assetReg, cdnHost) + '?imageView2/q/75';
+
+            if (!item.animated && supportWebp) {
+                item.animated_teaser_url += '/format/webp';
+            }
+
             item.preview_url = item.preview_url.replace(assetReg, cdnHost);
+
+            if (!/\.gif$/g.test(item.preview_url) && supportWebp) {
+                item.preview_url += '?imageView2/format/webp';
+            }
 
             if (item.images.length > 0) {
                 item.images = item.images.map((img) => {
                     img.urls.full = img.urls.full.replace(assetReg, cdnHost);
+
+                    if (!/\.gif$/g.test(img.urls.full) && supportWebp) {
+                        img.urls.full += '?imageView2/format/webp';
+                    }
+
                     return img;
                 });
             }
