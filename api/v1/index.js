@@ -11,6 +11,7 @@ const traceBook = require('./traceBook');
 const updateYoupin = require('./updateYoupin');
 const updateEle = require('./updateEle');
 const uplabsAll = require('./uplabs/all');
+const uplabsMore = require('./uplabs/more');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
@@ -22,5 +23,6 @@ router.get('/book/trace', traceBook);
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);
 router.get('/uplabs/all', uplabsAll);
+router.get('/uplabs/more', uplabsMore);
 
 module.exports = router;
