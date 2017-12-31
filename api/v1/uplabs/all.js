@@ -3,7 +3,7 @@
 module.exports = (req, res, next) => {
     const rp = require('request-promise');
     const offset = parseInt(req.query.offset);
-    const platform = req.query.platform;
+    const platform = req.query.platform || '';
     const supportWebp = platform.toLowerCase() == 'android';
     const assetReg = /^https:\/\/assets\.materialup\.com/g;
     const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
