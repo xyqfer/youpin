@@ -21,6 +21,10 @@ const cloudFuncConfig = [
         name: 'traceBook',
         url: '/api/v1/book/trace',
         info: 'traceBook 定时任务'
+    }, {
+        name: 'refreshUplabsCDN',
+        url: '/api/v1/uplabs/refreshCDN',
+        info: '更新 uplabs CDN'
     }
 ];
 
