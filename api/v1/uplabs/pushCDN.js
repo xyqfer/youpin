@@ -10,7 +10,10 @@ module.exports = (req, res, next) => {
     const date = params[2];
     const page = params[3];
 
-    const { currentYear, currentMonth, currentDate } = getFormatTime();
+    const timeObj = getFormatTime();
+    const currentYear = timeObj.year;
+    const currentMonth = timeObj.month;
+    const currentDate = timeObj.date;
     const offset = (((new Date(`${currentYear}-${currentMonth}-${currentDate}`)).getTime()) -
         ((new Date(`${year}-${month}-${date}`)).getTime())) / (24 * 60 * 60 * 1000);
 
