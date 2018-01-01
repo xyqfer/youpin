@@ -1,6 +1,5 @@
 module.exports = (req, res, next) => {
     const loadData = require('./_loadData');
-    const COS = require('cos-nodejs-sdk-v5');
 
     const params = req.params;
     const year = params[0];
@@ -32,23 +31,6 @@ module.exports = (req, res, next) => {
         url: url,
         platform: ''
     }).then((data) => {
-        const cos = new COS({
-            SecretId: process.env.COSSecretId || '',
-            SecretKey: process.env.COSSecretKey || ''
-        });
-
-        cos.putObject({
-            Bucket: process.env.COSBucket || '',
-            Region: process.env.COSRegion || '',
-            Key: `api/v1/uplabs/uplabs_${year}-${month}-${date}_${page}.json`,
-            Body: Buffer.from(JSON.stringify(data))
-        }, function (err, data) {
-            if (err) {
-                console.log(err);
-                res.json(err);
-            } else {
-                res.json(data);
-            }
-        });
+        res.json(data);
     });
 };
