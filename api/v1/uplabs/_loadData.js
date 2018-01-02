@@ -1,11 +1,16 @@
 'use strict';
 
-module.exports = ({url, platform}) => {
+module.exports = ({offset = 0, page = 0}) => {
     const rp = require('request-promise');
 
-    const supportWebp = platform.toLowerCase() == 'android';
     const assetReg = /^https:\/\/assets\.materialup\.com/g;
     const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
+
+    let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
+
+    if (page == 0) {
+        url = `https://www.uplabs.com/all.json?days_ago=${offset}&page=1`;
+    }
 
     return rp.get({
         json: true,
@@ -25,29 +30,14 @@ module.exports = ({url, platform}) => {
             card.desc = `by ${item.maker_name} in ${item.subcategory_friendly_name_plural}`;
 
             item.animated_teaser_url = item.animated_teaser_url.replace(assetReg, cdnHost) + '?imageView2/q/75';
-
-            if (!item.animated && supportWebp) {
-                item.animated_teaser_url += '/format/webp';
-            }
-
             card.cover = item.animated_teaser_url;
 
             item.preview_url = item.preview_url.replace(assetReg, cdnHost);
-
-            if (!/\.gif$/g.test(item.preview_url) && supportWebp) {
-                item.preview_url += '?imageView2/format/webp';
-            }
-
             card.urls = [item.preview_url];
 
             if (item.images.length > 0) {
                 item.images.forEach((img) => {
                     let url = img.urls.full.replace(assetReg, cdnHost);
-
-                    if (!/\.gif$/g.test(url) && supportWebp) {
-                        url += '?imageView2/format/webp';
-                    }
-
 
                     card.urls.push(url);
                 });

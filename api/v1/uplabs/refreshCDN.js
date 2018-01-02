@@ -27,15 +27,10 @@ module.exports = (req, res, next) => {
         urlObj[`urls.${i}`] = `${path}/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 
         taskList.push(new Promise((resolve, reject) => {
-            let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=0&per_page=12&page=${i}`;
-
-            if (i == 0) {
-                url = `https://www.uplabs.com/all.json?days_ago=0&page=1`;
-            }
 
             loadData({
-                url: url,
-                platform: ''
+                page: i,
+                offset: 0
             }).then((data) => {
                 const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 

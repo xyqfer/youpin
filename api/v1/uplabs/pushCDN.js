@@ -17,15 +17,9 @@ module.exports = (req, res, next) => {
     const offset = (((new Date(`${currentYear}-${currentMonth}-${currentDate}`)).getTime()) -
         ((new Date(`${year}-${month}-${date}`)).getTime())) / (24 * 60 * 60 * 1000);
 
-    let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
-
-    if (page == 0) {
-        url = `https://www.uplabs.com/all.json?days_ago=${offset}&page=1`;
-    }
-
     loadData({
-        url: url,
-        platform: ''
+        page: page,
+        offset: offset
     }).then((data) => {
         res.json(data);
     });
