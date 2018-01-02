@@ -7,12 +7,13 @@ module.exports = (req, res, next) => {
     const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
 
-    const pageCount = 5;
+    let pageCount = 5;
     const timeObj = getFormatTime();
     const currentYear = timeObj.year;
     const currentMonth = timeObj.month;
     const currentDate = timeObj.date;
     const path = 'https://uplabs-image-1252013833.file.myqcloud.com/api/v1';
+    let allData = [];
     let urlObj = {};
 
     const cos = new COS({
@@ -36,17 +37,24 @@ module.exports = (req, res, next) => {
                 url: url,
                 platform: ''
             }).then((data) => {
+                const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
+
+                if (i == 0) {
+                    allData = data;
+                }
+
                 cos.putObject({
                     Bucket: process.env.COSBucket,
                     Region: process.env.COSRegion,
-                    Key: `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`,
+                    Key: objectKey,
                     Body: Buffer.from(JSON.stringify(data))
                 }, function (err, data) {
+                    console.log(objectKey);
+
                     if (err) {
                         console.log(err);
                     }
 
-                    console.log(data);
                     resolve(data);
                 });
             });
@@ -57,6 +65,10 @@ module.exports = (req, res, next) => {
         qcloudSDK.config({
             secretId: process.env.CDNSecretId,
             secretKey: process.env.CDNSecretKey
+        });
+
+        allData.forEach((item) => {
+            urlObj[`urls.${pageCount++}`] = item.cover;
         });
 
         qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {

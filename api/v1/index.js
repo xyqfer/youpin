@@ -10,8 +10,6 @@ const redirectBook = require('./redirectBook');
 const traceBook = require('./traceBook');
 const updateYoupin = require('./updateYoupin');
 const updateEle = require('./updateEle');
-const uplabsAll = require('./uplabs/all');
-const uplabsMore = require('./uplabs/more');
 const uplabsPushCDN = require('./uplabs/pushCDN');
 const uplabsRefreshCDN = require('./uplabs/refreshCDN');
 
@@ -24,8 +22,6 @@ router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);
-router.get('/uplabs/all', uplabsAll);
-router.get('/uplabs/more', uplabsMore);
 router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsPushCDN);
 router.get('/uplabs/refreshCDN', uplabsRefreshCDN);
 
