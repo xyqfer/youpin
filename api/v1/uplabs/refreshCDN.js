@@ -67,7 +67,7 @@ module.exports = (req, res, next) => {
             secretKey: process.env.CDNSecretKey
         });
 
-        let coverUrlIndex = pageCount - 1;
+        let coverUrlIndex = pageCount;
 
         allData.forEach((item) => {
             urlObj[`urls.${coverUrlIndex++}`] = item.cover;
