@@ -71,6 +71,8 @@ module.exports = (req, res, next) => {
             urlObj[`urls.${pageCount++}`] = item.cover;
         });
 
+        console.log(urlObj);
+
         qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
             console.log(result);
             res.end();
