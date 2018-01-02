@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
 
-    let pageCount = 5;
+    const pageCount = 5;
     const timeObj = getFormatTime();
     const currentYear = timeObj.year;
     const currentMonth = timeObj.month;
@@ -67,8 +67,10 @@ module.exports = (req, res, next) => {
             secretKey: process.env.CDNSecretKey
         });
 
+        let coverUrlIndex = pageCount - 1;
+
         allData.forEach((item) => {
-            urlObj[`urls.${pageCount++}`] = item.cover;
+            urlObj[`urls.${coverUrlIndex++}`] = item.cover;
         });
 
         console.log(urlObj);
