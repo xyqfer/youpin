@@ -13,7 +13,7 @@ module.exports = ({offset = 0, page = 0}) => {
     }
 
     return rp.get({
-        timeout: 50,
+        timeout: 5000,
         json: true,
         uri: url,
         headers: {
