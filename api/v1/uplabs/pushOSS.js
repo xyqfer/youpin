@@ -23,6 +23,8 @@ module.exports = (req, res, next) => {
     }).then((data) => {
         res.json(data);
     }).catch((err) => {
+        console.log('uplabs 超时');
+
         let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
 
         if (page == 0) {
