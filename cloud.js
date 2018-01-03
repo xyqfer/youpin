@@ -25,6 +25,10 @@ const cloudFuncConfig = [
         name: 'refreshUplabsCDN',
         url: '/api/v1/uplabs/refreshCDN',
         info: '更新 uplabs CDN'
+    }, {
+        name: 'refreshUplabsOSS',
+        url: '/api/v1/uplabs/refreshOSS',
+        info: '更新 uplabs OSS'
     }
 ];
 
