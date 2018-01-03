@@ -17,12 +17,17 @@ module.exports = (req, res, next) => {
     const offset = (((new Date(`${currentYear}-${currentMonth}-${currentDate}`)).getTime()) -
         ((new Date(`${year}-${month}-${date}`)).getTime())) / (24 * 60 * 60 * 1000);
 
-    res.redirect('https://www.uplabs.com/all.json?days_ago=1&page=1');
+    loadData({
+        page: page,
+        offset: offset
+    }).then((data) => {
+        res.json(data);
+    }).catch((err) => {
+        let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
 
-    // loadData({
-    //     page: page,
-    //     offset: offset
-    // }).then((data) => {
-    //     res.json(data);
-    // });
+        if (page == 0) {
+            url = `https://www.uplabs.com/all.json?days_ago=${offset}&page=1`;
+        }
+        res.redirect(url);
+    });
 };

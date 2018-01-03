@@ -51,6 +51,8 @@ module.exports = (req, res, next) => {
 
                     resolve(data);
                 });
+            }).catch((err) => {
+                reject(err);
             });
         }));
     }
@@ -74,5 +76,7 @@ module.exports = (req, res, next) => {
             res.end();
         });
         res.end();
+    }).catch((err) => {
+        console.log(err);
     });
 };
