@@ -3,6 +3,7 @@
 module.exports = (req, res, next) => {
     const qcloudSDK = require('qcloud-cdn-node-sdk');
     const OSS = require('ali-oss');
+    const COS = require('cos-nodejs-sdk-v5');
     const Promise = require('bluebird');
     const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
@@ -17,10 +18,15 @@ module.exports = (req, res, next) => {
     let urlObj = {};
 
     const oss = new OSS.Wrapper({
-        accessKeyId: 'LTAIEbg4BuvHj4Bi',
-        accessKeySecret: 'yXaFTuVVpzuBxwxRUbutyBWzduZxE0',
-        region: 'oss-cn-hangzhou',
-        bucket: 'xingyongqiang'
+        accessKeyId: process.env.OSSAccessKeyId,
+        accessKeySecret: process.env.OSSAccessKeySecret,
+        region: process.env.OSSRegion,
+        bucket: process.env.OSSBucket
+    });
+
+    const cos = new COS({
+        SecretId: process.env.COSSecretId,
+        SecretKey: process.env.COSSecretKey
     });
 
     let taskList = [];
@@ -52,21 +58,46 @@ module.exports = (req, res, next) => {
     }
 
     Promise.all(taskList).then((resultList) => {
-        qcloudSDK.config({
-            secretId: process.env.CDNSecretId,
-            secretKey: process.env.CDNSecretKey
-        });
+        let taskList = [];
 
-        let coverUrlIndex = pageCount;
+        for (let i = 0 ; i < pageCount; i++) {
+            taskList.push(new Promise((resolve, reject) => {
+                const params = {
+                    Bucket: process.env.COSBucket2,
+                    Region: process.env.COSRegion,
+                    Key: `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`
+                };
 
-        // allData.forEach((item) => {
-        //     urlObj[`urls.${coverUrlIndex++}`] = item.cover;
-        // });
+                cos.deleteObject(params, function(err, data) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+            }));
+        }
 
-        console.log(urlObj);
+        Promise.all(taskList).then((result) => {
+            qcloudSDK.config({
+                secretId: process.env.CDNSecretId,
+                secretKey: process.env.CDNSecretKey
+            });
 
-        qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
-            console.log(result);
+            let coverUrlIndex = pageCount;
+
+            // allData.forEach((item) => {
+            //     urlObj[`urls.${coverUrlIndex++}`] = item.cover;
+            // });
+
+            console.log(urlObj);
+
+            qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
+                console.log(result);
+                res.end();
+            });
+        }).catch((err) => {
+            console.log(err);
             res.end();
         });
     }).catch((err) => {
