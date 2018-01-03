@@ -27,7 +27,6 @@ module.exports = (req, res, next) => {
         urlObj[`urls.${i}`] = `${path}/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 
         taskList.push(new Promise((resolve, reject) => {
-
             loadData({
                 page: i,
                 offset: 0

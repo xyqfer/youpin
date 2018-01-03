@@ -17,10 +17,12 @@ module.exports = (req, res, next) => {
     const offset = (((new Date(`${currentYear}-${currentMonth}-${currentDate}`)).getTime()) -
         ((new Date(`${year}-${month}-${date}`)).getTime())) / (24 * 60 * 60 * 1000);
 
-    loadData({
-        page: page,
-        offset: offset
-    }).then((data) => {
-        res.json(data);
-    });
+    res.redirect('https://www.uplabs.com/all.json?days_ago=1&page=1');
+
+    // loadData({
+    //     page: page,
+    //     offset: offset
+    // }).then((data) => {
+    //     res.json(data);
+    // });
 };
