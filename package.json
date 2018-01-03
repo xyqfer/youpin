@@ -9,6 +9,7 @@
     "dev": "nodemon server.js -- "
   },
   "dependencies": {
+    "ali-oss": "^4.11.3",
     "bluebird": "^3.5.1",
     "body-parser": "1.12.3",
     "cheerio": "^1.0.0-rc.2",

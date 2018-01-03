@@ -10,8 +10,10 @@ const redirectBook = require('./redirectBook');
 const traceBook = require('./traceBook');
 const updateYoupin = require('./updateYoupin');
 const updateEle = require('./updateEle');
-const uplabsPushCDN = require('./uplabs/pushCDN');
 const uplabsRefreshCDN = require('./uplabs/refreshCDN');
+
+const uplabsPushOSS = require('./uplabs/pushOSS');
+const uplabsRefreshOSS = require('./uplabs/refreshOSS');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
@@ -22,7 +24,7 @@ router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);
-router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsPushCDN);
-router.get('/uplabs/refreshCDN', uplabsRefreshCDN);
+router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsPushOSS);
+router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
 
 module.exports = router;

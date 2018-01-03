@@ -23,6 +23,11 @@ module.exports = (req, res, next) => {
     }).then((data) => {
         res.json(data);
     }).catch((err) => {
-        res.status(500).end();
+        let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
+
+        if (page == 0) {
+            url = `https://www.uplabs.com/all.json?days_ago=${offset}&page=1`;
+        }
+        res.redirect(url);
     });
 };
