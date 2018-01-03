@@ -59,9 +59,9 @@ module.exports = (req, res, next) => {
 
         let coverUrlIndex = pageCount;
 
-        allData.forEach((item) => {
-            urlObj[`urls.${coverUrlIndex++}`] = item.cover;
-        });
+        // allData.forEach((item) => {
+        //     urlObj[`urls.${coverUrlIndex++}`] = item.cover;
+        // });
 
         console.log(urlObj);
 
