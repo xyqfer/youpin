@@ -37,26 +37,32 @@ module.exports = (req, res, next) => {
                 url: url,
                 platform: ''
             }).then((data) => {
-                const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
+                if (data && data.length > 0) {
+                    const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 
-                if (i == 0) {
-                    allData = data;
-                }
-
-                cos.putObject({
-                    Bucket: process.env.COSBucket,
-                    Region: process.env.COSRegion,
-                    Key: objectKey,
-                    Body: Buffer.from(JSON.stringify(data))
-                }, function (err, data) {
-                    console.log(objectKey);
-
-                    if (err) {
-                        console.log(err);
+                    if (i == 0) {
+                        allData = data;
                     }
 
-                    resolve(data);
-                });
+                    cos.putObject({
+                        Bucket: process.env.COSBucket,
+                        Region: process.env.COSRegion,
+                        Key: objectKey,
+                        Body: Buffer.from(JSON.stringify(data))
+                    }, function (err, data) {
+                        console.log(objectKey);
+
+                        if (err) {
+                            console.log(err);
+                        }
+
+                        resolve(data);
+                    });
+                } else {
+                    reject({});
+                }
+            }).catch((err) => {
+                reject(err);
             });
         }));
     }
@@ -79,6 +85,8 @@ module.exports = (req, res, next) => {
             console.log(result);
             res.end();
         });
+    }).catch((err) => {
+        console.log(err);
         res.end();
     });
 };

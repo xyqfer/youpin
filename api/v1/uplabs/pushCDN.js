@@ -27,6 +27,10 @@ module.exports = (req, res, next) => {
         url: url,
         platform: ''
     }).then((data) => {
-        res.json(data);
+        if (data && data.length > 0) {
+            res.json(data);
+        } else {
+            res.redirect(url);
+        }
     });
 };
