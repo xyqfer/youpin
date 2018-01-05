@@ -20,8 +20,15 @@ module.exports = (req, res, next) => {
             if (restaurant.get('rate') >= 4 &&
                 !restaurant.get('name').includes('超市') &&
                 !restaurant.get('name').includes('商行')) {
-                data.push(restaurant);
-                count++;
+
+                const idx = data.findIndex((item) => {
+                    return item.get('restaurantId') == restaurant.get('restaurantId');
+                });
+
+                if (idx == -1) {
+                    data.push(restaurant);
+                    count++;
+                }
             }
         }
 
