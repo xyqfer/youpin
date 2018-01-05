@@ -39,18 +39,22 @@ module.exports = (req, res, next) => {
                 page: i,
                 offset: 0
             }).then((data) => {
-                const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
+                if (data && data.length > 0) {
+                    const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 
-                if (i == 0) {
-                    allData = data;
+                    if (i == 0) {
+                        allData = data;
+                    }
+
+                    oss.put(objectKey, Buffer.from(JSON.stringify(data))).then((data) => {
+                        console.log(objectKey);
+                        resolve(data);
+                    }).catch((err) => {
+                        reject(err);
+                    });
+                } else {
+                    reject({});
                 }
-
-                oss.put(objectKey, Buffer.from(JSON.stringify(data))).then((data) => {
-                    console.log(objectKey);
-                    resolve(data);
-                }).catch((err) => {
-                    reject(err);
-                });
             }).catch((err) => {
                 reject(err);
             });
