@@ -4,11 +4,10 @@ module.exports = (req, res, next) => {
     const AV = require('leanengine');
 
     const dbName = 'Ele_restaurant';
-    const Restaurant = AV.Object.extend(dbName);
-    let query = new AV.Query(Restaurant);
+    let query = new AV.Query(dbName);
     let limit = req.query.limit || 5;
 
-    query.limit(2000);
+    query.limit(1000);
 
     query.find().then((results) => {
         let data = [];
