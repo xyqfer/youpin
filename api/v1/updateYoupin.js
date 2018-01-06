@@ -117,7 +117,7 @@ module.exports = (req, res, next) => {
 
         sendMail() {
             if (this.newData.length > 0) {
-                if (process.env.LEANCLOUD_APP_ENV == 'production') {
+                if (process.env.LEANCLOUD_APP_ENV != 'development') {
                     let mailContent = '';
 
                     this.newData.forEach((item) => {

@@ -35,7 +35,7 @@ const cloudFuncConfig = [
 cloudFuncConfig.forEach((func) => {
     AV.Cloud.define(func.name, (request) => {
         const rp = require('request-promise');
-        const basePath = process.env.LEANCLOUD_APP_ENV == 'production' ? process.env.hostName : 'http://localhost:3000';
+        const basePath = 'http://localhost:3000';
 
         rp.get({
             uri: `${basePath}${func.url}`
