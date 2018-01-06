@@ -88,11 +88,19 @@ module.exports = (req, res, next) => {
                 secretKey: process.env.CDNSecretKey
             });
 
-            let coverUrlIndex = pageCount;
+            const now = new Date();
+            const nowHour = now.getHours();
+            const nowMinute = now.getMinutes();
 
-            // allData.forEach((item) => {
-            //     urlObj[`urls.${coverUrlIndex++}`] = item.cover;
-            // });
+            if (nowHour == 16 && (nowMinute > 0 && nowMinute < 59)) {
+                let coverUrlIndex = pageCount;
+
+                allData.forEach((item) => {
+                    item.urls.forEach((url) => {
+                        urlObj[`urls.${coverUrlIndex++}`] = url;
+                    });
+                });
+            }
 
             console.log(urlObj);
 
