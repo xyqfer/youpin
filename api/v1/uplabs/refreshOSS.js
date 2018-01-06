@@ -92,7 +92,7 @@ module.exports = (req, res, next) => {
             const nowHour = now.getHours();
             const nowMinute = now.getMinutes();
 
-            if (nowHour == 16 && (nowMinute > 0 && nowMinute < 59)) {
+            if (nowHour == 16 && (nowMinute > 20 && nowMinute < 40)) {
                 let coverUrlIndex = pageCount;
 
                 allData.forEach((item) => {
