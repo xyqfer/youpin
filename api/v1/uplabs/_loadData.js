@@ -39,7 +39,7 @@ module.exports = ({offset = 0, page = 0}) => {
             if (item.serialized_makers) {
                 const markerAvatar = item.serialized_makers[0].avatar_url;
                 card.avatar = markerAvatar.replace(/s3\.amazonaws\.com\//g, '').replace(/^https:\/\/assets\.materialup\.com/g, cdnHost) + '?imageView2/q/75';
-                card.verified = item.verified;
+                card.verified = markerAvatar.verified;
             }
 
             if (item.images.length > 0) {
