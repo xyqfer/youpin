@@ -36,6 +36,12 @@ module.exports = ({offset = 0, page = 0}) => {
             item.preview_url = item.preview_url.replace(assetReg, cdnHost);
             card.urls = [item.preview_url];
 
+            if (item.serialized_makers) {
+                const markerAvatar = item.serialized_makers[0].avatar_url;
+                card.avatar = markerAvatar.replace(/s3\.amazonaws\.com\//g, '').replace(/^https:\/\/assets\.materialup\.com/g, cdnHost) + '?imageView2/q/75';
+                card.verified = item.verified;
+            }
+
             if (item.images.length > 0) {
                 item.images.forEach((img) => {
                     let url = img.urls.full.replace(assetReg, cdnHost);
