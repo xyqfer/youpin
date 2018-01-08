@@ -10,8 +10,6 @@ const redirectBook = require('./redirectBook');
 const traceBook = require('./traceBook');
 const updateYoupin = require('./updateYoupin');
 const updateEle = require('./updateEle');
-const uplabsRefreshCDN = require('./uplabs/refreshCDN');
-
 const uplabsPushOSS = require('./uplabs/pushOSS');
 const uplabsRefreshOSS = require('./uplabs/refreshOSS');
 
