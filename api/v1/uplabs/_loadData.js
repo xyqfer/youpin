@@ -28,8 +28,6 @@ module.exports = ({offset = 0, page = 0}) => {
                 name: item.name,
             };
 
-            card.desc = `by ${item.maker_name} in ${item.subcategory_friendly_name_plural}`;
-
             item.animated_teaser_url = item.animated_teaser_url.replace(assetReg, cdnHost) + '?imageView2/q/75';
             card.cover = item.animated_teaser_url;
 
@@ -37,10 +35,20 @@ module.exports = ({offset = 0, page = 0}) => {
             card.urls = [item.preview_url];
 
             if (item.serialized_makers) {
-                const markerAvatar = item.serialized_makers[0].avatar_url;
-                card.avatar = markerAvatar.replace(/s3\.amazonaws\.com\//g, '').replace(/^https:\/\/assets\.materialup\.com/g, cdnHost) + '?imageView2/q/75';
-                card.verified = markerAvatar.verified;
+                const marker = item.serialized_makers[0];
+                const markerAvatar = marker.avatar_url;
+
+                if (markerAvatar.indexOf('assets.materialup.com') > -1) {
+                    card.avatar = markerAvatar.replace(/s3\.amazonaws\.com\//g, '').replace(/^https:\/\/assets\.materialup\.com/g, cdnHost) + '?imageView2/q/75';
+                    card.verified = markerAvatar.verified;
+                }
+
+                if (item.maker_name == null || item.maker_name == '') {
+                    item.maker_name = marker.full_name;
+                }
             }
+
+            card.desc = `by ${item.maker_name} in ${item.subcategory_friendly_name_plural}`;
 
             if (item.images.length > 0) {
                 item.images.forEach((img) => {
