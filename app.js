@@ -9,8 +9,9 @@ const AV = require('leanengine');
 
 let fundebug = require('fundebug-nodejs');
 fundebug.apikey = process.env.fundebugKey || '';
+fundebug.releaseStage = process.env.LEANCLOUD_APP_ENV;
 
-if (process.env.LEANCLOUD_APP_ENV != 'production') {
+if (process.env.LEANCLOUD_APP_ENV == 'development') {
     fundebug.silent = true;
 }
 

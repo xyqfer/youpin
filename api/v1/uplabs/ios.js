@@ -17,20 +17,25 @@ module.exports = (req, res, next) => {
     const offset = (((new Date(`${currentYear}-${currentMonth}-${currentDate}`)).getTime()) -
         ((new Date(`${year}-${month}-${date}`)).getTime())) / (24 * 60 * 60 * 1000);
 
-    let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
+    const url = page == 0 ?
+        `https://www.uplabs.com/ios.json?days_ago=${offset}&page=1` :
+        `https://www.uplabs.com/showcases/ios/more.json?days_ago=${offset}&per_page=12&page=${page}`;
 
-    if (page == 0) {
-        url = `https://www.uplabs.com/all.json?days_ago=${offset}&page=1`;
+    function redirectUplabs() {
+        console.log('uplabs 异常');
+        res.redirect(url);
     }
 
     loadData({
-        url: url,
-        platform: ''
+        url
     }).then((data) => {
         if (data && data.length > 0) {
             res.json(data);
         } else {
-            res.redirect(url);
+            redirectUplabs();
         }
+    }).catch((err) => {
+        console.log(err);
+        redirectUplabs();
     });
 };

@@ -24,13 +24,12 @@ module.exports = (req, res, next) => {
         console.log(data);
 
         if (data.length > 0) {
-            if (process.env.LEANCLOUD_APP_ENV == 'production') {
+            if (process.env.LEANCLOUD_APP_ENV != 'development') {
                 let mailContent = '';
 
                 data.forEach((item) => {
                     let bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(item.get('url'))}`;
                     mailContent += `
-
                     <div style="margin-bottom: 60px">
                         <a href="${bookUrl}">
                             <h4>${item.get('name')}</h4>
@@ -56,6 +55,9 @@ module.exports = (req, res, next) => {
             }
         }
     }).then((data) => {
+        res.end();
+    }).catch((err) => {
+        console.log(err);
         res.end();
     });
 };

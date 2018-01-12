@@ -22,16 +22,16 @@ const cloudFuncConfig = [
         url: '/api/v1/book/trace',
         info: 'traceBook 定时任务'
     }, {
-        name: 'refreshUplabsCDN',
-        url: '/api/v1/uplabs/refreshCDN',
-        info: '更新 uplabs CDN'
+        name: 'refreshUplabsOSS',
+        url: '/api/v1/uplabs/refreshOSS',
+        info: '更新 uplabs OSS'
     }
 ];
 
 cloudFuncConfig.forEach((func) => {
     AV.Cloud.define(func.name, (request) => {
         const rp = require('request-promise');
-        const basePath = process.env.LEANCLOUD_APP_ENV == 'production' ? process.env.hostName : 'http://localhost:3000';
+        const basePath = 'http://localhost:3000';
 
         rp.get({
             uri: `${basePath}${func.url}`
