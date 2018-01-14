@@ -30,6 +30,7 @@ module.exports = ({offset = 0, page = 0, url = ''}) => {
                 id: item.id,
                 animated: item.animated,
                 name: item.name,
+                detail: item.description_without_html
             };
 
             item.animated_teaser_url = item.animated_teaser_url.replace(assetReg, cdnHost) + '?imageView2/q/75';
