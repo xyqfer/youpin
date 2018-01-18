@@ -16,6 +16,7 @@ const uplabsiOS = require('./uplabs/ios');
 const uplabsAndroid = require('./uplabs/android');
 const uplabsAnimation = require('./uplabs/animation');
 const uplabsRefreshOSS = require('./uplabs/refreshOSS');
+const uplabsPost = require('./uplabs/post');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
@@ -31,6 +32,7 @@ router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAll
 router.get(/^\/uplabs\/uplabs_ios_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsiOS);
 router.get(/^\/uplabs\/uplabs_android_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAndroid);
 router.get(/^\/uplabs\/uplabs_animation_(\d+)\.json$/, uplabsAnimation);
+router.get(/^\/uplabs\/(\d+)\.json$/, uplabsPost);
 router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
 
 module.exports = router;
