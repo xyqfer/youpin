@@ -9,7 +9,8 @@ module.exports = (data) => {
         id: data.id,
         animated: data.animated,
         name: data.name,
-        detail: data.description_without_html
+        detail: data.description_without_html,
+        category: data.subcategory_friendly_name_plural
     };
 
     data.animated_teaser_url = data.animated_teaser_url.replace(assetReg, cdnHost) + '?imageView2/q/75';
@@ -32,12 +33,12 @@ module.exports = (data) => {
         }
     }
 
+    card.makerName = data.maker_name;
     card.desc = `by ${data.maker_name} in ${data.subcategory_friendly_name_plural}`;
 
     if (data.images.length > 0) {
         data.images.forEach((img) => {
             let url = img.urls.full.replace(assetReg, cdnHost);
-
             card.urls.push(url);
         });
     }
