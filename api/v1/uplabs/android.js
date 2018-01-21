@@ -3,6 +3,7 @@
 module.exports = (req, res, next) => {
     const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
+    const saveDbData = require('./_saveDbData');
 
     const params = req.params;
     const year = params[0];
@@ -30,6 +31,7 @@ module.exports = (req, res, next) => {
         url
     }).then((data) => {
         if (data && data.length > 0) {
+            saveDbData(data);
             res.json(data);
         } else {
             redirectUplabs();

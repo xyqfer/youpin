@@ -5,6 +5,8 @@ module.exports = (req, res, next) => {
     const OSS = require('ali-oss');
     const COS = require('cos-nodejs-sdk-v5');
     const Promise = require('bluebird');
+    const rp = require('request-promise');
+
     const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
 
@@ -29,10 +31,12 @@ module.exports = (req, res, next) => {
         SecretKey: process.env.COSSecretKey
     });
 
+    let objectKeyList = [];
+    let urlIndex = 0;
     let taskList = [];
 
     for (let i = 0; i < pageCount; i++) {
-        urlObj[`urls.${i}`] = `${path}/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
+        urlObj[`urls.${urlIndex++}`] = `${path}/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 
         taskList.push(new Promise((resolve, reject) => {
             loadData({
@@ -93,11 +97,9 @@ module.exports = (req, res, next) => {
             const nowMinute = now.getMinutes();
 
             if (nowHour == 16 && (nowMinute > 20 && nowMinute < 40)) {
-                let coverUrlIndex = pageCount;
-
                 allData.forEach((item) => {
                     item.urls.forEach((url) => {
-                        urlObj[`urls.${coverUrlIndex++}`] = url;
+                        urlObj[`urls.${urlIndex++}`] = url;
                     });
                 });
             }
