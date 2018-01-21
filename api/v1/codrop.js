@@ -75,7 +75,7 @@ module.exports = (req, res, next) => {
                 mailContent: mailContent
             });
         }
-    });
 
-    res.end();
+        res.end();
+    });
 };
