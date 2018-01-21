@@ -25,6 +25,10 @@ const cloudFuncConfig = [
         name: 'refreshUplabsOSS',
         url: '/api/v1/uplabs/refreshOSS',
         info: '更新 uplabs OSS'
+    }, {
+        name: 'updateCodrop',
+        url: '/api/v1/codrop/update',
+        info: '更新 Codrop'
     }
 ];
 
