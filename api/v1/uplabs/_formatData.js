@@ -4,6 +4,10 @@ module.exports = (data) => {
     const assetReg = /^https:\/\/assets\.materialup\.com/g;
     const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
 
+    if (data.animated_teaser_url == null) {
+        return data;
+    }
+
     let card = {
         backgroundColor: data.background_color,
         id: data.id,

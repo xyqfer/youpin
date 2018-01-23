@@ -7,17 +7,17 @@ module.exports = (req, res, next) => {
     const Promise = require('bluebird');
     const rp = require('request-promise');
 
-    const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
+    const formatData = require('./_formatData');
 
     const pageCount = 3;
     const timeObj = getFormatTime();
     const currentYear = timeObj.year;
     const currentMonth = timeObj.month;
     const currentDate = timeObj.date;
-    const path = 'https://uplabs-oss-1252013833.file.myqcloud.com/api/v1';
-    let allData = [];
-    let urlObj = {};
+    const path = 'https://uplabs-oss-1252013833.file.myqcloud.com';
+    const apiHost = process.env.LEANCLOUD_APP_ENV == 'development' ? 'http://localhost:3000' :
+        (process.env.LEANCLOUD_APP_ENV == 'production' ? process.env.hostName : process.env.stgHostName);
 
     const oss = new OSS.Wrapper({
         accessKeyId: process.env.OSSAccessKeyId,
@@ -32,90 +32,46 @@ module.exports = (req, res, next) => {
     });
 
     let objectKeyList = [];
-    let urlIndex = 0;
-    let taskList = [];
 
     for (let i = 0; i < pageCount; i++) {
-        urlObj[`urls.${urlIndex++}`] = `${path}/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
-
-        taskList.push(new Promise((resolve, reject) => {
-            loadData({
-                page: i,
-                offset: 0
-            }).then((data) => {
-                if (data && data.length > 0) {
-                    const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
-
-                    if (i == 0) {
-                        allData = data;
-                    }
-
-                    oss.put(objectKey, Buffer.from(JSON.stringify(data))).then((data) => {
-                        console.log(objectKey);
-                        resolve(data);
-                    }).catch((err) => {
-                        reject(err);
-                    });
-                } else {
-                    reject({});
-                }
-            }).catch((err) => {
-                reject(err);
-            });
-        }));
+        objectKeyList.push(`api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`);
+        objectKeyList.push(`api/v1/uplabs/uplabs_ios_${currentYear}-${currentMonth}-${currentDate}_${i}.json`);
+        objectKeyList.push(`api/v1/uplabs/uplabs_android_${currentYear}-${currentMonth}-${currentDate}_${i}.json`);
     }
 
-    Promise.all(taskList).then((resultList) => {
-        let taskList = [];
-
-        for (let i = 0 ; i < pageCount; i++) {
-            taskList.push(new Promise((resolve, reject) => {
+    const taskList = objectKeyList.map((objectKey) => {
+        return rp.get({
+            uri: `${apiHost}/${objectKey}`,
+            json: true
+        }).then((result) => {
+            oss.put(objectKey, Buffer.from(JSON.stringify(formatData(result))));
+        }).then(() => {
+            return new Promise((resolve) => {
                 const params = {
                     Bucket: process.env.COSBucket2,
                     Region: process.env.COSRegion,
-                    Key: `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`
+                    Key: objectKey
                 };
 
                 cos.deleteObject(params, function(err, data) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(data);
-                    }
+                    resolve(data);
                 });
-            }));
-        }
+            })
+        });
+    });
 
-        Promise.all(taskList).then((result) => {
-            qcloudSDK.config({
-                secretId: process.env.CDNSecretId,
-                secretKey: process.env.CDNSecretKey
-            });
+    Promise.all(taskList).then(() => {
+        let urlObj = {};
 
-            const now = new Date();
-            const nowHour = now.getHours();
-            const nowMinute = now.getMinutes();
+        objectKeyList.forEach((objectKey, index) => {
+            urlObj[`urls.${index}`] = `${path}/${objectKey}`;
+        });
 
-            if (nowHour == 16 && (nowMinute > 20 && nowMinute < 40)) {
-                allData.forEach((item) => {
-                    item.urls.forEach((url) => {
-                        urlObj[`urls.${urlIndex++}`] = url;
-                    });
-                });
-            }
-
-            console.log(urlObj);
-
-            qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
-                console.log(result);
-                res.end();
-            });
-        }).catch((err) => {
-            console.log(err);
+        qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
+            console.log(result);
             res.end();
         });
-    }).catch((err) => {
-        console.log(err);
+    }).catch(() => {
         res.end();
     });
 };
