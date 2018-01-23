@@ -29,6 +29,10 @@ const cloudFuncConfig = [
         name: 'updateCodrop',
         url: '/api/v1/codrop/update',
         info: '更新 Codrop'
+    }, {
+        name: 'updateGitHubTrending',
+        url: '/api/v1/github/trending',
+        info: '更新 GitHub Trending'
     }
 ];
 
