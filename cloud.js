@@ -33,6 +33,10 @@ const cloudFuncConfig = [
         name: 'updateGitHubTrending',
         url: '/api/v1/github/trending',
         info: '更新 GitHub Trending'
+    }, {
+        name: 'updateV2EXHot',
+        url: '/api/v1/v2ex/hot',
+        info: '更新 v2ex hot'
     }
 ];
 

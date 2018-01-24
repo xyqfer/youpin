@@ -20,6 +20,7 @@ const uplabsPost = require('./uplabs/post');
 
 const updateCodrop = require('./codrop');
 const updateGitHubTrending = require('./updateGitHubTrending');
+const updateV2EX = require('./updateV2EX');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
@@ -33,6 +34,7 @@ router.get('/ele/update', updateEle);
 
 router.get('/codrop/update', updateCodrop);
 router.get('/github/trending', updateGitHubTrending);
+router.get('/v2ex/hot', updateV2EX);
 
 router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAll);
 router.get(/^\/uplabs\/uplabs_ios_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsiOS);
