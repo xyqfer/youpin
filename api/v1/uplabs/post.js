@@ -4,6 +4,7 @@ module.exports = (req, res, next) => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
     const formatData = require('./_formatData');
+    const saveDbData = require('./_saveDbData');
 
     const params = req.params;
     const id = params[0];
@@ -19,9 +20,14 @@ module.exports = (req, res, next) => {
 
         try {
             const data = JSON.parse($(`[data-react-class='Post']`).attr('data-react-props'));
-            res.json(formatData(data.post));
+            const postData = formatData(data.post);
+
+            saveDbData(postData);
+            res.json(postData);
         } catch(e) {
             res.sendStatus(500);
         }
+    }).catch(() => {
+        res.sendStatus(500);
     });
 };
