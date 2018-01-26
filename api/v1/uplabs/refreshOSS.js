@@ -56,7 +56,7 @@ module.exports = (req, res, next) => {
                 cos.deleteObject(params, function(err, data) {
                     resolve(data);
                 });
-            })
+            });
         });
     });
 
