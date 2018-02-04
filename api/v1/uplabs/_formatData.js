@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = (data) => {
-    const assetReg = /^https:\/\/assets\.materialup\.com/g;
-    const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
-
     if (data.animated_teaser_url == null) {
         return data;
     }
+
+    const assetReg = /^https:\/\/assets\.materialup\.com/g;
+    const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
 
     let card = {
         backgroundColor: data.background_color,
@@ -25,7 +25,7 @@ module.exports = (data) => {
 
     if (data.serialized_makers) {
         const marker = data.serialized_makers[0];
-        const markerAvatar = marker.avatar_url;
+        const markerAvatar = marker.avatar_url || '';
 
         if (markerAvatar.indexOf('assets.materialup.com') > -1) {
             card.avatar = markerAvatar.replace(/s3\.amazonaws\.com\//g, '').replace(/^https:\/\/assets\.materialup\.com/g, cdnHost) + '?imageView2/q/75';
@@ -35,6 +35,8 @@ module.exports = (data) => {
         if (data.maker_name == null || data.maker_name == '') {
             data.maker_name = marker.full_name;
         }
+
+        card.authorName = marker.link_path.slice(1);
     }
 
     card.makerName = data.maker_name;

@@ -17,6 +17,8 @@ const uplabsAndroid = require('./uplabs/android');
 const uplabsAnimation = require('./uplabs/animation');
 const uplabsRefreshOSS = require('./uplabs/refreshOSS');
 const uplabsPost = require('./uplabs/post');
+const uplabsCollection = require('./uplabs/collection');
+const uplabsCollections = require('./uplabs/collections');
 
 const updateCodrop = require('./codrop');
 const updateGitHubTrending = require('./updateGitHubTrending');
@@ -41,6 +43,8 @@ router.get(/^\/uplabs\/uplabs_ios_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplab
 router.get(/^\/uplabs\/uplabs_android_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAndroid);
 router.get(/^\/uplabs\/uplabs_animation_(\d+)\.json$/, uplabsAnimation);
 router.get(/^\/uplabs\/(\d+)\.json$/, uplabsPost);
+router.get('/uplabs/collection', uplabsCollection);
+router.get('/uplabs/collections/:name', uplabsCollections);
 router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
 
 module.exports = router;
