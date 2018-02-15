@@ -25,13 +25,18 @@ const updateCodrop = require('./codrop');
 const updateGitHubTrending = require('./updateGitHubTrending');
 const updateV2EX = require('./updateV2EX');
 
+const doubanBook = require('./book/douban');
+
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
 router.get('/activities', activities);
+
 router.get('/book/update', updateBook);
 router.get('/book/notify', notifyBook);
 router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
+router.get('/book/douban', doubanBook);
+
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);
 
