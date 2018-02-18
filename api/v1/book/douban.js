@@ -95,10 +95,12 @@ module.exports = (req, res) => {
                     `;
             });
 
-            sendMail({
-                title: '豆瓣有新书啦~',
-                mailContent: mailContent
-            });
+            if (process.env.LEANCLOUD_APP_ENV !== 'development') {
+                sendMail({
+                    title: '豆瓣有新书啦~',
+                    mailContent: mailContent
+                });
+            }
         }
 
         res.end();
