@@ -32,6 +32,6 @@ module.exports = (req, res) => {
     }).then((result) => {
         res.json(result);
     }).catch((err) => {
-        res.json([]);
+        res.json({});
     });
 };
