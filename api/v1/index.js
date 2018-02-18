@@ -27,7 +27,8 @@ const updateV2EX = require('./updateV2EX');
 
 const doubanBook = require('./book/douban');
 
-const todayStatusLog = require('./dailyStatusLog/today');
+const getTodayStatusLog = require('./dailyStatusLog/today');
+const updateTodayStatusLog = require('./dailyStatusLog/update');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
@@ -56,6 +57,7 @@ router.get('/uplabs/collection', uplabsCollection);
 router.get('/uplabs/collections/:name', uplabsCollections);
 router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
 
-router.get('/dailyStatusLog/today', todayStatusLog);
+router.get('/dailyStatusLog/today', getTodayStatusLog);
+router.post('/dailyStatusLog/update', updateTodayStatusLog);
 
 module.exports = router;
