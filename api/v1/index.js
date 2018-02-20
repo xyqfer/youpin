@@ -29,6 +29,7 @@ const doubanBook = require('./book/douban');
 
 const getTodayStatusLog = require('./dailyStatusLog/today');
 const updateTodayStatusLog = require('./dailyStatusLog/update');
+const getHistoryStatusLog = require('./dailyStatusLog/history');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
@@ -59,5 +60,6 @@ router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
 
 router.get('/dailyStatusLog/today', getTodayStatusLog);
 router.post('/dailyStatusLog/update', updateTodayStatusLog);
+router.get('/dailyStatusLog/history/:days', getHistoryStatusLog);
 
 module.exports = router;
