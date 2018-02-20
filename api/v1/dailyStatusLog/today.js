@@ -6,6 +6,7 @@
 module.exports = (req, res) => {
     const AV = require('leanengine');
     const moment = require('moment');
+    moment.locale('zh-cn');
 
     const dbName = 'DayStatusLog';
     const today = new Date(`${moment().format('YYYY-MM-DD')} 00:00:00`);
@@ -30,6 +31,14 @@ module.exports = (req, res) => {
             });
         }
     }).then((result) => {
+        const timeString = moment(today).format('YYYY年M月D日 dddd');
+
+        if (result.set) {
+            result.set('time', timeString);
+        } else {
+            result.time = timeString;
+        }
+
         res.json(result);
     }).catch((err) => {
         res.json({});
