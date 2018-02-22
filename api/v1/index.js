@@ -26,6 +26,7 @@ const updateGitHubTrending = require('./updateGitHubTrending');
 const updateV2EX = require('./updateV2EX');
 
 const doubanBook = require('./book/douban');
+const zhongxinBook = require('./book/zhongxin');
 
 const getTodayStatusLog = require('./dailyStatusLog/today');
 const updateTodayStatusLog = require('./dailyStatusLog/update');
@@ -40,6 +41,7 @@ router.get('/book/notify', notifyBook);
 router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
 router.get('/book/douban', doubanBook);
+router.get('/book/zhongxin', zhongxinBook);
 
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);

@@ -41,6 +41,10 @@ const cloudFuncConfig = [
         name: 'updateDoubanBook',
         url: '/api/v1/book/douban',
         info: '更新豆瓣新书'
+    }, {
+        name: 'updateZhongxinBook',
+        url: '/api/v1/book/zhongxin',
+        info: '更新中信新书'
     }
 ];
 
