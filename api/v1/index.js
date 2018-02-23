@@ -4,7 +4,7 @@ const router = require('express').Router();
 const restaurant = require('./restaurant');
 const menu = require('./menu');
 const activities = require('./activities');
-const updateBook = require('./updateBook');
+const updateBook = require('./book/update');
 const notifyBook = require('./notifyBook');
 const redirectBook = require('./redirectBook');
 const traceBook = require('./traceBook');
@@ -25,9 +25,6 @@ const updateCodrop = require('./codrop');
 const updateGitHubTrending = require('./updateGitHubTrending');
 const updateV2EX = require('./updateV2EX');
 
-const doubanBook = require('./book/douban');
-const zhongxinBook = require('./book/zhongxin');
-
 const getTodayStatusLog = require('./dailyStatusLog/today');
 const updateTodayStatusLog = require('./dailyStatusLog/update');
 const getHistoryStatusLog = require('./dailyStatusLog/history');
@@ -40,8 +37,6 @@ router.get('/book/update', updateBook);
 router.get('/book/notify', notifyBook);
 router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
-router.get('/book/douban', doubanBook);
-router.get('/book/zhongxin', zhongxinBook);
 
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);

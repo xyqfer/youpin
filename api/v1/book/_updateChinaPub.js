@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = () => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
             this.dbData = await this.getDbData();
             this.bookData = await this.getBookData();
             await this.filterData();
-            await this.updateData();
+            return await this.updateData();
         }
 
         getDbData() {
@@ -157,13 +157,5 @@ module.exports = (req, res, next) => {
     }
 
     let book = new Book();
-    book.start();
-
-    const basePath = process.env.LEANCLOUD_APP_ENV == 'development' ? 'http://localhost:3000' :
-        (process.env.LEANCLOUD_APP_ENV == 'production' ? process.env.hostName : process.env.stgHostName);
-
-    rp.get({
-        uri: `${basePath}/api/v1/book/zhongxin`
-    });
-    res.end();
+    return book.start();
 };
