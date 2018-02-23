@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = () => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
@@ -41,7 +41,7 @@ module.exports = (req, res, next) => {
     }
 
 
-    Promise.all([getDbData(), getCodropData()]).then((result) => {
+    return Promise.all([getDbData(), getCodropData()]).then((result) => {
         const dbData = result[0];
         const codropData = result[1];
 
@@ -75,7 +75,5 @@ module.exports = (req, res, next) => {
                 mailContent: mailContent
             });
         }
-
-        res.end();
     });
 };

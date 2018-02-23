@@ -10,10 +10,6 @@ const cloudFuncConfig = [
         url: '/api/v1/ele/update',
         info: 'updateEle 定时任务'
     }, {
-        name: 'updateBook',
-        url: '/api/v1/book/update',
-        info: 'updateBook 定时任务'
-    }, {
         name: 'notifyBook',
         url: '/api/v1/book/notify',
         info: 'notifyBook 定时任务'
@@ -26,17 +22,13 @@ const cloudFuncConfig = [
         url: '/api/v1/uplabs/refreshOSS',
         info: '更新 uplabs OSS'
     }, {
-        name: 'updateCodrop',
-        url: '/api/v1/codrop/update',
-        info: '更新 Codrop'
-    }, {
-        name: 'updateGitHubTrending',
-        url: '/api/v1/github/trending',
-        info: '更新 GitHub Trending'
-    }, {
         name: 'updateV2EXHot',
         url: '/api/v1/v2ex/hot',
         info: '更新 v2ex hot'
+    }, {
+        name: 'updateDaily',
+        url: '/api/v1/update/daily',
+        info: '每日更新'
     }
 ];
 

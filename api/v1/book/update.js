@@ -1,15 +1,13 @@
 'use strict';
 
-module.exports = (req, res) => {
+module.exports = () => {
     const updateDouban = require('./_updateDouban');
     const updateChinaPub = require('./_updateChinaPub');
     const updateZhongxin = require('./_updateZhongxin');
 
-    updateDouban().then(() => {
+    return updateDouban().then(() => {
         return updateZhongxin();
     }).then(() => {
-        return updateChinaPub();
+        updateChinaPub();
     });
-
-    res.end();
 };

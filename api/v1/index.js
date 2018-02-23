@@ -4,7 +4,6 @@ const router = require('express').Router();
 const restaurant = require('./restaurant');
 const menu = require('./menu');
 const activities = require('./activities');
-const updateBook = require('./book/update');
 const notifyBook = require('./notifyBook');
 const redirectBook = require('./redirectBook');
 const traceBook = require('./traceBook');
@@ -21,9 +20,8 @@ const uplabsCollection = require('./uplabs/collection');
 const uplabsCollections = require('./uplabs/collections');
 const uplabsAuthor = require('./uplabs/author');
 
-const updateCodrop = require('./codrop');
-const updateGitHubTrending = require('./updateGitHubTrending');
 const updateV2EX = require('./updateV2EX');
+const updateDaily = require('./updateDaily');
 
 const getTodayStatusLog = require('./dailyStatusLog/today');
 const updateTodayStatusLog = require('./dailyStatusLog/update');
@@ -33,7 +31,6 @@ router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
 router.get('/activities', activities);
 
-router.get('/book/update', updateBook);
 router.get('/book/notify', notifyBook);
 router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
@@ -41,9 +38,8 @@ router.get('/book/trace', traceBook);
 router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);
 
-router.get('/codrop/update', updateCodrop);
-router.get('/github/trending', updateGitHubTrending);
 router.get('/v2ex/hot', updateV2EX);
+router.get('/update/daily', updateDaily);
 
 router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAll);
 router.get(/^\/uplabs\/uplabs_ios_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsiOS);
