@@ -8,8 +8,12 @@ module.exports = (req, res, next) => {
 
     const dbName = 'V2EXHot';
 
+    // 晚上10点15分前发邮件
+    const today = new Date();
+    const needSendMail = today.getHours() === 22 && today.getMinutes() <= 15;
+
     function getDbData() {
-        let query = new AV.Query(dbName);
+        const query = new AV.Query(dbName);
 
         query.ascending('updatedAt');
         query.limit(500);
@@ -21,14 +25,13 @@ module.exports = (req, res, next) => {
             json: true,
             uri: 'https://www.v2ex.com/api/topics/hot.json',
             headers: {
-                'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36`
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
             },
         });
     }
 
-    Promise.all([getDbData(), getV2EXData()]).then((result) => {
-        const dbData = result[0];
-        const v2exData = result[1];
+    Promise.all([getDbData(), getV2EXData()]).then((results) => {
+        const [ dbData, v2exData ] = results;
 
         const newData = v2exData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
@@ -42,35 +45,63 @@ module.exports = (req, res, next) => {
 
 
         if (newData.length > 0) {
-            let mailContent = '';
-
-            newData.forEach((item) => {
+            const v2HotObjects = newData.map((item) => {
                 const V2EXHot = AV.Object.extend(dbName);
-                let v2Hot = new V2EXHot();
-
+                const v2Hot = new V2EXHot();
                 v2Hot.set('postId', item.id);
-                v2Hot.save(null, {
-                    useMasterKey: false
-                });
+                v2Hot.set('url', item.url);
+                v2Hot.set('title', item.title);
+                v2Hot.set('content', item.content);
 
-                mailContent += `
-                    <div style="margin-bottom: 50px">
-                        <a href="${item.url}">
-                            <h4>${item.title}</h4>
-                        </a>
-                        <p>
-                            ${item.content}
-                        </p>
-                    </div>
-                    `;
+                return v2Hot;
             });
 
-            sendMail({
-                title: 'v2 今日热议主题',
-                mailContent: mailContent
+            AV.Object.saveAll(v2HotObjects).then((results) => {
+                if (needSendMail && process.env.LEANCLOUD_APP_ENV !== 'development') {
+                    const query = new AV.Query(dbName);
+
+                    const year = today.getFullYear();
+                    let month = today.getMonth() + 1;
+                    month = month < 10 ? '0' + month : month;
+
+                    const date = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
+
+                    query.greaterThanOrEqualTo('updatedAt', new Date(`${year}-${month}-${date} 00:00:00`));
+                    query.limit(1000);
+
+                    query.find().then((result) => {
+                        let mailContent = '';
+
+                        result.forEach((item) => {
+                            mailContent += `
+                                <div style="margin-bottom: 50px">
+                                    <a href="${item.get('url')}">
+                                        <h4>${item.get('title')}</h4>
+                                    </a>
+                                    <p>
+                                        ${item.get('content')}
+                                    </p>
+                                </div>
+                            `;
+                        });
+
+                        sendMail({
+                            title: 'v2 今日热议主题',
+                            mailContent: mailContent
+                        });
+                    }).catch((err) => {
+                        res.end();
+                    });
+                } else {
+                    res.end();
+                }
+            }).catch((err) => {
+                res.end();
             });
         }
 
+        res.end();
+    }).catch((err) => {
         res.end();
     });
 };
