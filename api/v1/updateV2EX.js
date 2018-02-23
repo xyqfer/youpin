@@ -8,8 +8,9 @@ module.exports = (req, res, next) => {
 
     const dbName = 'V2EXHot';
 
-    // 晚上10点发邮件
-    const needSendMail = (new Date()).getHours() === 22;
+    // 晚上10点15分前发邮件
+    const today = new Date();
+    const needSendMail = today.getHours() === 22 && today.getMinutes() <= 15;
 
     function getDbData() {
         const query = new AV.Query(dbName);
@@ -59,7 +60,6 @@ module.exports = (req, res, next) => {
                 if (needSendMail && process.env.LEANCLOUD_APP_ENV !== 'development') {
                     const query = new AV.Query(dbName);
 
-                    const today = new Date();
                     const year = today.getFullYear();
                     let month = today.getMonth() + 1;
                     month = month < 10 ? '0' + month : month;
