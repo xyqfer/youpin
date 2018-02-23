@@ -10,8 +10,6 @@ module.exports = () => {
 
     class Book {
         constructor() {
-            console.log('updateBook');
-
             this.dbName = 'ChinaPubBooks';
             this.dbData = [];
             this.bookData = [];

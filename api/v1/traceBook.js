@@ -10,8 +10,6 @@ module.exports = (req, res, next) => {
 
     class Trace {
         constructor() {
-            console.log('traceBook');
-
             this.dbName = 'ChinaPubBooks';
             this.mailTitle = '有货啦';
             this.traceBook = [];
