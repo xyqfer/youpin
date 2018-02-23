@@ -37,14 +37,6 @@ const cloudFuncConfig = [
         name: 'updateV2EXHot',
         url: '/api/v1/v2ex/hot',
         info: '更新 v2ex hot'
-    }, {
-        name: 'updateDoubanBook',
-        url: '/api/v1/book/douban',
-        info: '更新豆瓣新书'
-    }, {
-        name: 'updateZhongxinBook',
-        url: '/api/v1/book/zhongxin',
-        info: '更新中信新书'
     }
 ];
 
@@ -57,6 +49,8 @@ cloudFuncConfig.forEach((func) => {
         rp.get({
             uri: `${basePath}${func.url}`
         });
+
+        console.log(func.info);
 
         return func.info;
     });

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res) => {
+module.exports = () => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
@@ -45,7 +45,7 @@ module.exports = (req, res) => {
         });
     };
 
-    Promise.all([getDbData(), getDoubanData()]).then((results) => {
+    return Promise.all([getDbData(), getDoubanData()]).then((results) => {
         const dbData = results[0];
         const doubanData = results[1];
 
@@ -103,8 +103,7 @@ module.exports = (req, res) => {
             }
         }
 
-        res.end();
     }).catch((err) => {
-        res.end();
+        console.log(err);
     });
 };

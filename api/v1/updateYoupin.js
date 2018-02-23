@@ -8,8 +8,6 @@ module.exports = (req, res, next) => {
 
     class Youpin {
         constructor() {
-            console.log('updateYoupin');
-
             this.dbData = [];
             this.youpinData = [];
             this.newData = [];
@@ -80,8 +78,6 @@ module.exports = (req, res, next) => {
         }
 
         updateData() {
-            console.log('updateYoupin');
-
             return Promise.mapSeries(this.newData, (item) => {
                 const MiStore = AV.Object.extend(this.dbName);
                 const store = new MiStore();

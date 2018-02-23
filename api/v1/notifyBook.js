@@ -4,8 +4,6 @@ module.exports = (req, res, next) => {
     const AV = require('leanengine');
     const sendMail = require('../lib/mail');
 
-    console.log('notifyBook');
-
     const dbName = 'ChinaPubBooks';
     let query = new AV.Query(dbName);
 

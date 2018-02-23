@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res) => {
+module.exports = () => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
@@ -44,7 +44,7 @@ module.exports = (req, res) => {
         });
     };
 
-    Promise.all([getDbBook(), getZhongxinBook()]).then((results) => {
+    return Promise.all([getDbBook(), getZhongxinBook()]).then((results) => {
         const [ dbBook, zhongxinBook ] = results;
 
         const newData = zhongxinBook.filter((item) => {
@@ -93,9 +93,7 @@ module.exports = (req, res) => {
                 });
             }
         }
-
-        res.end();
     }).catch((err) => {
-        res.end();
+        console.log(err);
     });
 };
