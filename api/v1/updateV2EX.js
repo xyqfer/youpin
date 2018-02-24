@@ -4,104 +4,101 @@ module.exports = (req, res, next) => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
+    const moment = require('moment');
     const sendMail = require('../lib/mail');
 
     const dbName = 'V2EXHot';
 
-    // 晚上10点15分前发邮件
+    // 早上8点15分前发邮件
     const today = new Date();
-    const needSendMail = today.getHours() === 22 && today.getMinutes() <= 15;
+    const needSendMail = today.getHours() === 8 && today.getMinutes() <= 15;
 
-    function getDbData() {
+    if (needSendMail && process.env.LEANCLOUD_APP_ENV !== 'development') {
         const query = new AV.Query(dbName);
+        const yesterday = new Date(`${moment().add(-1, 'days').format('YYYY-MM-DD 00:00:00')}`);
 
-        query.ascending('updatedAt');
-        query.limit(500);
-        return query.find();
-    }
+        query.greaterThanOrEqualTo('updatedAt', yesterday);
+        query.limit(1000);
+        query.find().then((result) => {
+            let mailContent = '';
 
-    function getV2EXData() {
-        return rp.get({
-            json: true,
-            uri: 'https://www.v2ex.com/api/topics/hot.json',
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
-            },
+            result.forEach((item) => {
+                mailContent += `
+                    <div style="margin-bottom: 50px">
+                        <a href="${item.get('url')}">
+                            <h4>${item.get('title')}</h4>
+                        </a>
+                        <p>
+                            ${item.get('content')}
+                        </p>
+                    </div>
+                `;
+            });
+
+            sendMail({
+                title: 'v2 昨日热议主题',
+                mailContent: mailContent
+            });
+        }).catch((err) => {
+            console.log(err);
+        }).finally(() => {
+            res.end();
         });
-    }
+    } else {
+        const getDbData = () => {
+            const query = new AV.Query(dbName);
 
-    Promise.all([getDbData(), getV2EXData()]).then((results) => {
-        const [ dbData, v2exData ] = results;
+            query.ascending('updatedAt');
+            query.limit(500);
+            return query.find();
+        };
 
-        const newData = v2exData.filter((item) => {
-            for (let i = 0; i < dbData.length; i++) {
-                if (item.id === dbData[i].get('postId')) {
-                    return false;
+        const getV2EXData = () => {
+            return rp.get({
+                json: true,
+                uri: 'https://www.v2ex.com/api/topics/hot.json',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
+                },
+            });
+        };
+
+        Promise.all([getDbData(), getV2EXData()]).then((results) => {
+            const [ dbData, v2exData ] = results;
+
+            const newData = v2exData.filter((item) => {
+                for (let i = 0; i < dbData.length; i++) {
+                    if (item.id === dbData[i].get('postId')) {
+                        return false;
+                    }
                 }
-            }
 
-            return true;
-        });
+                return true;
+            });
 
 
-        if (newData.length > 0) {
-            const v2HotObjects = newData.map((item) => {
+            if (newData.length > 0) {
                 const V2EXHot = AV.Object.extend(dbName);
-                const v2Hot = new V2EXHot();
-                v2Hot.set('postId', item.id);
-                v2Hot.set('url', item.url);
-                v2Hot.set('title', item.title);
-                v2Hot.set('content', item.content);
+                const v2HotObjects = newData.map((item) => {
+                    const v2Hot = new V2EXHot();
+                    v2Hot.set('postId', item.id);
+                    v2Hot.set('url', item.url);
+                    v2Hot.set('title', item.title);
+                    v2Hot.set('content', item.content);
 
-                return v2Hot;
-            });
+                    return v2Hot;
+                });
 
-            AV.Object.saveAll(v2HotObjects).then((results) => {
-                if (needSendMail && process.env.LEANCLOUD_APP_ENV !== 'development') {
-                    const query = new AV.Query(dbName);
+                AV.Object.saveAll(v2HotObjects).then((results) => {
 
-                    const year = today.getFullYear();
-                    let month = today.getMonth() + 1;
-                    month = month < 10 ? '0' + month : month;
-
-                    const date = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
-
-                    query.greaterThanOrEqualTo('updatedAt', new Date(`${year}-${month}-${date} 00:00:00`));
-                    query.limit(1000);
-
-                    query.find().then((result) => {
-                        let mailContent = '';
-
-                        result.forEach((item) => {
-                            mailContent += `
-                                <div style="margin-bottom: 50px">
-                                    <a href="${item.get('url')}">
-                                        <h4>${item.get('title')}</h4>
-                                    </a>
-                                    <p>
-                                        ${item.get('content')}
-                                    </p>
-                                </div>
-                            `;
-                        });
-
-                        sendMail({
-                            title: 'v2 今日热议主题',
-                            mailContent: mailContent
-                        });
-                    }).catch((err) => {
-                        res.end();
-                    });
-                } else {
-                    res.end();
-                }
-            }).catch((err) => {
-                res.end();
-            });
-        }
-
-        res.end();
-    }).catch((err) => {
-        res.end();
-    });
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }).catch((err) => {
+            console.log(err)
+        }).finally(() => {
+            res.end();
+        });
+    }
 };

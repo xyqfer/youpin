@@ -7,6 +7,7 @@ module.exports = () => {
     const cheerio = require('cheerio');
     const iconv = require('iconv-lite');
     const flatten = require('lodash/flatten');
+    const sendMail = require('../lib/mail');
 
     class Book {
         constructor() {
@@ -134,22 +135,49 @@ module.exports = () => {
         }
 
         updateData() {
-            return Promise.mapSeries(this.newData, (item) => {
-                const BookStore = AV.Object.extend(this.dbName);
-                let store = new BookStore();
+            const BookObj = AV.Object.extend(this.dbName);
+            const bookObjList = this.newData.map((item) => {
+                const bookObj = new BookObj();
+                bookObj.set('name', item.name);
+                bookObj.set('url', item.url);
+                bookObj.set('cover', item.cover);
+                bookObj.set('intro', item.intro);
 
-                store.set('name', item.name);
-                store.set('url', item.url);
-                store.set('cover', item.cover);
-                store.set('intro', item.intro);
+                return bookObj;
+            });
 
-                return store.save(null, {
-                    useMasterKey: false
-                }).then(function (post) {
-                    return item;
-                }, function (error) {
-                    // 异常处理
+            if (process.env.LEANCLOUD_APP_ENV !== 'development') {
+                let mailContent = '';
+
+                this.newData.forEach((item) => {
+                    const bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(item.url)}`;
+                    mailContent += `
+                    <div style="margin-bottom: 60px">
+                        <a href="${bookUrl}">
+                            <h4>${item.name}</h4>
+                        </a>
+                        <p>
+                            ${item.intro}
+                        </p>
+                        <div>
+                            <img src="${item.cover}" 
+                                alt="">
+                        </div>
+                    </div>
+                    <br><br>
+                    `;
                 });
+
+                sendMail({
+                    title: '中信有新书啦',
+                    mailContent: mailContent
+                });
+            }
+
+            return AV.Object.saveAll(bookObjList).then((results) => {
+
+            }).catch((err) => {
+                console.log(err);
             });
         }
     }
