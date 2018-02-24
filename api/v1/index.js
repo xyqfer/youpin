@@ -21,6 +21,7 @@ const uplabsAuthor = require('./uplabs/author');
 
 const updateV2EX = require('./updateV2EX');
 const updateDaily = require('./updateDaily');
+const updateCodepen = require('./updateCodepen');
 
 const getTodayStatusLog = require('./dailyStatusLog/today');
 const updateTodayStatusLog = require('./dailyStatusLog/update');
@@ -37,6 +38,7 @@ router.get('/youpin/update', updateYoupin);
 router.get('/ele/update', updateEle);
 
 router.get('/v2ex/hot', updateV2EX);
+router.get('/codepen/update', updateCodepen);
 router.get('/update/daily', updateDaily);
 
 router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAll);
