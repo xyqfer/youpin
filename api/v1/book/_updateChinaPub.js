@@ -169,7 +169,7 @@ module.exports = () => {
                 });
 
                 sendMail({
-                    title: '中信有新书啦',
+                    title: 'ChinaPub有新书啦',
                     mailContent: mailContent
                 });
             }
