@@ -78,8 +78,8 @@ module.exports = (req, res, next) => {
 
 
             if (newData.length > 0) {
+                const V2EXHot = AV.Object.extend(dbName);
                 const v2HotObjects = newData.map((item) => {
-                    const V2EXHot = AV.Object.extend(dbName);
                     const v2Hot = new V2EXHot();
                     v2Hot.set('postId', item.id);
                     v2Hot.set('url', item.url);

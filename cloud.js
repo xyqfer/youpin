@@ -10,10 +10,6 @@ const cloudFuncConfig = [
         url: '/api/v1/ele/update',
         info: 'updateEle 定时任务'
     }, {
-        name: 'notifyBook',
-        url: '/api/v1/book/notify',
-        info: 'notifyBook 定时任务'
-    }, {
         name: 'traceBook',
         url: '/api/v1/book/trace',
         info: 'traceBook 定时任务'

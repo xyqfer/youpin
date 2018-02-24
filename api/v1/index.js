@@ -4,7 +4,6 @@ const router = require('express').Router();
 const restaurant = require('./restaurant');
 const menu = require('./menu');
 const activities = require('./activities');
-const notifyBook = require('./notifyBook');
 const redirectBook = require('./redirectBook');
 const traceBook = require('./traceBook');
 const updateYoupin = require('./updateYoupin');
@@ -31,7 +30,6 @@ router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);
 router.get('/activities', activities);
 
-router.get('/book/notify', notifyBook);
 router.get('/book/redirect', redirectBook);
 router.get('/book/trace', traceBook);
 
