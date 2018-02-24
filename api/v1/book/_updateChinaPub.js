@@ -7,7 +7,7 @@ module.exports = () => {
     const cheerio = require('cheerio');
     const iconv = require('iconv-lite');
     const flatten = require('lodash/flatten');
-    const sendMail = require('../lib/mail');
+    const sendMail = require('../../lib/mail');
 
     class Book {
         constructor() {
