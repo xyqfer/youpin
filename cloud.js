@@ -25,6 +25,10 @@ const cloudFuncConfig = [
         name: 'updateDaily',
         url: '/api/v1/update/daily',
         info: '每日更新'
+    }, {
+        name: 'wake',
+        url: '/',
+        info: '定时唤醒'
     }
 ];
 
