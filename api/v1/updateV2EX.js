@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = (req, res, next) => {
-    const AV = require('leanengine');
     const Promise = require('bluebird');
+    const AV = require('leanengine');
     const rp = require('request-promise');
     const moment = require('moment');
     const sendMail = require('../lib/mail');
