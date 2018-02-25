@@ -146,7 +146,7 @@ module.exports = () => {
                 return bookObj;
             });
 
-            if (process.env.LEANCLOUD_APP_ENV !== 'development') {
+            if (process.env.LEANCLOUD_APP_ENV !== 'development' && this.newData.length > 0) {
                 let mailContent = '';
 
                 this.newData.forEach((item) => {
