@@ -7,9 +7,9 @@ module.exports = (req, res) => {
     const updateBook = require('./book/update');
 
     updateBook().then(() => {
-        return updateGitHubTrending();
-    }).then(() => {
         return updateCodrop();
+    }).then(() => {
+        return updateGitHubTrending();
     }).catch((err) => {
         console.log(err);
     });

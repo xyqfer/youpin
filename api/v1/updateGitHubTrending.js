@@ -5,9 +5,18 @@ module.exports = () => {
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const cheerio = require('cheerio');
+    const flatten = require('lodash/flatten');
+    const uniqBy = require('lodash/uniqBy');
     const sendMail = require('../lib/mail');
 
     const dbName = 'GitHubTrending';
+    const urls = [
+        'https://github.com/trending',
+        'https://github.com/trending/javascript',
+        'https://github.com/trending/css',
+        'https://github.com/trending/vue',
+        'https://github.com/trending/unknown'
+    ];
 
     function getDbData() {
         let query = new AV.Query(dbName);
@@ -18,33 +27,45 @@ module.exports = () => {
     }
 
     function getGitHubData() {
-        return rp.get({
-            uri: 'https://github.com/trending',
-            headers: {
-                'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36`
-            },
-        }).then((htmlString) => {
-            const $ = cheerio.load(htmlString);
-            let repositoryList = [];
+        return Promise.mapSeries(urls, (url) => {
+            return rp.get({
+                uri: url,
+                headers: {
+                    'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36`
+                },
+            }).then((htmlString) => {
+                const $ = cheerio.load(htmlString);
+                let repositoryList = [];
 
-            $('.repo-list > li').each(function () {
-                const $elem = $(this);
+                $('.repo-list > li').each(function () {
+                    const $elem = $(this);
 
-                repositoryList.push({
-                    name: $elem.find('h3 a').text().replace(/\s+/g, ''),
-                    url: `https://github.com${$elem.find('h3 a').attr('href')}`,
-                    desc: $elem.find('.py-1').text().replace(/\n+/g, '').trim(),
-                    lang: $elem.find('[itemprop="programmingLanguage"]').text().replace(/\n+/g, '').trim()
+                    repositoryList.push({
+                        name: $elem.find('h3 a').text().replace(/\s+/g, ''),
+                        url: `https://github.com${$elem.find('h3 a').attr('href')}`,
+                        desc: $elem.find('.py-1').text().replace(/\n+/g, '').trim(),
+                        lang: $elem.find('[itemprop="programmingLanguage"]').text().replace(/\n+/g, '').trim()
+                    });
                 });
-            });
 
-            return repositoryList;
+                return repositoryList;
+            }).catch((err) => {
+                console.log(err);
+                return [];
+            });
+        }).then((results) => {
+            return uniqBy(flatten(results), 'url');
+        }).catch((err) => {
+            console.log(err);
+            return [];
         });
     }
 
-    return Promise.all([getDbData(), getGitHubData()]).then((result) => {
-        const dbData = result[0];
-        const githubData = result[1];
+    return Promise.props({
+        dbData: getDbData(),
+        githubData: getGitHubData()
+    }).then((result) => {
+        const { dbData, githubData } = result;
 
         const newData = githubData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
@@ -88,5 +109,7 @@ module.exports = () => {
                 mailContent: mailContent
             });
         }
+    }).catch((err) => {
+        console.log(err);
     });
 };
