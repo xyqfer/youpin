@@ -41,8 +41,6 @@ module.exports = (req, res, next) => {
             });
         }).catch((err) => {
             console.log(err);
-        }).finally(() => {
-            res.end();
         });
     } else {
         const getDbData = () => {
@@ -97,8 +95,8 @@ module.exports = (req, res, next) => {
             }
         }).catch((err) => {
             console.log(err)
-        }).finally(() => {
-            res.end();
         });
     }
+
+    res.end();
 };

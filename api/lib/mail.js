@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = (opt) => {
+    const Promise = require('bluebird');
+    const rp = require('request-promise');
     const nodemailer = require('nodemailer');
 
     const mailSender = process.env.mailSender;
@@ -24,5 +26,27 @@ module.exports = (opt) => {
         html: mailContent
     };
 
-    return transporter.sendMail(mailOptions);
+    return transporter.sendMail(mailOptions).catch((err) => {
+        console.log(err);
+
+        const apiUser = process.env.sendCloudApiUser;
+        const apiKey = process.env.sendCloudApiKey;
+
+        return rp.post({
+            uri: 'http://api.sendcloud.net/apiv2/mail/send',
+            form: {
+                'apiUser': apiUser,
+                'apiKey': apiKey,
+                'from': 'service@sendcloud.im',
+                'fromName': '凉凉',
+                'to': mailReceivers,
+                'subject': mailTitle,
+                'html': mailContent,
+            }
+        }).then((result) => {
+            console.log(result)
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
 };
