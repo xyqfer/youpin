@@ -5,30 +5,51 @@ module.exports = (opt) => {
     const rp = require('request-promise');
     const nodemailer = require('nodemailer');
 
-    const mailSender = process.env.mailSender;
-    const mailPass = process.env.mailPass;
     const mailReceivers = process.env.mailReceivers;
     const mailTitle = opt.title;
     const mailContent = opt.mailContent;
 
-    let transporter = nodemailer.createTransport({
-        service: 'qq',
-        auth: {
-            user: mailSender,
-            pass: mailPass // 授权码,通过QQ获取
-        }
-    });
+    const sendQQ = () => {
+        const mailSender = process.env.mailSender;
+        const mailPass = process.env.mailPass;
 
-    const mailOptions = {
-        from: mailSender, // 发送者
-        to: mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
-        subject: mailTitle, // 标题
-        html: mailContent
+        let transporter = nodemailer.createTransport({
+            service: 'qq',
+            auth: {
+                user: mailSender,
+                pass: mailPass // 授权码,通过QQ获取
+            }
+        });
+
+        const mailOptions = {
+            from: mailSender, // 发送者
+            to: mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
+            subject: mailTitle, // 标题
+            html: mailContent
+        };
+
+        return transporter.sendMail(mailOptions).then((result) => {
+            console.log(result);
+
+            const status = {
+                success: false
+            };
+
+            if (result.rejected.length === 0) {
+                status.success = true;
+            }
+
+            return status;
+        }).catch((err) => {
+            console.log(err);
+
+            return {
+                success: false
+            };
+        });
     };
 
-    return transporter.sendMail(mailOptions).catch((err) => {
-        console.log(err);
-
+    const sendCloud = () => {
         const apiUser = process.env.sendCloudApiUser;
         const apiKey = process.env.sendCloudApiKey;
 
@@ -44,9 +65,82 @@ module.exports = (opt) => {
                 'html': mailContent,
             }
         }).then((result) => {
-            console.log(result)
+            const response = JSON.parse(result);
+
+            console.log(response);
+
+            const status = {
+                success: true
+            };
+
+            if (!response || !response.result) {
+                status.success = false;
+            }
+
+            return status;
         }).catch((err) => {
             console.log(err);
+
+            return {
+                success: false
+            };
         });
-    });
+    };
+
+    const sendOutlook = () => {
+        const outlookMail = process.env.outlookMail;
+        const outlookPass = process.env.outlookPass;
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp-mail.outlook.com', // hostname
+            secureConnection: false, // TLS requires secureConnection to be false
+            port: 587, // port for secure SMTP
+            auth: {
+                user: outlookMail,
+                pass: outlookPass
+            },
+            tls: {
+                ciphers: 'SSLv3'
+            }
+        });
+
+        const mailOptions = {
+            from: outlookMail, // 发送者
+            to: mailReceivers, // 接受者,可以同时发送多个,以逗号隔开
+            subject: mailTitle, // 标题
+            html: mailContent
+        };
+
+        return transporter.sendMail(mailOptions).then((result) => {
+            console.log(result);
+
+            const status = {
+                success: false
+            };
+
+            if (result.rejected.length === 0) {
+                status.success = true;
+            }
+
+            return status;
+        }).catch((err) => {
+            console.log(err);
+
+            return {
+                success: false
+            };
+        });
+    };
+
+    (async () => {
+        const qqStatus = await sendQQ();
+
+        if (!qqStatus.success) {
+            const sendCloudStatus = await sendCloud();
+
+            if (!sendCloudStatus.success) {
+                const sendOutlookStatus = await sendOutlook();
+            }
+        }
+    })();
 };
