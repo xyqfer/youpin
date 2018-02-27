@@ -5,6 +5,7 @@
  */
 module.exports = (req, res) => {
     const AV = require('leanengine');
+    const moment = require('moment');
 
     const dbName = 'DayStatusLog';
     const DailyStatusLog = AV.Object.extend(dbName);
@@ -13,7 +14,14 @@ module.exports = (req, res) => {
 
     query.limit(days);
     query.ascending('time');
-    query.find().then((result) => {
+    query.find().then((data) => {
+        const result = data.map((item) => {
+            const time = moment(item.get('time')).format('YYYY-MM-DD');
+            item.set('time', time);
+
+            return item;
+        });
+
         res.json(result);
     }).catch((err) => {
         res.json([]);
