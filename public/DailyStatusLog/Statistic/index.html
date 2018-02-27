@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DailyStatusLogStatistic</title>
+    <style>
+        .container {
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="J-container" class="container"></div>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/echarts.min.js"></script>
+<script>
+    $(function () {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('J-container'));
+
+        $.get({
+            url: 'https://sy2bnjwp1a.leanapp.cn/api/v1/dailyStatusLog/history/7',
+            dataType: 'JSON',
+            success: function (data) {
+                var morningData = [];
+                var afternoonData = [];
+                var eveningData = [];
+
+                var xAxisData = data.map(function (item) {
+                    morningData.push(item.morningStatus);
+                    afternoonData.push(item.afternoonStatus);
+                    eveningData.push(item.eveningStatus);
+
+                    return item.time;
+                });
+
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: 'DailyStatusLogStatistic'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['上午', '下午', '晚上']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: xAxisData
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name: '上午',
+                            type: 'line',
+                            data: morningData
+                        },
+                        {
+                            name: '下午',
+                            type: 'line',
+                            data: afternoonData
+                        },
+                        {
+                            name: '晚上',
+                            type: 'line',
+                            data: eveningData
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+    });
+</script>
+</body>
+</html>
