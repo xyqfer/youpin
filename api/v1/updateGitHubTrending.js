@@ -19,7 +19,7 @@ module.exports = () => {
     ];
 
     function getDbData() {
-        let query = new AV.Query(dbName);
+        const query = new AV.Query(dbName);
 
         query.ascending('updatedAt');
         query.limit(500);
@@ -35,7 +35,7 @@ module.exports = () => {
                 },
             }).then((htmlString) => {
                 const $ = cheerio.load(htmlString);
-                let repositoryList = [];
+                const repositoryList = [];
 
                 $('.repo-list > li').each(function () {
                     const $elem = $(this);
@@ -77,17 +77,13 @@ module.exports = () => {
             return true;
         });
 
-        if (newData.length > 0) {
+        if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
             let mailContent = '';
 
-            newData.forEach((item) => {
-                const GitHubTrending = AV.Object.extend(dbName);
-                let trending = new GitHubTrending();
-
+            const GitHubTrending = AV.Object.extend(dbName);
+            const trendingObject =  newData.map((item) => {
+                const trending = new GitHubTrending();
                 trending.set('name', item.name);
-                trending.save(null, {
-                    useMasterKey: false
-                });
 
                 mailContent += `
                     <div style="margin-bottom: 50px">
@@ -102,6 +98,14 @@ module.exports = () => {
                         </p>
                     </div>
                     `;
+
+                return trending;
+            });
+
+            AV.Object.saveAll(trendingObject).then((results) => {
+
+            }).catch((err) => {
+                console.log(err);
             });
 
             sendMail({

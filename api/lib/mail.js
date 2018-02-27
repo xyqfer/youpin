@@ -133,14 +133,10 @@ module.exports = (opt) => {
     };
 
     (async () => {
-        const qqStatus = await sendQQ();
+        const sendCloudStatus = await sendCloud();
 
-        if (!qqStatus.success) {
-            const sendCloudStatus = await sendCloud();
-
-            if (!sendCloudStatus.success) {
-                const sendOutlookStatus = await sendOutlook();
-            }
+        if (!sendCloudStatus.success) {
+            const sendOutlookStatus = await sendOutlook();
         }
     })();
 };
