@@ -7,6 +7,7 @@ module.exports = () => {
     const cheerio = require('cheerio');
     const iconv = require('iconv-lite');
     const flatten = require('lodash/flatten');
+    const uniqBy = require('lodash/uniqBy');
     const sendMail = require('../../lib/mail');
 
     class Book {
@@ -21,7 +22,7 @@ module.exports = () => {
 
         async start() {
             this.dbData = await this.getDbData();
-            this.bookData = await this.getBookData();
+            this.bookData = uniqBy(await this.getBookData(), 'url');
             await this.filterData();
             return await this.updateData();
         }
@@ -77,14 +78,16 @@ module.exports = () => {
 
         filterData() {
             this.newData = this.bookData.filter((book) => {
-                let sameBook = this.dbData.filter((item) => {
-                    return item.get('url') == book.url;
-                });
+                for (let i = 0; i < this.dbData.length; i++) {
+                    if (book.url === this.dbData[i].get('url')) {
+                        return false;
+                    }
+                }
 
-                return sameBook.length == 0;
+                return true;
             });
 
-            let taskList = this.newData.map((book) => {
+            Promise.mapSeries(this.newData, (book) => {
                 return rp.get({
                     uri: book.url,
                     encoding : null,
@@ -120,9 +123,7 @@ module.exports = () => {
                         return false;
                     }
                 });
-            });
-
-            return Promise.all(taskList).then((result) => {
+            }).then((result) => {
                 this.newData = result.filter((book) => {
                     return book;
                 });
