@@ -22,6 +22,8 @@ const uplabsAuthor = require('./uplabs/author');
 const updateV2EX = require('./updateV2EX');
 const updateDaily = require('./updateDaily');
 
+const deploy = require('./deploy');
+
 const getTodayStatusLog = require('./dailyStatusLog/today');
 const updateTodayStatusLog = require('./dailyStatusLog/update');
 const getHistoryStatusLog = require('./dailyStatusLog/history');
@@ -48,6 +50,8 @@ router.get(/^\/uplabs\/(\d+)\.json$/, uplabsPost);
 router.get('/uplabs/collection', uplabsCollection);
 router.get('/uplabs/collections/:name', uplabsCollections);
 router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
+
+router.post('/deploy', deploy);
 
 router.get('/dailyStatusLog/today', getTodayStatusLog);
 router.post('/dailyStatusLog/update', updateTodayStatusLog);
