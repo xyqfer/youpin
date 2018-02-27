@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res) => {
+module.exports = () => {
     const AV = require('leanengine');
     const Promise = require('bluebird');
     const rp = require('request-promise');
@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     const dbName = 'CodePen';
 
     function getCodepenData() {
-        const pageCount = 3;
+        const pageCount = 5;
         const pageCountList = [];
 
         for (let i = 1; i <= pageCount; i++) {
@@ -40,6 +40,9 @@ module.exports = (req, res) => {
             });
         }).then((results) => {
             return flatten(results);
+        }).catch((err) => {
+            console.log(err);
+            return [];
         });
     }
 
@@ -64,9 +67,7 @@ module.exports = (req, res) => {
             return true;
         });
 
-        if (newData.length > 0) {
-            let mailContent = '';
-
+        if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
             const CodePen = AV.Object.extend(dbName);
             const codepenList = newData.map((item) => {
                 const codepen = new CodePen();
@@ -84,12 +85,30 @@ module.exports = (req, res) => {
                 console.log(err);
             });
 
-
+            const mailContent = newData.map((item) => {
+                return `
+                    <div style="margin-bottom: 60px">
+                        <a href="${item.url}">
+                            <h4>${item.title}</h4>
+                        </a>
+                        <p>
+                            ${item.desc}
+                        </p>
+                        <div>
+                            <img src="${item.cover}" 
+                                alt="">
+                        </div>
+                    </div>
+                    <br><br>
+                `;
+            }).join('');
 
             sendMail({
                 title: 'CodePen 有更新啦',
                 mailContent
             });
         }
+    }).catch((err) => {
+        console.log(err);
     });
 };

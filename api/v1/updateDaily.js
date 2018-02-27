@@ -3,6 +3,7 @@
 // 每日更新一次
 module.exports = (req, res) => {
     const updateGitHubTrending = require('./updateGitHubTrending');
+    const updateCodepen = require('./updateCodepen');
     const updateCodrop = require('./updateCodrop');
     const updateBook = require('./book/update');
 
@@ -10,6 +11,8 @@ module.exports = (req, res) => {
         return updateGitHubTrending();
     }).then(() => {
         return updateCodrop();
+    }).then(() => {
+        return updateCodepen();
     }).catch((err) => {
         console.log(err);
     });
