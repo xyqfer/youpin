@@ -11,7 +11,7 @@ module.exports = () => {
 
     const getDbBook = () => {
         const query = new AV.Query(dbName);
-        query.ascending('updatedAt');
+        query.descending('updatedAt');
         query.limit(1000);
 
         return query.find();
