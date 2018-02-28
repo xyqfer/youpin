@@ -4,6 +4,7 @@ module.exports = (opt) => {
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const nodemailer = require('nodemailer');
+    const cheerio = require('cheerio');
 
     const mailReceivers = process.env.mailReceivers;
     const mailTitle = opt.title;
@@ -132,11 +133,42 @@ module.exports = (opt) => {
         });
     };
 
+    const sendWechat = () => {
+        const scToken = process.env.scToken;
+        let markdownContent = '';
+
+        const $ = cheerio.load(mailContent);
+
+        $('a').each(function () {
+            const url = $(this).attr('href');
+            const title = $(this).text();
+
+            markdownContent += `- [${title}](${url})
+`;
+        });
+
+        return rp.post({
+            uri: `https://sc.ftqq.com/${scToken}.send`,
+            form: {
+                text: mailTitle,
+                desp: markdownContent
+            }
+        }).then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+
     (async () => {
         const sendCloudStatus = await sendCloud();
 
         if (!sendCloudStatus.success) {
             const sendOutlookStatus = await sendOutlook();
+
+            if (!sendOutlookStatus.success) {
+                await sendWechat();
+            }
         }
     })();
 };
