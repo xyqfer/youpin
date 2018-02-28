@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     const days = +(req.params.days || 1);
 
     query.limit(days);
-    query.ascending('time');
+    query.descending('time');
     query.find().then((data) => {
         const result = data.map((item) => {
             const time = moment(item.get('time')).format('YYYY-MM-DD');
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
             return item;
         });
 
-        res.json(result);
+        res.json(result.reverse());
     }).catch((err) => {
         res.json([]);
     });
