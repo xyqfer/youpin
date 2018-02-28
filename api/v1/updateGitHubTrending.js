@@ -21,7 +21,7 @@ module.exports = () => {
     function getDbData() {
         const query = new AV.Query(dbName);
 
-        query.ascending('updatedAt');
+        query.descending('updatedAt');
         query.limit(500);
         return query.find();
     }
