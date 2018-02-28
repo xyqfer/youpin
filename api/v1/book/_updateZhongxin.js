@@ -57,20 +57,17 @@ module.exports = () => {
             return true;
         });
 
-        if (newData.length > 0) {
+        if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
             let mailContent = '';
+            const ZhongxinBook = AV.Object.extend(dbName);
 
-            newData.forEach((item) => {
-                const ZhongxinBook = AV.Object.extend(dbName);
+            const zxBookObject = newData.map((item) => {
                 const zxBook = new ZhongxinBook();
 
                 zxBook.set('name', item.title);
                 zxBook.set('url', item.url);
                 zxBook.set('cover', item.image_url);
                 zxBook.set('bookId', item.id);
-                zxBook.save(null, {
-                    useMasterKey: false
-                });
 
                 mailContent += `
                     <div style="margin-bottom: 60px">
@@ -84,14 +81,20 @@ module.exports = () => {
                     </div>
                     <br><br>
                     `;
+
+                return zxBook;
             });
 
-            if (process.env.LEANCLOUD_APP_ENV !== 'development') {
-                sendMail({
-                    title: '中信有新书啦~',
-                    mailContent: mailContent
-                });
-            }
+            AV.Object.saveAll(zxBookObject).then((results) => {
+
+            }).catch((err) => {
+                console.log(err);
+            });
+
+            sendMail({
+                title: '中信有新书啦~',
+                mailContent: mailContent
+            });
         }
     }).catch((err) => {
         console.log(err);

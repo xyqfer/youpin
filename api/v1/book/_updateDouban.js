@@ -59,11 +59,11 @@ module.exports = () => {
             return true;
         });
 
-        if (newData.length > 0) {
+        if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
             let mailContent = '';
+            const DoubanBook = AV.Object.extend(dbName);
 
-            newData.forEach((item) => {
-                const DoubanBook = AV.Object.extend(dbName);
+            const doubanBookObject = newData.map((item) => {
                 const doubanBook = new DoubanBook();
 
                 doubanBook.set('name', item.name);
@@ -71,9 +71,6 @@ module.exports = () => {
                 doubanBook.set('cover', item.cover);
                 doubanBook.set('desc', item.desc);
                 doubanBook.set('pubInfo', item.pubInfo);
-                doubanBook.save(null, {
-                    useMasterKey: false
-                });
 
                 mailContent += `
                     <div style="margin-bottom: 60px">
@@ -93,14 +90,20 @@ module.exports = () => {
                     </div>
                     <br><br>
                     `;
+
+                return doubanBook;
             });
 
-            if (process.env.LEANCLOUD_APP_ENV !== 'development') {
-                sendMail({
-                    title: '豆瓣有新书啦~',
-                    mailContent: mailContent
-                });
-            }
+            AV.Object.saveAll(doubanBookObject).then((results) => {
+
+            }).catch((err) => {
+                console.log(err);
+            });
+
+            sendMail({
+                title: '豆瓣有新书啦~',
+                mailContent: mailContent
+            });
         }
 
     }).catch((err) => {
