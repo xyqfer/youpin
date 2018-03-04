@@ -87,7 +87,7 @@ module.exports = () => {
                 return true;
             });
 
-            Promise.mapSeries(this.newData, (book) => {
+            return Promise.mapSeries(this.newData, (book) => {
                 return rp.get({
                     uri: book.url,
                     encoding : null,
