@@ -4,6 +4,7 @@ module.exports = () => {
     const path = require('path');
     const getCodropData = require('./getCodropData');
     const sendMail = require(path.resolve(process.cwd(), 'api/lib/mail'));
+    const params = require(path.resolve(process.cwd(), 'api/lib/params'));
     const { getDbData, saveDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
 
     const dbName = 'Codrop';
@@ -27,18 +28,17 @@ module.exports = () => {
             return true;
         });
 
-        if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
-            const mailContent = newData.map((item) => {
-                return `<a href='${item.url}'>${item.name}</a><br><br>`;
-            }).join('');
-
+        if (newData.length > 0 && params.env !== 'development') {
             saveDbData({
                 dbName,
                 data: newData
             });
             sendMail({
                 title: 'Codrop 更新啦',
-                mailContent: mailContent
+                data: newData,
+                template: ({ url = '', name = '' }) => {
+                    return `<a href='${url}'>${name}</a><br><br>`;
+                }
             });
         }
 
