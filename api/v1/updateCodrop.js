@@ -34,20 +34,23 @@ module.exports = () => {
 
     function getDbData() {
         let query = new AV.Query(dbName);
-
         query.descending('updatedAt');
         query.limit(1000);
-        return query.find();
+
+        return query.find().then((data) => {
+            return data.map((item) => {
+                return item.toJSON();
+            });
+        }).catch((err) => {
+            console.log(err);
+            return [];
+        });
     }
 
-
-    return Promise.all([getDbData(), getCodropData()]).then((result) => {
-        const dbData = result[0];
-        const codropData = result[1];
-
+    return Promise.all([getDbData(), getCodropData()]).then(([dbData, codropData]) => {
         const newData = codropData.filter((codropItem) => {
             for (let i = 0; i < dbData.length; i++) {
-                if (dbData[i].get('postId') === codropItem.postId) {
+                if (dbData[i].postId === codropItem.postId) {
                     return false;
                 }
             }
@@ -55,7 +58,7 @@ module.exports = () => {
             return true;
         });
 
-        if (newData.length > 0) {
+        if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
             let mailContent = '';
 
             newData.forEach((item) => {
@@ -75,5 +78,7 @@ module.exports = () => {
                 mailContent: mailContent
             });
         }
+    }).catch((err) => {
+        console.log(err);
     });
 };
