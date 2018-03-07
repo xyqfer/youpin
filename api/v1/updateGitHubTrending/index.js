@@ -2,11 +2,11 @@
 
 module.exports = () => {
     const path = require('path');
-    const getCodropData = require('./getCodropData');
+    const getGitHubData = require('./getGitHubData');
     const sendMail = require(path.resolve(process.cwd(), 'api/lib/mail'));
     const { getDbData, saveDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
 
-    const dbName = 'Codrop';
+    const dbName = 'GitHubTrending';
 
     return (async () => {
         const dbData = await getDbData({
@@ -15,11 +15,11 @@ module.exports = () => {
                 descending: ['updatedAt']
             }
         });
-        const codropData = await getCodropData();
+        const githubData = await getGitHubData();
 
-        const newData = codropData.filter((codropItem) => {
+        const newData = githubData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
-                if (dbData[i].postId === codropItem.postId) {
+                if (item.name === dbData[i].name) {
                     return false;
                 }
             }
@@ -29,7 +29,19 @@ module.exports = () => {
 
         if (newData.length > 0 && process.env.LEANCLOUD_APP_ENV !== 'development') {
             const mailContent = newData.map((item) => {
-                return `<a href='${item.url}'>${item.name}</a><br><br>`;
+                return `
+                    <div style="margin-bottom: 50px">
+                        <a href="${item.url}">
+                            <h4>${item.name}</h4>
+                        </a>
+                        <p>
+                            ${item.desc}
+                        </p>
+                        <p>
+                            ${item.lang}
+                        </p>
+                    </div>
+                    `;
             }).join('');
 
             saveDbData({
@@ -37,7 +49,7 @@ module.exports = () => {
                 data: newData
             });
             sendMail({
-                title: 'Codrop 更新啦',
+                title: 'GitHub NEW Trending',
                 mailContent: mailContent
             });
         }

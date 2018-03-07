@@ -1,15 +1,17 @@
 'use strict';
 
 module.exports = async () => {
+    const path = require('path');
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const cheerio = require('cheerio');
+    const params = require(path.resolve(process.cwd(), 'api/lib/params'));
 
     try {
         const htmlString = await rp.get({
             uri: 'https://tympanus.net/codrops/all-articles/',
             headers: {
-                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                'User-Agent': params.ua.mobile
             }
         });
 
