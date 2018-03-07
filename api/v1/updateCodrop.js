@@ -9,14 +9,15 @@ module.exports = () => {
 
     const dbName = 'Codrop';
 
-    function getCodropData() {
-        return rp.get({
-            uri: 'https://tympanus.net/codrops/all-articles/',
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) ' +
-                'AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
-            }
-        }).then((htmlString) => {
+    const getCodropData = async () => {
+        try {
+            const htmlString = await rp.get({
+                uri: 'https://tympanus.net/codrops/all-articles/',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
+                }
+            });
+
             const $ = cheerio.load(htmlString);
             let postList = [];
 
@@ -29,25 +30,32 @@ module.exports = () => {
             });
 
             return postList;
-        });
-    }
+        } catch (err) {
+            console.log(err);
+            return [];
+        }
+    };
 
-    function getDbData() {
-        let query = new AV.Query(dbName);
-        query.descending('updatedAt');
-        query.limit(1000);
+    const getDbData = async () => {
+        try {
+            let query = new AV.Query(dbName);
+            query.descending('updatedAt');
+            query.limit(1000);
 
-        return query.find().then((data) => {
+            const data = await query.find();
             return data.map((item) => {
                 return item.toJSON();
             });
-        }).catch((err) => {
+        } catch (err) {
             console.log(err);
             return [];
-        });
-    }
+        }
+    };
 
-    return Promise.all([getDbData(), getCodropData()]).then(([dbData, codropData]) => {
+    return (async () => {
+        const dbData = await getDbData();
+        const codropData = await getCodropData();
+
         const newData = codropData.filter((codropItem) => {
             for (let i = 0; i < dbData.length; i++) {
                 if (dbData[i].postId === codropItem.postId) {
@@ -78,7 +86,9 @@ module.exports = () => {
                 mailContent: mailContent
             });
         }
-    }).catch((err) => {
-        console.log(err);
-    });
+
+        return {
+            finish: true
+        };
+    })();
 };
