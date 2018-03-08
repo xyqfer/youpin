@@ -31,7 +31,7 @@ module.exports = ({ title = '', data = [], template = () => ('') }) => {
         let sendSuccess = false;
 
         while (mailQueue.length > 0 && !sendSuccess) {
-            const mapKey = mailQueue.shift().toLowerCase() || 'wechat';
+            const mapKey = (mailQueue.shift() || 'wechat').toLowerCase();
             const status = await sendMap[mapKey](mailParams);
 
             if (status.success) {
@@ -40,7 +40,8 @@ module.exports = ({ title = '', data = [], template = () => ('') }) => {
         }
 
         if (!sendSuccess) {
-            console.error('邮件发送失败');
+            console.error(`${title} 邮件发送失败`);
+            console.log(data);
         }
     })();
 };

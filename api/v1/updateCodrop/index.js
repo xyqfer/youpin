@@ -1,11 +1,15 @@
 'use strict';
 
 module.exports = () => {
-    const path = require('path');
     const getCodropData = require('./getCodropData');
-    const sendMail = require(path.resolve(process.cwd(), 'api/lib/mail'));
-    const params = require(path.resolve(process.cwd(), 'api/lib/params'));
-    const { getDbData, saveDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
+    const {
+        db: {
+            getDbData,
+            saveDbData
+        },
+        params,
+        mail: sendMail
+    } = require('app-lib');
 
     const dbName = 'Codrop';
 
@@ -31,7 +35,11 @@ module.exports = () => {
         if (newData.length > 0 && params.env !== 'development') {
             saveDbData({
                 dbName,
-                data: newData
+                data: newData.map((item) => {
+                    return {
+                        postId: item.postId
+                    };
+                })
             });
             sendMail({
                 title: 'Codrop 更新啦',

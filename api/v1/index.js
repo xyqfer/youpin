@@ -24,9 +24,11 @@ const updateDaily = require('./updateDaily');
 
 const deploy = require('./deploy');
 
-const getTodayStatusLog = require('./dailyStatusLog/today');
-const updateTodayStatusLog = require('./dailyStatusLog/update');
-const getHistoryStatusLog = require('./dailyStatusLog/history');
+const {
+    today: getTodayStatusLog,
+    history: getHistoryStatusLog,
+    update: updateTodayStatusLog
+} = require('./dailyStatusLog');
 
 router.get('/restaurant', restaurant);
 router.get('/menu/:name', menu);

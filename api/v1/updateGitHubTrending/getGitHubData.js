@@ -1,13 +1,12 @@
 'use strict';
 
 module.exports = async () => {
-    const path = require('path');
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
     const uniqBy = require('lodash/uniqBy');
-    const params = require(path.resolve(process.cwd(), 'api/lib/params'));
+    const { params } = require('app-lib');
 
     const urls = [
         'https://github.com/trending',
@@ -18,7 +17,7 @@ module.exports = async () => {
     ];
 
     try {
-        const data = Promise.mapSeries(urls, (url) => {
+        const data = await Promise.mapSeries(urls, (url) => {
             return rp.get({
                 uri: url,
                 headers: {
@@ -41,14 +40,14 @@ module.exports = async () => {
 
                 return repositoryList;
             }).catch((err) => {
-                console.log(err);
+                console.error(err);
                 return [];
             });
         });
 
         return uniqBy(flatten(data), 'url');
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return [];
     }
 };

@@ -1,0 +1,9 @@
+{
+  "name": "app-lib",
+  "version": "1.0.0",
+  "description": "项目公用库",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT"
+}

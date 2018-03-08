@@ -1,11 +1,9 @@
 'use strict';
 
 module.exports = async () => {
-    const path = require('path');
-    const Promise = require('bluebird');
     const rp = require('request-promise');
     const cheerio = require('cheerio');
-    const params = require(path.resolve(process.cwd(), 'api/lib/params'));
+    const { params } = require('app-lib');
 
     try {
         const htmlString = await rp.get({

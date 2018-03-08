@@ -2,5 +2,6 @@
 
 module.exports = {
     saveDbData: require('./saveDbData'),
-    getDbData: require('./getDbData')
+    getDbData: require('./getDbData'),
+    updateDbData: require('./updateDbData')
 };
