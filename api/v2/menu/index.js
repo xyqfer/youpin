@@ -2,33 +2,31 @@
 
 module.exports = (req, res, next) => {
     const rp = require('request-promise');
+    const { params } = require('app-lib');
 
-    let name = encodeURIComponent(req.params.name);
-    let menuLimit = req.query.menuLimit || 5;
-    let restaurantLimit = req.query.restaurantLimit || 5;
-
+    const name = encodeURIComponent(req.params.name);
+    const menuLimit = req.query.menuLimit || 5;
+    const restaurantLimit = req.query.restaurantLimit || 5;
     const latitude = process.env.latitude || 30.30489;
     const longitude = process.env.longitude || 120.10598;
-    const ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) ' +
-        'AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60';
 
     rp.get({
         json: true,
         uri: `https://restapi.ele.me/shopping/v2/restaurants/search?offset=0&limit=20&keyword=${name}&latitude=${latitude}&longitude=${longitude}&is_rewrite=1&extras[]=activities&extras[]=coupon&terminal=h5`,
         headers: {
-            'User-Agent': ua
+            'User-Agent': params.ua.mobile
         }
     }).then((data) => {
         let resultList = [];
 
         try {
-            for (let key in data.inside) {
-                let restaurantWithFoods = data['inside'][key]['restaurant_with_foods'];
+            Object.keys(data.inside).forEach((key) => {
+                const restaurantWithFoods = data['inside'][key]['restaurant_with_foods'];
 
                 if (restaurantWithFoods.length > 0) {
                     restaurantWithFoods.forEach((item) => {
                         if (resultList.length < restaurantLimit) {
-                            if (item && item.restaurant.type == 0) {
+                            if (item && item.restaurant.type === 0) {
                                 let menu = [];
 
                                 for (let i = 0; i < menuLimit; i++) {
@@ -52,8 +50,9 @@ module.exports = (req, res, next) => {
                         }
                     });
                 }
-            }
-        } catch (e) {
+            });
+        } catch (err) {
+            console.error(err);
             resultList = [];
         }
 
