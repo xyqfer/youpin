@@ -35,7 +35,7 @@ module.exports = (req, res, next) => {
             return true;
         });
 
-        if (newData.length > 0 && params.env !== 'development') {
+        if (newData.length > 0 && !params.env.isDev) {
             saveYoupinData({
                 dbName,
                 data: newData

@@ -21,7 +21,7 @@ module.exports = () => {
         const chinaPubData = await getChinaPubData();
         const newData = await getNewData({ dbData, chinaPubData });
 
-        if (newData.length > 0 && params.env !== 'development') {
+        if (newData.length > 0 && !params.env.isDev) {
             saveDbData({
                 dbName,
                 data: newData

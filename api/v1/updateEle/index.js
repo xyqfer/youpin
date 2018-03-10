@@ -58,7 +58,7 @@ module.exports = (req, res, next) => {
             return item.type == 0;
         });
 
-        if (newData.length > 0 && params.env !== 'development') {
+        if (newData.length > 0 && !params.env.isDev) {
             saveEleData({
                 dbName,
                 data: newData

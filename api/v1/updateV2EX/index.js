@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
 
     (async () => {
         try {
-            if (needSendMail && params.env !== 'development') {
+            if (needSendMail && !params.env.isDev) {
                 const yesterday = new Date(`${moment().add(-1, 'days').format('YYYY-MM-DD 00:00:00')}`);
                 const data = await getDbData({
                     dbName,
@@ -65,7 +65,7 @@ module.exports = (req, res, next) => {
                     return true;
                 });
 
-                if (newData.length > 0 && params.env !== 'development') {
+                if (newData.length > 0 && !params.env.isDev) {
                     saveDbData({
                         dbName,
                         data: newData

@@ -32,7 +32,7 @@ module.exports = () => {
             return true;
         });
 
-        if (newData.length > 0 && params.env !== 'development') {
+        if (newData.length > 0 && !params.env.isDev) {
             saveDbData({
                 dbName,
                 data: newData

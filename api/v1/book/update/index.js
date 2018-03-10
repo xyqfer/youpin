@@ -8,7 +8,7 @@ module.exports = () => {
     return updateDouban().then(() => {
         return updateZhongxin();
     }).then(() => {
-        updateChinaPub();
+        return updateChinaPub();
     }).catch((err) => {
         console.error(err);
     });
