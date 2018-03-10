@@ -40,7 +40,7 @@ module.exports = (req, res) => {
             result.time = moment(today).format('YYYY年M月D日 dddd');
             res.json(result);
         } catch (err) {
-            console.log(err);
+            console.error(err);
             res.json({});
         }
     })();

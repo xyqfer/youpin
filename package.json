@@ -28,11 +28,10 @@
     "qcloud-cdn-node-sdk": "^1.0.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
-    "app-lib": "file:./api/lib"
+    "shelljs": "^0.8.1"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0",
-    "shelljs": "^0.8.1"
+    "nodemon": "^1.11.0"
   },
   "engines": {
     "node": "*"

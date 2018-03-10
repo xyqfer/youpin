@@ -26,7 +26,7 @@ module.exports = async () => {
 
         return postList;
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return [];
     }
 };

@@ -23,7 +23,7 @@ module.exports = async ({ dbName = 'Test', limit = 1000, query = {} }) => {
             return item.toJSON();
         });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return [];
     }
 };

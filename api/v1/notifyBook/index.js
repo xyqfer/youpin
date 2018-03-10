@@ -55,7 +55,7 @@ module.exports = (req, res, next) => {
     }).then((data) => {
         res.end();
     }).catch((err) => {
-        console.log(err);
+        console.error(err);
         res.end();
     });
 };

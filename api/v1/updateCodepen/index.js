@@ -36,12 +36,12 @@ module.exports = () => {
                     };
                 });
             }).catch((err) => {
-                console.log(err);
+                console.error(err);
             });
         }).then((results) => {
             return flatten(results);
         }).catch((err) => {
-            console.log(err);
+            console.error(err);
             return [];
         });
     }
@@ -82,7 +82,7 @@ module.exports = () => {
             AV.Object.saveAll(codepenList).then((results) => {
 
             }).catch((err) => {
-                console.log(err);
+                console.error(err);
             });
 
             const mailContent = newData.map((item) => {
@@ -109,6 +109,6 @@ module.exports = () => {
             });
         }
     }).catch((err) => {
-        console.log(err);
+        console.error(err);
     });
 };

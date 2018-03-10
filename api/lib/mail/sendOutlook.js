@@ -39,7 +39,7 @@ module.exports = ({ title = '', content = '', receivers = process.env.mailReceiv
 
         return status;
     }).catch((err) => {
-        console.log(err);
+        console.error(err);
 
         return {
             success: false

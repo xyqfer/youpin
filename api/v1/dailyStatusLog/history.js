@@ -30,7 +30,7 @@ module.exports = (req, res) => {
 
             res.json(result.reverse());
         } catch (err) {
-            console.log(err);
+            console.error(err);
             res.json([]);
         }
     })();
