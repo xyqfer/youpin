@@ -13,7 +13,10 @@ module.exports = (req, res, next) => {
     (async () => {
         const dbName = 'Ele_restaurant';
         const dbData = await getDbData({
-            dbName
+            dbName,
+            query: {
+                descending: ['updatedAt']
+            }
         });
 
         const offsets = [];
@@ -48,14 +51,14 @@ module.exports = (req, res, next) => {
             for (let i = 0; i < dbData.length; i++) {
                 const dbItem = dbData[i];
 
-                if (+item.id === dbItem.restaurantId) {
+                if (item.id === dbItem.restaurantId) {
                     return item.name === dbItem.name &&
-                        +item.rating === dbItem.rate &&
+                        item.rating === dbItem.rate &&
                         discountTip === dbItem.discountTip;
                 }
             }
 
-            return item.type == 0;
+            return item.type === 0;
         });
 
         if (newData.length > 0 && !params.env.isDev) {

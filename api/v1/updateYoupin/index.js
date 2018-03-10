@@ -24,10 +24,8 @@ module.exports = (req, res, next) => {
         const youpinData = await getYoupinData();
 
         const newData = youpinData.filter((item) => {
-            const gid = item.gid;
-
             for (let i = 0; i < dbData.length; i++) {
-                if (gid == dbData[i].gid) {
+                if (item.gid === dbData[i].gid) {
                     return false;
                 }
             }

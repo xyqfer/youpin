@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = ({ dbName = 'Test', data = [] }) => {
-    const { saveDbData } = require('app-lib/db');
+    const { getDbData, saveDbData } = require('app-lib/db');
 
-    const saveData = data.map((item) => {
+    const rawSaveData = data.map((item) => {
         let discountTip = '';
 
         for (let i = 0; i < item.activities.length; i++) {
@@ -21,8 +21,26 @@ module.exports = ({ dbName = 'Test', data = [] }) => {
         };
     });
 
-    saveDbData({
-        dbName,
-        data: saveData
-    });
+    (async () => {
+        const saveData = [];
+
+        for (let i = 0; i < rawSaveData.length; i++) {
+            const item = rawSaveData[i];
+            const dbItem = await getDbData({
+                dbName,
+                query: {
+                    equalTo: ['restaurantId', item.restaurantId]
+                }
+            });
+
+            if (dbItem.length === 0) {
+                saveData.push(item);
+            }
+        }
+
+        saveDbData({
+            dbName,
+            data: saveData
+        });
+    })();
 };
