@@ -13,7 +13,7 @@ module.exports = ({ title = '', data = [], template = () => ('') }) => {
         return template(item);
     }).join('');
 
-    (async () => {
+    return (async () => {
         const mailQueue = process.env.mailQueue.split(',');
 
         const sendMap = {
@@ -42,6 +42,10 @@ module.exports = ({ title = '', data = [], template = () => ('') }) => {
         if (!sendSuccess) {
             console.error(`${title} 邮件发送失败`);
             console.log(data);
+        }
+
+        return {
+            success: sendSuccess
         }
     })();
 };

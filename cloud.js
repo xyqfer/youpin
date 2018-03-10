@@ -3,11 +3,11 @@ const AV = require('leanengine');
 const cloudFuncConfig = [
     {
         name: 'updateYoupin',
-        url: '/api/v1/youpin/update',
+        module: 'updateYoupin',
         info: 'updateYoupin 定时任务'
     }, {
         name: 'updateEle',
-        url: '/api/v1/ele/update',
+        module: 'updateEle',
         info: 'updateEle 定时任务'
     }, {
         name: 'updateV2EXHot',
@@ -24,16 +24,13 @@ const cloudFuncConfig = [
     }
 ];
 
-cloudFuncConfig.forEach((func) => {
-    AV.Cloud.define(func.name, () => {
-        const rp = require('request-promise');
-        const basePath = process.env.LEANCLOUD_APP_ENV == 'development' ? 'http://localhost:3000' :
-            (process.env.LEANCLOUD_APP_ENV == 'production' ? process.env.hostName : process.env.stgHostName);
+cloudFuncConfig.forEach((config) => {
+    const { name, module, info } = config;
 
-        rp.get({
-            uri: `${basePath}${func.url}`
-        });
+    AV.Cloud.define(name, () => {
+        const cloudFunc = require(`./app-modules/${module}`);
+        cloudFunc && cloudFunc();
 
-        return Promise.resolve(func.info);
+        return Promise.resolve(info);
     });
 });

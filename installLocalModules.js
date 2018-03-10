@@ -1,2 +1,2 @@
 const shell = require('shelljs');
-shell.exec('npm install ./api/lib');
+shell.exec('npm install ./app-libs');
