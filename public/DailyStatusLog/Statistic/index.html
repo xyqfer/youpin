@@ -12,6 +12,7 @@
 <body>
 
 <div id="J-line-chart-container" class="container"></div>
+<div id="J-line-chart-continue-container" class="container"></div>
 <div id="J-pie-chart-container" class="container"></div>
 
 <script src="./js/jquery.min.js"></script>
@@ -23,6 +24,7 @@
             dataType: 'JSON',
             success: function (data) {
                 renderLineChart(data);
+                renderContinueLineChart(data);
                 renderPieChart(data);
             }
         });
@@ -80,6 +82,50 @@
                         name: '晚上',
                         type: 'line',
                         data: eveningData
+                    }
+                ]
+            };
+
+            lineChart.setOption(option);
+        }
+
+        function renderContinueLineChart(data) {
+            var totalData = [];
+            var xAxisData = [];
+            var lineChart = echarts.init(document.getElementById('J-line-chart-continue-container'));
+
+            data.forEach(function (item) {
+                totalData.push(item.morningStatus);
+                totalData.push(item.afternoonStatus);
+                totalData.push(item.eveningStatus);
+
+                xAxisData.push(item.time + "/上午");
+                xAxisData.push(item.time + "/下午");
+                xAxisData.push(item.time + "/晚上");
+            });
+
+            var option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xAxisData
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        type: 'line',
+                        data: totalData
                     }
                 ]
             };
