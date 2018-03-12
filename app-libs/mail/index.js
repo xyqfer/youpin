@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ({ title = '', data = [], template = () => ('') }) => {
+module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
     const sendWechat = require('./sendWechat');
@@ -13,23 +13,23 @@ module.exports = ({ title = '', data = [], template = () => ('') }) => {
         return template(item);
     }).join('');
 
-    return (async () => {
-        const mailQueue = process.env.mailQueue.split(',');
+    const mailQueue = process.env.mailQueue.split(',');
 
-        const sendMap = {
-            outlook: sendOutlook,
-            wechat: sendWechat,
-            sendcloud: sendCloud
-        };
+    const sendMap = {
+        outlook: sendOutlook,
+        wechat: sendWechat,
+        sendcloud: sendCloud
+    };
 
-        const mailParams = {
-            title,
-            content,
-            receivers
-        };
+    const mailParams = {
+        title,
+        content,
+        receivers
+    };
 
-        let sendSuccess = false;
+    let sendSuccess = false;
 
+    try {
         while (mailQueue.length > 0 && !sendSuccess) {
             const mapKey = (mailQueue.shift() || 'wechat').toLowerCase();
             const status = await sendMap[mapKey](mailParams);
@@ -47,5 +47,10 @@ module.exports = ({ title = '', data = [], template = () => ('') }) => {
         return {
             success: sendSuccess
         }
-    })();
+    } catch (err) {
+        console.error(err);
+        return {
+            success: false
+        }
+    }
 };

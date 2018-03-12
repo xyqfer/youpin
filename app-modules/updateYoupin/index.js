@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = () => {
+module.exports = async () => {
     const getYoupinData = require('./getYoupinData');
     const saveYoupinData = require('./saveYoupinData');
     const {
@@ -13,15 +13,17 @@ module.exports = () => {
 
     const dbName = 'Mi_store';
 
-    return Promise.all([
-        getDbData({
-            dbName,
-            query: {
-                descending: ['updatedAt']
-            }
-        }),
-        getYoupinData()
-    ]).then(([dbData, youpinData]) => {
+    try {
+        const [ dbData, youpinData ] = await Promise.all([
+            getDbData({
+                dbName,
+                query: {
+                    descending: ['updatedAt']
+                }
+            }),
+            getYoupinData()
+        ]);
+
         const newData = youpinData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
                 if (item.gid === dbData[i].gid) {
@@ -47,8 +49,10 @@ module.exports = () => {
         }
 
         return newData;
-    }).catch((err) => {
+    } catch (err) {
         console.error(err);
-        return [];
-    });
+        return {
+            success: false
+        };
+    }
 };

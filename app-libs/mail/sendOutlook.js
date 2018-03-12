@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ({ title = '', content = '', receivers = process.env.mailReceivers }) => {
+module.exports = async ({ title = '', content = '', receivers = process.env.mailReceivers }) => {
     const nodemailer = require('nodemailer');
 
     const outlookMail = process.env.outlookMail;
@@ -26,7 +26,8 @@ module.exports = ({ title = '', content = '', receivers = process.env.mailReceiv
         html: content
     };
 
-    return transporter.sendMail(mailOptions).then((result) => {
+    try {
+        const result = await transporter.sendMail(mailOptions);
         console.log(result);
 
         const status = {
@@ -38,11 +39,10 @@ module.exports = ({ title = '', content = '', receivers = process.env.mailReceiv
         }
 
         return status;
-    }).catch((err) => {
+    } catch (err) {
         console.error(err);
-
         return {
             success: false
         };
-    });
+    }
 };

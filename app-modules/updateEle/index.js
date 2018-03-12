@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = () => {
+module.exports = async () => {
     const getEleData = require('./getEleData');
     const saveEleData = require('./saveEleData');
     const {
@@ -20,19 +20,21 @@ module.exports = () => {
     const latitude = process.env.latitude || 30.30489;
     const longitude = process.env.longitude || 120.10598;
 
-    return Promise.all([
-        getDbData({
-            dbName,
-            query: {
-                descending: ['updatedAt']
-            }
-        }),
-        getEleData({
-            offsets,
-            latitude,
-            longitude
-        })
-    ]).then(([dbData, eleData]) => {
+    try {
+        const [ dbData, eleData ] = await Promise.all([
+            getDbData({
+                dbName,
+                query: {
+                    descending: ['updatedAt']
+                }
+            }),
+            getEleData({
+                offsets,
+                latitude,
+                longitude
+            })
+        ]);
+
         const newData = eleData.filter((item) => {
             if (item.rating < 4) {
                 return false;
@@ -61,15 +63,19 @@ module.exports = () => {
         });
 
         if (newData.length > 0 && !params.env.isDev) {
-            saveEleData({
+            await saveEleData({
                 dbName,
                 data: newData
             });
         }
 
-        return newData;
-    }).catch((err) => {
+        return {
+            success: true
+        };
+    } catch (err) {
         console.error(err);
-        return [];
-    });
+        return {
+            success: false
+        };
+    }
 };

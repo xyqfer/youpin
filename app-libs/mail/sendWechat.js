@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ({ title = '', content = '' }) => {
+module.exports = async ({ title = '', content = '' }) => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
 
@@ -16,23 +16,23 @@ module.exports = ({ title = '', content = '' }) => {
 `;
     });
 
-    return rp.post({
-        uri: `https://sc.ftqq.com/${scToken}.send`,
-        form: {
-            text: title,
-            desp: markdownContent
-        }
-    }).then((result) => {
+    try {
+        const result = await rp.post({
+            uri: `https://sc.ftqq.com/${scToken}.send`,
+            form: {
+                text: title,
+                desp: markdownContent
+            }
+        });
         console.log(result);
 
         return {
             success: true
         };
-    }).catch((err) => {
+    } catch (err) {
         console.error(err);
-
         return {
             success: false
         };
-    });
+    }
 };

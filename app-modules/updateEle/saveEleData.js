@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ({ dbName = 'Test', data = [] }) => {
+module.exports = async ({ dbName = 'Test', data = [] }) => {
     const { getDbData, saveDbData } = require('app-libs/db');
 
     const rawSaveData = data.map((item) => {
@@ -21,7 +21,7 @@ module.exports = ({ dbName = 'Test', data = [] }) => {
         };
     });
 
-    (async () => {
+    try {
         const saveData = [];
 
         for (let i = 0; i < rawSaveData.length; i++) {
@@ -39,9 +39,18 @@ module.exports = ({ dbName = 'Test', data = [] }) => {
             }
         }
 
-        saveDbData({
+        await saveDbData({
             dbName,
             data: saveData
         });
-    })();
+
+        return {
+            success: true
+        };
+    } catch (err) {
+        console.error(err);
+        return {
+            success: false
+        };
+    }
 };
