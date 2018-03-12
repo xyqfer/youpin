@@ -7,8 +7,8 @@ module.exports = ({ dbName = 'Test', data = [] }) => {
     const dbObjectList = data.map((item) => {
         const dbObject = new DbObject();
 
-        Object.keys(item).forEach((objKey) => {
-            dbObject.set(objKey, item[objKey]);
+        Object.entries(item).forEach(([ key, value ]) => {
+            dbObject.set(key, value);
         });
 
         return dbObject;

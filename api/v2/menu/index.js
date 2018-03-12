@@ -20,8 +20,8 @@ module.exports = (req, res, next) => {
         let resultList = [];
 
         try {
-            Object.keys(data.inside).forEach((key) => {
-                const restaurantWithFoods = data['inside'][key]['restaurant_with_foods'];
+            Object.values(data.inside).forEach((value) => {
+                const { restaurant_with_foods: restaurantWithFoods } = value;
 
                 if (restaurantWithFoods.length > 0) {
                     restaurantWithFoods.forEach((item) => {

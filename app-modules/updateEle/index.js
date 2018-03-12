@@ -8,7 +8,7 @@ module.exports = () => {
             getDbData,
         },
         params
-    } = require('app-lib');
+    } = require('app-libs');
 
     const dbName = 'Ele_restaurant';
     const offsets = [];

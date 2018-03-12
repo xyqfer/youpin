@@ -10,7 +10,7 @@ module.exports = ({
     const flatten = require('lodash/flatten');
     const {
         params
-    } = require('app-lib');
+    } = require('app-libs');
 
     return Promise.mapSeries(offsets, (offset) => {
         return rp.get({

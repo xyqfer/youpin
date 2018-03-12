@@ -6,15 +6,14 @@ module.exports = ({ dbName = 'Test', limit = 1000, query = {} }) => {
 
     const q = new AV.Query(dbName);
 
-    Object.keys(query).forEach((key) => {
-        let params = query[key];
-
+    Object.entries(query).forEach(([ key, params ]) => {
         if (isString(params)) {
             params = [params];
         }
 
         q[key].apply(q, params);
     });
+
     q.limit(limit);
 
     return q.find().then((data) => {

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = ({ dbName = 'Test', data = [] }) => {
-    const { getDbData, saveDbData } = require('app-lib/db');
+    const { getDbData, saveDbData } = require('app-libs/db');
 
     const rawSaveData = data.map((item) => {
         let discountTip = '';

@@ -10,7 +10,7 @@ module.exports = () => {
         },
         params,
         mail: sendMail
-    } = require('app-lib');
+    } = require('app-libs');
 
     const dbName = 'V2EXHot';
 

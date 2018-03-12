@@ -8,7 +8,7 @@ module.exports = ({ data = [], dbName = 'Test' }) => {
             saveDbData
         },
         params,
-    } = require('app-lib');
+    } = require('app-libs');
 
     Promise.mapSeries(data, (item) => {
         return rp.post({

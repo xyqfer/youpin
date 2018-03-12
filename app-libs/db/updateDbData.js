@@ -3,8 +3,8 @@
 module.exports = ({ dbName = 'Text', data = {}, id = '' }) => {
     const dbObject = AV.Object.createWithoutData(dbName, id);
 
-    Object.keys(data).forEach((key) => {
-        dbObject.set(key, data[key]);
+    Object.entries(data).forEach(([ key, value]) => {
+        dbObject.set(key, value);
     });
 
     return dbObject.save();

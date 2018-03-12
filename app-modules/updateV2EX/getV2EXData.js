@@ -2,7 +2,7 @@
 
 module.exports = () => {
     const rp = require('request-promise');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     return rp.get({
         json: true,
