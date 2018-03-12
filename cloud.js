@@ -11,7 +11,7 @@ const cloudFuncConfig = [
         info: 'updateEle 定时任务'
     }, {
         name: 'updateV2EXHot',
-        url: '/api/v1/v2ex/hot',
+        module: 'updateV2EX',
         info: '更新 v2ex hot'
     }, {
         name: 'updateDaily',
@@ -19,7 +19,7 @@ const cloudFuncConfig = [
         info: '每日更新'
     }, {
         name: 'wake',
-        url: '/',
+        module: 'wake',
         info: '定时唤醒'
     }
 ];
@@ -28,8 +28,11 @@ cloudFuncConfig.forEach((config) => {
     const { name, module, info } = config;
 
     AV.Cloud.define(name, () => {
-        const cloudFunc = require(`./app-modules/${module}`);
-        cloudFunc && cloudFunc();
+        const modules = Array.isArray(module) ? module : [module];
+        modules.forEach((module) => {
+            const func = require(`./app-modules/${module}`);
+            func && func();
+        });
 
         return Promise.resolve(info);
     });
