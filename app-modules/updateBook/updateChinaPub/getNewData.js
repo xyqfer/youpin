@@ -5,7 +5,7 @@ module.exports = async ({ dbData = [], chinaPubData = [] }) => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
     const iconv = require('iconv-lite');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     const newData = chinaPubData.filter((book) => {
         for (let i = 0; i < dbData.length; i++) {

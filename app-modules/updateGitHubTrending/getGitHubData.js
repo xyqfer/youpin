@@ -6,7 +6,7 @@ module.exports = async () => {
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
     const uniqBy = require('lodash/uniqBy');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     const urls = [
         'https://github.com/trending',

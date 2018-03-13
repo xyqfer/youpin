@@ -4,7 +4,7 @@ module.exports = async () => {
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const flatten = require('lodash/flatten');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     const pageCount = 3;
     const pageCountList = [];

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (req, res, next) => {
-    const { getDbData } = require('app-lib/db');
+    const { getDbData } = require('app-libs/db');
 
     (async () => {
         try {

@@ -9,7 +9,7 @@ module.exports = async () => {
         },
         params,
         mail: sendMail
-    } = require('app-lib');
+    } = require('app-libs');
 
     const dbName = 'Codrop';
 

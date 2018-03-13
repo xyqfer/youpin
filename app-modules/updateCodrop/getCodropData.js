@@ -3,7 +3,7 @@
 module.exports = async () => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     try {
         const htmlString = await rp.get({

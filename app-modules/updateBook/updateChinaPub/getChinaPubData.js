@@ -6,7 +6,7 @@ module.exports = async () => {
     const cheerio = require('cheerio');
     const iconv = require('iconv-lite');
     const uniqBy = require('lodash/uniqBy');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     try {
         const htmlString = await rp.get({

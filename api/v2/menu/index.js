@@ -2,7 +2,7 @@
 
 module.exports = (req, res, next) => {
     const rp = require('request-promise');
-    const { params } = require('app-lib');
+    const { params } = require('app-libs');
 
     const name = encodeURIComponent(req.params.name);
     const menuLimit = req.query.menuLimit || 5;
