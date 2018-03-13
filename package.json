@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "ali-oss": "^4.11.3",
+    "app-libs": "file:app-libs",
     "bluebird": "^3.5.1",
     "body-parser": "1.12.3",
     "cheerio": "^1.0.0-rc.2",
@@ -27,7 +28,8 @@
     "nodemailer": "^4.4.0",
     "qcloud-cdn-node-sdk": "^1.0.0",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "shelljs": "^0.8.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

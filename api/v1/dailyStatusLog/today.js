@@ -4,43 +4,44 @@
  * 获取今日状态
  */
 module.exports = (req, res) => {
-    const AV = require('leanengine');
+    const path = require('path');
     const moment = require('moment');
+    const { getDbData, saveDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
+
     moment.locale('zh-cn');
 
     const dbName = 'DayStatusLog';
     const today = new Date(`${moment().format('YYYY-MM-DD')} 00:00:00`);
+    const limit = 1;
 
-    const DailyStatusLog = AV.Object.extend(dbName);
-    const query = new AV.Query(DailyStatusLog);
-
-    query.limit(1);
-    query.equalTo('time', today);
-
-    query.find().then((result) => {
-        if (result.length > 0) {
-            return result[0];
-        } else {
-            const todayStatusLog = new DailyStatusLog();
-            todayStatusLog.set('time', today);
-
-            return todayStatusLog.save(null, {
-                useMasterKey: false
-            }).then(() => {
-                return {};
+    (async () => {
+        try {
+            let todayData = await getDbData({
+                dbName,
+                limit,
+                query: {
+                    equalTo: ['time', today]
+                }
             });
-        }
-    }).then((result) => {
-        const timeString = moment(today).format('YYYY年M月D日 dddd');
 
-        if (result.set) {
-            result.set('time', timeString);
-        } else {
-            result.time = timeString;
-        }
+            if (todayData.length === 0) {
+                todayData = await saveDbData({
+                    dbName,
+                    data: [
+                        {
+                            time: today
+                        }
+                    ]
+                });
+            }
 
-        res.json(result);
-    }).catch((err) => {
-        res.json({});
-    });
+            const result = todayData[0] || {};
+
+            result.time = moment(today).format('YYYY年M月D日 dddd');
+            res.json(result);
+        } catch (err) {
+            console.error(err);
+            res.json({});
+        }
+    })();
 };

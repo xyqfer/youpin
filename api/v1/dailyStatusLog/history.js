@@ -4,26 +4,34 @@
  * 获取历史状态
  */
 module.exports = (req, res) => {
-    const AV = require('leanengine');
+    const path = require('path');
     const moment = require('moment');
+    const { getDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
 
     const dbName = 'DayStatusLog';
-    const DailyStatusLog = AV.Object.extend(dbName);
-    const query = new AV.Query(DailyStatusLog);
-    const days = +(req.params.days || 1);
+    const limit = +(req.params.days || 1);
 
-    query.limit(days);
-    query.descending('time');
-    query.find().then((data) => {
-        const result = data.map((item) => {
-            const time = moment(item.get('time')).format('YYYY-MM-DD');
-            item.set('time', time);
+    (async () => {
+        try {
+            const data = await getDbData({
+                dbName,
+                limit,
+                query: {
+                    descending: ['time']
+                }
+            });
 
-            return item;
-        });
+            const result = data.map((item) => {
+                const time = moment(item.time).format('YYYY-MM-DD');
+                item.time = time;
 
-        res.json(result.reverse());
-    }).catch((err) => {
-        res.json([]);
-    });
+                return item;
+            });
+
+            res.json(result.reverse());
+        } catch (err) {
+            console.error(err);
+            res.json([]);
+        }
+    })();
 };
