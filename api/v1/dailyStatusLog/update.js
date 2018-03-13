@@ -4,9 +4,8 @@
  * 更新今日状态
  */
 module.exports = (req, res) => {
-    const path = require('path');
     const moment = require('moment');
-    const { getDbData, updateDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
+    const { getDbData, updateDbData } = require('app-libs/db');
 
     const dbName = 'DayStatusLog';
     const limit = 1;
