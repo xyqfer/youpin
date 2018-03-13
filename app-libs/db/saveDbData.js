@@ -1,25 +1,22 @@
 'use strict';
 
-module.exports = async ({ dbName = 'Test', data = [] }) => {
+module.exports = async ({ dbName = '', data = [] }) => {
     const AV = require('leanengine');
 
-    try {
-        const DbObject = AV.Object.extend(dbName);
-        const dbObjectList = data.map((item) => {
-            const dbObject = new DbObject();
+    const DbObject = AV.Object.extend(dbName);
+    const dbObjectList = data.map((item) => {
+        const dbObject = new DbObject();
 
-            Object.entries(item).forEach(([ key, value ]) => {
-                dbObject.set(key, value);
-            });
-
-            return dbObject;
+        Object.entries(item).forEach(([ key, value ]) => {
+            dbObject.set(key, value);
         });
 
-        return await AV.Object.saveAll(dbObjectList);
-    } catch (err) {
-        console.error(err);
-        return {
-            success: false
-        };
-    }
+        return dbObject;
+    });
+
+    const results = await AV.Object.saveAll(dbObjectList);
+
+    return results.map((item) => {
+        return item.toJSON();
+    });
 };
