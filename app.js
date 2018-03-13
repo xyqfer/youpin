@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const AV = require('leanengine');
 
-let fundebug = require('fundebug-nodejs');
+const fundebug = require('fundebug-nodejs');
 fundebug.apikey = process.env.fundebugKey || '';
 fundebug.releaseStage = process.env.LEANCLOUD_APP_ENV;
 
@@ -15,10 +15,12 @@ if (process.env.LEANCLOUD_APP_ENV == 'development') {
     fundebug.silent = true;
 }
 
+require('./installLocalModules');
+
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./cloud');
 
-let app = express();
+const app = express();
 
 // 设置模板引擎
 app.set('views', path.join(__dirname, 'views'));
