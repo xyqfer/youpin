@@ -1,3 +1,5 @@
+'use strict';
+
 const AV = require('leanengine');
 
 const cloudFuncConfig = [
@@ -15,7 +17,7 @@ const cloudFuncConfig = [
         info: '更新 v2ex hot'
     }, {
         name: 'updateDaily',
-        url: '/api/v1/update/daily',
+        module: ['updateBook', 'updateCodrop', 'updateGitHubTrending'],
         info: '每日更新'
     }, {
         name: 'wake',
