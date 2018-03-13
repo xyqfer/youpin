@@ -25,7 +25,7 @@ module.exports = (req, res) => {
             if (todayData.length > 0) {
                 updateDbData({
                     dbName,
-                    id: todayData[0].id,
+                    id: todayData[0].objectId,
                     data: todayStatusLog
                 });
             } else {
