@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async () => {
-    const getDoubanData = require('./getDoubanData');
+    const getGitHubData = require('./getGitHubData');
     const {
         db: {
             getDbData,
@@ -11,20 +11,20 @@ module.exports = async () => {
         mail: sendMail
     } = require('app-lib');
 
-    try {
-        const dbName = 'DoubanBook';
+    const dbName = 'GitHubTrending';
 
+    try {
         const dbData = await getDbData({
             dbName,
             query: {
                 descending: ['updatedAt']
             }
         });
-        const doubanData = await getDoubanData();
+        const githubData = await getGitHubData();
 
-        const newData = doubanData.filter((item) => {
+        const newData = githubData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
-                if (item.url === dbData[i].url) {
+                if (item.name === dbData[i].name) {
                     return false;
                 }
             }
@@ -35,30 +35,28 @@ module.exports = async () => {
         if (newData.length > 0 && !params.env.isDev) {
             saveDbData({
                 dbName,
-                data: newData
+                data: newData.map((item) => {
+                    return {
+                        name: item.name
+                    };
+                })
             });
-
             sendMail({
-                title: '豆瓣有新书啦~',
+                title: 'GitHub NEW Trending',
                 data: newData,
-                template: ({ name = '', url = '', pubInfo = '', desc = '', cover = '' }) => {
+                template: ({ url = '', name = '', desc = '', lang = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 50px">
                             <a href="${url}">
                                 <h4>${name}</h4>
                             </a>
                             <p>
-                                ${pubInfo}
-                            </p>
-                            <div>
                                 ${desc}
-                            </div>
-                            <div>
-                                <img src="${cover}" 
-                                    alt="">
-                            </div>
+                            </p>
+                            <p>
+                                ${lang}
+                            </p>
                         </div>
-                        <br><br>
                     `;
                 }
             });

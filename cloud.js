@@ -34,6 +34,6 @@ cloudFuncConfig.forEach((config) => {
             func && func();
         });
 
-        return Promise.resolve(info);
+        return info;
     });
 });

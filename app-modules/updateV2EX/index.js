@@ -32,7 +32,7 @@ module.exports = async () => {
             return await sendMail({
                 title: 'v2 昨日热议主题',
                 data,
-                template: (url = '', title = '', content = '') => {
+                template: ({ url = '', title = '', content = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">
                             <a href="${url}">

@@ -41,7 +41,7 @@ module.exports = async () => {
             sendMail({
                 title: '中信有新书啦~',
                 data: newData,
-                template: (url = '', title = '', cover = '') => {
+                template: ({ url = '', title = '', cover = '' }) => {
                     return `
                         <div style="margin-bottom: 60px">
                             <a href="${url}">

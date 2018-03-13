@@ -30,7 +30,7 @@ module.exports = async () => {
             sendMail({
                 title: 'ChinaPub 有新书啦',
                 data: newData,
-                template: (url = '', name = '', intro = '', cover = '') => {
+                template: ({ url = '', name = '', intro = '', cover = '' }) => {
                     const bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(url)}`;
                     return `
                         <div style="margin-bottom: 60px">
