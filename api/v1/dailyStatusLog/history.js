@@ -4,9 +4,8 @@
  * 获取历史状态
  */
 module.exports = (req, res) => {
-    const path = require('path');
     const moment = require('moment');
-    const { getDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
+    const { getDbData } = require('app-libs/db');
 
     const dbName = 'DayStatusLog';
     const limit = +(req.params.days || 1);

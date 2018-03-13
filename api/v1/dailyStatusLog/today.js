@@ -4,9 +4,8 @@
  * 获取今日状态
  */
 module.exports = (req, res) => {
-    const path = require('path');
     const moment = require('moment');
-    const { getDbData, saveDbData } = require(path.resolve(process.cwd(), 'api/lib/db'));
+    const { getDbData, saveDbData } = require('app-libs/db');
 
     moment.locale('zh-cn');
 
