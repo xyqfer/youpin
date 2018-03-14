@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async ({
-    offsets = [],
+    offsets = [0],
     latitude = process.env.latitude,
     longitude = process.env.longitude
 }) => {
@@ -12,20 +12,15 @@ module.exports = async ({
         params
     } = require('app-libs');
 
-    try {
-        const results = await Promise.mapSeries(offsets, (offset) => {
-            return rp.get({
-                json: true,
-                uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
-                headers: {
-                    'User-Agent': params.ua.mobile,
-                }
-            });
+    const results = await Promise.mapSeries(offsets, (offset) => {
+        return rp.get({
+            json: true,
+            uri: `https://restapi.ele.me/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=20&extras[]=activities&extras[]=tags&terminal=h5`,
+            headers: {
+                'User-Agent': params.ua.mobile,
+            }
         });
+    });
 
-        return flatten(results);
-    } catch (err) {
-        console.error(err);
-        return [];
-    }
+    return flatten(results);
 };

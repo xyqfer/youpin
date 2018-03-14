@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ data = [], dbName = 'Test' }) => {
+module.exports = async ({ data = [], dbName = '' }) => {
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const {

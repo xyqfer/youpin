@@ -50,9 +50,7 @@ module.exports = async () => {
             });
         }
 
-        return {
-            success: true
-        };
+        return newData;
     } catch (err) {
         console.error(err);
         return {
