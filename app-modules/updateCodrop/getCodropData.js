@@ -5,28 +5,23 @@ module.exports = async () => {
     const cheerio = require('cheerio');
     const { params } = require('app-libs');
 
-    try {
-        const htmlString = await rp.get({
-            uri: 'https://tympanus.net/codrops/all-articles/',
-            headers: {
-                'User-Agent': params.ua.mobile
-            }
+    const htmlString = await rp.get({
+        uri: 'https://tympanus.net/codrops/all-articles/',
+        headers: {
+            'User-Agent': params.ua.mobile
+        }
+    });
+
+    const $ = cheerio.load(htmlString);
+    const postList = [];
+
+    $('.ct-row article').each(function () {
+        postList.push({
+            postId: $(this).attr('id'),
+            url: $(this).find('h3 > a').attr('href'),
+            name: $(this).find('h3 > a').text()
         });
+    });
 
-        const $ = cheerio.load(htmlString);
-        const postList = [];
-
-        $('.ct-row article').each(function () {
-            postList.push({
-                postId: $(this).attr('id'),
-                url: $(this).find('h3 > a').attr('href'),
-                name: $(this).find('h3 > a').text()
-            });
-        });
-
-        return postList;
-    } catch (err) {
-        console.error(err);
-        return [];
-    }
+    return postList;
 };

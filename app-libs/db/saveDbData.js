@@ -1,25 +1,28 @@
 'use strict';
 
-module.exports = async ({ dbName = 'Test', data = [] }) => {
+module.exports = async ({ dbName = '', data = [] }) => {
     const AV = require('leanengine');
+    const isString = require('lodash/isString');
+    const isObject = require('lodash/isObject');
 
-    try {
-        const DbObject = AV.Object.extend(dbName);
-        const dbObjectList = data.map((item) => {
-            const dbObject = new DbObject();
+    if (!isString(dbName) || dbName === '') {
+        throw 'dbName 不能为空';
+    }
 
-            Object.entries(item).forEach(([ key, value ]) => {
-                dbObject.set(key, value);
-            });
+    const DbObject = AV.Object.extend(dbName);
+    const dbObjectList = data.map((item) => {
+        const dbObject = new DbObject();
 
-            return dbObject;
+        Object.entries(item).forEach(([ key, value ]) => {
+            dbObject.set(key, value);
         });
 
-        return await AV.Object.saveAll(dbObjectList);
-    } catch (err) {
-        console.error(err);
-        return {
-            success: false
-        };
-    }
+        return dbObject;
+    });
+
+    const results = await AV.Object.saveAll(dbObjectList);
+
+    return results.map((item) => {
+        return item.toJSON();
+    });
 };

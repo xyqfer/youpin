@@ -29,7 +29,7 @@ module.exports = async () => {
                 }
             });
 
-            return await sendMail({
+            sendMail({
                 title: 'v2 昨日热议主题',
                 data,
                 template: ({ url = '', title = '', content = '' }) => {
@@ -45,6 +45,8 @@ module.exports = async () => {
                     `;
                 }
             });
+
+            return data;
         } else {
             const [ dbData, v2exData ] = await Promise.all([
                 getDbData({
