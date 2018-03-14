@@ -21,7 +21,7 @@ const cloudFuncConfig = [
         info: '更新 juejin'
     }, {
         name: 'updateDaily',
-        module: ['updateZCFY', 'updateBook', 'updateCodrop', 'updateGitHubTrending'],
+        module: ['updateZCFY', 'updateBook', 'updateCodrop', 'updateGitHubTrending', 'updateEchojs'],
         info: '每日更新'
     }, {
         name: 'wake',
