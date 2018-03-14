@@ -34,7 +34,7 @@ module.exports = async () => {
                 if (url != null && url !== '') {
                     postList.push({
                         title: $elem.find('.uk-card-header .uk-link-reset').text(),
-                        url: `http://www.zcfy.cc/${$elem.find('.uk-link-reset').attr('href')}`,
+                        url: `http://www.zcfy.cc${$elem.find('.uk-link-reset').attr('href')}`,
                         desc: $elem.find('.uk-card-body .uk-card-body').text()
                     });
                 }
