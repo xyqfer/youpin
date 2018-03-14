@@ -5,13 +5,15 @@ module.exports = async () => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
+    const uniqBy = require('lodash/uniqBy');
     const { params } = require('app-libs');
 
-    const urls = [];
-
-    for (let i = 1; i <= 3; i++) {
-        urls.push(`http://www.zcfy.cc/?page=${i}&mode=loadmore`);
-    }
+    const urls = [
+        'http://www.echojs.com/',
+        'http://www.echojs.com/latest/0',
+        'http://www.echojs.com/latest/1',
+        'http://www.echojs.com/latest/2'
+    ];
 
     const result = await Promise.mapSeries(urls, async (uri) => {
         try {
@@ -23,27 +25,24 @@ module.exports = async () => {
             });
 
             const $ = cheerio.load(htmlString);
-            const postList = [];
+            const newsList = [];
 
-            $('.uk-card').each(function () {
+            $('#newslist > article').each(function () {
                 const $elem = $(this);
-                const url = $elem.find('.uk-link-reset').attr('href');
 
-                if (url != null && url !== '') {
-                    postList.push({
-                        title: $elem.find('.uk-card-header .uk-link-reset').text(),
-                        url: `http://www.zcfy.cc${$elem.find('.uk-link-reset').attr('href')}`,
-                        desc: $elem.find('.uk-card-body .uk-card-body').text()
-                    });
-                }
+                newsList.push({
+                    title: $elem.find('h2 a').text(),
+                    url: $elem.find('h2 a').attr('href'),
+                    newsId: $elem.attr('data-news-id')
+                });
             });
 
-            return postList;
+            return newsList;
         } catch (err) {
             console.error(err);
             return [];
         }
     });
 
-    return flatten(result);
+    return uniqBy(flatten(result), 'newsId');
 };
