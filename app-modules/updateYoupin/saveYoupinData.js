@@ -38,13 +38,13 @@ module.exports = async ({ data = [], dbName = '' }) => {
             }
         });
 
-        const data = results.filter((item) => {
+        const newData = results.filter((item) => {
             return item != null;
         });
 
         await saveDbData({
             dbName,
-            data
+            data: newData
         });
 
         return {
