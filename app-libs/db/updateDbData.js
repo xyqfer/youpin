@@ -1,20 +1,28 @@
 'use strict';
 
-module.exports = async ({ dbName = 'Text', data = {}, id = '' }) => {
+module.exports = async ({ dbName = '', data = {}, id = '' }) => {
     const AV = require('leanengine');
+    const isString = require('lodash/isString');
+    const isObject = require('lodash/isObject');
 
-    try {
-        const dbObject = AV.Object.createWithoutData(dbName, id);
-
-        Object.entries(data).forEach(([ key, value]) => {
-            dbObject.set(key, value);
-        });
-
-        return await dbObject.save();
-    } catch (err) {
-        console.error(err);
-        return {
-            success: false
-        };
+    if (!isString(dbName) || dbName === '') {
+        throw 'dbName 不能为空';
     }
+
+    if (!isObject(data)) {
+        throw 'data 不能为空';
+    }
+
+    if (!isString(id) || id === '') {
+        throw 'id 不能为空';
+    }
+
+    const dbObject = AV.Object.createWithoutData(dbName, id);
+
+    Object.entries(data).forEach(([ key, value ]) => {
+        dbObject.set(key, value);
+    });
+
+    const result = await dbObject.save();
+    return result.toJSON();
 };

@@ -64,7 +64,7 @@ test('传空Object报错', async () => {
     expect.assertions(1);
 
     try {
-        await saveDbData();
+        await saveDbData({});
     } catch (err) {
         expect(true).toBe(true);
     }

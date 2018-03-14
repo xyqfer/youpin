@@ -20,4 +20,6 @@ module.exports = () => {
         appKey: process.env.LEANCLOUD_APP_KEY,
         masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
     });
+
+    AV.Cloud.useMasterKey();
 };

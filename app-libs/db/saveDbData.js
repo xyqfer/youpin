@@ -2,6 +2,12 @@
 
 module.exports = async ({ dbName = '', data = [] }) => {
     const AV = require('leanengine');
+    const isString = require('lodash/isString');
+    const isObject = require('lodash/isObject');
+
+    if (!isString(dbName) || dbName === '') {
+        throw 'dbName 不能为空';
+    }
 
     const DbObject = AV.Object.extend(dbName);
     const dbObjectList = data.map((item) => {
