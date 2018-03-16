@@ -7,7 +7,6 @@ module.exports = async () => {
         db: {
             getDbData
         },
-        params,
         mail: sendMail
     } = require('app-libs');
 
@@ -34,7 +33,7 @@ module.exports = async () => {
             return true;
         });
 
-        if (newData.length > 0 && !params.env.isDev) {
+        if (newData.length > 0) {
             saveYoupinData({
                 dbName,
                 data: newData

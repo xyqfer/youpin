@@ -8,7 +8,6 @@ module.exports = async () => {
             getDbData,
             saveDbData
         },
-        params,
         mail: sendMail
     } = require('app-libs');
 
@@ -19,7 +18,7 @@ module.exports = async () => {
     const needSendMail = today.getHours() === 8 && today.getMinutes() <= 15;
 
     try {
-        if (needSendMail && !params.env.isDev) {
+        if (needSendMail) {
             const yesterday = new Date(`${moment().add(-1, 'days').format('YYYY-MM-DD 00:00:00')}`);
 
             const data = await getDbData({
@@ -68,7 +67,7 @@ module.exports = async () => {
                 return true;
             });
 
-            if (newData.length > 0 && !params.env.isDev) {
+            if (newData.length > 0) {
                 saveDbData({
                     dbName,
                     data: newData
