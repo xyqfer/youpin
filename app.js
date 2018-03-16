@@ -33,7 +33,6 @@ app.use(AV.Cloud.HttpsRedirect());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(fundebug.ExpressErrorHandler);
 
 app.get('/', function (req, res) {
     res.render('index', {});
