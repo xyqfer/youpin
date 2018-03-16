@@ -16,9 +16,9 @@ const cloudFuncConfig = [
         module: 'updateV2EX',
         info: '更新 v2ex hot'
     }, {
-        name: 'updateJuejin',
-        module: 'updateJuejin',
-        info: '更新 juejin'
+        name: 'update_3/day',
+        module: ['updateJuejin', 'updateHackerNews'],
+        info: '每日三更'
     }, {
         name: 'updateDaily',
         module: ['updateZCFY', 'updateBook', 'updateCodrop', 'updateGitHubTrending', 'updateEchojs'],
