@@ -10,5 +10,7 @@ module.exports = {
         isProd: process.env.LEANCLOUD_APP_ENV === 'production',
         isStg: process.env.LEANCLOUD_APP_ENV === 'stage',
         isDev: process.env.LEANCLOUD_APP_ENV === 'development'
+            || process.env.LEANCLOUD_APP_ENV == null
+            || process.env.LEANCLOUD_APP_ENV === ''
     }
 };

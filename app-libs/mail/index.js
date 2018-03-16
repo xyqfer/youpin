@@ -4,6 +4,7 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
     const sendWechat = require('./sendWechat');
+    const params = require('../params');
 
     const {
         mailReceivers: receivers
@@ -27,9 +28,15 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
         receivers
     };
 
-    let sendSuccess = false;
+    if (params.env.isDev) {
+        return {
+            success: true
+        };
+    }
 
     try {
+        let sendSuccess = false;
+
         while (mailQueue.length > 0 && !sendSuccess) {
             const mapKey = (mailQueue.shift() || 'wechat').toLowerCase();
             const status = await sendMap[mapKey](mailParams);
