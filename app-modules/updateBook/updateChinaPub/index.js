@@ -8,7 +8,6 @@ module.exports = async () => {
             getDbData,
             saveDbData
         },
-        params,
         mail: sendMail
     } = require('app-libs');
 
@@ -21,7 +20,7 @@ module.exports = async () => {
         const chinaPubData = await getChinaPubData();
         const newData = await getNewData({ dbData, chinaPubData });
 
-        if (newData.length > 0 && !params.env.isDev) {
+        if (newData.length > 0) {
             saveDbData({
                 dbName,
                 data: newData

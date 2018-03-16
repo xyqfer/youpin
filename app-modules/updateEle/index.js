@@ -7,7 +7,6 @@ module.exports = async () => {
         db: {
             getDbData,
         },
-        params
     } = require('app-libs');
 
     const dbName = 'Ele_restaurant';
@@ -62,7 +61,7 @@ module.exports = async () => {
             return item.type === 0;
         });
 
-        if (newData.length > 0 && !params.env.isDev) {
+        if (newData.length > 0) {
             saveEleData({
                 dbName,
                 data: newData

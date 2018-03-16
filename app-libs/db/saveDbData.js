@@ -4,9 +4,14 @@ module.exports = async ({ dbName = '', data = [] }) => {
     const AV = require('leanengine');
     const isString = require('lodash/isString');
     const isObject = require('lodash/isObject');
+    const params = require('../params');
 
     if (!isString(dbName) || dbName === '') {
         throw 'dbName 不能为空';
+    }
+
+    if (params.env.isDev) {
+        return data;
     }
 
     const DbObject = AV.Object.extend(dbName);
