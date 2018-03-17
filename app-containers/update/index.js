@@ -53,11 +53,13 @@ module.exports = (params = {}) => {
         const targetData = await this.getTargetData();
         const newData = await this.filterData(dbData, targetData);
 
-        const saveDataResult = this.saveData(newData);
-        const notifyResult = this.notify(newData);
+        if (newData.length > 0) {
+            const saveDataResult = this.saveData(newData);
+            const notifyResult = this.notify(newData);
 
-        await saveDataResult;
-        await notifyResult;
+            await saveDataResult;
+            await notifyResult;
+        }
 
         return newData;
     }.bind(mergeParams))();
