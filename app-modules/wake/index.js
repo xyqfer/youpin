@@ -15,7 +15,6 @@ module.exports = () => {
 
     });
 
-    console.log('wake');
     return {
         success: true
     };
