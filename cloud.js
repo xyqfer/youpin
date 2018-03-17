@@ -21,7 +21,7 @@ const cloudFuncConfig = [
         info: '更新 GitHubTrending'
     }, {
         name: 'update3PerDay',
-        module: ['updateSMZDM', 'updateJuejin', 'updateHackerNews'],
+        module: ['updateZhihuHot', 'updateSMZDM', 'updateJuejin', 'updateHackerNews'],
         info: '每日三更'
     }, {
         name: 'updateDaily',
