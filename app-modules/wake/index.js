@@ -9,6 +9,12 @@ module.exports = () => {
 
     });
 
+    rp.get({
+        uri: 'https://ibdkopi6vn.avosapps.us/'
+    }).catch(() => {
+
+    });
+
     console.log('wake');
     return {
         success: true
