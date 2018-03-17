@@ -42,6 +42,8 @@ cloudFuncConfig.forEach((config) => {
         modules.forEach((module) => {
             const func = require(`./app-modules/${module}`);
             func && func();
+
+            console.log(module);
         });
 
         return info;
