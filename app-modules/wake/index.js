@@ -5,6 +5,8 @@ module.exports = () => {
 
     rp.get({
         uri: 'https://stg-sy2bnjwp1a.leanapp.cn'
+    }).catch(() => {
+
     });
 
     console.log('wake');
