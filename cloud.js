@@ -20,8 +20,12 @@ const cloudFuncConfig = [
         module: 'updateGitHubTrending',
         info: '更新 GitHubTrending'
     }, {
+        name: 'updateZhihuHot',
+        module: 'updateZhihuHot',
+        info: '更新 ZhihuHot'
+    }, {
         name: 'update3PerDay',
-        module: ['updateZhihuHot', 'updateSMZDM', 'updateJuejin', 'updateHackerNews'],
+        module: ['updateSMZDM', 'updateJuejin', 'updateHackerNews'],
         info: '每日三更'
     }, {
         name: 'updateDaily',
