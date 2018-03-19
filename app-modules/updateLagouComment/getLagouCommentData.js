@@ -1,8 +1,6 @@
 'use strict';
 
-module.exports = async ({
-    offsets = [0]
-}) => {
+module.exports = async () => {
     const Promise = require('bluebird');
     const rp = require('request-promise');
     const flatten = require('lodash/flatten');
@@ -11,23 +9,32 @@ module.exports = async ({
         params
     } = require('app-libs');
 
-    const results = await Promise.mapSeries(offsets, async (offset) => {
+    const urls = [
+        {
+            url: 'https://www.lagou.com/gongsi/searchInterviewExperiences.json',
+            body: {
+                companyId: 84693
+            }
+        }
+    ];
+
+    const results = await Promise.mapSeries(urls, async ({ url = '', body = {} }) => {
         try {
             const result = await rp.post({
-                json: true,
-                uri: 'http://api.xitu.io/resources/gold',
+                uri: url,
                 headers: {
                     'User-Agent': params.ua.pc,
                 },
-                body: {
-                    category: 'frontend',
-                    order: 'time',
-                    offset: offset,
-                    limit: 30
+                form: {
+                    pageSize: 10,
+                    pageNo: 1,
+                    ...body
                 }
+            }).then((data) => {
+                return JSON.parse(data);
             });
 
-            return result.data;
+            return result.content.data.page.result;
         } catch (err) {
             console.error(err);
             return [];
@@ -36,9 +43,7 @@ module.exports = async ({
 
     return uniqBy(flatten(results), 'id').map((item) => {
         return {
-            postId: item.id,
-            title: item.title,
-            url: item.originalUrl
+            commentId: item.id
         };
     });
 };
