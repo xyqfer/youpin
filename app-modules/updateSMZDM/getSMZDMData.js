@@ -83,5 +83,9 @@ module.exports = async () => {
         timesort = postData.data[postData.data.length - 1].time_sort;
     }
 
-    return uniqBy(flatten(results), 'url');
+    return uniqBy(flatten(results), 'url').map((item) => {
+        item.title = item.title.replace(/#/g, '');
+
+        return item;
+    });
 };
