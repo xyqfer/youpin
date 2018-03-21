@@ -4,12 +4,6 @@ module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const getSMZDMData = require('./getSMZDMData');
 
-    const offsets = [];
-
-    for (let offset = 1; offset <= 3; offset += 1) {
-        offsets.push(offset);
-    }
-
     try {
         return await updateContainer({
             dbName: 'SMZDM',
@@ -33,9 +27,7 @@ module.exports = async () => {
                 }
             },
             getTargetData: () => {
-                return getSMZDMData({
-                    offsets
-                });
+                return getSMZDMData();
             },
             filterKey: 'url'
         });
