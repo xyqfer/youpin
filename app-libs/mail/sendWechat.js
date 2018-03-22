@@ -7,13 +7,24 @@ module.exports = async ({ title = '', content = '' }) => {
     const scToken = process.env.scToken;
     let markdownContent = '';
 
-    const $ = cheerio.load(content);
-    $('a').each(function () {
-        const url = $(this).attr('href');
-        const title = $(this).text();
+    const cheerioId = 'J-cheerio-wrap';
+    const $ = cheerio.load(`<div id='${cheerioId}'>${content}</div>`);
+    $(`#${cheerioId}`).children().each(function () {
+        const $elem = $(this);
+
+        const url = $elem.find('a').attr('href');
+        const title = $elem.find('a').text();
 
         markdownContent += `- [${title}](${url})
 `;
+
+        const $img = $elem.find('img');
+
+        if ($img.length > 0) {
+            const imgUrl = $img.attr('src');
+            markdownContent += `![](${imgUrl})
+`;
+        }
     });
 
     try {
