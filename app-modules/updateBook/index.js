@@ -5,12 +5,14 @@ module.exports = async () => {
     const updateChinaPub = require('./updateChinaPub');
     const updateZhongxin = require('./updateZhongxin');
     const updateZhanlu = require('./updateZhanlu');
+    const updateIturing = require('./updateIturing');
 
     try {
         await updateDouban();
         await updateZhongxin();
         await updateChinaPub();
         await updateZhanlu();
+        await updateIturing();
 
         return {
             success: true
