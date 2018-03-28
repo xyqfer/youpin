@@ -1,7 +1,7 @@
 const AV = require('leanengine');
 const shell = require('shelljs');
 
-const testModule = require('./app-modules/updateBook/updateBroadview');
+const testModule = require('./app-modules/updateBook/updateWeibo');
 
 const initEnv = () => {
     const envString = shell.exec('lean env', {
@@ -27,7 +27,7 @@ const setProd = () => {
 };
 
 initEnv();
-setProd();
+// setProd();
 
 // class JuejinContainer extends UpdateContainer {
 //     getTargetData() {
@@ -41,7 +41,8 @@ setProd();
 
 (async () => {
     try {
-        const result = await testModule({});
+        const result = await testModule({
+        });
         console.log(result);
     } catch (err) {
         console.error(err);
