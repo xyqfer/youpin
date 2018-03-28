@@ -1,7 +1,7 @@
 const AV = require('leanengine');
 const shell = require('shelljs');
 
-const testModule = require('./app-modules/updateBook/updateEpubit');
+const testModule = require('./app-modules/updateBook/updateBroadview');
 
 const initEnv = () => {
     const envString = shell.exec('lean env', {
@@ -27,7 +27,7 @@ const setProd = () => {
 };
 
 initEnv();
-// setProd();
+setProd();
 
 // class JuejinContainer extends UpdateContainer {
 //     getTargetData() {
