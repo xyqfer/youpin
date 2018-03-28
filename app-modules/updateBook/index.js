@@ -6,6 +6,7 @@ module.exports = async () => {
     const updateZhongxin = require('./updateZhongxin');
     const updateZhanlu = require('./updateZhanlu');
     const updateIturing = require('./updateIturing');
+    const updateEpubit = require('./updateEpubit');
 
     try {
         await updateDouban();
@@ -13,6 +14,7 @@ module.exports = async () => {
         await updateChinaPub();
         await updateZhanlu();
         await updateIturing();
+        await updateEpubit();
 
         return {
             success: true
