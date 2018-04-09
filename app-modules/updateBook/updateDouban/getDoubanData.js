@@ -45,7 +45,7 @@ module.exports = async () => {
                 $book.find('.more-meta .year').text().replace(/\n+/g, '').trim();
 
             bookList.push({
-                url: $book.find('.cover a').attr('href').replace(/\/\?.+$/g, ''),
+                url: $book.find('.cover a').attr('href').replace(/\?.+$/g, ''),
                 cover: $book.find('.cover img').attr('src'),
                 name: $book.find('.info .more-meta .title').text().replace(/\n+/g, '').trim(),
                 desc: $book.find('.abstract').text().replace(/\n+/g, '').trim(),
