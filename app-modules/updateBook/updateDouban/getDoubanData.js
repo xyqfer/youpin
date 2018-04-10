@@ -3,6 +3,7 @@
 module.exports = async () => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
+    const uniqBy = require('lodash/uniqBy');
     const { params } = require('app-libs');
 
     try {
@@ -53,7 +54,7 @@ module.exports = async () => {
             });
         });
 
-        return bookList;
+        return uniqBy(bookList, 'url');
     } catch (err) {
         console.error(err);
         return [];
