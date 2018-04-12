@@ -25,11 +25,11 @@ const cloudFuncConfig = [
         info: '更新 ZhihuHot'
     }, {
         name: 'update3PerDay',
-        module: ['updateJuejin'],
+        module: ['updateJuejin', 'updateEchojs'],
         info: '每日三更'
     }, {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCodrop', 'updateEchojs', 'updateLagouComment'],
+        module: ['updateBook', 'updateCodrop', 'updateLagouComment'],
         info: '每日更新'
     }, {
         name: 'wake',
