@@ -8,20 +8,20 @@ module.exports = async () => {
     const { params } = require('app-libs');
 
     const urls = [
-        'https://medium.com/_/api/tags/javascript/stream?limit=100&sortBy=published-at'
+        'https://medium.com/_/api/tags/javascript/stream?limit=10&sortBy=published-at'
     ];
 
     const result = await Promise.mapSeries(urls, async (uri) => {
         try {
-            const data = await rp.get({
+            const result = await rp.get({
                 uri,
-                json: true,
                 headers: {
                     'User-Agent': params.ua.pc,
                     'Referer': 'https://medium.com/tag/javascript/latest'
                 }
             });
 
+            const data = JSON.parse(result.replace('])}while(1);</x>', ''));
             let postList = [];
 
             if (data.success) {
