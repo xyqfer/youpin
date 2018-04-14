@@ -8,7 +8,7 @@ module.exports = async () => {
     const { params } = require('app-libs');
 
     const urls = [
-        'https://medium.com/_/api/tags/javascript/stream?limit=10&sortBy=published-at'
+        'https://medium.com/_/api/tags/javascript/stream?limit=100&sortBy=published-at'
     ];
 
     const result = await Promise.mapSeries(urls, async (uri) => {
