@@ -12,6 +12,10 @@ const cloudFuncConfig = [
         module: 'updateEle',
         info: 'updateEle 定时任务'
     }, {
+        name: 'updateMedium',
+        module: 'updateMedium',
+        info: 'updateMedium 定时任务'
+    }, {
         name: 'updateV2EXHot',
         module: 'updateV2EX',
         info: '更新 v2ex hot'
