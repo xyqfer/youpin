@@ -8,7 +8,7 @@ module.exports = (req, res) => {
 
         if (ref === 'refs/heads/master') {
             rp.post({
-                uri: `https://leancloud.cn/1.1/engine/groups/web/productionImage?token=${process.env.deployToken}&gitTag=master`
+                uri: `${process.env.deployUrl}`
             }).catch((err) => {
                 console.error(err);
             });
