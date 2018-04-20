@@ -1,7 +1,7 @@
 const AV = require('leanengine');
 const shell = require('shelljs');
 
-const testModule = require('./app-modules/updateMedium/updateJavaScript/getJavaScriptData');
+const testModule = require('./app-modules/updateZhihuHot/getZhihuHotData');
 
 const initEnv = () => {
     const envString = shell.exec('lean env', {
@@ -41,14 +41,9 @@ initEnv();
 
 (async () => {
     try {
-        const result = await testModule({
-        });
+        const result = await testModule({});
         console.log(result);
     } catch (err) {
         console.error(err);
     }
 })();
-
-
-
-
