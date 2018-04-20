@@ -40,7 +40,7 @@ module.exports = async () => {
                         dbName,
                         limit: 1,
                         query: {
-                            equalTo: [filterKey, item.filterKey]
+                            equalTo: [filterKey, item[filterKey]]
                         }
                     });
 
