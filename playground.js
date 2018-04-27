@@ -1,7 +1,7 @@
 const AV = require('leanengine');
 const shell = require('shelljs');
 
-const testModule = require('./app-modules/updateZhihuHot/getZhihuHotData');
+const testModule = require('./app-modules/updateCBNweekly');
 
 const initEnv = () => {
     const envString = shell.exec('lean env', {
