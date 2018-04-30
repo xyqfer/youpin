@@ -45,6 +45,8 @@ module.exports = async () => {
                     });
 
                     return dbItem.length === 0;
+                }, {
+                    concurrency: 1
                 });
             }
         });
