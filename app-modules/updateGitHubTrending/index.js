@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = async () => {
+    const Promise = require('bluebird');
     const getGitHubData = require('./getGitHubData');
     const {
         db: {
@@ -11,6 +12,7 @@ module.exports = async () => {
     } = require('app-libs');
 
     const dbName = 'GitHubTrending';
+    const filterKey = 'name';
 
     try {
         const dbData = await getDbData({
@@ -21,9 +23,9 @@ module.exports = async () => {
         });
         const githubData = await getGitHubData();
 
-        const newData = githubData.filter((item) => {
+        let newData = githubData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
-                if (item.name === dbData[i].name) {
+                if (item[filterKey] === dbData[i][filterKey]) {
                     return false;
                 }
             }
@@ -32,6 +34,26 @@ module.exports = async () => {
         });
 
         if (newData.length > 0) {
+            newData = await Promise.filter(newData, async (item) => {
+                for (let i = 0; i < dbData.length; i++) {
+                    if (item[filterKey] === dbData[i][filterKey]) {
+                        return false;
+                    }
+                }
+
+                const dbItem = await getDbData({
+                    dbName,
+                    limit: 1,
+                    query: {
+                        equalTo: [filterKey, item[filterKey]]
+                    }
+                });
+
+                return dbItem.length === 0;
+            }, {
+                concurrency: 1
+            });
+
             saveDbData({
                 dbName,
                 data: newData.map((item) => {
