@@ -54,19 +54,20 @@ module.exports = async () => {
                 concurrency: 1
             });
 
-            saveDbData({
-                dbName,
-                data: newData.map((item) => {
-                    return {
-                        name: item.name
-                    };
-                })
-            });
-            sendMail({
-                title: 'GitHub NEW Trending',
-                data: newData,
-                template: ({ url = '', name = '', desc = '', lang = '' }) => {
-                    return `
+            if (newData.length > 0) {
+                saveDbData({
+                    dbName,
+                    data: newData.map((item) => {
+                        return {
+                            name: item.name
+                        };
+                    })
+                });
+                sendMail({
+                    title: 'GitHub NEW Trending',
+                    data: newData,
+                    template: ({ url = '', name = '', desc = '', lang = '' }) => {
+                        return `
                         <div style="margin-bottom: 50px">
                             <a href="${url}">
                                 <h4>${name}</h4>
@@ -79,8 +80,9 @@ module.exports = async () => {
                             </p>
                         </div>
                     `;
-                }
-            });
+                    }
+                });
+            }
         }
 
         return newData;
