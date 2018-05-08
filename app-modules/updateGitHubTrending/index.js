@@ -35,12 +35,6 @@ module.exports = async () => {
 
         if (newData.length > 0) {
             newData = await Promise.filter(newData, async (item) => {
-                for (let i = 0; i < dbData.length; i++) {
-                    if (item[filterKey] === dbData[i][filterKey]) {
-                        return false;
-                    }
-                }
-
                 const dbItem = await getDbData({
                     dbName,
                     limit: 1,
