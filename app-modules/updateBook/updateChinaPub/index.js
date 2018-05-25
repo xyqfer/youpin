@@ -13,25 +13,41 @@ module.exports = async () => {
 
     try {
         const dbName = 'ChinaPubBooks';
+        const filterKey = 'url';
 
         const dbData = await getDbData({
             dbName
         });
         const chinaPubData = await getChinaPubData();
-        const newData = await getNewData({ dbData, chinaPubData });
+        let newData = await getNewData({ dbData, chinaPubData });
 
         if (newData.length > 0) {
-            saveDbData({
-                dbName,
-                data: newData
+            newData = await Promise.filter(newData, async (item) => {
+                const dbItem = await getDbData({
+                    dbName,
+                    limit: 1,
+                    query: {
+                        equalTo: [filterKey, item[filterKey]]
+                    }
+                });
+
+                return dbItem.length === 0;
+            }, {
+                concurrency: 1
             });
 
-            sendMail({
-                title: 'ChinaPub 有新书啦',
-                data: newData,
-                template: ({ url = '', name = '', intro = '', cover = '' }) => {
-                    const bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(url)}`;
-                    return `
+            if (newData.length > 0) {
+                saveDbData({
+                    dbName,
+                    data: newData
+                });
+
+                sendMail({
+                    title: 'ChinaPub 有新书啦',
+                    data: newData,
+                    template: ({ url = '', name = '', intro = '', cover = '' }) => {
+                        const bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(url)}`;
+                        return `
                         <div style="margin-bottom: 60px">
                             <a href="${bookUrl}">
                                 <h4>${name}</h4>
@@ -46,8 +62,9 @@ module.exports = async () => {
                         </div>
                         <br><br>
                     `;
-                }
-            });
+                    }
+                });
+            }
         }
 
         return newData;
