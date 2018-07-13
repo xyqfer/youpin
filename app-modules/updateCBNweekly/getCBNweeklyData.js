@@ -24,7 +24,8 @@ module.exports = async () => {
             img: $item.find('.magazine-cover > img').attr('src'),
             title: $item.find('.aside-title-magazine').text(),
             no: $item.find('.text-muted').eq(0).text(),
-            time: $item.find('.text-muted').eq(1).text()
+            time: $item.find('.text-muted').eq(1).text(),
+            url: `https://www.cbnweek.com${$item.attr('href')}`
         });
     });
 

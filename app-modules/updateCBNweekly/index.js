@@ -13,10 +13,14 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'CBNweekly更新啦~',
-                template: ({ no = '', time = '', title = '', img = '' }) => {
+                template: ({ no = '', time = '', title = '', img = '', url = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">
-                            <h4>${title}</h4>
+                            <h4>
+                              <a href="${url}">
+                                ${title}
+                              </a>
+                            </h4>
                             <div>${no} - ${time}</div>
                             <div>
                                 <img src="${img}" 
