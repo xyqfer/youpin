@@ -8,6 +8,7 @@ module.exports = (content) => {
   const cheerio = require('cheerio');
   const url = require("url");
   const id = 'vsrokjx';
+  let at = [];
 
   let $ = cheerio.load(`<div id="${id}">${content}</div>`);
   $('a').each(function () {
@@ -26,7 +27,14 @@ module.exports = (content) => {
     } else {
       $elem.attr('href', link.replace(reg, ''));
     }
+
+    if ((/^\/member\/.+/).test($elem.attr('href'))) {
+      at.push($elem.text());
+    }
   });
 
-  return $(`#${id}`).html();
+  return {
+    at,
+    content: $(`#${id}`).html(),
+  };
 };

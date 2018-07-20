@@ -46,7 +46,7 @@ module.exports = (req, res) => {
           content: `${$elem.find('a').eq(2).text()} <div><a href="${$elem.find('a').eq(2).attr('href')}">查看</a></div>`,
         },
         sent: {
-          content: convertContent($replies.eq(index).html()),
+          content: convertContent($replies.eq(index).html()).content,
           time: $elem.find('.fr > .fade').text() || '',
         }
       };

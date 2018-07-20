@@ -40,7 +40,7 @@ module.exports = (req, res) => {
         url: $header.find('.header > a').eq(1).attr('href'),
       },
       // status: $('.topic_buttons').length,
-      content: convertContent($header.find('.topic_content').html() || ''),
+      content: convertContent($header.find('.topic_content').html() || '').content,
     };
 
     let $additions = $header.find('.subtle');
@@ -52,7 +52,7 @@ module.exports = (req, res) => {
         let $addition = $(this);
 
         let addition = {
-          content: convertContent($addition.find('.topic_content').html()),
+          content: convertContent($addition.find('.topic_content').html()).content,
           time: $addition.find('.fade').text().split('·')[1].trim(),
           title: $addition.find('.fade').text().split('·')[0].trim(),
         };
@@ -63,13 +63,15 @@ module.exports = (req, res) => {
 
     $body.find('.cell').each(function () {
       let $item = $(this);
+      let { at, content } = convertContent($item.find('.reply_content').html());
 
       if ($item.attr('id')) {
         let replyItem = {
+          at,
+          content,
           avatar: `https:${$item.find('.avatar').attr('src')}`,
           author: $item.find('.dark').text(),
           time: $item.find('.ago').text(),
-          content: convertContent($item.find('.reply_content').html()),
           floor: $item.find('.no').text(),
         };
 
