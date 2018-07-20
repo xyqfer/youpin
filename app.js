@@ -5,6 +5,7 @@ const timeout = require('connect-timeout');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const AV = require('leanengine');
 
 require('./installLocalModules');
@@ -33,6 +34,12 @@ app.use(AV.Cloud.HttpsRedirect());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
+if (process.env.LEANCLOUD_APP_ENV !== 'production') {
+    app.use(cors({
+        origin: '*',
+    }));
+}
 
 app.get('/', function (req, res) {
     res.render('index', {});

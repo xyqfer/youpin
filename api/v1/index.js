@@ -23,6 +23,17 @@ const {
     update: updateTodayStatusLog
 } = require('./dailyStatusLog');
 
+const {
+    hot: v2exHot,
+    nodes: v2exNodes,
+    node: v2exNode,
+    t: v2exT,
+    member: v2exMember,
+    memberTopic: v2exMemberTopic,
+    memberReply: v2exMemberReply,
+    'allNodes': v2exAllNodes,
+} = require('./v2ex');
+
 router.get('/restaurant', restaurant);
 router.get('/activities', activities);
 
@@ -37,6 +48,15 @@ router.get(/^\/uplabs\/(\d+)\.json$/, uplabsPost);
 router.get('/uplabs/collection', uplabsCollection);
 router.get('/uplabs/collections/:name', uplabsCollections);
 router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
+
+router.get('/v2ex/hot', v2exHot);
+router.get('/v2ex/nodes', v2exNodes);
+router.get('/v2ex/all-nodes', v2exAllNodes);
+router.get('/v2ex/node/:name', v2exNode);
+router.get('/v2ex/member/:name', v2exMember);
+router.get('/v2ex/member/:name/topic', v2exMemberTopic);
+router.get('/v2ex/member/:name/reply', v2exMemberReply);
+router.get('/v2ex/t/:id', v2exT);
 
 router.post('/deploy', deploy);
 
