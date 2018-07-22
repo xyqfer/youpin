@@ -12,15 +12,15 @@ self.__precacheManifest = [
     "url": "/v2ex/m/fonts/MaterialIcons-Regular.012cf6a1.woff"
   },
   {
-    "revision": "cd688f0ca6d1e94ac74a",
-    "url": "/v2ex/m/js/chunk-vendors.cd688f0c.js"
+    "revision": "635f8fc9b029cadeea09",
+    "url": "/v2ex/m/js/chunk-vendors.635f8fc9.js"
   },
   {
-    "revision": "8bfeae6b4de6ca025ad2",
-    "url": "/v2ex/m/js/app.8bfeae6b.js"
+    "revision": "572d3e794627a8a33f21",
+    "url": "/v2ex/m/js/app.572d3e79.js"
   },
   {
-    "revision": "7a654aec2d02ce0d666baf675c6f854a",
+    "revision": "9b0a728696d76e7b9809e027e0ee7de5",
     "url": "/v2ex/m/index.html"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/v2ex/m/fonts/Framework7Icons-Regular.2e9a0313.woff"
   },
   {
-    "revision": "8bfeae6b4de6ca025ad2",
-    "url": "/v2ex/m/css/app.333f9dd3.css"
+    "revision": "572d3e794627a8a33f21",
+    "url": "/v2ex/m/css/app.5ef0f4f1.css"
   }
 ];

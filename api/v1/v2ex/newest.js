@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * 获取最热
+ * 获取最新
  */
 
 module.exports = (req, res) => {
@@ -10,7 +10,7 @@ module.exports = (req, res) => {
   const parsePage = require('./utils/parseHomePage');
 
   rp.get({
-    uri: 'https://www.v2ex.com/?tab=hot',
+    uri: 'https://www.v2ex.com/changes',
     headers: {
       'User-Agent': params.ua.pc
     }
@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     console.log(err);
     res.json({
       success: false,
-      msg: 'v2ex hot 获取失败'
+      msg: 'v2ex newest 获取失败'
     });
   });
 };

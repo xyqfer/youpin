@@ -35,10 +35,12 @@ module.exports = (req, res) => {
       author: $header.find('.gray > a').text(),
       avatar: `https:${$header.find('.avatar').attr('src')}`,
       time: $header.find('.gray').text().split('·')[1].trim(),
+      click: $header.find('.gray').text().split('·')[2].trim(),
       node: {
         name: $header.find('.header > a').eq(1).text(),
         url: $header.find('.header > a').eq(1).attr('href'),
       },
+      count: $body.find('.cell').eq(0).find('.gray').text().split('|')[0].trim(),
       // status: $('.topic_buttons').length,
       content: convertContent($header.find('.topic_content').html() || '').content,
     };

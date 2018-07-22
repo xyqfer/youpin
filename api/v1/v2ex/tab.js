@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * 获取最热
+ * 获取 tab
  */
 
 module.exports = (req, res) => {
@@ -9,8 +9,10 @@ module.exports = (req, res) => {
   const { params } = require('app-libs');
   const parsePage = require('./utils/parseHomePage');
 
+  const { name } = req.params;
+
   rp.get({
-    uri: 'https://www.v2ex.com/?tab=hot',
+    uri: `https://www.v2ex.com/?tab=${name}`,
     headers: {
       'User-Agent': params.ua.pc
     }
@@ -23,7 +25,7 @@ module.exports = (req, res) => {
     console.log(err);
     res.json({
       success: false,
-      msg: 'v2ex hot 获取失败'
+      msg: 'v2ex ${name} tab 获取失败'
     });
   });
 };
