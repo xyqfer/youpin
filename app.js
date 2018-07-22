@@ -35,11 +35,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-if (process.env.LEANCLOUD_APP_ENV !== 'production') {
-    app.use(cors({
-        origin: '*',
-    }));
-}
+app.use(cors({
+    origin: '*',
+}));
 
 app.get('/', function (req, res) {
     res.render('index', {});
