@@ -35,6 +35,7 @@ const {
     memberReply: v2exMemberReply,
     login: v2exLogin,
     initLogin: v2exInitLogin,
+    search: v2exSearch,
     'allNodes': v2exAllNodes,
 } = require('./v2ex');
 
@@ -65,6 +66,7 @@ router.get('/v2ex/t/:id', v2exT);
 router.get('/v2ex/tab/:name', v2exTab);
 router.get('/v2ex/login/init', v2exInitLogin);
 router.post('/v2ex/login', v2exLogin);
+router.get('/v2ex/search', v2exSearch);
 
 router.post('/deploy', deploy);
 

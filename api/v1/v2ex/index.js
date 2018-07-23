@@ -12,5 +12,6 @@ module.exports = {
   memberTopic: require('./memberTopic'),
   memberReply: require('./memberReply'),
   login: require('./login'),
+  search: require('./search'),
   initLogin: require('./initLogin'),
 };
