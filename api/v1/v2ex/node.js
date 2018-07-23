@@ -21,6 +21,10 @@ module.exports = (req, res) => {
     let $ = cheerio.load(htmlString);
     let data = {
       total: 1,
+      node: {
+        count: +$('.node_info > .fr.f12 > strong').text(),
+        name: $('head > title').text().split('›')[1].trim(),
+      },
       list: [],
     };
 
