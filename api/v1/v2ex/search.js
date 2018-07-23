@@ -20,10 +20,13 @@ module.exports = (req, res) => {
     let $ = cheerio.load(htmlString);
     let data = [];
 
-    $('#rso > .srg .amp_r').each(function () {
+    $('#rso > .srg > div').each(function () {
       let $elem = $(this);
+      let $link = $elem.find('.amp_r');
       let post = {
-        title: $elem.find("[role='heading']").text().replace(/ \- V2EX$/, '').trim(),
+        title: $link.find("[role='heading']").text().replace(/\- V2EX$/, '').trim(),
+        url: $link.attr('data-amp-cur').replace(/^https:\/\/www\.v2ex\.com/, ''),
+        desc: $elem.find("div[data-id^='_'] > div").eq(1).text().trim(),
       };
 
       data.push(post);
