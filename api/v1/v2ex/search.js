@@ -26,7 +26,7 @@ module.exports = (req, res) => {
       let post = {
         title: $link.find("[role='heading']").text().replace(/\- V2EX$/, '').trim(),
         url: $link.attr('data-amp-cur').replace(/^https:\/\/www\.v2ex\.com/, ''),
-        desc: $elem.find("hr").next().text().trim(),
+        desc: $elem.text().split('V2EX › ...')[1].trim(),
       };
 
       data.push(post);
