@@ -9,9 +9,10 @@ module.exports = (req, res) => {
   const { params } = require('app-libs');
 
   const { q = '', p = 1 } = req.query;
+  console.log(q);
 
   rp.get({
-    uri: `https://www.google.com/search?q=site:v2ex.com/t ${q}&start=${10 * (p - 1)}`,
+    uri: `https://www.google.com/search?q=site:v2ex.com/t%20${encodeURIComponent(q)}&start=${10 * (p - 1)}`,
     headers: {
       'User-Agent': params.ua.mobile,
     }
