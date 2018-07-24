@@ -23,7 +23,15 @@ module.exports = (content) => {
     link = url.resolve('https://www.v2ex.com', link);
 
     if (!(reg).test(link)) {
-      $elem.addClass('external').attr('target', '_blank');
+      let $children = $elem.children();
+
+      if ($children.length === 1
+        && $children[0].tagName.toLowerCase() === 'img'
+        && $children.attr('src') === link) {
+        $elem.attr('href', '#');
+      } else {
+        $elem.addClass('external').attr('target', '_blank');
+      }
     } else {
       $elem.attr('href', link.replace(reg, ''));
     }

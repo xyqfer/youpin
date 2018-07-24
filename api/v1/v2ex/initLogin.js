@@ -4,7 +4,7 @@
  * 登录初始化
  */
 module.exports = (req, res) => {
-  const rp = require('request-promise');
+  const rp = require('request-promise').defaults({jar: true});
   const cheerio = require('cheerio');
   const { params } = require('app-libs');
 
@@ -23,11 +23,7 @@ module.exports = (req, res) => {
     let $form = $('form').eq(1);
 
     $form.find('.sl').each(function (index) {
-      let $elem = $(this);
-
-      data[index] = {
-        name: $elem.attr('name'),
-      };
+      data[index] = $(this).attr('name');
     });
 
     data.once = $form.find("[name='once']").val();

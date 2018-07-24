@@ -8,24 +8,36 @@ module.exports = (req, res) => {
   const cheerio = require('cheerio');
   const { params } = require('app-libs');
 
-  const { cookie, form, once } = req.body;
+  const {
+    cookie,
+    once,
+    key0,
+    key1,
+    key2,
+    value0,
+    value1,
+    value2,
+  } = req.body;
   let formData = {
     once,
     next: '/',
+    [key0]: value0,
+    [key1]: value1,
+    [key2]: value2,
   };
-  form.forEach((value, key) => {
-    formData[key] = value;
-  });
 
   rp.post({
     uri: 'https://www.v2ex.com/signin',
+    followAllRedirects: true,
+    resolveWithFullResponse: true,
     headers: {
       'User-Agent': params.ua.pc,
       'Cookie': cookie,
     },
     formData,
-  }).then((htmlString) => {
-    let $ = cheerio.load(htmlString);
+  }).then((response) => {
+    let $ = cheerio.load(response.body);
+    console.log(response.headers);
 
     if ($('.sl').length > 0) {
       res.json({
