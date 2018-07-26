@@ -46,7 +46,7 @@ module.exports = (req, res) => {
 
     if (/^A2=/.test(cookie)) {
       cookie = cookie.replace(/; Domain=.*/, '').trim();
-      res.append('Cookie', cookie);
+      res.append('Set-Cookie', cookie);
       res.json({
         success: true,
         data: {},
