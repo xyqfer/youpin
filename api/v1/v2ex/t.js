@@ -12,7 +12,7 @@ module.exports = (req, res) => {
   const { id } = req.params;
   const { p = 1 } = req.query;
 
-  let cookie = req.cookie || '';
+  let cookie = `A2=${req.cookies.A2 || ''}`;
   rp.get({
     json: true,
     uri: `https://www.v2ex.com/t/${id}?p=${p}`,

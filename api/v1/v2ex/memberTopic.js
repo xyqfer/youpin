@@ -13,7 +13,7 @@ module.exports = (req, res) => {
   const { name } = req.params;
   const { p = 1 } = req.query;
 
-  let cookie = req.cookie || '';
+  let cookie = `A2=${req.cookies.A2 || ''}`;
   rp.get({
     uri: `https://www.v2ex.com/member/${name}/topics?p=${p}`,
     headers: {
