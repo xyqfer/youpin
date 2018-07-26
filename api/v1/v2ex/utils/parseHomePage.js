@@ -28,6 +28,10 @@ module.exports = (htmlString) => {
         time: ($table.find('.topic_info').text().trim().split('•')[2] || '').trim(),
       };
 
+      if ($elem.attr('style').indexOf('/static/img/corner_star.png') !== -1) {
+        chatData.top = true;
+      }
+
       data.push(chatData);
     });
   });

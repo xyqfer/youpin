@@ -4,7 +4,9 @@
  * 登录初始化
  */
 module.exports = (req, res) => {
-  const rp = require('request-promise').defaults({jar: true});
+  const rp = require('request-promise').defaults({
+    jar: true,
+  });
   const cheerio = require('cheerio');
   const { params } = require('app-libs');
 
@@ -12,11 +14,11 @@ module.exports = (req, res) => {
     uri: 'https://www.v2ex.com/signin',
     resolveWithFullResponse: true,
     headers: {
-      'User-Agent': params.ua.pc
+      'User-Agent': params.ua.pc,
     },
   }).then((response) => {
     let $ = cheerio.load(response.body);
-    let cookie = response.headers['set-cookie'][0].replace(/expires=.*/, '').trim();
+    let cookie = response.headers['set-cookie'][0].replace(/; expires=.*/, '').trim();
     let data = {
       cookie,
     };

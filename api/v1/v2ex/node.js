@@ -12,10 +12,12 @@ module.exports = (req, res) => {
   const { name } = req.params;
   const { p = 1 } = req.query;
 
+  let cookie = req.cookie || '';
   rp.get({
     uri: `https://www.v2ex.com/go/${name}?p=${p}`,
     headers: {
-      'User-Agent': params.ua.pc
+      'User-Agent': params.ua.pc,
+      'Cookie': cookie,
     }
   }).then((htmlString) => {
     let $ = cheerio.load(htmlString);

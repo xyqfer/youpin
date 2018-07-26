@@ -4,8 +4,9 @@
  * 登录
  */
 module.exports = (req, res) => {
-  const rp = require('request-promise');
-  const cheerio = require('cheerio');
+  const rp = require('request-promise').defaults({
+    jar: true,
+  });
   const { params } = require('app-libs');
 
   const {
@@ -28,33 +29,33 @@ module.exports = (req, res) => {
 
   rp.post({
     uri: 'https://www.v2ex.com/signin',
-    followAllRedirects: true,
     resolveWithFullResponse: true,
     headers: {
       'User-Agent': params.ua.pc,
       'Cookie': cookie,
+      'Referer': 'https://v2ex.com/signin',
     },
     formData,
-  }).then((response) => {
-    let $ = cheerio.load(response.body);
-    console.log(response.headers);
-
-    if ($('.sl').length > 0) {
-      res.json({
-        success: false,
-        msg: 'v2ex login 失败'
-      });
-    } else {
-      res.json({
-        success: true,
-        data: {},
-      });
-    }
-  }).catch((err) => {
-    console.log(err);
+  }).then(() => {
     res.json({
       success: false,
       msg: 'v2ex login 失败'
     });
+  }).catch((err) => {
+    let cookie = err.response.headers['set-cookie'][0];
+
+    if (/^A2=/.test(cookie)) {
+      cookie = cookie.replace(/; Domain=.*/, '').trim();
+      res.append('Cookie', cookie);
+      res.json({
+        success: true,
+        data: {},
+      });
+    } else {
+      res.json({
+        success: false,
+        msg: 'v2ex login 失败'
+      });
+    }
   });
 };

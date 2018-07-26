@@ -12,7 +12,7 @@ module.exports = (req, res) => {
   rp.get({
     uri: 'https://www.v2ex.com/changes',
     headers: {
-      'User-Agent': params.ua.pc
+      'User-Agent': params.ua.pc,
     }
   }).then((htmlString) => {
     res.json({
