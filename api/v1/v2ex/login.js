@@ -45,7 +45,8 @@ module.exports = (req, res) => {
     let cookie = err.response.headers['set-cookie'][0];
 
     if (/^A2=/.test(cookie)) {
-      cookie = cookie.replace(/; Domain=.*/, '').trim();
+      cookie = cookie.replace('Domain=.v2ex.com; ', '').trim();
+
       res.append('Set-Cookie', cookie);
       res.json({
         success: true,

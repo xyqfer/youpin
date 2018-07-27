@@ -10,10 +10,12 @@ module.exports = (req, res) => {
 
   const { name } = req.params;
 
+  let cookie = `A2=${req.cookies.A2 || ''}`;
   rp.get({
     uri: `https://www.v2ex.com/member/${name}`,
     headers: {
-      'User-Agent': params.ua.pc
+      'User-Agent': params.ua.pc,
+      'Cookie': cookie,
     }
   }).then((htmlString) => {
     let $ = cheerio.load(htmlString);
