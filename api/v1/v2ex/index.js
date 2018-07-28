@@ -12,7 +12,9 @@ module.exports = {
   memberTopic: require('./memberTopic'),
   memberReply: require('./memberReply'),
   login: require('./login'),
+  logout: require('./logout'),
   search: require('./search'),
   initLogin: require('./initLogin'),
   recent: require('./recent'),
+  checkLogin: require('./checkLogin'),
 };
