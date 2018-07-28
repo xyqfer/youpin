@@ -36,6 +36,7 @@ const {
     login: v2exLogin,
     initLogin: v2exInitLogin,
     search: v2exSearch,
+    recent: v2exRecent,
     'allNodes': v2exAllNodes,
 } = require('./v2ex');
 
@@ -67,6 +68,7 @@ router.get('/v2ex/tab/:name', v2exTab);
 router.get('/v2ex/login/init', v2exInitLogin);
 router.post('/v2ex/login', v2exLogin);
 router.get('/v2ex/search', v2exSearch);
+router.get('/v2ex/recent', v2exRecent);
 
 router.post('/deploy', deploy);
 

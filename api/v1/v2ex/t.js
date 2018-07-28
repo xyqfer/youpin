@@ -45,6 +45,7 @@ module.exports = (req, res) => {
       count: $body.find('.cell').eq(0).find('.gray').text().split('|')[0].trim(),
       // status: $('.topic_buttons').length,
       content: convertContent($header.find('.topic_content').html() || '').content,
+      tag: [],
     };
 
     let $additions = $header.find('.subtle');
@@ -92,6 +93,18 @@ module.exports = (req, res) => {
 
     if ($pageInput.length > 0) {
       data.total = +$pageInput.attr('max');
+    }
+
+    let $tag = $('.tag');
+    if ($tag.length > 0) {
+      $tag.each(function () {
+        let $item = $(this);
+
+        data.topic.tag.push({
+          url: $item.attr('href'),
+          name: $item.text().trim(),
+        });
+      });
     }
 
     res.json({
