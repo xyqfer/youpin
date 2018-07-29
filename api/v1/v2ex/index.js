@@ -17,4 +17,5 @@ module.exports = {
   initLogin: require('./initLogin'),
   recent: require('./recent'),
   checkLogin: require('./checkLogin'),
+  tag: require('./tag'),
 };

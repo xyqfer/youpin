@@ -4,7 +4,7 @@
  * 退出登录
  */
 module.exports = (req, res) => {
-  res.append('Set-Cookie', 'A2=');
+  res.clearCookie('A2');
   res.json({
     success: true,
     data: {},

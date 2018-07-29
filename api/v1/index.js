@@ -39,6 +39,7 @@ const {
     search: v2exSearch,
     recent: v2exRecent,
     checkLogin: v2exCheckLogin,
+    tag: v2exTag,
     'allNodes': v2exAllNodes,
 } = require('./v2ex');
 
@@ -67,6 +68,7 @@ router.get('/v2ex/member/:name/topic', v2exMemberTopic);
 router.get('/v2ex/member/:name/reply', v2exMemberReply);
 router.get('/v2ex/t/:id', v2exT);
 router.get('/v2ex/tab/:name', v2exTab);
+router.get('/v2ex/tag/:name', v2exTag);
 router.get('/v2ex/login/init', v2exInitLogin);
 router.post('/v2ex/login', v2exLogin);
 router.post('/v2ex/logout', v2exLogout);
