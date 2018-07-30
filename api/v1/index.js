@@ -43,6 +43,12 @@ const {
     'allNodes': v2exAllNodes,
 } = require('./v2ex');
 
+const {
+  home: nytimesHome,
+  category: nytimesCategory,
+  content: nytimesContent,
+} = require('./nytimes');
+
 router.get('/restaurant', restaurant);
 router.get('/activities', activities);
 
@@ -75,6 +81,10 @@ router.post('/v2ex/logout', v2exLogout);
 router.get('/v2ex/search', v2exSearch);
 router.get('/v2ex/recent', v2exRecent);
 router.get('/v2ex/checkLogin', v2exCheckLogin);
+
+router.get('/nytimes/home', nytimesHome);
+router.get('/nytimes/category/:name', nytimesCategory);
+router.get('/nytimes/content', nytimesContent);
 
 router.post('/deploy', deploy);
 
