@@ -16,9 +16,14 @@ module.exports = (htmlString) => {
 
     if (elemClass && !elemClass.includes('photospot-slideshow-item')) {
       let $link = $elem.find('a');
+      let title = $link.attr('title');
+
+      if (!title) {
+        title = $link.find('h2').text().trim();
+      }
 
       let news = {
-        title: $link.attr('title'),
+        title,
         url: $link.attr('href').replace('https://cn.nytimes.com', ''),
         summary: $elem.find('.summary-container').text(),
       };
