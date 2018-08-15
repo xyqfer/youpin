@@ -15,13 +15,15 @@ module.exports = (htmlString) => {
 
   $('.article-dual-body-item').each(function () {
     let $p = $(this).find('.article-paragraph');
+    let enText = $p.eq(0).text();
+    let zhText = $p.eq(1).text();
 
-    let block = {
-      en: $p.eq(0).text(),
-      zh: $p.eq(1).text(),
-    };
-
-    data.content.push(block);
+    if (enText !== '' && zhText !== '') {
+      data.content.push({
+        en: enText,
+        zh: zhText,
+      });
+    }
   });
 
   return data;
