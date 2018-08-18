@@ -36,14 +36,13 @@ module.exports = (req, res) => {
       title: $header.find('.header > h1').text(),
       author: $header.find('.gray > a').text(),
       avatar: `https:${$header.find('.avatar').attr('src')}`,
-      time: $header.find('.gray').text().split('·')[1].trim(),
+      createTime: $header.find('.gray').text().split('·')[1].trim(),
       click: $header.find('.gray').text().split('·')[2].trim(),
       node: {
         name: $header.find('.header > a').eq(1).text(),
         url: $header.find('.header > a').eq(1).attr('href'),
       },
       count: $body.find('.cell').eq(0).find('.gray').text().split('|')[0].trim(),
-      // status: $('.topic_buttons').length,
       content: convertContent($header.find('.topic_content').html() || '').content,
       tag: [],
     };
@@ -58,7 +57,6 @@ module.exports = (req, res) => {
 
         let addition = {
           content: convertContent($addition.find('.topic_content').html()).content,
-          time: $addition.find('.fade').text().split('·')[1].trim(),
           title: $addition.find('.fade').text().split('·')[0].trim(),
         };
 
@@ -76,7 +74,6 @@ module.exports = (req, res) => {
           content,
           avatar: `https:${$item.find('.avatar').attr('src')}`,
           author: $item.find('.dark').text(),
-          time: $item.find('.ago').text(),
           floor: $item.find('.no').text(),
         };
 
