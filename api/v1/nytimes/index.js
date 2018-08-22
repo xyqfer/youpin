@@ -6,4 +6,5 @@ module.exports = {
   category: require('./category'),
   content: require('./content'),
   content2: require('./content2'),
+  translate: require('./translate'),
 };
