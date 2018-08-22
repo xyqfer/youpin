@@ -47,6 +47,8 @@ const {
   home: nytimesHome,
   category: nytimesCategory,
   content: nytimesContent,
+  content2: nytimesContent2,
+  today: nytimesToday,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -83,8 +85,10 @@ router.get('/v2ex/recent', v2exRecent);
 router.get('/v2ex/checkLogin', v2exCheckLogin);
 
 router.get('/nytimes/home', nytimesHome);
+router.get('/nytimes/today', nytimesToday);
 router.get('/nytimes/category/:name', nytimesCategory);
 router.get('/nytimes/content', nytimesContent);
+router.get('/nytimes/content2', nytimesContent2);
 
 router.post('/deploy', deploy);
 
