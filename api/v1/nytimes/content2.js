@@ -5,9 +5,7 @@
  */
 
 module.exports = (req, res) => {
-  const rp = require('request-promise').defaults({
-    proxy: 'http://127.0.0.1:1087'
-  });
+  const rp = require('request-promise');
   const cheerio = require('cheerio');
   const { params } = require('app-libs');
 
