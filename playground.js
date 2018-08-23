@@ -26,7 +26,7 @@ const setProd = () => {
     process.env.LEANCLOUD_APP_ENV = 'production';
 };
 
-initEnv();
+// initEnv();
 // setProd();
 
 // class JuejinContainer extends UpdateContainer {
@@ -39,11 +39,21 @@ initEnv();
 //     silent: false
 // });
 
-(async () => {
-    try {
-        const result = await testModule({});
-        console.log(result);
-    } catch (err) {
-        console.error(err);
-    }
-})();
+// (async () => {
+//     try {
+//         const result = await testModule({});
+//         console.log(result);
+//     } catch (err) {
+//         console.error(err);
+//     }
+// })();
+
+require('isomorphic-fetch')
+var Dropbox = require('dropbox').Dropbox;
+new Dropbox({
+  accessToken: ''
+})
+  .filesDownload({path: '/TE/2018-06/5af5461f73a9cf1a1d5677fd/article.xml'})
+  .then((res) => {
+    console.log(Buffer.from(res.fileBinary, 'binary').toString())
+  }).catch(console.log);
