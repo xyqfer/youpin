@@ -24,9 +24,13 @@ module.exports = (req, res) => {
     };
 
     $('.StoryBodyCompanionColumn p').each(function() {
-      data.content.push({
-        en: $(this).text(),
-      });
+      let text = $(this).text();
+
+      if (text !== '') {
+        data.content.push({
+          en: $(this).text(),
+        });
+      }
     });
 
     res.json({
