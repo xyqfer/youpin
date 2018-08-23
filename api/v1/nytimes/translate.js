@@ -26,9 +26,15 @@ module.exports = (req, res) => {
       'User-Agent': params.ua.mobile,
     },
   }).then((response) => {
+    let text = response.sentences.reduce((acc, item) => {
+      return acc + item.trans;
+    }, '');
+
     res.json({
       success: true,
-      data: response.sentences,
+      data: {
+        text,
+      },
     });
   }).catch((err) => {
     console.log(err);
