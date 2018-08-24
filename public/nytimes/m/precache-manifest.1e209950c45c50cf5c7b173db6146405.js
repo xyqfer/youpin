@@ -1,19 +1,27 @@
 self.__precacheManifest = [
   {
-    "revision": "570eb83859dc23dd0eec423a49e147fe",
-    "url": "/nytimes/m/fonts/MaterialIcons-Regular.570eb838.woff2"
+    "revision": "4348368ab857cb57b18e1a87ba8ff284",
+    "url": "/nytimes/m/fonts/Framework7Icons-Regular.4348368a.ttf"
   },
   {
-    "revision": "bdbc52fe8e46be03632a2cfa3ae52237",
+    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+    "url": "/nytimes/m/robots.txt"
+  },
+  {
+    "revision": "012cf6a10129e2275d79d6adac7f3b02",
+    "url": "/nytimes/m/fonts/MaterialIcons-Regular.012cf6a1.woff"
+  },
+  {
+    "revision": "75b039fa3e338f4f8bc1",
+    "url": "/nytimes/m/js/chunk-vendors.75b039fa.js"
+  },
+  {
+    "revision": "089e4d03532d15326544",
+    "url": "/nytimes/m/js/app.089e4d03.js"
+  },
+  {
+    "revision": "0f37471c1c6922b5c57da8e395dc732e",
     "url": "/nytimes/m/index.html"
-  },
-  {
-    "revision": "e010c2dbea2f61da78ea",
-    "url": "/nytimes/m/js/chunk-vendors-legacy.e010c2db.js"
-  },
-  {
-    "revision": "b696c06ec0471198685c",
-    "url": "/nytimes/m/js/app-legacy.b696c06e.js"
   },
   {
     "revision": "09cb9966e6ff69cca6694ec5d1f11c86",
@@ -28,8 +36,8 @@ self.__precacheManifest = [
     "url": "/nytimes/m/fonts/MaterialIcons-Regular.a37b0c01.ttf"
   },
   {
-    "revision": "012cf6a10129e2275d79d6adac7f3b02",
-    "url": "/nytimes/m/fonts/MaterialIcons-Regular.012cf6a1.woff"
+    "revision": "570eb83859dc23dd0eec423a49e147fe",
+    "url": "/nytimes/m/fonts/MaterialIcons-Regular.570eb838.woff2"
   },
   {
     "revision": "c0087d4d5ddd32ec52f1859b42956db6",
@@ -40,15 +48,11 @@ self.__precacheManifest = [
     "url": "/nytimes/m/fonts/Framework7Icons-Regular.ae8767ca.woff2"
   },
   {
-    "revision": "4348368ab857cb57b18e1a87ba8ff284",
-    "url": "/nytimes/m/fonts/Framework7Icons-Regular.4348368a.ttf"
-  },
-  {
     "revision": "2e9a0313ed02aed1e206340feb36ec5c",
     "url": "/nytimes/m/fonts/Framework7Icons-Regular.2e9a0313.woff"
   },
   {
-    "revision": "b696c06ec0471198685c",
-    "url": "/nytimes/m/css/app.c22b7cec.css"
+    "revision": "089e4d03532d15326544",
+    "url": "/nytimes/m/css/app.e8b70004.css"
   }
 ];
