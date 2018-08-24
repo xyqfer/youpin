@@ -9,4 +9,6 @@ module.exports = {
   translate: require('./translate'),
   te: require('./te'),
   teContent: require('./teContent'),
+  te2: require('./te2'),
+  teContent2: require('./teContent2'),
 };
