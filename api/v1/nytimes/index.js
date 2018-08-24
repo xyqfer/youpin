@@ -7,4 +7,5 @@ module.exports = {
   content: require('./content'),
   content2: require('./content2'),
   translate: require('./translate'),
+  te: require('./te'),
 };
