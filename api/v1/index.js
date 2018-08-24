@@ -51,7 +51,9 @@ const {
   today: nytimesToday,
   translate: nytimesTranslate,
   te: teNews,
+  te2: teNews2,
   teContent,
+  teContent2,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -95,6 +97,8 @@ router.get('/nytimes/content2', nytimesContent2);
 router.post('/nytimes/translate', nytimesTranslate);
 router.get('/nytimes/te', teNews);
 router.get('/nytimes/teContent', teContent);
+router.get('/nytimes/te2', teNews2);
+router.get('/nytimes/teContent2', teContent2);
 
 router.post('/deploy', deploy);
 
