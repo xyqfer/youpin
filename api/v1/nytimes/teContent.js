@@ -28,15 +28,22 @@ module.exports = (req, res) => {
     $('content > *').each(function () {
       const $elem = $(this);
 
-      content.push({
-        en: $elem.find('copy[lang=en_GB]').text(),
-        zh: $elem.find('copy[lang=zh_CN]').text(),
-      });
+      let enText = $elem.find('copy[lang=en_GB]').text();
+      let zhText = $elem.find('copy[lang=zh_CN]').text();
+
+      if (enText !== '' && zhText !== '') {
+        content.push({
+          en: enText,
+          zh: zhText,
+        });
+      }
     });
 
     res.json({
       success: true,
-      data: content,
+      data: {
+        content,
+      },
     });
   }).catch((err) => {
     console.log(err);
