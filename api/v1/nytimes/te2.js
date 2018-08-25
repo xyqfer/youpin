@@ -22,15 +22,19 @@ module.exports = (req, res) => {
     });
 
     let articles = [];
+    let category = '';
 
-    $('a').each(function() {
+    $('nav').eq(0).find('a').each(function() {
       let $link = $(this);
       
       if ($link.attr('href').includes('article_')) {
         articles.push({
+          category,
           title: $link.text(),
           name: $link.attr('href'),
         });
+      } else {
+        category = $link.text();
       }
     });
 
