@@ -11,4 +11,6 @@ module.exports = {
   teContent: require('./teContent'),
   te2: require('./te2'),
   teContent2: require('./teContent2'),
+  times: require('./times'),
+  timesContent: require('./timesContent'),
 };
