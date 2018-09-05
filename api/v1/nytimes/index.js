@@ -13,4 +13,6 @@ module.exports = {
   teContent2: require('./teContent2'),
   times: require('./times'),
   timesContent: require('./timesContent'),
+  crawl: require('./crawl'),
+  wanqu: require('./wanqu'),
 };
