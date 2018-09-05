@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/v2ex/m/img/member_0.4e7f038e.png"
   },
   {
-    "revision": "32b283c1913289e58995ed2a35013f47",
+    "revision": "481a8ff395320939a57066fddb5725d6",
     "url": "/v2ex/m/index.html"
   },
   {

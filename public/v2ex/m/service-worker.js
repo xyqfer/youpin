@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
 
 importScripts(
-  "/v2ex/m/precache-manifest.01ac7a85e22e1e12d7561237e53823fc.js"
+  "/v2ex/m/precache-manifest.6ff67f623fdd68c795f1cb4e223318fb.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "v2ex-h5"});
