@@ -56,6 +56,8 @@ const {
   teContent2,
   times,
   timesContent,
+  crawl,
+  wanqu,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -103,6 +105,8 @@ router.get('/nytimes/te2', teNews2);
 router.get('/nytimes/teContent2', teContent2);
 router.get('/nytimes/times', times);
 router.get('/nytimes/timesContent', timesContent);
+router.get('/nytimes/crawl', crawl);
+router.get('/nytimes/wanqu', wanqu);
 
 router.post('/deploy', deploy);
 
