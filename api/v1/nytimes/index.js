@@ -15,4 +15,7 @@ module.exports = {
   timesContent: require('./timesContent'),
   crawl: require('./crawl'),
   wanqu: require('./wanqu'),
+  wanquRandom: require('./wanquRandom'),
+  wanquHot: require('./wanquHot'),
+  wanquIssue: require('./wanquIssue'),
 };

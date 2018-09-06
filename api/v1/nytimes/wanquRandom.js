@@ -1,29 +1,36 @@
 'use strict';
 
 /**
- * 获取湾区日报内容
+ * 湾区日报随机文章
  */
 
 module.exports = (req, res) => {
   const rp = require('request-promise');
+  const cheerio = require('cheerio');
   const { params } = require('app-libs');
-  const parseWanquList = require('./utils/parseWanquList');
 
   rp.get({
-    uri: 'https://wanqu.co/',
+    uri: 'https://wanqu.co/random/',
     headers: {
       'User-Agent': params.ua.pc,
     },
   }).then((htmlString) => {
+    let $ = cheerio.load(htmlString);
+    let article = {
+      title: $('.panel-heading > h1').text(),
+      url: $('.panel-body a').attr('href'),
+      summary: $('.lead').text(),
+    };
+
     res.json({
       success: true,
-      data: parseWanquList(htmlString),
+      data: [article],
     });
   }).catch((err) => {
     console.log(err);
     res.json({
       success: false,
-      msg: 'wanqu 爬取失败',
+      msg: 'wanqu random 获取失败',
     });
   });
 };
