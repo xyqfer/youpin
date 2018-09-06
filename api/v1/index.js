@@ -58,6 +58,9 @@ const {
   timesContent,
   crawl,
   wanqu,
+  wanquRandom,
+  wanquHot,
+  wanquIssue,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -107,6 +110,9 @@ router.get('/nytimes/times', times);
 router.get('/nytimes/timesContent', timesContent);
 router.get('/nytimes/crawl', crawl);
 router.get('/nytimes/wanqu', wanqu);
+router.get('/nytimes/wanquRandom', wanquRandom);
+router.get('/nytimes/wanquHot', wanquHot);
+router.get('/nytimes/wanquIssue', wanquIssue);
 
 router.post('/deploy', deploy);
 

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * 获取湾区日报内容
+ * 湾区日报近期热门文章
  */
 
 module.exports = (req, res) => {
@@ -10,7 +10,7 @@ module.exports = (req, res) => {
   const parseWanquList = require('./utils/parseWanquList');
 
   rp.get({
-    uri: 'https://wanqu.co/',
+    uri: 'https://wanqu.co/hot/',
     headers: {
       'User-Agent': params.ua.pc,
     },
@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     console.log(err);
     res.json({
       success: false,
-      msg: 'wanqu 爬取失败',
+      msg: 'wanqu hot 获取失败',
     });
   });
 };
