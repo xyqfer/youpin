@@ -60,7 +60,7 @@ self.__precacheManifest = [
     "url": "/nytimes/m/fonts/MaterialIcons-Regular.e79bfd88.eot"
   },
   {
-    "revision": "5cf067cd48b76094ca59d69b462cd921",
+    "revision": "a2ffd3cc990a225f5127423b8ab1cd34",
     "url": "/nytimes/m/index.html"
   },
   {
