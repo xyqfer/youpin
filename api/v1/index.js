@@ -62,6 +62,8 @@ const {
   wanquHot,
   wanquIssue,
   book,
+  i21st,
+  i21stContent,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -115,6 +117,8 @@ router.get('/nytimes/wanquRandom', wanquRandom);
 router.get('/nytimes/wanquHot', wanquHot);
 router.get('/nytimes/wanquIssue', wanquIssue);
 router.get('/nytimes/book', book);
+router.get('/nytimes/i21st', i21st);
+router.get('/nytimes/i21stContent', i21stContent);
 
 router.post('/deploy', deploy);
 

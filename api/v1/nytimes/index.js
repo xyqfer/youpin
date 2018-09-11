@@ -19,4 +19,6 @@ module.exports = {
   wanquHot: require('./wanquHot'),
   wanquIssue: require('./wanquIssue'),
   book: require('./book'),
+  i21st: require('./i21st'),
+  i21stContent: require('./i21stContent'),
 };
