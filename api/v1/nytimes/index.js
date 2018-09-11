@@ -18,4 +18,5 @@ module.exports = {
   wanquRandom: require('./wanquRandom'),
   wanquHot: require('./wanquHot'),
   wanquIssue: require('./wanquIssue'),
+  book: require('./book'),
 };
