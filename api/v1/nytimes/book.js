@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * 获取今日新闻列表
+ * 获取书评列表
  */
 
 module.exports = (req, res) => {
@@ -10,9 +10,9 @@ module.exports = (req, res) => {
   const parseNYTList = require('./utils/parseNYTList');
 
   rp.get({
-    uri: 'https://www.nytimes.com/section/todayspaper',
+    uri: 'https://www.nytimes.com/section/books',
     headers: {
-      'User-Agent': params.ua.mobile,
+      'User-Agent': params.ua.pc,
     },
   }).then((htmlString) => {
     res.json({
@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     console.log(err);
     res.json({
       success: false,
-      msg: 'nytimes today 获取失败',
+      msg: 'nytimes book 获取失败',
     });
   });
 };
