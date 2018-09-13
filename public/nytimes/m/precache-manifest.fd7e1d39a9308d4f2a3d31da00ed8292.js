@@ -12,11 +12,11 @@ self.__precacheManifest = [
     "url": "/nytimes/m/fonts/MaterialIcons-Regular.a37b0c01.ttf"
   },
   {
-    "revision": "5c0cbf4702d7d5abcb62",
+    "revision": "9ab220c08aaad646ddf0",
     "url": "/nytimes/m/css/app.1daf06be.css"
   },
   {
-    "revision": "5cca59ec5eb6900707b35506cecf4d66",
+    "revision": "ad7f09c5adc0b521f08a04a0b7c3ebb5",
     "url": "/nytimes/m/index.html"
   },
   {
@@ -40,8 +40,8 @@ self.__precacheManifest = [
     "url": "/nytimes/m/js/chunk-vendors.27236fbb.js"
   },
   {
-    "revision": "5c0cbf4702d7d5abcb62",
-    "url": "/nytimes/m/js/app.5c0cbf47.js"
+    "revision": "9ab220c08aaad646ddf0",
+    "url": "/nytimes/m/js/app.9ab220c0.js"
   },
   {
     "revision": "ce7622c3abddcb54481d",
