@@ -4,28 +4,28 @@ self.__precacheManifest = [
     "url": "/nytimes/m/js/chunk-vendors-legacy.472f17d2.js"
   },
   {
-    "revision": "c08fddd85f3ee5d07b62ef9087eb2891",
+    "revision": "0d7ab6c288d38693f50c36f9aa28cea5",
     "url": "/nytimes/m/index.html"
   },
   {
-    "revision": "54859d315c2d9db8bfbc",
-    "url": "/nytimes/m/js/app-legacy.54859d31.js"
+    "revision": "d85408b53baa2b82134b",
+    "url": "/nytimes/m/js/app-legacy.d85408b5.js"
   },
   {
     "revision": "1cdd051760469fc38772",
     "url": "/nytimes/m/js/1-legacy.1cdd0517.js"
   },
   {
-    "revision": "0910008e8e6539a44415",
-    "url": "/nytimes/m/js/5-legacy.0910008e.js"
+    "revision": "554025fe2799e423e876",
+    "url": "/nytimes/m/js/5-legacy.554025fe.js"
   },
   {
-    "revision": "403c0d42733e4fcaa3fc",
-    "url": "/nytimes/m/js/2-legacy.403c0d42.js"
+    "revision": "7403a40dda75d26af565",
+    "url": "/nytimes/m/js/2-legacy.7403a40d.js"
   },
   {
-    "revision": "d97f3debee8b5404fef5",
-    "url": "/nytimes/m/js/4-legacy.d97f3deb.js"
+    "revision": "423f87fc449221b98b7d",
+    "url": "/nytimes/m/js/4-legacy.423f87fc.js"
   },
   {
     "revision": "4c04f93d96274f3dd87f",
@@ -36,8 +36,8 @@ self.__precacheManifest = [
     "url": "/nytimes/m/fonts/MaterialIcons-Regular.570eb838.woff2"
   },
   {
-    "revision": "54859d315c2d9db8bfbc",
-    "url": "/nytimes/m/css/app.8c5ca519.css"
+    "revision": "d85408b53baa2b82134b",
+    "url": "/nytimes/m/css/app.53e8adc7.css"
   },
   {
     "revision": "e79bfd88537def476913f3ed52f4f4b3",
@@ -72,7 +72,7 @@ self.__precacheManifest = [
     "url": "/nytimes/m/fonts/MaterialIcons-Regular.012cf6a1.woff"
   },
   {
-    "revision": "d97f3debee8b5404fef5",
+    "revision": "423f87fc449221b98b7d",
     "url": "/nytimes/m/css/4.ac994e7f.css"
   },
   {
@@ -80,8 +80,8 @@ self.__precacheManifest = [
     "url": "/nytimes/m/css/3.557aa669.css"
   },
   {
-    "revision": "403c0d42733e4fcaa3fc",
-    "url": "/nytimes/m/css/2.76d167cd.css"
+    "revision": "7403a40dda75d26af565",
+    "url": "/nytimes/m/css/2.8d46ed08.css"
   },
   {
     "revision": "1cdd051760469fc38772",
