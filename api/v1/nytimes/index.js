@@ -7,6 +7,7 @@ module.exports = {
   content: require('./content'),
   content2: require('./content2'),
   translate: require('./translate'),
+  translate2: require('./translate2'),
   te: require('./te'),
   teContent: require('./teContent'),
   te2: require('./te2'),

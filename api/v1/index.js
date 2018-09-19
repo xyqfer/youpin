@@ -64,6 +64,7 @@ const {
   book,
   i21st,
   i21stContent,
+  translate2,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -105,6 +106,7 @@ router.get('/nytimes/category/:name', nytimesCategory);
 router.get('/nytimes/content', nytimesContent);
 router.get('/nytimes/content2', nytimesContent2);
 router.post('/nytimes/translate', nytimesTranslate);
+router.post('/nytimes/translate2', translate2);
 router.get('/nytimes/te', teNews);
 router.get('/nytimes/teContent', teContent);
 router.get('/nytimes/te2', teNews2);

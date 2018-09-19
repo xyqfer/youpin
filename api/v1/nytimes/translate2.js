@@ -9,14 +9,17 @@ module.exports = (req, res) => {
   const { text = '' } = req.body;
   
   googletranslate(text).then((response) => {
-    let text = response.sentences.reduce((acc, item) => {
-      return acc + item.trans;
+    let content = response.sentences.map((item) => {
+      return {
+        en: item.orig,
+        zh: item.trans,
+      };
     }, '');
 
     res.json({
       success: true,
       data: {
-        text,
+        content,
       },
     });
   }).catch((err) => {
