@@ -30,6 +30,9 @@ module.exports = (text = '') => {
         },
       }).then((resp) => {
         return resp;
+      }).catch((err) => {
+        console.log(err);
+        return null;
       });
     } else {
       return total;
