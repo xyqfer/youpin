@@ -38,8 +38,8 @@ module.exports = (req, res) => {
               xmlMode: true
             });
 
-            let title = $('title[lang=zh_CN]').text();
-            let summary = $('rubric[lang=zh_CN]').text();
+            let title = $('title[lang=en_GB]').text();
+            let summary = $('rubric[lang=en_GB]').text();
         
             return {
               articleId: $('article').attr('id'),
