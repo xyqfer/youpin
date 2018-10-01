@@ -31,7 +31,8 @@
     "qcloud-cdn-node-sdk": "^1.0.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
-    "shelljs": "^0.8.1"
+    "shelljs": "^0.8.1",
+    "subtitles-parser": "0.0.2"
   },
   "devDependencies": {
     "jest": "^22.4.2",
