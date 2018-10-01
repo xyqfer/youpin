@@ -65,6 +65,8 @@ const {
   i21st,
   i21stContent,
   translate2,
+  subtitle,
+  subtitleContent,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -121,6 +123,8 @@ router.get('/nytimes/wanquIssue', wanquIssue);
 router.get('/nytimes/book', book);
 router.get('/nytimes/i21st', i21st);
 router.get('/nytimes/i21stContent', i21stContent);
+router.get('/nytimes/subtitles', subtitle);
+router.get('/nytimes/subtitleContent', subtitleContent);
 
 router.post('/deploy', deploy);
 

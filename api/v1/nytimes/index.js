@@ -22,4 +22,6 @@ module.exports = {
   book: require('./book'),
   i21st: require('./i21st'),
   i21stContent: require('./i21stContent'),
+  subtitle: require('./subtitle'),
+  subtitleContent: require('./subtitleContent'),
 };
