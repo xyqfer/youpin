@@ -5,48 +5,61 @@
  */
 
 module.exports = (req, res) => {
-  require('isomorphic-fetch');
-  const Dropbox = require('dropbox').Dropbox;
+  const rp = require('request-promise');
   const cheerio = require('cheerio');
+  const { params } = require('app-libs');
 
-  let dropbox = new Dropbox({
-    accessToken: process.env.dropboxToken,
-  });
+  rp.get({
+    uri: 'https://www.economist.com/ap/printedition/',
+    headers: {
+      'User-Agent': params.ua.pc,
+    },
+  }).then((htmlString) => {
+    let $ = cheerio.load(htmlString);
+    let data = {
+      cover: {
+        img: $('img.component-image__img').attr('src'),
+        time: $('.print-edition__main-title-header__date').text(),
+        topic: $('.print-edition__main-title-header__edition').text()
+      },
+      list: []
+    };
 
-  dropbox.filesDownload({
-    path: `/TE2/nav.xhtml`,
-  }).then((data) => {
-    const $ = cheerio.load(Buffer.from(data.fileBinary, 'binary').toString(), {
-      normalizeWhitespace: true,
-      xmlMode: true
-    });
+    $('.print-edition__content ul.list > li.list__item').each(function() {
+      let $elem = $(this);
 
-    let articles = [];
-    let category = '';
+      let group = {
+        title: $elem.find('.list__title').text(),
+        list: [],
+      };
 
-    $('nav').eq(0).find('a').each(function() {
-      let $link = $(this);
-      
-      if ($link.attr('href').includes('article_')) {
-        articles.push({
-          category,
-          title: $link.text(),
-          name: $link.attr('href'),
+      $elem.find('.list__link').each(function() {
+        let $link = $(this);
+        let title = $link.find('.print-edition__link-title').text();
+
+        if (title === '') {
+          title = $link.find('.print-edition__link-title-sub').text();
+        }
+
+        group.list.push({
+          url: $link.attr('href'),
+          title,
+          flyTitle: $link.find('.print-edition__link-flytitle').text(),
         });
-      } else {
-        category = $link.text();
-      }
+      });
+
+      data.list.push(group);
     });
 
     res.json({
       success: true,
-      data: articles,
+      data,
     });
   }).catch((err) => {
     console.log(err);
     res.json({
       success: false,
-      msg: 'TE 列表获取失败',
+      msg: 'te2 获取失败',
     });
   });
 };
