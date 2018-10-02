@@ -67,6 +67,8 @@ const {
   translate2,
   subtitle,
   subtitleContent,
+  te3,
+  te3Content,
 } = require('./nytimes');
 
 router.get('/restaurant', restaurant);
@@ -125,6 +127,8 @@ router.get('/nytimes/i21st', i21st);
 router.get('/nytimes/i21stContent', i21stContent);
 router.get('/nytimes/subtitles', subtitle);
 router.get('/nytimes/subtitleContent', subtitleContent);
+router.get('/nytimes/te3', te3);
+router.get('/nytimes/te3Content', te3Content);
 
 router.post('/deploy', deploy);
 

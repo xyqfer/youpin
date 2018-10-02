@@ -15,6 +15,9 @@ module.exports = (req, res) => {
 
   getDbData({
     dbName,
+    query: {
+      descending: ['updatedAt']
+    }
   }).then((articles) => {
     res.json({
       success: true,

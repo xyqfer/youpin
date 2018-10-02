@@ -24,4 +24,6 @@ module.exports = {
   i21stContent: require('./i21stContent'),
   subtitle: require('./subtitle'),
   subtitleContent: require('./subtitleContent'),
+  te3: require('./te3'),
+  te3Content: require('./te3Content'),
 };
