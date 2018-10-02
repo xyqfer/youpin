@@ -25,5 +25,5 @@ module.exports = {
   subtitle: require('./subtitle'),
   subtitleContent: require('./subtitleContent'),
   te3: require('./te3'),
-  te3Content: require('./te3Content'),
+  teContent3: require('./teContent3'),
 };
