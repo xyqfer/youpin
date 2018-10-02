@@ -41,7 +41,7 @@ module.exports = (req, res) => {
     console.log(err);
     res.json({
       success: false,
-      msg: `${url} 爬取失败`,
+      msg: `${name} 爬取失败`,
     });
   });
 };
