@@ -16,6 +16,12 @@ module.exports = async () => {
             mail: {
                 title: '知乎热榜有更新~',
                 template: ({ url = '', title = '' }) => {
+                    if (url.startsWith('https://zhuanlan.zhihu.com')) {
+                        url = `https://oia.zhihu.com/articles/${url.replace('https://zhuanlan.zhihu.com/p/', '')}`;
+                    } else {
+                        url = url.replace('www.zhihu.com', 'oia.zhihu.com')
+                    }
+
                     return `
                         <div style="margin-bottom: 50px">
                             <a href="${url}">
