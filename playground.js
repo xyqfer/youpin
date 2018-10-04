@@ -26,14 +26,17 @@ const setProd = () => {
     process.env.LEANCLOUD_APP_ENV = 'production';
 };
 
-initEnv();
+// initEnv();
 // setProd();
 
 (async () => {
-    try {
-        const result = await testModule({});
-        console.log(result);
-    } catch (err) {
-        console.error(err);
-    }
+    // try {
+    //     const result = await testModule({});
+    //     console.log(result);
+    // } catch (err) {
+    //     console.error(err);
+    // }
+
+    const fs = require('fs');
+    console.log()
 })();

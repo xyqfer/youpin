@@ -71,6 +71,16 @@ const {
   teContent3,
 } = require('./nytimes');
 
+const poliwagRouters = require('./poliwag');
+Object.entries(poliwagRouters).forEach(([name, callback]) => {
+    let method = 'get';
+    if (name === 'translate') {
+        method = 'post';
+    }
+
+    router[method](`/poliwag/${name}`, callback);
+});
+
 router.get('/restaurant', restaurant);
 router.get('/activities', activities);
 
