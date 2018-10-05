@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "b42de232abd37ed8c37e",
-    "url": "/poliwag/js/chunk-vendors.b42de232.js"
+    "revision": "a708aa628e6e2075023f",
+    "url": "/poliwag/js/chunk-vendors.a708aa62.js"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
@@ -24,32 +24,32 @@ self.__precacheManifest = [
     "url": "/poliwag/js/2.88d1f923.js"
   },
   {
-    "revision": "68739d10339e3e9d101d",
-    "url": "/poliwag/js/4.68739d10.js"
+    "revision": "28261b15c7f49a5bab21",
+    "url": "/poliwag/js/4.28261b15.js"
   },
   {
-    "revision": "2ca63204d4c7fbd31402",
-    "url": "/poliwag/js/5.2ca63204.js"
+    "revision": "21865e95d6b0131c14f9",
+    "url": "/poliwag/js/5.21865e95.js"
   },
   {
-    "revision": "a0a5d7c42174945526a0",
-    "url": "/poliwag/js/app.a0a5d7c4.js"
+    "revision": "e7ed3db812f2261f3b92",
+    "url": "/poliwag/js/app.e7ed3db8.js"
   },
   {
-    "revision": "bf73fab0cd8a61c73f3d",
-    "url": "/poliwag/js/6.bf73fab0.js"
+    "revision": "5051642b35bbc0c8ecf6",
+    "url": "/poliwag/js/6.5051642b.js"
   },
   {
-    "revision": "2cc6ce6882a4355954e8",
-    "url": "/poliwag/js/7.2cc6ce68.js"
+    "revision": "f36f6521b15eee4557c5",
+    "url": "/poliwag/js/7.f36f6521.js"
   },
   {
     "revision": "012cf6a10129e2275d79d6adac7f3b02",
     "url": "/poliwag/fonts/MaterialIcons-Regular.012cf6a1.woff"
   },
   {
-    "revision": "a0a5d7c42174945526a0",
-    "url": "/poliwag/css/app.d1f9eab5.css"
+    "revision": "e7ed3db812f2261f3b92",
+    "url": "/poliwag/css/app.95d5832f.css"
   },
   {
     "revision": "a37b0c01c0baf1888ca812cc0508f6e2",
@@ -68,7 +68,7 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/Framework7Icons-Regular.4348368a.ttf"
   },
   {
-    "revision": "a722c57c4daf19ea3f4d0b7d352d6b5a",
+    "revision": "4cc1a61c4f0ad1eeda03700c3f12e1c8",
     "url": "/poliwag/index.html"
   },
   {
@@ -84,11 +84,11 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/MaterialIcons-Regular.e79bfd88.eot"
   },
   {
-    "revision": "bf73fab0cd8a61c73f3d",
+    "revision": "5051642b35bbc0c8ecf6",
     "url": "/poliwag/css/6.c01f40c7.css"
   },
   {
-    "revision": "68739d10339e3e9d101d",
+    "revision": "28261b15c7f49a5bab21",
     "url": "/poliwag/css/4.4611dc79.css"
   }
 ];

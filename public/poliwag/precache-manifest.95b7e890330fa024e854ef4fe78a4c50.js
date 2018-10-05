@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "dd546414e11bf1367354",
-    "url": "/poliwag/js/chunk-vendors-legacy.dd546414.js"
+    "revision": "fa6882162ae08c73c088",
+    "url": "/poliwag/js/chunk-vendors-legacy.fa688216.js"
   },
   {
-    "revision": "41fc12c41cf54163f33baf44a0cd2637",
+    "revision": "52c8583063ec027e1dc968330a9c4dd5",
     "url": "/poliwag/index.html"
   },
   {
@@ -20,32 +20,32 @@ self.__precacheManifest = [
     "url": "/poliwag/js/3-legacy.f3f7ce64.js"
   },
   {
-    "revision": "ec3dffc0c488222f15dd",
-    "url": "/poliwag/js/app-legacy.ec3dffc0.js"
+    "revision": "aa7ca7784b7984226eaa",
+    "url": "/poliwag/js/app-legacy.aa7ca778.js"
   },
   {
-    "revision": "4381728fa9bdcda280a2",
-    "url": "/poliwag/js/4-legacy.4381728f.js"
+    "revision": "f3108b802f51bc387767",
+    "url": "/poliwag/js/4-legacy.f3108b80.js"
   },
   {
-    "revision": "29b12ae528576a5543eb",
-    "url": "/poliwag/js/5-legacy.29b12ae5.js"
+    "revision": "26594628f0693b66e918",
+    "url": "/poliwag/js/5-legacy.26594628.js"
   },
   {
-    "revision": "98b0adb17b4ad6c04b52",
-    "url": "/poliwag/js/7-legacy.98b0adb1.js"
+    "revision": "25b42dc50a7efc2c562a",
+    "url": "/poliwag/js/7-legacy.25b42dc5.js"
   },
   {
-    "revision": "4bf29ba3d4e725571e16",
-    "url": "/poliwag/js/6-legacy.4bf29ba3.js"
+    "revision": "7f98258d04895474a836",
+    "url": "/poliwag/js/6-legacy.7f98258d.js"
   },
   {
     "revision": "4348368ab857cb57b18e1a87ba8ff284",
     "url": "/poliwag/fonts/Framework7Icons-Regular.4348368a.ttf"
   },
   {
-    "revision": "ec3dffc0c488222f15dd",
-    "url": "/poliwag/css/app.d1f9eab5.css"
+    "revision": "aa7ca7784b7984226eaa",
+    "url": "/poliwag/css/app.95d5832f.css"
   },
   {
     "revision": "ae8767ca8ecf4b090af58eff5dd6d3a7",
@@ -80,11 +80,11 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/Framework7Icons-Regular.2e9a0313.woff"
   },
   {
-    "revision": "4bf29ba3d4e725571e16",
+    "revision": "7f98258d04895474a836",
     "url": "/poliwag/css/6.c01f40c7.css"
   },
   {
-    "revision": "4381728fa9bdcda280a2",
+    "revision": "f3108b802f51bc387767",
     "url": "/poliwag/css/4.4611dc79.css"
   }
 ];
