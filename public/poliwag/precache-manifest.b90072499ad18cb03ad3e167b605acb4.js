@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/poliwag/js/5.2ca63204.js"
   },
   {
-    "revision": "aa4de73dfb3d46ffc1b7",
-    "url": "/poliwag/js/app.aa4de73d.js"
+    "revision": "a0a5d7c42174945526a0",
+    "url": "/poliwag/js/app.a0a5d7c4.js"
   },
   {
     "revision": "bf73fab0cd8a61c73f3d",
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/MaterialIcons-Regular.012cf6a1.woff"
   },
   {
-    "revision": "aa4de73dfb3d46ffc1b7",
-    "url": "/poliwag/css/app.bab157d9.css"
+    "revision": "a0a5d7c42174945526a0",
+    "url": "/poliwag/css/app.d1f9eab5.css"
   },
   {
     "revision": "a37b0c01c0baf1888ca812cc0508f6e2",
@@ -68,7 +68,7 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/Framework7Icons-Regular.4348368a.ttf"
   },
   {
-    "revision": "420f228d0816dd71afcf07d59ddd7fa2",
+    "revision": "a722c57c4daf19ea3f4d0b7d352d6b5a",
     "url": "/poliwag/index.html"
   },
   {
