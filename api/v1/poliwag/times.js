@@ -24,7 +24,7 @@ module.exports = (req, res) => {
       
       articles.push({
         title: $elem.find('text').text(),
-        name: $elem.find('content').attr('src'),
+        url: $elem.find('content').attr('src'),
       });
     });
 

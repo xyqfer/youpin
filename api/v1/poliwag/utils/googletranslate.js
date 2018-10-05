@@ -6,7 +6,7 @@
 
 module.exports = (text = '') => {
   const Promise = require('bluebird');
-  const rp = require('request-promise');
+  const http = require('./http');
   const { params } = require('app-libs');
 
   const form = {
@@ -21,7 +21,7 @@ module.exports = (text = '') => {
 
   return Promise.reduce(['cn', 'com'], function(total, current) {
     if (!total) {
-      return rp.post({
+      return http.post({
         json: true,
         uri: `https://translate.google.${current}/translate_a/single`,
         form,
