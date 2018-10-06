@@ -10,7 +10,7 @@ module.exports = (url) => {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
     },
   }).then((htmlString) => {
-    const id = htmlString.match(/__ga\('set', 'dimension2', (.+)\);/)[1];
+    const id = htmlString.match(/__ga\('set', 'dimension2', '?(\d+)'?\);/)[1];
 
     return http.get({
       uri: `https://www.ted.com/talks/${+id}/transcript.json?language=en`,
