@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/poliwag/js/app.ce10a45d.js"
   },
   {
-    "revision": "d4c84b3f8a3b230e34429f03cad0a554",
+    "revision": "cd141b9d334b797bd34a6ea726e5ee36",
     "url": "/poliwag/index.html"
   },
   {
