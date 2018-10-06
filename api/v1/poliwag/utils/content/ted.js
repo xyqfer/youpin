@@ -13,7 +13,7 @@ module.exports = (url) => {
     const id = htmlString.match(/__ga\('set', 'dimension2', (.+)\);/)[1];
 
     return http.get({
-      uri: `https://www.ted.com/talks/${id}/transcript.json?language=en`,
+      uri: `https://www.ted.com/talks/${+id}/transcript.json?language=en`,
       json: true,
       headers: {
         'User-Agent': params.ua.mobile,
