@@ -17,7 +17,7 @@ module.exports = (url) => {
       content: [],
     };
 
-    $('.content-body p').each(function() {
+    $('.article-body p').each(function() {
       let text = $(this).text();
 
       if (text !== '') {
