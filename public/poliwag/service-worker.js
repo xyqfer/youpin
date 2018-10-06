@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
 
 importScripts(
-  "/poliwag/precache-manifest.46d953ffdbcd361eff01486713d39357.js"
+  "/poliwag/precache-manifest.0e63478f4f51084caaec2453e7d82694.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "poliwag"});
