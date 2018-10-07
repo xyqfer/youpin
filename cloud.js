@@ -20,9 +20,9 @@ const cloudFuncConfig = [
         module: 'updateV2EX',
         info: '更新 v2ex hot'
     }, {
-        name: 'updateGitHubTrending',
-        module: 'updateGitHubTrending',
-        info: '更新 GitHubTrending'
+        name: 'updateDaily_en',
+        module: ['updateGitHubTrending', 'updatePixiv'],
+        info: '每日更新'
     }, {
         name: 'updateZhihuHot',
         module: 'updateZhihuHot',
