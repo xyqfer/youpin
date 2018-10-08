@@ -4,6 +4,7 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
     const sendWechat = require('./sendWechat');
+    const sendBark = require('./sendBark');
     const params = require('../params');
 
     const {
@@ -19,7 +20,8 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const sendMap = {
         outlook: sendOutlook,
         wechat: sendWechat,
-        sendcloud: sendCloud
+        sendcloud: sendCloud,
+        bark: sendBark,
     };
 
     const mailParams = {
@@ -47,7 +49,7 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
         }
 
         if (!sendSuccess) {
-            console.error(`${title} 邮件发送失败`);
+            console.error(`${title} 消息发送失败`);
             console.log(data);
         }
 

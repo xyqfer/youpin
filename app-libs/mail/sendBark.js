@@ -6,7 +6,7 @@ module.exports = async ({ title = '', content = '' }) => {
     const rp = require('request-promise');
 
     const uuid = uuidv4();
-    const scToken = process.env.scToken;
+    const { barkUrl } = process.env;
     
     try {
         await saveDbData({
@@ -18,18 +18,14 @@ module.exports = async ({ title = '', content = '' }) => {
             }]
         });
 
-        let markdownContent = `- [${title}](${process.env.hostName}/archive?id=${uuid})`;
-        const result = await rp.post({
-            uri: `https://sc.ftqq.com/${scToken}.send`,
-            form: {
-                text: title,
-                desp: markdownContent
-            }
+        const url = encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}`);
+        const result = await rp.get({
+            uri: `${barkUrl}${encodeURIComponent(title)}?url=${url}`,
         });
 
         console.log(result);
         return {
-            success: result.errno == 0
+            success: result.code == 200
         };
     } catch (err) {
         console.error(title, err);
