@@ -23,9 +23,11 @@ module.exports = async ({ title = '', content = '' }) => {
             uri: `${barkUrl}${encodeURIComponent(title)}?url=${url}`,
         });
 
-        console.log(result);
+        const response = JSON.parse(result);
+
+        console.log(response);
         return {
-            success: result.code == 200
+            success: response.code == 200
         };
     } catch (err) {
         console.error(title, err);

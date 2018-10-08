@@ -27,9 +27,11 @@ module.exports = async ({ title = '', content = '' }) => {
             }
         });
 
-        console.log(result);
+        const response = JSON.parse(result);
+        console.log(response);
+
         return {
-            success: result.errno == 0
+            success: response.errno == 0
         };
     } catch (err) {
         console.error(title, err);
