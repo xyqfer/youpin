@@ -29,9 +29,11 @@ module.exports = async ({ title = '', content = '' }) => {
             }
         });
 
-        console.log(result);
+        const response = JSON.parse(result);
+
+        console.log(response);
         return {
-            success: result.ok
+            success: response.ok
         };
     } catch (err) {
         console.error(title, err);
