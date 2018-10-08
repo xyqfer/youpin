@@ -8,7 +8,7 @@ module.exports = async () => {
 
     const result = await rp.get({
         json: true,
-        uri: 'https://rsshub.app/dribbble/popular.json',
+        uri: 'https://rsshub.app/gitlab/explore/trending.json',
         headers: {
             'User-Agent': params.ua.pc,
         }
