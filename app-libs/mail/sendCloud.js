@@ -34,7 +34,7 @@ module.exports = async ({ title = '', content = '', receivers = process.env.mail
         }
         return status;
     } catch (err) {
-        console.error(err);
+        console.error(title, err);
         return {
             success: false
         };

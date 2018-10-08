@@ -3,7 +3,6 @@
 module.exports = async ({ dbName = '', data = [] }) => {
     const AV = require('leanengine');
     const isString = require('lodash/isString');
-    const isObject = require('lodash/isObject');
     const params = require('../params');
 
     if (!isString(dbName) || dbName === '') {

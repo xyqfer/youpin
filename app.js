@@ -43,6 +43,30 @@ app.get('/', function (req, res) {
     res.render('index', {});
 });
 
+app.get('/archive', function (req, res) {
+    const getDbData = require('app-libs/db/getDbData');
+    const { id } = req.query;
+
+    getDbData({
+        dbName: 'Archive',
+        limit: 1,
+        query: {
+            equalTo: ['uuid', id]
+        }
+    }).then(([{ title = '', content = '' }]) => {
+        res.render('archive', {
+            title,
+            content
+        });
+    }).catch(err => {
+        console.error(err);
+        res.render('archive', {
+            title: '',
+            content: ''
+        });
+    });
+});
+
 app.use('/api', require('./api/index'));
 
 app.use(function (req, res, next) {
