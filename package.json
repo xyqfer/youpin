@@ -32,7 +32,8 @@
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "shelljs": "^0.8.1",
-    "subtitles-parser": "0.0.2"
+    "subtitles-parser": "0.0.2",
+    "unescape": "^1.0.1"
   },
   "devDependencies": {
     "jest": "^22.4.2",

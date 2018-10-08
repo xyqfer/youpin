@@ -25,7 +25,7 @@ const cloudFuncConfig = [
         info: '更新 GitHub Trending'
     },{
         name: 'updateDaily_en',
-        module: ['updatePixiv'],
+        module: ['updatePixiv', 'updateDribbble'],
         info: '每日更新'
     }, {
         name: 'updateZhihuHot',

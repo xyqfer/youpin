@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const ejs = require('ejs');
     const updateContainer = require('app-containers/update');
     const getPixivData = require('./getPixivData');
 
