@@ -5,6 +5,7 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const sendOutlook = require('./sendOutlook');
     const sendWechat = require('./sendWechat');
     const sendBark = require('./sendBark');
+    const sendTelegram = require('./sendTelegram');
     const params = require('../params');
 
     const {
@@ -22,6 +23,7 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
         wechat: sendWechat,
         sendcloud: sendCloud,
         bark: sendBark,
+        tg: sendTelegram
     };
 
     const mailParams = {
