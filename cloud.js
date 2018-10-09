@@ -26,7 +26,7 @@ const cloudFuncConfig = [
     },{
         name: 'updateDaily_en',
         module: ['updatePixiv', 'updateDribbble', 'updateKonachan', 'updateUplabs'],
-        info: '每日更新'
+        info: '每日更新_en'
     }, {
         name: 'updateZhihuHot',
         module: 'updateZhihuHot',

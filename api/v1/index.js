@@ -81,6 +81,11 @@ Object.entries(poliwagRouters).forEach(([name, callback]) => {
     router[method](`/poliwag/${name}`, callback);
 });
 
+const stickerRouters = require('./sticker');
+Object.entries(stickerRouters).forEach(([name, callback]) => {
+    router.get(`/sticker/${name}`, callback);
+});
+
 router.get('/restaurant', restaurant);
 router.get('/activities', activities);
 
