@@ -19,11 +19,10 @@ module.exports = async ({ title = '', content = '' }) => {
         });
 
         const url = encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}`);
-        const result = await rp.get({
+        const response = await rp.get({
+            json: true,
             uri: `${barkUrl}${encodeURIComponent(title)}?url=${url}`,
         });
-
-        const response = JSON.parse(result);
 
         console.log(response);
         return {

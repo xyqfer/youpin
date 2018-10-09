@@ -20,7 +20,8 @@ module.exports = async ({ title = '', content = '' }) => {
 
         const url = `${process.env.hostName}/archive?id=${uuid}`;
         const text = `<a href="${url}">${title}</a>`;
-        const result = await rp.post({
+        const response = await rp.post({
+            json: true,
             uri: tgUrl,
             form: {
               chat_id: tgChatId,
@@ -28,8 +29,6 @@ module.exports = async ({ title = '', content = '' }) => {
               parse_mode: 'HTML'
             }
         });
-
-        const response = JSON.parse(result);
 
         console.log(response);
         return {

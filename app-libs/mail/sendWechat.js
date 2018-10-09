@@ -19,7 +19,8 @@ module.exports = async ({ title = '', content = '' }) => {
         });
 
         let markdownContent = `- [${title}](${process.env.hostName}/archive?id=${uuid})`;
-        const result = await rp.post({
+        const response = await rp.post({
+            json: true,
             uri: `https://sc.ftqq.com/${scToken}.send`,
             form: {
                 text: title,
@@ -27,9 +28,7 @@ module.exports = async ({ title = '', content = '' }) => {
             }
         });
 
-        const response = JSON.parse(result);
         console.log(response);
-
         return {
             success: response.errno == 0
         };

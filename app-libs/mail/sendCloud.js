@@ -9,7 +9,8 @@ module.exports = async ({ title = '', content = '', receivers = process.env.mail
     } = process.env;
 
     try {
-        const result = await rp.post({
+        const response = await rp.post({
+            json: true,
             uri: 'http://api.sendcloud.net/apiv2/mail/send',
             form: {
                 'apiUser': apiUser,
@@ -22,9 +23,7 @@ module.exports = async ({ title = '', content = '', receivers = process.env.mail
             }
         });
 
-        const response = JSON.parse(result);
         console.log(response);
-
         const status = {
             success: true
         };
