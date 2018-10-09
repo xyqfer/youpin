@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/poliwag/js/6-legacy.f6015391.js"
   },
   {
-    "revision": "b6c7d86957828a575d34d704b2db3a21",
+    "revision": "5ed33a2a31cf4c3b48cccf49023dff6f",
     "url": "/poliwag/index.html"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "/poliwag/js/3-legacy.f3f7ce64.js"
   },
   {
-    "revision": "ba2eb1d36902c2f09f1b",
-    "url": "/poliwag/js/chunk-vendors-legacy.ba2eb1d3.js"
+    "revision": "8dfa2302764f6153f3f0",
+    "url": "/poliwag/js/chunk-vendors-legacy.8dfa2302.js"
   },
   {
     "revision": "3887b82520f110455590",
@@ -36,8 +36,8 @@ self.__precacheManifest = [
     "url": "/poliwag/js/7-legacy.25b42dc5.js"
   },
   {
-    "revision": "58af9003b59ca65d329c",
-    "url": "/poliwag/js/app-legacy.58af9003.js"
+    "revision": "1e7c87c330a04bd759c3",
+    "url": "/poliwag/js/app-legacy.1e7c87c3.js"
   },
   {
     "revision": "09cb9966e6ff69cca6694ec5d1f11c86",
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/MaterialIcons-Regular.012cf6a1.woff"
   },
   {
-    "revision": "ba2eb1d36902c2f09f1b",
-    "url": "/poliwag/css/chunk-vendors.c8e3b2ad.css"
+    "revision": "8dfa2302764f6153f3f0",
+    "url": "/poliwag/css/chunk-vendors.40557902.css"
   },
   {
-    "revision": "58af9003b59ca65d329c",
-    "url": "/poliwag/css/app.59f39c63.css"
+    "revision": "1e7c87c330a04bd759c3",
+    "url": "/poliwag/css/app.3a108d70.css"
   },
   {
     "revision": "f60153914c629c7a621f",
