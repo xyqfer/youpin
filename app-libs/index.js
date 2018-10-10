@@ -3,5 +3,6 @@
 module.exports = {
     db: require('./db'),
     mail: require('./mail'),
-    params: require('./params')
+    params: require('./params'),
+    telegram: require('./telegram'),
 };
