@@ -10,7 +10,7 @@ module.exports = async () => {
 
     const urls = [
         'https://rsshub.app/konachan/post/popular_recent.json',
-        'https://rsshub.app/yande.re/post/popular_recent.json',
+        // 'https://rsshub.app/yande.re/post/popular_recent.json',
         'https://rsshub.app/imuseum/guangzhou/all.json',
         'https://rsshub.app/mi/crowdfunding.json',
         'https://rsshub.app/rsshub/rss.json'
