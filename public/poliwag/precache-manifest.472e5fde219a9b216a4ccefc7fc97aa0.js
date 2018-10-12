@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
     "revision": "639d41da1ef5d4412d2c",
-    "url": "/poliwag/js/6-legacy.639d41da.js"
+    "url": "/poliwag/css/6.dbf40aea.css"
   },
   {
-    "revision": "e766e3a155b2771528fe894124a4eab4",
+    "revision": "6d4d5b27a99aacfc55e2418bd7d5dd5a",
     "url": "/poliwag/index.html"
   },
   {
@@ -20,24 +20,28 @@ self.__precacheManifest = [
     "url": "/poliwag/js/3-legacy.f3f7ce64.js"
   },
   {
-    "revision": "8dfa2302764f6153f3f0",
-    "url": "/poliwag/js/chunk-vendors-legacy.8dfa2302.js"
+    "revision": "fa6882162ae08c73c088",
+    "url": "/poliwag/js/chunk-vendors-legacy.fa688216.js"
   },
   {
-    "revision": "732792e8fbc7fd6b45b8",
-    "url": "/poliwag/js/4-legacy.732792e8.js"
+    "revision": "81934cff155c6425d038",
+    "url": "/poliwag/js/4-legacy.81934cff.js"
   },
   {
     "revision": "1bfa046b9300c6c021ac",
     "url": "/poliwag/js/5-legacy.1bfa046b.js"
   },
   {
-    "revision": "25b42dc50a7efc2c562a",
-    "url": "/poliwag/js/7-legacy.25b42dc5.js"
+    "revision": "a36e99497972383a8fbf",
+    "url": "/poliwag/js/app-legacy.a36e9949.js"
   },
   {
-    "revision": "3be16782a81ffe4c66df",
-    "url": "/poliwag/js/app-legacy.3be16782.js"
+    "revision": "639d41da1ef5d4412d2c",
+    "url": "/poliwag/js/6-legacy.639d41da.js"
+  },
+  {
+    "revision": "25b42dc50a7efc2c562a",
+    "url": "/poliwag/js/7-legacy.25b42dc5.js"
   },
   {
     "revision": "09cb9966e6ff69cca6694ec5d1f11c86",
@@ -56,19 +60,11 @@ self.__precacheManifest = [
     "url": "/poliwag/fonts/MaterialIcons-Regular.012cf6a1.woff"
   },
   {
-    "revision": "8dfa2302764f6153f3f0",
-    "url": "/poliwag/css/chunk-vendors.40557902.css"
+    "revision": "a36e99497972383a8fbf",
+    "url": "/poliwag/css/app.655aebce.css"
   },
   {
-    "revision": "3be16782a81ffe4c66df",
-    "url": "/poliwag/css/app.3a108d70.css"
-  },
-  {
-    "revision": "639d41da1ef5d4412d2c",
-    "url": "/poliwag/css/6.dbf40aea.css"
-  },
-  {
-    "revision": "732792e8fbc7fd6b45b8",
+    "revision": "81934cff155c6425d038",
     "url": "/poliwag/css/4.2bb0bfa9.css"
   }
 ];
