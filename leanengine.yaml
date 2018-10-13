@@ -1,0 +1,4 @@
+systemDependencies:
+  - chrome-headless
+  - fonts-wqy
+  - fonts-noto

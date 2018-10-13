@@ -151,4 +151,6 @@ router.get('/dailyStatusLog/today', getTodayStatusLog);
 router.post('/dailyStatusLog/update', updateTodayStatusLog);
 router.get('/dailyStatusLog/history/:days', getHistoryStatusLog);
 
+router.get('/bigText', require('./bigText'));
+
 module.exports = router;
