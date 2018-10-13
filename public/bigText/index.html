@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Big text bot</title>
+  <style id="jsbin-css">
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+body{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #666;
+  background-color: transparent;
+}
+.wrap {
+  position: relative;
+}
+
+.sans {
+  font-family: "Noto Symbol", "Roboto", "Noto Sans CJK SC", 'Noto Sans SC Sliced',  'Noto Sans Japanese', sans-serif;
+}
+
+.serif {
+  font-family: "Noto Serif", "Noto Serif CJK SC", serif;
+}
+
+.text {
+  text-align: center;
+  font-weight: 700;
+
+
+  -webkit-text-stroke: 5px white;
+  color: black;
+  font-size: 20px;
+  white-space: pre;
+}
+.text.cover{
+  position: absolute;
+  -webkit-text-stroke: 0;
+}
+
+.text.cover:focus{
+  outline: none;
+}
+</style>
+</head>
+<body>
+<div class="wrap sans" id="content">
+  <div class="text cover" contenteditable="true"></div>
+  <div class="text">t.me/BigTextBot<br>with Noto Fonts
+  </div>
+</div>
+<script id="jsbin-javascript">
+function resize(){
+  var r1 = cover.clientWidth / cover.clientHeight;
+  var r2 = window.innerWidth / window.innerHeight;
+  if (r1 < r2){
+    var ratio = window.innerHeight / (cover.clientHeight + 10);
+  } else {
+    var ratio = window.innerWidth / (cover.clientWidth + 10);
+  }
+
+  wrap.style.transform = "scale(" + ratio + ")";
+};
+
+var cover = document.getElementsByClassName("cover")[0];
+var text = document.getElementsByClassName("text")[1];
+var wrap = document.getElementsByClassName("wrap")[0];
+cover.innerHTML = text.innerHTML;
+window.onresize = resize;
+
+function update(){
+  text.innerHTML = cover.innerHTML;
+  resize();
+}
+
+function set(word) {
+  cover.innerText = word;
+  update();
+}
+
+function setHtml(word) {
+  cover.innerHTML = word;
+  update();
+}
+
+function serif() {
+  wrap.classList.remove('sans');
+  wrap.classList.add('serif');
+}
+
+cover.addEventListener("input", update, false);
+cover.addEventListener("DOMNodeInserted", update, false);
+cover.addEventListener("DOMNodeRemoved", update, false);
+cover.addEventListener("DOMCharacterDataModified", update, false);
+
+resize();
+</script>
+</body>
+</html>
