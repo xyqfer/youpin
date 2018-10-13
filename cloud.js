@@ -20,9 +20,9 @@ const cloudFuncConfig = [
         module: 'updateV2EX',
         info: '更新 v2ex hot'
     }, {
-        name: 'updateCat',
-        module: 'updateCat',
-        info: '更新 tg random cat'
+        name: 'updateRandom',
+        module: ['updateCat', 'updateSticker'],
+        info: '更新 random 内容'
     }, {
         name: 'updateGitHubAndGitLabTrending',
         module: ['updateGitHubTrending', 'updateGitLabTrending'],

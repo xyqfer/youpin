@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = async ({ text = '' }) => {
-    const rp = require('request-promise');
+    const http = require('../http');
     const { tgUrl, tgChatId } = process.env;
     
     try {
-        const response = await rp.post({
+        const response = await http.post({
             json: true,
             uri: tgUrl,
             form: {

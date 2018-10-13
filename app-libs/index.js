@@ -5,4 +5,5 @@ module.exports = {
     mail: require('./mail'),
     params: require('./params'),
     telegram: require('./telegram'),
+    http: require('./http'),
 };
