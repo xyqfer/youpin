@@ -14,7 +14,8 @@ module.exports = async () => {
         'https://rsshub.app/imuseum/guangzhou/all.json',
         'https://rsshub.app/mi/crowdfunding.json',
         'https://rsshub.app/rsshub/rss.json',
-        'https://rsshub.app/douyin/user/97611960349.json'
+        'https://rsshub.app/douyin/user/97611960349.json',
+        'https://rsshub.app/twitter/user/ruanyf.json'
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
