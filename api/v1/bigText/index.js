@@ -22,7 +22,7 @@ async function makeText(text) {
   const browser = await puppeteer.launch(config);
   
   const page = await browser.newPage();
-  await page.goto('https://sy2bnjwp1a.leanapp.cn/bigText/index.html');
+  await page.goto(`${process.env.hostName}/bigText/index.html`);
   
   if (text.length < 10) {
     await page.setViewport({ width: 460, height: 460 });
