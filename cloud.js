@@ -41,7 +41,7 @@ const cloudFuncConfig = [
         info: '每日三更'
     }, {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCodrop', 'updateLagouComment'],
+        module: ['updateBook', 'updateCodrop', 'updateLagouComment', 'updateOSChina'],
         info: '每日更新'
     }, {
         name: 'wake',

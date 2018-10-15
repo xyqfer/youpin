@@ -8,7 +8,7 @@ module.exports = async () => {
     } = require('app-libs');
 
     const htmlString = await rp.get({
-        uri: 'https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncementlist&lang=zh_CN',
+        uri: 'https://my.oschina.net/xxiaobian/widgets/_space_index_newest_blog?catalogId=547834&q=&p=1&type=ajax',
         headers: {
             'User-Agent': params.ua.pc
         }
@@ -17,14 +17,14 @@ module.exports = async () => {
     const messages = [];
     const $ = cheerio.load(htmlString);
 
-    $('.mp_news_list > .mp_news_item').each(function () {
+    $('.blog-item').each(function () {
         const $item = $(this);
-        const $link = $item.find('a');
-        const title = `${$item.find('.read_more').text()}-${$item.find('strong').text()}`;
+        const $link = $item.find('.header');
+        const title = $link.text();
 
         messages.push({
             title,
-            url: `https://mp.weixin.qq.com${$link.attr('href')}`
+            url: $link.attr('href')
         });
     });
 
