@@ -13,6 +13,7 @@ module.exports = async () => {
         // 'https://rsshub.app/yande.re/post/popular_recent.json',
         'https://rsshub.app/imuseum/guangzhou/all.json',
         'https://rsshub.app/mi/crowdfunding.json',
+        'https://rsshub.app/mi/youpin/crowdfunding.json',
         'https://rsshub.app/rsshub/rss.json',
         'https://rsshub.app/douyin/user/97611960349.json',
         'https://rsshub.app/twitter/user/ruanyf.json',
