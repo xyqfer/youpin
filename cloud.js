@@ -8,6 +8,10 @@ const cloudFuncConfig = [
         module: 'updateYoupin',
         info: 'updateYoupin 定时任务'
     }, {
+        name: 'updateGZWeather',
+        module: 'updateGZWeather',
+        info: 'updateGZWeather 定时任务'
+    }, {
         name: 'updateEle',
         module: 'updateEle',
         info: 'updateEle 定时任务'
