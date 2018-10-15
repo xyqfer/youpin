@@ -16,6 +16,13 @@ module.exports = async () => {
         'https://rsshub.app/rsshub/rss.json',
         'https://rsshub.app/douyin/user/97611960349.json',
         'https://rsshub.app/twitter/user/ruanyf.json',
+        'https://rsshub.app/bilibili/partion/178.json',
+        'https://rsshub.app/douban/explore.json',
+        'https://rsshub.app/juejin/trending/all/weekly.json',
+        'https://rsshub.app/pediy/topic/ios/latest.json',
+        'https://rsshub.app/pediy/topic/android/latest.json',
+        'https://rsshub.app/pigtails.json',
+        'https://rsshub.app/guokr/scientific.json',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
