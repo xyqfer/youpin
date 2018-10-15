@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const unescape = require('unescape');
     const updateContainer = require('app-containers/update');
     const getDribbbleData = require('./getDribbbleData');
 
@@ -21,7 +20,7 @@ module.exports = async () => {
                                 <h4>${title}</h4>
                             </a>
                             <div>
-                                ${unescape(summary)}
+                                ${summary}
                             </div>
                         </div>
                         <br><br>

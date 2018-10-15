@@ -2,23 +2,33 @@
 
 module.exports = async () => {
     const rp = require('request-promise');
+    const cheerio = require('cheerio');
     const {
         params
     } = require('app-libs');
 
-    const result = await rp.get({
-        json: true,
-        uri: 'https://rsshub.app/dribbble/popular.json',
+    const xmlString = await rp.get({
+        uri: 'https://rsshub.app/dribbble/popular',
         headers: {
             'User-Agent': params.ua.pc,
         }
     });
 
-    return result.items.map(({ title, summary, url }) => {
-        return {
-            title,
-            url,
-            summary,
-        };
+    const $ = cheerio.load(xmlString, {
+        normalizeWhitespace: true,
+        xmlMode: true
     });
+    const result = [];
+    
+    $('item').each(function() {
+        const $item = $(this);
+
+        result.push({
+            url: $item.find('link').text(),
+            title: $item.find('title').text(),
+            summary: $item.find('description').text()
+        });
+    });
+
+    return result;
 };
