@@ -20,7 +20,7 @@ module.exports = async () => {
     $('.mp_news_list > .mp_news_item').each(function () {
         const $item = $(this);
         const $link = $item.find('a');
-        const title = `${$item.find('.read_more').text()}-${$item.find('strong').text()}`;
+        const title = `${$item.find('.read_more').text()} ${$item.find('strong').text()}`;
 
         messages.push({
             title,
