@@ -46,7 +46,7 @@ module.exports = async () => {
 
                 result.push({
                     url: $item.find('link').text(),
-                    title: $item.find('title').text(),
+                    title: $item.find('title').text() || '',
                     summary: $item.find('description').text()
                 });
             });
