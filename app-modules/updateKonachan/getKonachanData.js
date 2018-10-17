@@ -16,15 +16,15 @@ module.exports = async () => {
         'https://rsshub.app/mi/crowdfunding',
         'https://rsshub.app/mi/youpin/crowdfunding',
         'https://rsshub.app/rsshub/rss',
-        'https://rsshub.app/douyin/user/97611960349',
+        // 'https://rsshub.app/douyin/user/97611960349',
         'https://rsshub.app/twitter/user/ruanyf',
         'https://rsshub.app/bilibili/partion/178',
         'https://rsshub.app/douban/explore',
-        'https://rsshub.app/juejin/trending/all/weekly',
-        'https://rsshub.app/pediy/topic/ios/latest',
-        'https://rsshub.app/pediy/topic/android/latest',
+        // 'https://rsshub.app/juejin/trending/all/weekly',
+        // 'https://rsshub.app/pediy/topic/ios/latest',
+        // 'https://rsshub.app/pediy/topic/android/latest',
         'https://rsshub.app/pigtails',
-        'https://rsshub.app/guokr/scientific',
+        // 'https://rsshub.app/guokr/scientific',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
