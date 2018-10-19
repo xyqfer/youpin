@@ -97,4 +97,6 @@ router.get('/dailyStatusLog/today', getTodayStatusLog);
 router.post('/dailyStatusLog/update', updateTodayStatusLog);
 router.get('/dailyStatusLog/history/:days', getHistoryStatusLog);
 
+router.get('/zhihu/question/:id', require('./zhihu/question'));
+
 module.exports = router;
