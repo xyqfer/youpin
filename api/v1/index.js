@@ -43,34 +43,6 @@ const {
     'allNodes': v2exAllNodes,
 } = require('./v2ex');
 
-const {
-  home: nytimesHome,
-  category: nytimesCategory,
-  content: nytimesContent,
-  content2: nytimesContent2,
-  today: nytimesToday,
-  translate: nytimesTranslate,
-  te: teNews,
-  te2: teNews2,
-  teContent,
-  teContent2,
-  times,
-  timesContent,
-  crawl,
-  wanqu,
-  wanquRandom,
-  wanquHot,
-  wanquIssue,
-  book,
-  i21st,
-  i21stContent,
-  translate2,
-  subtitle,
-  subtitleContent,
-  te3,
-  teContent3,
-} = require('./nytimes');
-
 const poliwagRouters = require('./poliwag');
 Object.entries(poliwagRouters).forEach(([name, callback]) => {
     let method = 'get';
@@ -118,32 +90,6 @@ router.post('/v2ex/logout', v2exLogout);
 router.get('/v2ex/search', v2exSearch);
 router.get('/v2ex/recent', v2exRecent);
 router.get('/v2ex/checkLogin', v2exCheckLogin);
-
-router.get('/nytimes/home', nytimesHome);
-router.get('/nytimes/today', nytimesToday);
-router.get('/nytimes/category/:name', nytimesCategory);
-router.get('/nytimes/content', nytimesContent);
-router.get('/nytimes/content2', nytimesContent2);
-router.post('/nytimes/translate', nytimesTranslate);
-router.post('/nytimes/translate2', translate2);
-router.get('/nytimes/te', teNews);
-router.get('/nytimes/teContent', teContent);
-router.get('/nytimes/te2', teNews2);
-router.get('/nytimes/teContent2', teContent2);
-router.get('/nytimes/times', times);
-router.get('/nytimes/timesContent', timesContent);
-router.get('/nytimes/crawl', crawl);
-router.get('/nytimes/wanqu', wanqu);
-router.get('/nytimes/wanquRandom', wanquRandom);
-router.get('/nytimes/wanquHot', wanquHot);
-router.get('/nytimes/wanquIssue', wanquIssue);
-router.get('/nytimes/book', book);
-router.get('/nytimes/i21st', i21st);
-router.get('/nytimes/i21stContent', i21stContent);
-router.get('/nytimes/subtitles', subtitle);
-router.get('/nytimes/subtitleContent', subtitleContent);
-router.get('/nytimes/te3', te3);
-router.get('/nytimes/teContent3', teContent3);
 
 router.post('/deploy', deploy);
 
