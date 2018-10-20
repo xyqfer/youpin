@@ -30,9 +30,9 @@ module.exports = (req, res) => {
             html += `<img referrerpolicy="no-referrer" src="${$(this).attr('src')}">`;
           }
         });
-        $('.video-box').each(function() {
-          html += `<iframe frameborder="0" allowfullscreen="" src="${$(this).attr('href')}"></iframe>`;
-        });
+        // $('.video-box').each(function() {
+        //   html += `<iframe frameborder="0" allowfullscreen="" src="${$(this).attr('href')}"></iframe>`;
+        // });
 
         return {
           content: html
