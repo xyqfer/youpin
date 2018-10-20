@@ -25,7 +25,7 @@ const cloudFuncConfig = [
         info: '更新 v2ex hot'
     }, {
         name: 'updateRandom',
-        module: ['updateCat', 'updateSticker'],
+        module: ['updateCat', 'updateSticker', 'updateBilibiliGif'],
         info: '更新 random 内容'
     }, {
         name: 'updateGitHubAndGitLabTrending',
