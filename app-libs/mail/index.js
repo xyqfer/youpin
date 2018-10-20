@@ -7,12 +7,19 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const sendBark = require('./sendBark');
     const sendTelegram = require('./sendTelegram');
     const params = require('../params');
-
     const {
         mailReceivers: receivers
     } = process.env;
 
-    const content = data.map((item) => {
+    let content = `
+        <style>
+            img {
+                display: block;
+                max-width: 100%;
+            }
+        </style>
+    `;
+    content += data.map((item) => {
         return template(item);
     }).join('');
 
