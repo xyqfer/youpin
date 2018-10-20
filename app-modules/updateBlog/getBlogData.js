@@ -14,7 +14,9 @@ module.exports = async () => {
         'https://www.zhangxinxu.com/wordpress/feed/',
         'http://taobaofed.org/atom.xml',
         'https://www.w3cplus.com/rss.xml',
-        'http://www.alloyteam.com/feed/'
+        'http://www.alloyteam.com/feed/',
+        'https://kiwenlau.com/atom.xml',
+        'https://blog.fundebug.com/atom.xml',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
