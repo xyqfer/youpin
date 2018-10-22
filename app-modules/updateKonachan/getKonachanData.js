@@ -26,6 +26,7 @@ module.exports = async () => {
         'https://rsshub.app/pigtails',
         // 'https://rsshub.app/guokr/scientific',
         'https://rsshub.app/douban/event/hot/118281',
+        'https://rsshub.app/sspai/shortcuts',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
