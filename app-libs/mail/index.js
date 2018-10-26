@@ -11,15 +11,7 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
         mailReceivers: receivers
     } = process.env;
 
-    let content = `
-        <style>
-            img {
-                display: block;
-                max-width: 100%;
-            }
-        </style>
-    `;
-    content += data.map((item) => {
+    let content = data.map((item) => {
         return template(item);
     }).join('');
 
