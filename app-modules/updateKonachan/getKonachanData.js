@@ -27,6 +27,7 @@ module.exports = async () => {
         // 'https://rsshub.app/guokr/scientific',
         'https://rsshub.app/douban/event/hot/118281',
         'https://rsshub.app/sspai/shortcuts',
+        'https://rsshub.app/douban/commercialpress/latest',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
