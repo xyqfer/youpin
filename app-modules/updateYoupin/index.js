@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = async () => {
+    const Promise = require('bluebird');
     const getYoupinData = require('./getYoupinData');
     const saveYoupinData = require('./saveYoupinData');
     const {
@@ -23,7 +24,7 @@ module.exports = async () => {
             getYoupinData()
         ]);
 
-        const newData = youpinData.filter((item) => {
+        let newData = youpinData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
                 if (item.gid === dbData[i].gid) {
                     return false;
@@ -31,6 +32,21 @@ module.exports = async () => {
             }
 
             return true;
+        });
+
+        const filterKey = 'gid';
+        newData = await Promise.filter(newData, async (item) => {
+            const dbItem = await getDbData({
+                dbName,
+                limit: 1,
+                query: {
+                    equalTo: [filterKey, item[filterKey]]
+                }
+            });
+
+            return dbItem.length === 0;
+        }, {
+            concurrency: 1
         });
 
         if (newData.length > 0) {

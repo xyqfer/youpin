@@ -7,7 +7,7 @@ module.exports = async ({ data = [], dbName = '' }) => {
         },
     } = require('app-libs');
 
-    try {        
+    try {
         await saveDbData({
             dbName,
             data,
