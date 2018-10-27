@@ -4,12 +4,12 @@ self.__precacheManifest = [
     "url": "/v2ex/m/fonts/Framework7Icons-Regular.c0087d4d.eot"
   },
   {
-    "revision": "21626c196b8bcfd604a524995cbfd633",
+    "revision": "d232827d073850a1c84cd88b9ace66c9",
     "url": "/v2ex/m/index.html"
   },
   {
-    "revision": "f6fc19e3915c2ebcd90b",
-    "url": "/v2ex/m/js/app-legacy.f6fc19e3.js"
+    "revision": "c84830531acf404da861",
+    "url": "/v2ex/m/js/app-legacy.c8483053.js"
   },
   {
     "revision": "120433a862c16e52be86",
@@ -60,8 +60,8 @@ self.__precacheManifest = [
     "url": "/v2ex/m/fonts/Framework7Icons-Regular.2e9a0313.woff"
   },
   {
-    "revision": "f6fc19e3915c2ebcd90b",
-    "url": "/v2ex/m/css/app.32903dc3.css"
+    "revision": "c84830531acf404da861",
+    "url": "/v2ex/m/css/app.3ee9e1d4.css"
   },
   {
     "revision": "120433a862c16e52be86",

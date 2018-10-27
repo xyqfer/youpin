@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/v2ex/m/fonts/Framework7Icons-Regular.4348368a.ttf"
   },
   {
-    "revision": "8e5db1d7e644d589b6f8",
-    "url": "/v2ex/m/css/app.32903dc3.css"
+    "revision": "e2e3f1f5c1644516ff3f",
+    "url": "/v2ex/m/css/app.3ee9e1d4.css"
   },
   {
     "revision": "809097afff33202a4e55",
@@ -36,8 +36,8 @@ self.__precacheManifest = [
     "url": "/v2ex/m/fonts/Framework7Icons-Regular.c0087d4d.eot"
   },
   {
-    "revision": "8e5db1d7e644d589b6f8",
-    "url": "/v2ex/m/js/app.8e5db1d7.js"
+    "revision": "e2e3f1f5c1644516ff3f",
+    "url": "/v2ex/m/js/app.e2e3f1f5.js"
   },
   {
     "revision": "406eda52d0c806efb369",
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/v2ex/m/img/member_0.4e7f038e.png"
   },
   {
-    "revision": "50f8dcad7b559e1444899c6ccc42105c",
+    "revision": "d3f724be9c9f4f516fd7c56c1886ab8c",
     "url": "/v2ex/m/index.html"
   },
   {
