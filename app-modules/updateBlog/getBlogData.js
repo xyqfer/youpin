@@ -17,6 +17,7 @@ module.exports = async () => {
         'http://www.alloyteam.com/feed/',
         'https://kiwenlau.com/atom.xml',
         'https://blog.fundebug.com/atom.xml',
+        'https://github.com/framework7io/framework7/releases.atom',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
