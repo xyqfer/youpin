@@ -18,6 +18,8 @@ module.exports = async () => {
         'https://kiwenlau.com/atom.xml',
         'https://blog.fundebug.com/atom.xml',
         'https://github.com/framework7io/framework7/releases.atom',
+        'http://liqi.io/feed/',
+        'http://www.zreading.cn/feed',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
