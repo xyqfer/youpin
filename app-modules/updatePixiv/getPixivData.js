@@ -19,7 +19,7 @@ module.exports = async () => {
             workId: work.id + '',
             title: work.title,
             url: work.image_urls.large,
-            img: work.image_urls.px_480mw,
+            img: work.image_urls.large,
         };
     });
 };
