@@ -30,6 +30,7 @@ module.exports = async () => {
         'https://rsshub.app/douban/commercialpress/latest',
         'https://rsshub.app/westore/new',
         'https://zh.wikipedia.org/w/api.php?action=featuredfeed&feed=good&feedformat=rss',
+        'https://rsshub.app/douban/bookstore',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {

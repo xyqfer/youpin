@@ -20,6 +20,7 @@ module.exports = async () => {
         'https://github.com/framework7io/framework7/releases.atom',
         'http://liqi.io/feed/',
         'http://www.zreading.cn/feed',
+        'https://paper.seebug.org/rss/',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
