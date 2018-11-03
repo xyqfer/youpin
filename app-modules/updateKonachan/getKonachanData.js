@@ -32,7 +32,8 @@ module.exports = async () => {
         'https://zh.wikipedia.org/w/api.php?action=featuredfeed&feed=good&feedformat=rss',
         'https://rsshub.app/douban/bookstore',
         'https://rsshub.app/douban/book/rank/fiction',
-        'https://rsshub.app/douban/book/rank/nonfiction'
+        'https://rsshub.app/douban/book/rank/nonfiction',
+        'http://zuimeia.com/feed/',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
