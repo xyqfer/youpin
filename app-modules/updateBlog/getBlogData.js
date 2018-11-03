@@ -21,6 +21,7 @@ module.exports = async () => {
         'http://liqi.io/feed/',
         'http://www.zreading.cn/feed',
         'https://paper.seebug.org/rss/',
+        'https://coolshell.cn/feed',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
