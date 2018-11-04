@@ -34,6 +34,9 @@ module.exports = async () => {
         'https://rsshub.app/douban/book/rank/fiction',
         'https://rsshub.app/douban/book/rank/nonfiction',
         'http://zuimeia.com/feed/',
+        'https://rsshub.app/baidu/doodles?limit=3',
+        'https://rsshub.app/sogou/doodles?limit=3',
+        'https://rsshub.app/google/doodles',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
