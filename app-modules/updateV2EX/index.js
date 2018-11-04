@@ -13,23 +13,23 @@ module.exports = async () => {
 
     const dbName = 'V2EXHot';
 
-    // 早上8点15分前发邮件
+    // 晚上10点15分前发邮件
     const today = new Date();
-    const needSendMail = today.getHours() === 8 && today.getMinutes() <= 15;
+    const needSendMail = today.getHours() === 22 && today.getMinutes() <= 15;
 
     try {
         if (needSendMail) {
-            const yesterday = new Date(`${moment().add(-1, 'days').format('YYYY-MM-DD 00:00:00')}`);
+            const time = new Date(`${moment().add(-22, 'hours').format('YYYY-MM-DD 00:00:00')}`);
 
             const data = await getDbData({
                 dbName,
                 query: {
-                    greaterThanOrEqualTo: ['updatedAt', yesterday]
+                    greaterThanOrEqualTo: ['updatedAt', time]
                 }
             });
 
             sendMail({
-                title: 'v2 昨日热议主题',
+                title: 'v2 热议主题',
                 data,
                 template: ({ url = '', title = '', content = '' }) => {
                     return `
