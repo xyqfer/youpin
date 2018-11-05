@@ -41,7 +41,7 @@ const cloudFuncConfig = [
         info: '更新 ZhihuHot'
     }, {
         name: 'update3PerDay',
-        module: ['updateJuejin', 'updateEchojs', 'updateCBNweekly', 'updateWaterSupply', 'updateWechatAnnounce'],
+        module: ['updateJuejin', 'updateEchojs', 'updateCBNweekly', 'updateWaterSupply', 'updateWechatAnnounce', 'updateBlogread'],
         info: '每日三更'
     }, {
         name: 'updateDaily',
