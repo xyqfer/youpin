@@ -40,6 +40,7 @@ module.exports = async () => {
         'https://rsshub.app/itjuzi/merge',
         'https://rsshub.app/itjuzi/invest',
         'https://rsshub.app/tanwu/products?limit=5',
+        'https://feedx.net/rss/bingwallpaper.xml',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
