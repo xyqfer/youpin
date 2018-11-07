@@ -37,6 +37,9 @@ module.exports = async () => {
         'https://rsshub.app/baidu/doodles?limit=3',
         'https://rsshub.app/sogou/doodles?limit=3',
         'https://rsshub.app/google/doodles',
+        'https://rsshub.app/itjuzi/merge',
+        'https://rsshub.app/itjuzi/invest',
+        'https://rsshub.app/tanwu/products?limit=5',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
