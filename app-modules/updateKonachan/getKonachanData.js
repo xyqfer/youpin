@@ -11,6 +11,7 @@ module.exports = async () => {
 
     const urls = [
         'https://rsshub.app/konachan/post/popular_recent',
+        'http://zuimeia.com/feed/',
         // 'https://rsshub.app/yande.re/post/popular_recent',
         'https://rsshub.app/imuseum/guangzhou/all',
         'https://rsshub.app/mi/crowdfunding',
@@ -33,7 +34,6 @@ module.exports = async () => {
         'https://rsshub.app/douban/bookstore',
         'https://rsshub.app/douban/book/rank/fiction',
         'https://rsshub.app/douban/book/rank/nonfiction',
-        'http://zuimeia.com/feed/',
         'https://rsshub.app/baidu/doodles?limit=3',
         'https://rsshub.app/sogou/doodles?limit=3',
         'https://rsshub.app/google/doodles',
@@ -41,6 +41,7 @@ module.exports = async () => {
         'https://rsshub.app/itjuzi/invest',
         'https://rsshub.app/tanwu/products?limit=5',
         'https://feedx.net/rss/bingwallpaper.xml',
+        'https://rsshub.app/wechat/miniprogram/plugins',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
