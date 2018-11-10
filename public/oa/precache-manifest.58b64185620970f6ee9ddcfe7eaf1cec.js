@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/oa/js/xlsx.full.min.js"
   },
   {
-    "revision": "bba1f47c1ffee2cb6cd3",
-    "url": "/oa/js/chunk-vendors.a9221d78.js"
+    "revision": "27d8d51defeb0bf91fc8",
+    "url": "/oa/js/chunk-vendors.fded9883.js"
   },
   {
-    "revision": "f07427a6d1c64a1c8e97",
-    "url": "/oa/js/app.79638882.js"
+    "revision": "5c72aa0aba5bfb7a20c9",
+    "url": "/oa/js/app.8cb18604.js"
   },
   {
-    "revision": "2c2e442afaa6c1f39d79a74e2c319c73",
+    "revision": "b5a73dfd9ed9e4d43c91251cb48845a0",
     "url": "/oa/index.html"
   },
   {
@@ -28,11 +28,11 @@ self.__precacheManifest = [
     "url": "/oa/fonts/element-icons.2fad952a.woff"
   },
   {
-    "revision": "bba1f47c1ffee2cb6cd3",
+    "revision": "27d8d51defeb0bf91fc8",
     "url": "/oa/css/chunk-vendors.f31a5d75.css"
   },
   {
-    "revision": "f07427a6d1c64a1c8e97",
+    "revision": "5c72aa0aba5bfb7a20c9",
     "url": "/oa/css/app.74a716f9.css"
   }
 ];
