@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = async () => {
+    const Promise = require('bluebird');
     const updateContainer = require('app-containers/update');
     const getKonachanData = require('./getKonachanData');
 
