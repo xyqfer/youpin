@@ -44,6 +44,7 @@ module.exports = async () => {
         'https://rsshub.app/wechat/miniprogram/plugins',
         'https://rsshub.app/xiachufang/popular/hot',
         'https://rsshub.app/xiachufang/popular/pop',
+        'http://3hedashen.net/comments/feed/',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
