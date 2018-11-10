@@ -4,6 +4,7 @@ module.exports = async () => {
     const Promise = require('bluebird');
     const updateContainer = require('app-containers/update');
     const getKonachanData = require('./getKonachanData');
+    const { getDbData } = require('app-libs/db');
 
     const filterKey = 'url';
     const dbName = 'Konachan';
