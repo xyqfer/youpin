@@ -29,6 +29,27 @@ module.exports = async () => {
             },
             getTargetData: () => {
                 return getKonachanData();
+            },
+            filterData: function (dbData, targetData) {
+                return Promise.filter(targetData, async (item) => {
+                    for (let i = 0; i < dbData.length; i++) {
+                        if (item[filterKey] === dbData[i][filterKey]) {
+                            return false;
+                        }
+                    }
+
+                    const dbItem = await getDbData({
+                        dbName,
+                        limit: 1,
+                        query: {
+                            equalTo: [filterKey, item[filterKey]]
+                        }
+                    });
+
+                    return dbItem.length === 0;
+                }, {
+                        concurrency: 1
+                    });
             }
         });
     } catch (err) {
