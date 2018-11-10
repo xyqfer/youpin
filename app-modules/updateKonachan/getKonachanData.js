@@ -42,6 +42,8 @@ module.exports = async () => {
         'https://rsshub.app/tanwu/products?limit=5',
         'https://feedx.net/rss/bingwallpaper.xml',
         'https://rsshub.app/wechat/miniprogram/plugins',
+        'https://rsshub.app/xiachufang/popular/hot',
+        'https://rsshub.app/xiachufang/popular/pop',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
