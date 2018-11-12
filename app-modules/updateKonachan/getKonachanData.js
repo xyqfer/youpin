@@ -45,6 +45,7 @@ module.exports = async () => {
         'https://rsshub.app/xiachufang/popular/hot',
         'https://rsshub.app/xiachufang/popular/pop',
         'http://3hedashen.net/comments/feed/',
+        'https://rsshub.app/miniapp/article/recommendation',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
