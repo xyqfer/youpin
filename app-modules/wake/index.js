@@ -3,16 +3,20 @@
 module.exports = () => {
     const rp = require('request-promise');
 
-    rp.get({
-        uri: 'https://sy2bnjwp1a.leanapp.cn'
-    }).catch(() => {
+    const urls = [
+        'https://sy2bnjwp1a.leanapp.cn',
+        'https://ibdkopi6vn.avosapps.us/',
+        'https://rsshub.avosapps.us/'
+    ];
 
-    });
-
-    rp.get({
-        uri: 'https://ibdkopi6vn.avosapps.us/'
-    }).catch(() => {
-
+    Promise.all(
+        urls.map((uri) => {
+            return rp.get({
+                uri
+            });
+        })
+    ).catch((err) => {
+        console.log(err);
     });
 
     return {
