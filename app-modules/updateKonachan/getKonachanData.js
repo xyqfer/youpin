@@ -50,6 +50,7 @@ module.exports = async () => {
         'http://3hedashen.net/comments/feed/',
         'https://rsshub.app/miniapp/article/recommendation',
         'https://rsshub.app/miniapp/store/newest',
+        'https://rsshub.avosapps.us/zhihu/bookstore/newest',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
