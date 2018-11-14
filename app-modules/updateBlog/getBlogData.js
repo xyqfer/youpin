@@ -22,6 +22,8 @@ module.exports = async () => {
         'http://www.zreading.cn/feed',
         'https://paper.seebug.org/rss/',
         'https://coolshell.cn/feed',
+        'https://www.codesky.me/feed/',
+        'https://gank.io/feed',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
