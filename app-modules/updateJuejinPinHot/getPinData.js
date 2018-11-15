@@ -13,6 +13,7 @@ module.exports = async () => {
         'https://rsshub.app/juejin/pins',
         'https://rsshub.avosapps.us/weseepro/newest',
         'https://rsshub.avosapps.us/weseepro/circle',
+        'https://rsshub.avosapps.us/testerhome/newest',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
