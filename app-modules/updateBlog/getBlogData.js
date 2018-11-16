@@ -24,6 +24,10 @@ module.exports = async () => {
         'https://coolshell.cn/feed',
         'https://www.codesky.me/feed/',
         'https://gank.io/feed',
+        'http://zuimeia.com/feed/',
+        'https://rsshub.app/douban/explore',
+        'https://rsshub.app/wechat/miniprogram/plugins',
+        'https://rsshub.app/miniapp/article/recommendation',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
