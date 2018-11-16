@@ -21,7 +21,7 @@ const cloudFuncConfig = [
         info: 'updateMedium 定时任务'
     }, {
         name: 'updateV2EXHot',
-        module: 'updateV2EX',
+        module: ['updateV2EX', 'updateLagou'],
         info: '更新 v2ex hot'
     }, {
         name: 'updateRandom',
