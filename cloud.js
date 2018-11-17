@@ -21,7 +21,7 @@ const cloudFuncConfig = [
         info: 'updateMedium 定时任务'
     }, {
         name: 'updateV2EXHot',
-        module: ['updateV2EX', 'updateLagou'],
+        module: ['updateV2EX'],
         info: '更新 v2ex hot'
     }, {
         name: 'updateRandom',
@@ -45,7 +45,7 @@ const cloudFuncConfig = [
         info: '每日三更'
     }, {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCodrop', 'updateLagouComment', 'updateOSChina', 'updateBlog', 'updateKelemiao'],
+        module: ['updateBook', 'updateCodrop', 'updateOSChina', 'updateBlog', 'updateKelemiao'],
         info: '每日更新'
     }, {
         name: 'wake',
