@@ -37,16 +37,20 @@ const cloudFuncConfig = [
         info: '每日更新_en'
     }, {
         name: 'updateZhihuHot',
-        module: ['updateZhihuHot', 'updateZhihuPinHot', 'updateZhihuDailyPin', 'updateJuejinPinHot'],
+        module: ['updateZhihuHot', 'updateZhihuPinHot', 'updateJuejinPinHot'],
         info: '更新 ZhihuHot'
     }, {
         name: 'update3PerDay',
-        module: ['updateJuejin', 'updateEchojs', 'updateCBNweekly', 'updateWaterSupply', 'updateWechatAnnounce', 'updateBlogread'],
+        module: ['updateJuejin', 'updateEchojs', 'updateCBNweekly', 'updateWaterSupply', 'updateWechatAnnounce'],
         info: '每日三更'
     }, {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCodrop', 'updateOSChina', 'updateBlog', 'updateKelemiao'],
+        module: ['updateBook', 'updateCodrop', 'updateOSChina', 'updateKelemiao'],
         info: '每日更新'
+    }, {
+        name: 'updateBlog',
+        module: ['updateBlog'],
+        info: '每日更新 blog'
     }, {
         name: 'wake',
         module: 'wake',
