@@ -11,15 +11,15 @@ module.exports = async ({
     try {
         const results = await Promise.mapSeries(offsets, async (page) => {
             try {
-                const htmlString = await rp.get({
-                    uri: `https://h5.youzan.com/v2/showcase/goods/allgoods?kdt_id=18826691&p=${page}`,
+                const result = await rp.get({
+                    json: true,
+                    uri: `https://h5.youzan.com/wscshop/showcase/goods/allGoods.json?page=${page}&pageSize=20&offlineId=0&kdtId=18826691`,
                     headers: {
                         'User-Agent': params.ua.pc
                     }
                 });
 
-                const bookDetail = JSON.parse(htmlString.match(/var _showcase_components = (.+)} else {/)[1].trim().slice(0, -1));
-                return bookDetail[0].goods;
+                return result.data.list;
             } catch (err) {
                 console.error(err);
                 return [];
