@@ -31,7 +31,7 @@ module.exports = async ({
                 title: item.title,
                 url: item.url,
                 cover: item.image_url,
-                bookId: item.id
+                bookId: item.id + ''
             };
         });
     } catch (err) {
