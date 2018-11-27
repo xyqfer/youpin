@@ -23,8 +23,14 @@ module.exports = async () => {
                     }
                 });
 
-                const bookDetail = JSON.parse(htmlString.match(/var _showcase_components = (.+)} else {/)[1].trim().slice(0, -1));
-                return bookDetail[1].goods;
+                const bookDetail = JSON.parse(htmlString.match(/window\._global = (.+)[\s\S]*<\/script>[\s\S]*<\/head>/)[1]);
+                return bookDetail.feature_components.reduce((goods, item) => {
+                    if (item.type === 'goods') {
+                        goods = item.goods;
+                    }
+
+                    return goods;
+                }, []);
             } catch (err) {
                 console.error(err);
                 return [];
@@ -36,7 +42,7 @@ module.exports = async () => {
                 name: item.title,
                 url: item.url,
                 cover: item.image_url,
-                bookId: item.id
+                bookId: item.id + ''
             };
         });
     } catch (err) {

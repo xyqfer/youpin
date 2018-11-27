@@ -13,6 +13,7 @@ module.exports = async () => {
         'http://fex.baidu.com/feed.xml',
         'https://www.zhangxinxu.com/wordpress/feed/',
         'http://taobaofed.org/atom.xml',
+        'https://blog.techbridge.cc/atom.xml',
         'https://www.w3cplus.com/rss.xml',
         'http://www.alloyteam.com/feed/',
         'https://kiwenlau.com/atom.xml',
