@@ -52,6 +52,10 @@ const cloudFuncConfig = [
         module: ['updateBlog'],
         info: '每日更新 blog'
     }, {
+        name: 'updateAppStore',
+        module: 'updateAppStore',
+        info: '更新 app store'
+    }, {
         name: 'wake',
         module: 'wake',
         info: '定时唤醒'
