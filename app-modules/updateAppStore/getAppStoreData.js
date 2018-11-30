@@ -25,7 +25,7 @@ module.exports = async () => {
 
     $('.featured-content .table-box tbody tr').each(function () {
         const $item = $(this);
-        const title = $item.find('.td-3').text();
+        const title = $item.find('.app-title-text').text();
         const logo = $item.find('a > img').attr('src');
         const desc = $item.find('.app-info').text();
         const link = $item.find('.app-title').attr('href');
