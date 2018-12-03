@@ -7,11 +7,7 @@ module.exports = async () => {
         http
     } = require('app-libs');
 
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    const date = now.getDate();
-    const uri = `https://www.chandashi.com/ranking/featured/page/today/date/${year}${month}${date}.html`;
+    const uri = 'https://www.chandashi.com/ranking/featured/page/today/date/';
     const htmlString = await http.get({
         uri,
         headers: {
