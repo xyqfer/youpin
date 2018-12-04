@@ -12,7 +12,7 @@ module.exports = async () => {
                 template: ({ commentId = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">
-                            <a href="https://www.lagou.com/gongsi/interviewExperiences.html?companyId=84693">
+                            <a href="https://www.lagou.com/gongsi/interviewExperiences.html?companyId=84693" target="_blank">
                                 ${commentId}
                             </a>
                         </div>

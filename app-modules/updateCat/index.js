@@ -19,7 +19,7 @@ module.exports = async () => {
         });
 
         const response = await sendMessage({
-          text: `<a href="${file}">${file}</a>`
+            text: `<a href="${file}" target="_blank">${file}</a>`
         });
 
         return response;

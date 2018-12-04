@@ -21,7 +21,7 @@ module.exports = async () => {
         const gifItem = gifList[Math.floor(Math.random() * length)];
 
         const response = await sendMessage({
-          text: `<a href="https:${gifItem.icon}">${gifItem.title}</a>`
+            text: `<a href="https:${gifItem.icon}" target="_blank">${gifItem.title}</a>`
         });
 
         return response;
