@@ -32,7 +32,7 @@ module.exports = async () => {
         let file = `https://s.tcdn.co/${uuid.slice(0, 3)}/${uuid.slice(3, 6)}/${uuid}/${fileIndex}.png`;
 
         const response = await sendMessage({
-          text: `<a href="${file}">${name}</a>`
+          text: `<a href="${file}" target="_blank">${name}</a>`
         });
 
         return response;

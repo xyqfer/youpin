@@ -58,7 +58,7 @@ module.exports = async () => {
                 title: '米家上新品啦',
                 data: newData,
                 template: ({ url = '', name = '' }) => {
-                    return `<div><a href='${url}'>${name}</a><br><br></div>`;
+                    return `<div><a href='${url}' target='_blank'>${name}</a><br><br></div>`;
                 }
             });
         }

@@ -50,7 +50,7 @@ module.exports = async () => {
                         const bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(url)}`;
                         return `
                         <div style="margin-bottom: 60px">
-                            <a href="${bookUrl}">
+                            <a href="${bookUrl}" target="_blank">
                                 <h4>${name}</h4>
                             </a>
                             <p>

@@ -17,7 +17,7 @@ module.exports = async () => {
                     return `
                         <div style="margin-bottom: 50px">
                             <h4>
-                              <a href="${url}">
+                              <a href="${url}" target="_blank">
                                 ${title}
                               </a>
                             </h4>

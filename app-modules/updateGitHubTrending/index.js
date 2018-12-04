@@ -63,7 +63,7 @@ module.exports = async () => {
                     template: ({ url = '', name = '', desc = '', lang = '' }) => {
                         return `
                         <div style="margin-bottom: 50px">
-                            <a href="${url}">
+                            <a href="${url}" target="_blank">
                                 <h4>${name}</h4>
                             </a>
                             <p>
