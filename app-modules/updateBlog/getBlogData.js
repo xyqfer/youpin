@@ -29,6 +29,7 @@ module.exports = async () => {
         'https://gank.io/feed',
         'http://zuimeia.com/feed/',
         'https://rsshub.app/douban/explore',
+        'http://www.vice.cn/read/rss',
         'https://rsshub.app/wechat/miniprogram/plugins',
         'https://rsshub.app/miniapp/article/recommendation',
     ];
