@@ -11,6 +11,7 @@ module.exports = async () => {
     const updateWeibo = require('./updateWeibo');
     const updateZhihu = require('./updateZhihu');
     const updatePtpress = require('./updatePtpress');
+    const updateDangdang = require('./updateDangdang');
 
     try {
         await updateDouban();
@@ -23,6 +24,7 @@ module.exports = async () => {
         await updateWeibo();
         await updateZhihu();
         await updatePtpress();
+        await updateDangdang();
 
         return {
             success: true
