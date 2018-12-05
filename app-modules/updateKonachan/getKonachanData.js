@@ -52,6 +52,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/baidu/topwords/341',
         'https://rsshub.avosapps.us/enjoy/explore/216',
         'https://rsshub.avosapps.us/enjoy/product/newest/216',
+        'https://linux.pictures/feed',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
