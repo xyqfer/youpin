@@ -32,6 +32,8 @@ module.exports = async () => {
         'http://www.vice.cn/read/rss',
         'https://rsshub.app/wechat/miniprogram/plugins',
         'https://rsshub.app/miniapp/article/recommendation',
+        'http://damobing.com/?feed=rss2',
+        'https://onevcat.com/feed.xml',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
