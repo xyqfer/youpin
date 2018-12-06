@@ -27,7 +27,7 @@ module.exports = async ({
                     newBookList.push({
                         title: $(this).find('.name a').attr('title'),
                         url: $(this).find('.name a').attr('href'),
-                        cover: $(this).find('.pic img').attr('src')
+                        cover: $(this).find('.pic img').attr('src').replace('1_l', '1_u')
                     });
                 });
 
