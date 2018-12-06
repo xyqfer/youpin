@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = async ({ title = '', data = [], template = () => ('') }) => {
+    const cheerio = require('cheerio');
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
     const sendWechat = require('./sendWechat');
@@ -14,6 +15,11 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     let content = data.map((item) => {
         return template(item);
     }).join('');
+    const $ = cheerio.load(content);
+    $('a').each(function() {
+        $(this).attr('target', '_blank');
+    });
+    content = $.html();
 
     const mailQueue = process.env.mailQueue.split(',');
 
