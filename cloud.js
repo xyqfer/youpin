@@ -33,7 +33,7 @@ const cloudFuncConfig = [
         info: '更新 GitHub Trending && GitLab Trending'
     },{
         name: 'updateDaily_en',
-        module: ['updatePixiv', 'updateDribbble', 'updateKonachan', 'updateUplabs', 'updateOctocat'],
+        module: ['updateKonachan', 'updateOctocat'],
         info: '每日更新_en'
     }, {
         name: 'updateZhihuHot',

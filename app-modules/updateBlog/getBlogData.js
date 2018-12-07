@@ -40,6 +40,7 @@ module.exports = async () => {
         'http://tag.pedaily.cn/rss/rss-c5.xml',
         'http://tag.pedaily.cn/rss/rss-c6.xml',
         'http://tag.pedaily.cn/rss/rss-c7.xml',
+        'http://blog.cnbang.net/feed/',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
