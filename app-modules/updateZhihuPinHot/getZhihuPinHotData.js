@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = async () => {
-    const rp = require('request-promise');
     const {
-        params
+        params,
+        http
     } = require('app-libs');
 
-    const result = await rp.get({
+    const result = await http.get({
         json: true,
         uri: 'https://api.zhihu.com/pins/hot_list?reverse_order=0',
         headers: {
