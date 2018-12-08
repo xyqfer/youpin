@@ -2,6 +2,7 @@
 
 module.exports = async () => {
     const cheerio = require('cheerio');
+    const uniqBy = require('lodash/uniqBy');
     const {
         params,
         http
@@ -37,5 +38,5 @@ module.exports = async () => {
         });
     });
 
-    return apps;
+    return uniqBy(apps, 'url');
 };

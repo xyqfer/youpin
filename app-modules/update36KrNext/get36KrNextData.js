@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = async () => {
-    const rp = require('request-promise');
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
     const uniqBy = require('lodash/uniqBy');
     const {
-        params
+        params,
+        http
     } = require('app-libs');
 
     const results = [];
 
-    const htmlString = await rp.get({
+    const htmlString = await http.get({
         uri: 'https://next.36kr.com/posts?sort=hot',
         headers: {
             'User-Agent': params.ua.mobile
