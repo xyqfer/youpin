@@ -55,6 +55,19 @@ module.exports = async () => {
         'https://linux.pictures/feed',
         'https://rsshub.avosapps.us/newseed/invest',
         'https://rsshub.avosapps.us/newseed/quicklook',
+        'https://rsshub.avosapps.us/douban/column/24',
+        'https://rsshub.avosapps.us/douban/column/20',
+        'https://rsshub.avosapps.us/douban/column/33',
+        'https://rsshub.avosapps.us/douban/column/40',
+        'https://rsshub.avosapps.us/douban/column/49',
+        'https://rsshub.avosapps.us/douban/column/35',
+        'https://rsshub.avosapps.us/douban/column/36',
+        'https://rsshub.avosapps.us/douban/column/37',
+        'https://rsshub.avosapps.us/douban/column/44',
+        'https://rsshub.avosapps.us/douban/column/45',
+        'https://rsshub.avosapps.us/douban/column/48',
+        'https://rsshub.avosapps.us/douban/column/54',
+        'https://rsshub.avosapps.us/douban/column/58',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
