@@ -1,6 +1,7 @@
 'use strict';
 
 const AV = require('leanengine');
+const Promise = require('bluebird');
 
 const cloudFuncConfig = [
     {
@@ -67,12 +68,15 @@ cloudFuncConfig.forEach((config) => {
 
     AV.Cloud.define(name, () => {
         const modules = Array.isArray(module) ? module : [module];
-        modules.forEach((module) => {
-            const func = require(`./app-modules/${module}`);
-            func && func();
-
+        Promise.each(modules, (module) => {
+            const func = require(`./app-modules/${module}`) || function () {};
             console.log(module);
-        });
+            return func();
+        }).then(() => {
+
+        }).catch((err) => {
+            console.error(err);
+        })
 
         return info;
     });
