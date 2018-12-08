@@ -1,5 +1,7 @@
 'use strict';
 
+const Promise = require('bluebird');
+const uniqBy = require('lodash/uniqBy');
 const {
     db: {
         getDbData,
@@ -26,15 +28,25 @@ module.exports = (params = {}) => {
         getTargetData: () => [],
         filterKey: '',
         filterData: function (dbData, targetData) {
-            return targetData.filter((item) => {
+            return Promise.filter(targetData, async (item) => {
                 for (let i = 0; i < dbData.length; i++) {
                     if (item[this.filterKey] === dbData[i][this.filterKey]) {
                         return false;
                     }
                 }
 
-                return true;
-            });
+                const dbItem = await getDbData({
+                    dbName: this.dbName,
+                    limit: 1,
+                    query: {
+                        equalTo: [this.filterKey, item[this.filterKey]]
+                    }
+                });
+
+                return dbItem.length === 0;
+            }, {
+                    concurrency: 1
+                });
         },
         saveData: function (data = []) {
             return saveDbData({
@@ -50,7 +62,7 @@ module.exports = (params = {}) => {
     const mergeParams = Object.assign(baseParams, params);
     return (async function () {
         const dbData = await this.getDbData();
-        const targetData = await this.getTargetData();
+        const targetData = await uniqBy(this.getTargetData(), this.filterKey);
         const newData = await this.filterData(dbData, targetData);
 
         if (newData.length > 0) {
