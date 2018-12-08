@@ -49,7 +49,7 @@ const cloudFuncConfig = [
         info: '每日更新'
     }, {
         name: 'updateBlog',
-        module: ['updateBlog', 'updateAppStore'],
+        module: ['updateBlog', 'updateAppStore', 'update36KrNext'],
         info: '每日更新 blog'
     }, {
         name: 'updateAppStore',
