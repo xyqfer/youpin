@@ -62,7 +62,7 @@ module.exports = (params = {}) => {
     const mergeParams = Object.assign(baseParams, params);
     return (async function () {
         const dbData = await this.getDbData();
-        const targetData = await uniqBy(this.getTargetData(), this.filterKey);
+        const targetData = uniqBy(await this.getTargetData(), this.filterKey);
         const newData = await this.filterData(dbData, targetData);
 
         if (newData.length > 0) {
