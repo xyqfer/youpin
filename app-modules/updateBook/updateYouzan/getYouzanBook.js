@@ -3,6 +3,7 @@
 module.exports = async () => {
     const Promise = require('bluebird');
     const flatten = require('lodash/flatten');
+    const uniqBy = require('lodash/uniqBy');
     const { params, http } = require('app-libs');
 
     const pageCount = 3;
@@ -42,7 +43,7 @@ module.exports = async () => {
             }
         });
 
-        return flatten(results).map((item) => {
+        return uniqBy(flatten(results).map((item) => {
             if (!item.image_url.startsWith('https://img.yzcdn.cn/') && !item.image_url.startsWith('http://img.yzcdn.cn/')) {
                 item.image_url = `https://img.yzcdn.cn/${item.image_url}`
             }
@@ -53,7 +54,7 @@ module.exports = async () => {
                 cover: item.image_url,
                 bookId: item.id + ''
             };
-        });
+        }), 'url');
     } catch (err) {
         console.error(err);
         return [];
