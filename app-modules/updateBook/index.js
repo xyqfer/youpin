@@ -3,7 +3,7 @@
 module.exports = async () => {
     const updateDouban = require('./updateDouban');
     const updateChinaPub = require('./updateChinaPub');
-    const updateZhongxin = require('./updateZhongxin');
+    const updateYouzan = require('./updateYouzan');
     const updateZhanlu = require('./updateZhanlu');
     const updateIturing = require('./updateIturing');
     const updateEpubit = require('./updateEpubit');
@@ -15,7 +15,7 @@ module.exports = async () => {
 
     try {
         await updateDouban();
-        await updateZhongxin();
+        await updateYouzan();
         await updateChinaPub();
         await updateZhanlu();
         await updateIturing();

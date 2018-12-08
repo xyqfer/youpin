@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async () => {
-    const getZhongxinBook = require('./getZhongxinBook');
+    const getYouzanBook = require('./getYouzanBook');
     const {
         db: {
             getDbData,
@@ -19,9 +19,9 @@ module.exports = async () => {
             }
         });
 
-        const zhongxinData = await getZhongxinBook();
+        const youzanData = await getYouzanBook();
 
-        const newData = zhongxinData.filter((item) => {
+        const newData = youzanData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {
                 if (item.bookId === dbData[i].bookId) {
                     return false;
@@ -38,7 +38,7 @@ module.exports = async () => {
             });
 
             sendMail({
-                title: '中信有新书啦~',
+                title: '有赞商城有新书啦~',
                 data: newData,
                 template: ({ url = '', name = '', cover = '' }) => {
                     return `
@@ -47,8 +47,7 @@ module.exports = async () => {
                                 <h4>${name}</h4>
                             </a>
                             <div>
-                                <img src="${cover}" 
-                                    alt="">
+                                <img src="${cover}" alt="">
                             </div>
                         </div>
                         <br><br>
