@@ -10,7 +10,6 @@ module.exports = async ({ dbName = '', data = {}, id = '' }) => {
         throw 'dbName 不能为空';
     }
 
-
     if (!isObject(data)) {
         throw 'data 不能为空';
     }
