@@ -14,6 +14,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/weseepro/newest',
         'https://rsshub.avosapps.us/weseepro/circle',
         'https://rsshub.avosapps.us/testerhome/newest',
+        'https://rsshub.avosapps.us/chouti/hot',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
