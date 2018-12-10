@@ -25,7 +25,7 @@ const cloudFuncConfig = [
         info: 'updateMedium 定时任务'
     }, {
         name: 'updateV2EXHot',
-        module: ['updateV2EX', 'updateFanfou', 'updateGZWeather'],
+        module: ['updateV2EX', 'updateFanfou'],
         info: '更新 v2ex hot'
     }, {
         name: 'updateRandom',
@@ -53,7 +53,7 @@ const cloudFuncConfig = [
         info: '每日更新'
     }, {
         name: 'updateBlog',
-        module: ['updateBlog', 'updateAppStore', 'update36KrNext'],
+        module: ['updateBlog', 'updateAppStore', 'update36KrNext', 'updateGZWeather'],
         info: '每日更新 blog'
     }, {
         name: 'updateAppStore',
