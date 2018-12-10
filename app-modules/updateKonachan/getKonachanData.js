@@ -58,6 +58,7 @@ module.exports = async () => {
         'https://linux.pictures/feed',
         'https://rsshub.avosapps.us/newseed/invest',
         'https://rsshub.avosapps.us/newseed/quicklook',
+        'https://www.douban.com/feed/people/shjifeng/notes',
         'https://rsshub.avosapps.us/douban/column/24',
         'https://rsshub.avosapps.us/douban/column/20',
         'https://rsshub.avosapps.us/douban/column/33',
