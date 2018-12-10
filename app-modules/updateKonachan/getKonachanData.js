@@ -18,6 +18,7 @@ module.exports = async () => {
         // 'https://rsshub.app/rsshub/rss',
         // 'https://rsshub.app/douyin/user/97611960349',
         'https://rsshub.app/twitter/user/ruanyf',
+        'https://rsshub.avosapps.us/infoq/topic/3?limit=5',
         // 'https://rsshub.app/bilibili/partion/178',
         // 'https://rsshub.app/juejin/trending/all/weekly',
         // 'https://rsshub.app/pediy/topic/ios/latest',
