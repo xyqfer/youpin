@@ -52,7 +52,6 @@ module.exports = async () => {
         const lowestTemperatureDiff = tomorrowWeather.lowestTemperature - todayWeather.lowestTemperature;
         const desc = `
             明天(${tomorrowWeather.time})天气${tomorrowWeather.weatherText}<br>
-            <img referrerpolicy="no-referrer" src="${tomorrowWeather.weatherImg}" /><br>
             气温${tomorrowWeather.temperature}, 最低温比今天${getCompareText(lowestTemperatureDiff)}${lowestTemperatureDiff}度, 最高温比今天${getCompareText(highestTemperatureDiff)}${highestTemperatureDiff}度<br><br>
             今天(${todayWeather.time})天气${todayWeather.weatherText}, 气温${todayWeather.temperature}
         `;
