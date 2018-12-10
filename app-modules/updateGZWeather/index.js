@@ -1,37 +1,38 @@
 'use strict';
 
 module.exports = async () => {
-    const unescape = require('unescape');
-    const updateContainer = require('app-containers/update');
     const getGZWeatherData = require('./getGZWeatherData');
-
-    const filterKey = 'url';
-    const dbName = 'Konachan';
+    const {
+        mail: sendMail
+    } = require('app-libs');
 
     try {
-        return await updateContainer({
-            dbName,
-            filterKey,
-            mail: {
-                title: '广州天气有更新~',
-                template: ({ title = '', summary = '', url = '' }) => {
-                    return `
-                        <div style="margin-bottom: 60px">
-                            <a href="${url}" target="_blank">
-                                <h4>${title}</h4>
-                            </a>
-                            <div>
-                                ${unescape(summary)}
-                            </div>
-                        </div>
-                        <br><br>
-                    `;
-                }
-            },
-            getTargetData: () => {
-                return getGZWeatherData();
+        const weatherText = await getGZWeatherData();
+        const title = '明日天气预报';
+        sendMail({
+            title,
+            data: [{
+                url: 'https://www.tianqi.com/tianhequ/7/',
+                title,
+                content: weatherText
+            }],
+            template: ({ url = '', title = '', content = '' }) => {
+                return `
+                    <div style="margin-bottom: 50px">
+                        <a href="${url}" target="_blank">
+                            <h4>${title}</h4>
+                        </a>
+                        <p>
+                            ${content}
+                        </p>
+                    </div>
+                `;
             }
         });
+
+        return {
+            success: true
+        };
     } catch (err) {
         console.error(err);
         return {
