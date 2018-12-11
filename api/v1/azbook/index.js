@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   const books = JSON.parse(req.body.books);
   const updateContainer = require('app-containers/update');
 
