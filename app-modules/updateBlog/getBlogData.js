@@ -34,14 +34,7 @@ module.exports = async () => {
         'https://rsshub.app/miniapp/article/recommendation',
         'http://damobing.com/?feed=rss2',
         'https://onevcat.com/feed.xml',
-        'http://tag.pedaily.cn/rss/rss-c2.xml',
-        'http://tag.pedaily.cn/rss/rss-c3334.xml',
-        'http://tag.pedaily.cn/rss/rss-c4.xml',
-        'http://tag.pedaily.cn/rss/rss-c5.xml',
-        'http://tag.pedaily.cn/rss/rss-c6.xml',
-        'http://tag.pedaily.cn/rss/rss-c7.xml',
         'http://blog.cnbang.net/feed/',
-        'https://blog.douban.com/feed/',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
