@@ -99,4 +99,6 @@ router.get('/dailyStatusLog/history/:days', getHistoryStatusLog);
 
 router.get('/zhihu/question/:id', require('./zhihu/question'));
 
+router.post('/azbook', require('./azbook'));
+
 module.exports = router;
