@@ -13,8 +13,8 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/juejin/pins',
         'https://rsshub.avosapps.us/weseepro/newest',
         'https://rsshub.avosapps.us/weseepro/circle',
-        'https://rsshub.avosapps.us/testerhome/newest',
-        'https://rsshub.avosapps.us/chouti/hot',
+        // 'https://rsshub.avosapps.us/testerhome/newest',
+        // 'https://rsshub.avosapps.us/chouti/hot',
         'https://rsshub.avosapps.us/kcaibao/newest',
     ];
 
