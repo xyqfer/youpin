@@ -18,7 +18,7 @@ module.exports = async ({ title = '', content = '' }) => {
             }]
         });
 
-        const url = encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}`);
+        const url = encodeURIComponent(`${process.env.hostName.replace('https://', 'googlechromes://')}/archive?id=${uuid}`);
         const response = await rp.get({
             json: true,
             uri: `${barkUrl}${encodeURIComponent(title)}?url=${url}`,
