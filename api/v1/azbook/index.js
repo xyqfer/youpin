@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
       getTargetData: () => {
         return books.map((book) => {
           return {
-            url: book.link,
+            url: book.link.replace(/\/ref.+/g, ''),
             title: book.title,
             summary: book.description
           };
