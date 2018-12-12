@@ -35,6 +35,7 @@ module.exports = async () => {
         'http://damobing.com/?feed=rss2',
         'https://onevcat.com/feed.xml',
         'http://blog.cnbang.net/feed/',
+        'https://rsshub.avosapps.us/github/issue/BUCT-Vision/weekly-review',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
