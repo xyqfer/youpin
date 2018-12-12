@@ -73,6 +73,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/douban/column/54',
         'https://rsshub.avosapps.us/douban/column/58',
         'https://blog.douban.com/feed/',
+        'https://rsshub.avosapps.us/guanzhi',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
