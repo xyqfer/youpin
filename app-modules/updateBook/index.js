@@ -15,14 +15,14 @@ module.exports = async () => {
 
     try {
         await updateDouban();
-        await updateYouzan();
+        // await updateYouzan();
         await updateChinaPub();
-        await updateZhanlu();
+        // await updateZhanlu();
         await updateIturing();
         await updateEpubit();
         await updateBroadview();
         await updateWeibo();
-        await updateZhihu();
+        // await updateZhihu();
         await updatePtpress();
         await updateDangdang();
 
