@@ -11,6 +11,7 @@ module.exports = async () => {
 
     const urls = [
         'https://rsshub.avosapps.us/juejin/pins',
+        'https://rsshub.avosapps.us/coding/pp/latest',
         'https://rsshub.avosapps.us/weseepro/newest',
         'https://rsshub.avosapps.us/weseepro/circle',
         // 'https://rsshub.avosapps.us/testerhome/newest',
