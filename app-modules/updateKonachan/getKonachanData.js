@@ -57,6 +57,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/enjoy/product/newest/216',
         // 'https://linux.pictures/feed',
         'https://rsshub.avosapps.us/newseed/invest',
+        'https://cn.nytimes.com/rss/',
         // 'https://rsshub.avosapps.us/newseed/quicklook',
         'https://www.douban.com/feed/people/shjifeng/notes',
         'https://rsshub.avosapps.us/douban/column/24',
@@ -74,6 +75,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/douban/column/58',
         // 'https://blog.douban.com/feed/',
         'https://rsshub.avosapps.us/guanzhi',
+        'https://www.economist.com/the-economist-explains/rss.xml',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
