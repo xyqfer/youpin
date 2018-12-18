@@ -12,6 +12,7 @@ module.exports = async () => {
     const updateZhihu = require('./updateZhihu');
     const updatePtpress = require('./updatePtpress');
     const updateDangdang = require('./updateDangdang');
+    const updateMebook = require('./updateMebook');
 
     try {
         await updateDouban();
@@ -25,6 +26,7 @@ module.exports = async () => {
         // await updateZhihu();
         await updatePtpress();
         await updateDangdang();
+        await updateMebook();
 
         return {
             success: true

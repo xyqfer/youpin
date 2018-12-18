@@ -31,6 +31,7 @@
     "qcloud-cdn-node-sdk": "^1.0.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
+    "rss-parser": "^3.6.0",
     "shelljs": "^0.8.1",
     "subtitles-parser": "0.0.2",
     "unescape": "^1.0.1",
