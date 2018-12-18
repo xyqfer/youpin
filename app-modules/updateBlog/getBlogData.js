@@ -17,7 +17,7 @@ module.exports = async () => {
         'https://www.w3cplus.com/rss.xml',
         'http://www.alloyteam.com/feed/',
         'https://kiwenlau.com/atom.xml',
-        'https://blog.fundebug.com/atom.xml',
+        'https://rsshub.avosapps.us/fundebug/latest?limit=5',
         'https://www.jackpu.com/rss/',
         'https://techblog.toutiao.com/rss/',
         'https://github.com/framework7io/framework7/releases.atom',
