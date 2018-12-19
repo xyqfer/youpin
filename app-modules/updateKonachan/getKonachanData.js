@@ -75,6 +75,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/douban/column/58',
         // 'https://blog.douban.com/feed/',
         'https://rsshub.avosapps.us/guanzhi',
+        'https://rsshub.avosapps.us/meicai/latest',
         'https://www.economist.com/the-economist-explains/rss.xml',
     ];
 
