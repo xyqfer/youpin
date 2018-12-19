@@ -29,6 +29,8 @@ module.exports = async () => {
         // 'https://gank.io/feed',
         // 'http://zuimeia.com/feed/',
         'https://rsshub.app/douban/explore',
+        'https://rsshub.avosapps.us/dapenti/tugua?limit=3',
+        'https://rsshub.avosapps.us/dapenti/blog/184?limit=3',
         // 'http://www.vice.cn/read/rss',
         // 'https://rsshub.app/wechat/miniprogram/plugins',
         // 'https://rsshub.app/miniapp/article/recommendation',
