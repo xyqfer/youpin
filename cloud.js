@@ -53,7 +53,7 @@ const cloudFuncConfig = [
         info: '每日更新'
     }, {
         name: 'updateBlog',
-        module: ['updateBlog', 'updateGZWeather'],
+        module: ['updateBlog'],
         info: '每日更新 blog'
     }, {
         name: 'updateAppStore',
