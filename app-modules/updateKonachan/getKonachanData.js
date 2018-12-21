@@ -46,7 +46,7 @@ module.exports = async () => {
         // 'https://rsshub.app/xiachufang/popular/week',
         // 'https://rsshub.app/xiachufang/popular/rising',
         // 'https://rsshub.app/xiachufang/popular/monthhonor',
-        'http://3hedashen.net/comments/feed/',
+        'https://rsshub.avosapps.us/3hedashen/comment?limit=3&filter=%E6%96%B9%E8%A8%80',
         // 'https://rsshub.app/miniapp/store/newest',
         // 'https://rsshub.avosapps.us/zhihu/bookstore/newest',
         // 'https://rsshub.avosapps.us/ilixiangguo/newest',
@@ -74,7 +74,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/douban/column/54',
         // 'https://rsshub.avosapps.us/douban/column/58',
         // 'https://blog.douban.com/feed/',
-        'https://rsshub.avosapps.us/guanzhi',
+        // 'https://rsshub.avosapps.us/guanzhi',
         'https://rsshub.avosapps.us/meicai/latest',
         'https://www.economist.com/the-economist-explains/rss.xml',
     ];

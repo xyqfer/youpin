@@ -1,13 +1,26 @@
 'use strict';
+const AV = require('leanengine');
 
 module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const getWechatAnnounceData = require('./getWechatAnnounceData');
 
-    const filterKey = 'url';
-    const dbName = 'WechatAnnounce';
+    try {
+        // 晚上18点15分前发天气预报邮件
+        const today = new Date();
+        const needSendWeather = today.getHours() === 18 && today.getMinutes() <= 15;
+
+        if (needSendWeather) {
+            await AV.Cloud.run('updateGZWeather', {});
+        }
+    } catch (err) {
+        console.log(err);
+    }
 
     try {
+        const filterKey = 'url';
+        const dbName = 'WechatAnnounce';
+
         return await updateContainer({
             dbName,
             filterKey,
