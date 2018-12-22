@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ title = '', data = [], template = () => ('') }) => {
+module.exports = async ({ title = '', data = [], render = 'archive', template = () => ('') }) => {
     const cheerio = require('cheerio');
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
@@ -34,7 +34,8 @@ module.exports = async ({ title = '', data = [], template = () => ('') }) => {
     const mailParams = {
         title,
         content,
-        receivers
+        receivers,
+        render,
     };
 
     if (params.env.isDev) {
