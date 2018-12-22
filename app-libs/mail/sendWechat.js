@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports = async ({ title = '', content = '' }) => {
+module.exports = async ({ title = '', content = '', render }) => {
     const saveDbData = require('../db/saveDbData');
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
 
     const uuid = uuidv4();
     const scToken = process.env.scToken;
-    
+
     try {
         await saveDbData({
             dbName: 'Archive',
@@ -18,7 +18,7 @@ module.exports = async ({ title = '', content = '' }) => {
             }]
         });
 
-        let markdownContent = `- [${title}](${process.env.hostName}/archive?id=${uuid})`;
+        let markdownContent = `- [${title}](${process.env.hostName}/archive?id=${uuid}&render=${render})`;
         const response = await rp.post({
             json: true,
             uri: `https://sc.ftqq.com/${scToken}.send`,

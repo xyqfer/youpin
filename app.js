@@ -51,7 +51,7 @@ app.get('/', function (req, res) {
 
 app.get('/archive', function (req, res) {
     const getDbData = require('app-libs/db/getDbData');
-    const { id } = req.query;
+    const { id, render = 'archive' } = req.query;
 
     getDbData({
         dbName: 'Archive',
@@ -60,13 +60,13 @@ app.get('/archive', function (req, res) {
             equalTo: ['uuid', id]
         }
     }).then(([{ title = '', content = '' }]) => {
-        res.render('archive', {
+        res.render(render, {
             title,
             content
         });
     }).catch(err => {
         console.error(err);
-        res.render('archive', {
+        res.render(render, {
             title: '',
             content: ''
         });

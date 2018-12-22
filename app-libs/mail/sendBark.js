@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports = async ({ title = '', content = '' }) => {
+module.exports = async ({ title = '', content = '', render }) => {
     const saveDbData = require('../db/saveDbData');
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
 
     const uuid = uuidv4();
     const { barkUrl } = process.env;
-    
+
     try {
         await saveDbData({
             dbName: 'Archive',
@@ -18,7 +18,7 @@ module.exports = async ({ title = '', content = '' }) => {
             }]
         });
 
-        const url = encodeURIComponent(`${process.env.hostName.replace('https://', 'googlechromes://')}/archive?id=${uuid}`);
+        const url = encodeURIComponent(`${process.env.hostName.replace('https://', 'googlechromes://')}/archive?id=${uuid}&render=${render}`);
         const response = await rp.get({
             json: true,
             uri: `${barkUrl}${encodeURIComponent(title)}?url=${url}`,
