@@ -62,6 +62,7 @@ module.exports = async () => {
         'https://www.douban.com/feed/people/shjifeng/notes',
         'https://rsshub.avosapps.us/douban/column/24',
         'https://rsshub.avosapps.us/qdaily/tag/594?limit=5',
+        'https://rsshub.avosapps.us/readmoo/category/reading-and-life%7Cdigest?limit=5',
         // 'https://rsshub.avosapps.us/douban/column/20',
         // 'https://rsshub.avosapps.us/douban/column/33',
         // 'https://rsshub.avosapps.us/douban/column/40',
