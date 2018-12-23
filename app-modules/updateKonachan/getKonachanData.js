@@ -79,6 +79,8 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/guanzhi',
         'https://rsshub.avosapps.us/meicai/latest',
         'https://www.economist.com/the-economist-explains/rss.xml',
+        'https://rsshub.avosapps.us/infzm/10?limit=3',
+        'https://rsshub.avosapps.us/infzm/7?limit=5',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
