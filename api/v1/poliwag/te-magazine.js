@@ -6,7 +6,7 @@ module.exports = (req, res) => {
   const { params } = require('app-libs');
 
   http.get({
-    uri: 'https://www.economist.com/ap/printedition/',
+    uri: 'https://www.economist.com/printedition/',
     headers: {
       'User-Agent': params.ua.pc,
     },
