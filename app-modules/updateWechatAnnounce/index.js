@@ -13,6 +13,8 @@ module.exports = async () => {
         if (needSendWeather) {
             await AV.Cloud.run('updateGZWeather', {});
         }
+
+        await AV.Cloud.run('updateLeetcode', {});
     } catch (err) {
         console.log(err);
     }
