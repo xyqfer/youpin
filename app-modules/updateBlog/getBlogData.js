@@ -39,6 +39,7 @@ module.exports = async () => {
         'http://damobing.com/?feed=rss2',
         'https://onevcat.com/feed.xml',
         'http://blog.cnbang.net/feed/',
+        'https://rsshub.avosapps.us/zhihu/zhuanlan/lishuhang?limit=3',
         // 'https://rsshub.avosapps.us/github/issue/BUCT-Vision/weekly-review',
     ];
 
