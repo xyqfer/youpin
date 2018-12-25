@@ -62,6 +62,7 @@ module.exports = async () => {
         'https://www.douban.com/feed/people/shjifeng/notes',
         'https://rsshub.avosapps.us/douban/column/24',
         'https://rsshub.avosapps.us/qdaily/tag/594?limit=5',
+        'https://rsshub.avosapps.us/qdaily/tag/1068?limit=5',
         'https://rsshub.avosapps.us/readmoo/category/reading-and-life%7Cdigest?limit=5',
         // 'https://rsshub.avosapps.us/douban/column/20',
         // 'https://rsshub.avosapps.us/douban/column/33',
@@ -79,6 +80,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/guanzhi',
         'https://rsshub.avosapps.us/meicai/latest',
         'https://www.economist.com/the-economist-explains/rss.xml',
+        'https://rsshub.avosapps.us/lishuhang/clip?limit=3',
         'https://rsshub.avosapps.us/infzm/10?limit=3',
         'https://rsshub.avosapps.us/infzm/7?limit=5',
     ];
