@@ -5,10 +5,9 @@ module.exports = async () => {
     const cheerio = require('cheerio');
     const uniqBy = require('lodash/uniqBy');
     const { params } = require('app-libs');
+    const bookList = [];
 
     try {
-        const bookList = [];
-
         // 新书页
         let htmlString = await rp.get({
             uri: 'https://book.douban.com/latest?icn=index-latestbook-all',
@@ -29,15 +28,19 @@ module.exports = async () => {
                 pubInfo: $book.find('.color-gray').text().replace(/\n+/g, '').trim()
             });
         });
+    } catch (err) {
+        console.error(err);
+    }
 
+    try {
         //读书首页
-        htmlString = await rp.get({
+        const htmlString = await rp.get({
             uri: 'https://book.douban.com/',
             headers: {
                 'User-Agent': params.ua.pc
             }
         });
-        $ = cheerio.load(htmlString);
+        const $ = cheerio.load(htmlString);
 
         $('.carousel .slide-list li').each(function () {
             const $book = $(this);
@@ -53,10 +56,9 @@ module.exports = async () => {
                 pubInfo
             });
         });
-
-        return uniqBy(bookList, 'url');
     } catch (err) {
         console.error(err);
-        return [];
     }
+
+    return uniqBy(bookList, 'url');
 };

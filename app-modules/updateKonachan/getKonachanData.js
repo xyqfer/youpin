@@ -83,6 +83,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/lishuhang/clip?limit=3',
         'https://rsshub.avosapps.us/infzm/10?limit=3',
         'https://rsshub.avosapps.us/infzm/7?limit=5',
+        'https://developers.google.com/web/updates/rss.xml',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
