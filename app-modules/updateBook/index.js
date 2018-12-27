@@ -22,11 +22,11 @@ module.exports = async () => {
         await updateIturing();
         await updateEpubit();
         await updateBroadview();
-        await updateWeibo();
+        // await updateWeibo();
         // await updateZhihu();
-        await updatePtpress();
+        // await updatePtpress();
         await updateDangdang();
-        await updateMebook();
+        // await updateMebook();
 
         return {
             success: true

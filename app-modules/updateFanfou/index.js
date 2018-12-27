@@ -28,11 +28,12 @@ module.exports = async () => {
                 }
             });
 
-            sendMail({
-                title: '饭否有更新啦~',
-                data,
-                template: ({ content = '', postId = '' }) => {
-                    return `
+            if (data && data.length > 0) {
+                sendMail({
+                    title: '饭否有更新啦~',
+                    data,
+                    template: ({ content = '', postId = '' }) => {
+                        return `
                         <div style="margin-bottom: 50px">
                             <a href="http://fanfou.com/statuses/${postId}" target="_blank">
                                 <h4>${postId}</h4>
@@ -42,8 +43,9 @@ module.exports = async () => {
                             </p>
                         </div>
                     `;
-                }
-            });
+                    }
+                });
+            }
 
             return data;
         } else {
