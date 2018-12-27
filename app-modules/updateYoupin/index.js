@@ -2,6 +2,7 @@
 
 module.exports = async () => {
     const Promise = require('bluebird');
+    const AV = require('leanengine');
     const getYoupinData = require('./getYoupinData');
     const saveYoupinData = require('./saveYoupinData');
     const {
@@ -12,6 +13,17 @@ module.exports = async () => {
     } = require('app-libs');
 
     const dbName = 'Mi_store';
+
+    try {
+        const needSendLeetcode = today.getHours() === 10 && (today.getMinutes() > 10 && today.getMinutes() < 30)
+            && (today.getDay() >= 1 && today.getDay() <= 5);
+
+        if (needSendLeetcode) {
+            await AV.Cloud.run('updateLeetcode', {});
+        }
+    } catch (err) {
+        console.log(err);
+    }
 
     try {
         const [ dbData, youpinData ] = await Promise.all([

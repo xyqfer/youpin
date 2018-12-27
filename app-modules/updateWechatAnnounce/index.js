@@ -14,7 +14,12 @@ module.exports = async () => {
             await AV.Cloud.run('updateGZWeather', {});
         }
 
-        await AV.Cloud.run('updateLeetcode', {});
+        const needSendLeetcode = today.getHours() === 12 && today.getMinutes() <= 15
+            && (today.getDay() >= 1 && today.getDay() <= 5);
+
+        if (needSendLeetcode) {
+            await AV.Cloud.run('updateLeetcode', {});
+        }
     } catch (err) {
         console.log(err);
     }
