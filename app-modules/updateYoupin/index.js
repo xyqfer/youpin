@@ -15,6 +15,7 @@ module.exports = async () => {
     const dbName = 'Mi_store';
 
     try {
+        const today = new Date();
         const needSendLeetcode = today.getHours() === 10 && (today.getMinutes() > 10 && today.getMinutes() < 30)
             && (today.getDay() >= 1 && today.getDay() <= 5);
 
