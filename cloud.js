@@ -78,6 +78,11 @@ const cloudFuncConfig = [
         info: '更新 Leetcode'
     },
     {
+        name: 'updateArticleFragment',
+        module: 'updateArticleFragment',
+        info: '更新 articleFragment'
+    },
+    {
         name: 'wake',
         module: 'wake',
         info: '定时唤醒'

@@ -13,14 +13,25 @@ module.exports = async () => {
     } = require('app-libs');
 
     const dbName = 'Mi_store';
+    const today = new Date();
 
     try {
-        const today = new Date();
         const needSendLeetcode = today.getHours() === 10 && (today.getMinutes() > 10 && today.getMinutes() < 30)
             && (today.getDay() >= 1 && today.getDay() <= 5);
 
         if (needSendLeetcode) {
             await AV.Cloud.run('updateLeetcode', {});
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    try {
+        const needReadArticle = today.getHours() === 16 && (today.getMinutes() > 30 && today.getMinutes() < 45)
+            && (today.getDay() >= 1 && today.getDay() <= 6);
+
+        if (needReadArticle) {
+            await AV.Cloud.run('updateArticleFragment', {});
         }
     } catch (err) {
         console.log(err);
