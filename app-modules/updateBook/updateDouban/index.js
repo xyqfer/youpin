@@ -40,21 +40,14 @@ module.exports = async () => {
             sendMail({
                 title: '豆瓣有新书啦~',
                 data: newData,
-                template: ({ name = '', url = '', pubInfo = '', desc = '', cover = '' }) => {
+                template: ({ name = '', url = '', desc = '' }) => {
                     return `
                         <div style="margin-bottom: 60px">
                             <a href="${url}" target="_blank">
                                 <h4>${name}</h4>
                             </a>
-                            <p>
-                                ${pubInfo}
-                            </p>
                             <div>
                                 ${desc}
-                            </div>
-                            <div>
-                                <img src="${cover}" 
-                                    alt="">
                             </div>
                         </div>
                         <br><br>
