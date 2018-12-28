@@ -58,6 +58,8 @@ module.exports = async () => {
         // 'https://linux.pictures/feed',
         'https://rsshub.avosapps.us/newseed/invest',
         'https://cn.nytimes.com/rss/',
+        'https://rsshub.avosapps.us/36kr/search/article/%E7%BC%96%E8%AF%91%E7%BB%84?limit=5',
+        'https://rsshub.avosapps.us/36kr/search/topic/%E4%BB%8A%E6%97%A5%E5%80%BC%E5%BE%97%E7%9C%8B',
         // 'https://rsshub.avosapps.us/newseed/quicklook',
         'https://www.douban.com/feed/people/shjifeng/notes',
         'https://rsshub.avosapps.us/douban/column/24',
