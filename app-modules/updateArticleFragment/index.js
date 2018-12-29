@@ -9,8 +9,8 @@ module.exports = async () => {
   const cheerio = require('cheerio');
 
   try {
-    const url = 'https://www.1843magazine.com/features/the-scientists-who-make-apps-addictive';
-    const day = 8;
+    const url = 'https://www.nytimes.com/2018/12/18/style/dating-apps-tinder-bumble-content.html';
+    const day = 6;
     const dbName = 'ArticleFragment';
     const [articleInfo] = await db.getDbData({
       dbName,
@@ -25,7 +25,7 @@ module.exports = async () => {
         uri: url,
       });
       const $ = cheerio.load(htmlString);
-      const $content = $('.article__body > p');
+      const $content = $('.StoryBodyCompanionColumn p');
       const length = $content.length;
       const perDay = Math.ceil(length / day);
       const { count, objectId } = articleInfo;
