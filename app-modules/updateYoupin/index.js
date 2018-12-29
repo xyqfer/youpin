@@ -27,11 +27,13 @@ module.exports = async () => {
     }
 
     try {
-        const needReadArticle = today.getHours() === 16 && (today.getMinutes() > 30 && today.getMinutes() < 45)
+        const needReadArticle = today.getHours() === 16 && (today.getMinutes() > 10 && today.getMinutes() < 30)
             && (today.getDay() >= 1 && today.getDay() <= 6);
 
         if (needReadArticle) {
-            await AV.Cloud.run('updateArticleFragment', {});
+            await AV.Cloud.run('execCloud', {
+                name: 'updateArticleFragment',
+            });
         }
     } catch (err) {
         console.log(err);

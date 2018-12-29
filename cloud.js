@@ -28,11 +28,6 @@ const cloudFuncConfig = [
         info: 'updateMedium 定时任务'
     },
     {
-        name: 'updateV2EXHot',
-        module: ['updateFanfou'],
-        info: '更新 v2ex hot'
-    },
-    {
         name: 'updateRandom',
         module: ['updateCat', 'updateSticker', 'updateBilibiliGif'],
         info: '更新 random 内容'
@@ -64,7 +59,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateBlog',
-        module: ['updateBlog'],
+        module: ['updateBlog', 'updateFanfou'],
         info: '每日更新 blog'
     },
     {
