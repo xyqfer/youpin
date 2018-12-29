@@ -18,6 +18,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', template = 
     const $ = cheerio.load(content);
     $('a').each(function() {
         $(this).attr('target', '_blank');
+        $(this).attr('rel', 'noreferrer');
     });
     content = $.html();
 
