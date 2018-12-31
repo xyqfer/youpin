@@ -22,6 +22,8 @@ module.exports = async () => {
     'https://onevcat.com/feed.xml',
     'http://blog.cnbang.net/feed/',
     'https://rsshub.avosapps.us/meicai/latest',
+    'https://rsshub.avosapps.us/ioin/wiki',
+    'https://rsshub.avosapps.us/rachelbythebay/feed?limit=3',
     'https://rsshub.avosapps.us/google/developers/web?limit=3',
     'https://rsshub.avosapps.us/webkit/blog?limit=3',
     'https://rsshub.avosapps.us/mozilla/blog?limit=3',
