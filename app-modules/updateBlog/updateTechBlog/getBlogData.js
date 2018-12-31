@@ -28,6 +28,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/mozilla/hacks?limit=3',
     'https://rsshub.avosapps.us/wechat/miniprogram/developers?limit=3',
     'https://rsshub.avosapps.us/medium/user/netflix-techblog?limit=3',
+    'https://rsshub.avosapps.us/facebook/newsroom/news?limit=3',
   ];
 
   const data = await Promise.mapSeries(urls, async (url) => {
