@@ -7,6 +7,10 @@ module.exports = async () => {
     db,
   } = require('app-libs');
 
+  return {
+    success: true,
+  };
+
   try {
     const url = 'https://leetcode-cn.com/api/problems/all/';
     const dbName = 'ArticleFragment';
