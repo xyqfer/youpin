@@ -13,6 +13,7 @@ module.exports = async () => {
         'https://github.com/trending/javascript',
         'https://github.com/trending/css',
         'https://github.com/trending/vue',
+        'https://github.com/trending/java',
         'https://github.com/trending/unknown'
     ];
 
