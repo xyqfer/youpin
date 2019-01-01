@@ -1,12 +1,10 @@
 'use strict';
 
-module.exports = async ({ title = '', content = '', render }) => {
+module.exports = async ({ title = '', content = '', render, device = 'device1' }) => {
     const saveDbData = require('../db/saveDbData');
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
-
     const uuid = uuidv4();
-    const { barkUrl } = process.env;
 
     try {
         await saveDbData({
@@ -21,7 +19,7 @@ module.exports = async ({ title = '', content = '', render }) => {
         const url = encodeURIComponent(`${process.env.hostName.replace('https://', 'googlechromes://')}/archive?id=${uuid}&render=${render}`);
         const response = await rp.get({
             json: true,
-            uri: `${barkUrl}${encodeURIComponent(title)}?url=${url}`,
+            uri: `https://api.day.app/${process.env[device]}/${encodeURIComponent(title)}?url=${url}`,
         });
 
         console.log(response);

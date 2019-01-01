@@ -40,6 +40,7 @@ module.exports = async () => {
       await sendMail({
         title: '要刷进度啦~',
         render: 'archive2',
+        device: 'device2',
         data: [{
           url,
           title,

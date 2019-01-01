@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ title = '', data = [], render = 'archive', template = () => ('') }) => {
+module.exports = async ({ title = '', data = [], render = 'archive', device = 'device1', template = () => ('') }) => {
     const cheerio = require('cheerio');
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
@@ -9,7 +9,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', template = 
     const sendTelegram = require('./sendTelegram');
     const params = require('../params');
     const {
-        mailReceivers: receivers
+        mailReceivers: receivers,
     } = process.env;
 
     let content = data.map((item) => {
@@ -37,6 +37,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', template = 
         content,
         receivers,
         render,
+        device,
     };
 
     if (params.env.isDev) {
