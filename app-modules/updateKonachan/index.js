@@ -25,7 +25,8 @@ module.exports = async () => {
                         </div>
                         <br><br>
                     `;
-                }
+                },
+                device: 'device2',
             },
             getTargetData: () => {
                 return getKonachanData();
