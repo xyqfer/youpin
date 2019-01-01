@@ -13,6 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'TE 杂志有更新~',
+                device: 'device2',
                 template: ({ title = '', summary = '', url = '' }) => {
                     return `
                         <div style="margin-bottom: 60px">
