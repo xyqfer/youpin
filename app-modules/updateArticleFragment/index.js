@@ -9,7 +9,7 @@ module.exports = async () => {
   const cheerio = require('cheerio');
 
   try {
-    const url = 'https://www.nytimes.com/2018/12/18/style/dating-apps-tinder-bumble-content.html';
+    const url = 'https://www.nytimes.com/2018/12/12/style/goldman-sachs-wine-thief-nicolas-demeyer.html';
     const day = 6;
     const dbName = 'ArticleFragment';
     const [articleInfo] = await db.getDbData({
