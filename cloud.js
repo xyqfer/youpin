@@ -49,7 +49,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'update3PerDay',
-        module: ['updateJuejin', 'updateEchojs', 'updateWechatAnnounce'],
+        module: ['updateJuejin', 'updateEchojs', 'updateWechatAnnounce', 'updateBilibiliRead'],
         info: '每日三更'
     },
     {
