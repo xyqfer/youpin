@@ -44,12 +44,12 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateZhihuHot',
-        module: ['updateZhihuPinHot', 'updateJuejinPinHot'],
+        module: ['updateZhihuPinHot', 'updateJuejinPinHot', 'updateBilibiliRead'],
         info: '更新 ZhihuHot'
     },
     {
         name: 'update3PerDay',
-        module: ['updateJuejin', 'updateEchojs', 'updateWechatAnnounce', 'updateBilibiliRead'],
+        module: ['updateJuejin', 'updateEchojs', 'updateWechatAnnounce'],
         info: '每日三更'
     },
     {
