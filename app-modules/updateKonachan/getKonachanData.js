@@ -80,6 +80,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/douban/column/58',
         'https://rsshub.avosapps.us/douban/column/49?limit=3',
         'https://rsshub.avosapps.us/douban/channel/30169684?limit=3',
+        'https://rsshub.avosapps.us/instagram/user/apple',
         // 'https://blog.douban.com/feed/',
         // 'https://rsshub.avosapps.us/guanzhi',
         // 'https://rsshub.avosapps.us/lishuhang/clip?limit=3',
