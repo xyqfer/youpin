@@ -6,8 +6,10 @@ module.exports = async () => {
   } = require('app-libs');
 
   try {
+    const title = '刷书啦~';
+
     sendMail({
-      title: '刷书啦~',
+      title,
       data: [{
         url: 'life1389://topic?topic_id=6612888851461439758&tab=1',
         title,
