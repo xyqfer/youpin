@@ -9,7 +9,7 @@ module.exports = async () => {
   const urls = [
     'https://www.zhangxinxu.com/wordpress/feed/',
     'http://taobaofed.org/atom.xml',
-    'https://blog.techbridge.cc/atom.xml',
+    'https://rsshub.avosapps.us/techbridge/blog',
     'https://www.w3cplus.com/rss.xml',
     'http://www.alloyteam.com/feed/',
     'https://rsshub.avosapps.us/fundebug/latest?limit=5',
@@ -30,6 +30,8 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/mozilla/hacks?limit=3',
     'https://rsshub.avosapps.us/wechat/miniprogram/developers?limit=3',
     'https://rsshub.avosapps.us/medium/user/netflix-techblog?limit=3',
+    'https://rsshub.avosapps.us/medium/user/hulis-blog?limit=3',
+    'https://rsshub.avosapps.us/github/issue/aszx87410/blog?limit=3',
     'https://rsshub.avosapps.us/facebook/newsroom/news?limit=3',
   ];
 
