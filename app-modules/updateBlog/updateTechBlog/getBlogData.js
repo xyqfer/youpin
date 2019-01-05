@@ -8,7 +8,7 @@ module.exports = async () => {
 
   const urls = [
     'https://www.zhangxinxu.com/wordpress/feed/',
-    'http://taobaofed.org/atom.xml',
+    'https://rsshub.avosapps.us/taobaofed/blog',
     'https://rsshub.avosapps.us/techbridge/blog',
     'https://www.w3cplus.com/rss.xml',
     'http://www.alloyteam.com/feed/',
