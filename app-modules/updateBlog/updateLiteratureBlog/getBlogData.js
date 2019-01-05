@@ -4,7 +4,7 @@ module.exports = async () => {
   const Parser = require('rss-parser');
   const Promise = require('bluebird');
   const flatten = require('lodash/flatten');
-  let parser = new Parser();
+  const parser = new Parser();
 
   const urls = [
     'http://liqi.io/feed/',

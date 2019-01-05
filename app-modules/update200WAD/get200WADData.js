@@ -10,7 +10,7 @@ module.exports = async () => {
     } = require('app-libs');
 
     const urls = [
-        'https://rsshub.avosapps.us/200wordsaday/hot?limit=3',
+        'https://rsshub.avosapps.us/200wordsaday/hot?limit=4',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {

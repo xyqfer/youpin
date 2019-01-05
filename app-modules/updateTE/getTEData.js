@@ -2,10 +2,15 @@
 
 module.exports = async () => {
     const cheerio = require('cheerio');
+    const Parser = require('rss-parser');
     const {
         params,
         http,
     } = require('app-libs');
+
+    const formatLink = (link, title) => {
+        return `https://ibdkopi6vn.avosapps.us/poliwag#!/content?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}&region=te`;
+    };
 
     const host = 'https://www.economist.com';
     const htmlString = await http.get({
@@ -28,7 +33,7 @@ module.exports = async () => {
             }
 
             const link = $link.attr('href');
-            const url = `https://ibdkopi6vn.avosapps.us/poliwag#!/content?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}&region=te`;
+            const url = formatLink(link, title);
             const summary = $link.find('.print-edition__link-flytitle').text();
             return {
                 title,
@@ -37,6 +42,20 @@ module.exports = async () => {
             };
         }).get();
     }).get();
+
+    const parser = new Parser();
+    const feed = await parser.parseURL('https://www.economist.com/the-economist-explains/rss.xml');
+    feed.items.forEach((item) => {
+        const title = item.title;
+        const link = item.link.replace('https://www.economist.com', '');
+        const url = formatLink(link, title);
+
+        result.push({
+            title,
+            url,
+            summary: item.content || item.description || '',
+        });
+    });
 
     return result;
 };
