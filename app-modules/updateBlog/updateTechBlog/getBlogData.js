@@ -23,6 +23,7 @@ module.exports = async () => {
     'http://blog.cnbang.net/feed/',
     'https://rsshub.avosapps.us/meicai/latest',
     'https://rsshub.avosapps.us/ioin/wiki',
+    'http://www.raychase.net/feed',
     'https://rsshub.avosapps.us/rachelbythebay/feed?limit=3',
     'https://rsshub.avosapps.us/google/developers/web?limit=3',
     'https://rsshub.avosapps.us/webkit/blog?limit=3',
