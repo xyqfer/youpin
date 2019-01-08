@@ -34,7 +34,7 @@ module.exports = async () => {
       }).get().reduce((content, item) => {
         content += `<p>${item}</p>`;
         return content;
-      }, `<div>${count + 1} / ${day}</div>`);
+      }, '') + `<div>${count + 1} / ${day}</div>`;
       const title = $('title').text();
 
       await sendMail({
