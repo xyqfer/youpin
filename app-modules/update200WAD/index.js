@@ -15,12 +15,11 @@ module.exports = async () => {
                 title: '刷200wordsaday啦~',
                 template: ({ title = '',  url = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                         </div>
-                        <br><br>
                     `;
                 },
                 device: 'device2',
