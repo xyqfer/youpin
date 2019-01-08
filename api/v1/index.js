@@ -101,4 +101,6 @@ router.get('/zhihu/question/:id', require('./zhihu/question'));
 
 router.post('/azbook', require('./azbook'));
 
+router.get('/ping', require('./ping'));
+
 module.exports = router;
