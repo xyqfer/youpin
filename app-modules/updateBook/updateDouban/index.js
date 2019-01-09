@@ -42,7 +42,7 @@ module.exports = async () => {
                 data: newData,
                 template: ({ name = '', url = '', desc = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${name}</h4>
                             </a>
@@ -50,7 +50,6 @@ module.exports = async () => {
                                 ${desc}
                             </div>
                         </div>
-                        <br><br>
                     `;
                 }
             });

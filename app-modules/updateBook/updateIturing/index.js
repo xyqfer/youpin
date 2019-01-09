@@ -25,10 +25,8 @@ module.exports = async () => {
                                 ${desc}
                             </p>
                             <div>
-                                <img src="${cover}" 
-                                    alt="">
+                                <img src="${cover}" alt="">
                             </div>
-                            <br><br>
                         </div>
                     `;
                 }

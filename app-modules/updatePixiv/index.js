@@ -15,16 +15,14 @@ module.exports = async () => {
                 title: 'Pixiv 有更新~',
                 template: ({ title = '', img = '', url = '' }) => {
                     return `
-                      <div style="margin-bottom: 60px">
+                      <div style="margin-bottom: 30px">
                         <a href="${url}" target="_blank">
                             <h4>${title}</h4>
                         </a>
                         <div>
-                            <img src="${img}" 
-                                alt="">
+                            <img src="${img}" alt="">
                         </div>
                       </div>
-                      <br><br>
                     `;
                 }
             },

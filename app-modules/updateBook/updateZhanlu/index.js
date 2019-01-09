@@ -17,16 +17,14 @@ module.exports = async () => {
                 title: '湛庐有新书啦~',
                 template: ({ url = '', title = '', cover = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                             <div>
-                                <img src="${cover}" 
-                                    alt="">
+                                <img src="${cover}" alt="">
                             </div>
                         </div>
-                        <br><br>
                     `;
                 }
             },
