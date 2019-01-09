@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
         title: '亚马逊有新书~',
         template: ({ title = '', summary = '', url = '' }) => {
           return `
-              <div style="margin-bottom: 60px">
+              <div style="margin-bottom: 30px">
                   <a href="${url}" target="_blank">
                       <h4>${title}</h4>
                   </a>
@@ -23,7 +23,6 @@ module.exports = async (req, res) => {
                       ${summary}
                   </div>
               </div>
-              <br><br>
           `;
         }
       },

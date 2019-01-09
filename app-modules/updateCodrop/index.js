@@ -44,7 +44,7 @@ module.exports = async () => {
                 title: 'Codrop 更新啦',
                 data: newData,
                 template: ({ url = '', name = '' }) => {
-                    return `<div><a href='${url}' target='_blank'>${name}</a><br><br></div>`;
+                    return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br></div>`;
                 }
             });
         }

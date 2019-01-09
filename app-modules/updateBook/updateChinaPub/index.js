@@ -49,7 +49,7 @@ module.exports = async () => {
                     template: ({ url = '', name = '', intro = '', cover = '' }) => {
                         const bookUrl = `${process.env.hostName}/api/v1/book/redirect?url=${encodeURIComponent(url)}`;
                         return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <a href="${bookUrl}" target="_blank">
                                 <h4>${name}</h4>
                             </a>
@@ -57,11 +57,9 @@ module.exports = async () => {
                                 ${intro}
                             </p>
                             <div>
-                                <img src="${cover}" 
-                                    alt="">
+                                <img src="${cover}" alt="">
                             </div>
                         </div>
-                        <br><br>
                     `;
                     }
                 });

@@ -15,7 +15,7 @@ module.exports = async () => {
                 title: '知乎 Daily Pin 有更新~',
                 template: ({ title = '', summary = '', url = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
@@ -23,7 +23,6 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                        <br><br>
                     `;
                 }
             },

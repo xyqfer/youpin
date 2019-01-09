@@ -17,17 +17,15 @@ module.exports = async () => {
                 title: '微博新书快讯~',
                 template: ({ title = '', cover = '', desc = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <h4>${title}</h4>
                             <p>
                                 ${desc}
                             </p>
                             <div>
-                                <img src="${cover}" 
-                                    alt="">
+                                <img src="${cover}" alt="">
                             </div>
                         </div>
-                        <br><br>
                     `;
                 }
             },

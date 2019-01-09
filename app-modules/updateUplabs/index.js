@@ -16,7 +16,7 @@ module.exports = async () => {
                 title: 'Uplabs 有更新~',
                 template: ({ title = '', summary = '', url = '' }) => {
                     return `
-                        <div style="margin-bottom: 60px">
+                        <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
@@ -24,7 +24,6 @@ module.exports = async () => {
                                 ${unescape(summary)}
                             </div>
                         </div>
-                        <br><br>
                     `;
                 }
             },
