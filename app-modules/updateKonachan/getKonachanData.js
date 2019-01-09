@@ -53,6 +53,8 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/ilixiangguo/newest',
         'https://rsshub.avosapps.us/coolbuy/newest',
         'https://rsshub.avosapps.us/jd/crowdfunding/10',
+        'https://rsshub.avosapps.us/taobao/crowdfunding/tech',
+        'https://rsshub.avosapps.us/taobao/crowdfunding/book',
         // 'https://rsshub.avosapps.us/jsbox/bbs/newest?limit=7',
         // 'https://rsshub.avosapps.us/baidu/topwords/341',
         // 'https://rsshub.avosapps.us/enjoy/explore/216',
