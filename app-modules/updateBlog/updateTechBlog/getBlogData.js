@@ -24,6 +24,7 @@ module.exports = async () => {
     'http://blog.cnbang.net/feed/',
     'https://www.hchstudio.cn/atom.xml',
     'https://rsshub.avosapps.us/meicai/latest',
+    'https://rsshub.avosapps.us/jartto/blog?limit=3',
     'https://rsshub.avosapps.us/ioin/wiki',
     'https://rsshub.avosapps.us/yq/publication/14?lilmit=3',
     'https://rsshub.avosapps.us/yq/publication/19?lilmit=3',
