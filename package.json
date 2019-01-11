@@ -20,6 +20,7 @@
     "cos-nodejs-sdk-v5": "^2.2.2",
     "dropbox": "^4.0.9",
     "ejs": "2.5.7",
+    "epub-gen": "^0.1.0",
     "express": "4.12.3",
     "iconv-lite": "^0.4.19",
     "isomorphic-fetch": "^2.2.1",
