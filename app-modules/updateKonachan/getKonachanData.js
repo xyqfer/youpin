@@ -55,6 +55,8 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/jd/crowdfunding/10',
         'https://rsshub.avosapps.us/taobao/crowdfunding/tech',
         'https://rsshub.avosapps.us/taobao/crowdfunding/book',
+        'https://rsshub.avosapps.us/ideebank/idea',
+        'https://rsshub.avosapps.us/ideebank/news?filter=IdeeBank%E6%AF%8F%E5%91%A8%E7%81%B5%E6%84%9F%E9%A1%B9%E7%9B%AE%E8%BF%9B%E5%B1%95%E6%8A%A5%E5%91%8A',
         // 'https://rsshub.avosapps.us/jsbox/bbs/newest?limit=7',
         // 'https://rsshub.avosapps.us/baidu/topwords/341',
         // 'https://rsshub.avosapps.us/enjoy/explore/216',
