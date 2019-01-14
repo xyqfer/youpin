@@ -9,8 +9,8 @@ module.exports = async () => {
   const cheerio = require('cheerio');
 
   try {
-    const url = 'https://www.reuters.com/investigates/special-report/johnsonandjohnson-cancer/';
-    const day = 6;
+    const url = 'https://www.newyorker.com/magazine/2018/12/10/why-we-sleep-and-why-we-often-cant';
+    const day = 4;
     const dbName = 'ArticleFragment';
     const [articleInfo] = await db.getDbData({
       dbName,
@@ -25,14 +25,18 @@ module.exports = async () => {
         uri: url,
       });
       const $ = cheerio.load(htmlString);
-      const $content = $('.story-content-container > .container p.article-paragraph');
+      const $content = $('.SectionBreak > p');
       const length = $content.length;
       const perDay = Math.ceil(length / day);
       const { count, objectId } = articleInfo;
       const content = $content.slice(count * perDay, (count + 1) * perDay).map((index, elem) => {
         return $(elem).text();
       }).get().reduce((content, item) => {
-        content += `<p>${item}</p>`;
+        let words = item.split(' ').reduce((words, word) => {
+          words += `<div class="word J-word" data-word="${word}">${word}<span class="J-translate"></span></div>&nbsp;`;
+          return words;
+        }, '');
+        content += `<div class="p">${words}</div>`;
         return content;
       }, '') + `<div>${count + 1} / ${day}</div>`;
       const title = $('title').text();
