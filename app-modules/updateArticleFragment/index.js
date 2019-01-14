@@ -33,7 +33,7 @@ module.exports = async () => {
         return $(elem).text();
       }).get().reduce((content, item) => {
         let words = item.split(' ').reduce((words, word) => {
-          words += `<div class="word J-word" data-word="${word}">${word}<span class="J-translate"></span></div>&nbsp;`;
+          words += `<div class="word J-word" data-word="${word}">${word}<span class="J-translate translate"></span></div>&nbsp;`;
           return words;
         }, '');
         content += `<div class="p">${words}</div>`;
