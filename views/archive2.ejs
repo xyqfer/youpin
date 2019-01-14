@@ -25,7 +25,7 @@
         max-width: 100%;
       }
 
-      p {
+      .p {
         margin: 30px 23px;
         color: rgb(36, 36, 36);
         font-size: 18px;
@@ -34,6 +34,10 @@
         -webkit-font-smoothing: antialiased;
         font-family: "Tiempos Text", serif;
       }
+
+      .word {
+        display: inline;
+      }
     </style>
   </head>
   <body>
@@ -41,5 +45,38 @@
     <div>
         <%-content%>
     </div>
+
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script>
+      $(function() {
+        let map = {};
+
+        $('.J-word').one(function() {
+          const $elem = $(this);
+          const $translate = $elem.find('.J-translate');
+          const word = $elem.attr('data-word').trim();
+
+          if (map[word]) {
+            $translate.text(map[word]);
+          } else {
+            $.ajax({
+              method: 'POST',
+              crossDomain: true,
+              url: 'https://ibdkopi6vn.avosapps.us/api/v1/poliwag/translate',
+              data: {
+                text: word,
+                type: 'all',
+              },
+              dataType: 'json',
+              success: function (result) {
+                const text = result.data.text || '';
+                $translate.text(text);
+                map[word] = text;
+              },
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
