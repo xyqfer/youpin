@@ -3,7 +3,7 @@
 module.exports = (req, res) => {
   const googletranslate = require('./utils/googletranslate');
   const { text = '', type = 'all' } = req.body;
-  
+
   googletranslate(text).then((response) => {
     let data = {};
 
