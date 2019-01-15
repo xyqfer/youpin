@@ -78,6 +78,11 @@ const cloudFuncConfig = [
         info: '更新 Leetcode'
     },
     {
+        name: 'updateTicket',
+        module: 'updateTicket',
+        info: '更新车票'
+    },
+    {
         name: 'updateArticleFragment',
         module: 'updateArticleFragment',
         info: '更新 articleFragment'
