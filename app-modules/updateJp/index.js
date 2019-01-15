@@ -35,7 +35,6 @@ module.exports = async () => {
 
         await sendMail({
           title: '要刷JP啦~',
-          render: 'archive2',
           data: [{
             url,
             title,
