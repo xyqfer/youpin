@@ -56,7 +56,6 @@ module.exports = async () => {
           dbName,
           id: objectId,
           data: {
-            url,
             count: count + 1
           }
         });
