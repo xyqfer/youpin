@@ -42,12 +42,21 @@
     }
 
     .word {
+      position: relative;
       display: inline-block;
     }
 
     .translate {
       word-break: keep-all;
-      font-size: 14px;
+      font-size: 12px;
+      position: absolute;
+      line-height: 16px;
+      left: 0;
+      top: -6px;
+      width: 100%;
+      overflow-y: hidden;
+      height: 16px;
+      overflow-x: scroll;
     }
   </style>
 </head>
@@ -81,11 +90,11 @@
               url: 'https://sy2bnjwp1a.leanapp.cn/api/v1/poliwag/translate',
               data: {
                 text: word,
-                type: 'all',
+                type: 'word',
               },
               dataType: 'json',
               success: function (result) {
-                const text = ` (${result.data.text || ''})`;
+                const text = result.data.text || '';
                 $translate.text(text);
                 map[word] = text;
               },
