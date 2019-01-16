@@ -31,7 +31,7 @@ module.exports = async () => {
       if (count < length) {
         const $link = $content.eq(count);
         const title = $link.text();
-        const url = 'https://res.wokanxing.info/jpgramma/' + $link.attr('href');
+        const url = 'http://res.wokanxing.info/jpgramma/' + $link.attr('href');
 
         await sendMail({
           title: '要刷JP啦~',
