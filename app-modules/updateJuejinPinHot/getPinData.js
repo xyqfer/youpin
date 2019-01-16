@@ -16,6 +16,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/weseepro/newest',
         'https://rsshub.avosapps.us/weseepro/circle',
         'https://rsshub.avosapps.us/ifanr2/latest',
+        'https://a.jiemian.com/index.php?m=article&a=rss',
         'https://rsshub.avosapps.us/weibo/user/1614282004',
         'https://rsshub.avosapps.us/weibo/user/1684197391',
         // 'https://rsshub.app/twitter/user/Medium',

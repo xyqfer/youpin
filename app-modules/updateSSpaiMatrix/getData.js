@@ -15,6 +15,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/reuters/investigates?limit=3',
         'https://rsshub.avosapps.us/tianfateng/tag/books',
         'https://www.gatesnotes.com/rss',
+        'https://rsshub.app/youtube/channel/UCb_CkUzhPsHXdrpQl9Zg5aA',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
