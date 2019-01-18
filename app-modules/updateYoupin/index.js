@@ -31,9 +31,9 @@ module.exports = async () => {
             && (today.getDay() >= 1 && today.getDay() <= 6);
 
         if (needReadArticle) {
-            await AV.Cloud.run('execCloud', {
-                name: 'updateArticleFragment',
-            });
+            // await AV.Cloud.run('execCloud', {
+            //     name: 'updateArticleFragment',
+            // });
         }
     } catch (err) {
         console.log(err);
