@@ -14,7 +14,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/wubiaoqing/home',
     'https://rsshub.avosapps.us/luojilab/poster/picqqAD838qrRSQj76y0XRB?limit=3',
     // 'https://rsshub.avosapps.us/luojilab/course/24/1',
-    'https://rsshub.avosapps.us/luojilab/course/24/2',
+    // 'https://rsshub.avosapps.us/luojilab/course/24/2',
   ];
 
   const data = await Promise.mapSeries(urls, async (url) => {
