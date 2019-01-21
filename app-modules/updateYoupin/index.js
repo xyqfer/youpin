@@ -20,7 +20,7 @@ module.exports = async () => {
             && (today.getDay() >= 1 && today.getDay() <= 5);
 
         if (needSendLeetcode) {
-            await AV.Cloud.run('updateLeetcode', {});
+            // await AV.Cloud.run('updateLeetcode', {});
         }
     } catch (err) {
         console.log(err);
