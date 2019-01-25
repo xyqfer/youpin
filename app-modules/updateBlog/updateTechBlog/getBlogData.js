@@ -10,6 +10,9 @@ module.exports = async () => {
     'https://www.zhangxinxu.com/wordpress/feed/',
     'https://rsshub.avosapps.us/taobaofed/blog',
     'https://rsshub.avosapps.us/techbridge/blog',
+    'https://rsshub.avosapps.us/upyun/tech',
+    'https://rsshub.avosapps.us/timilong/blog',
+    'https://dnc1994.com/atom.xml',
     // 'https://www.w3cplus.com/rss.xml',
     'http://www.alloyteam.com/feed/',
     'https://rsshub.avosapps.us/fundebug/latest?limit=5',
@@ -47,6 +50,8 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/github/issue/aszx87410/blog?limit=3',
     // 'https://rsshub.avosapps.us/facebook/newsroom/news?limit=3',
     'https://rsshub.avosapps.us/opera/blog?limit=3',
+    'https://jsfeeds.com/feed',
+    'https://itnext.io/feed',
   ];
 
   const data = await Promise.mapSeries(urls, async (url) => {
