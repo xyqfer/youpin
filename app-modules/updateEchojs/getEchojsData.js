@@ -2,47 +2,49 @@
 
 module.exports = async () => {
     const Promise = require('bluebird');
-    const rp = require('request-promise');
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
-    const uniqBy = require('lodash/uniqBy');
-    const { params } = require('app-libs');
+    const {
+        params,
+        http,
+    } = require('app-libs');
 
     const urls = [
-        'http://www.echojs.com/',
-        'http://www.echojs.com/latest/0',
-        'http://www.echojs.com/latest/1',
-        'http://www.echojs.com/latest/2'
+        'https://rsshub.avosapps.us/weibo/user/3665442037',
+        'https://rsshub.avosapps.us/weibo/user/5242649983',
+        'https://rsshub.avosapps.us/weibo/user/1715118170',
     ];
 
-    const result = await Promise.mapSeries(urls, async (uri) => {
+    const data = await Promise.mapSeries(urls, async (url) => {
         try {
-            const htmlString = await rp.get({
-                uri,
+            const xmlString = await http.get({
+                uri: url,
                 headers: {
                     'User-Agent': params.ua.pc
-                }
+                },
             });
+            const $ = cheerio.load(xmlString, {
+                normalizeWhitespace: true,
+                xmlMode: true
+            });
+            const result = [];
 
-            const $ = cheerio.load(htmlString);
-            const newsList = [];
+            $('item').each(function () {
+                const $item = $(this);
 
-            $('#newslist > article').each(function () {
-                const $elem = $(this);
-
-                newsList.push({
-                    title: $elem.find('h2 a').text(),
-                    url: $elem.find('h2 a').attr('href'),
-                    newsId: $elem.attr('data-news-id')
+                result.push({
+                    url: $item.find('link').text(),
+                    title: $item.find('title').text() || '',
+                    summary: $item.find('description').text()
                 });
             });
 
-            return newsList;
+            return result;
         } catch (err) {
             console.error(err);
             return [];
         }
     });
 
-    return uniqBy(flatten(result), 'newsId');
+    return flatten(data);
 };
