@@ -1,57 +1,35 @@
 'use strict';
 
 module.exports = async () => {
+    const updateContainer = require('app-containers/update');
     const getEchojsData = require('./getEchojsData');
-    const {
-        db: {
-            getDbData,
-            saveDbData
-        },
-        mail: sendMail
-    } = require('app-libs');
 
+    const filterKey = 'url';
     const dbName = 'Echojs';
 
     try {
-        const dbData = await getDbData({
+        return await updateContainer({
             dbName,
-            query: {
-                descending: ['updatedAt']
-            }
-        });
-        const echojsData = await getEchojsData();
-
-        const newData = echojsData.filter((item) => {
-            for (let i = 0; i < dbData.length; i++) {
-                if (item.newsId === dbData[i].newsId) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
-        if (newData.length > 0) {
-            saveDbData({
-                dbName,
-                data: newData
-            });
-            sendMail({
-                title: 'Echojs有更新了~',
-                data: newData,
-                template: ({ url = '', title = '' }) => {
+            filterKey,
+            mail: {
+                title: 'Echojs 有更新~',
+                template: ({ title = '', summary = '', url = '' }) => {
                     return `
-                        <div style="margin-bottom: 50px">
+                        <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
+                            <div>
+                                ${summary}
+                            </div>
                         </div>
                     `;
                 }
-            });
-        }
-
-        return newData;
+            },
+            getTargetData: () => {
+                return getEchojsData();
+            }
+        });
     } catch (err) {
         console.error(err);
         return {
