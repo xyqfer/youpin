@@ -83,8 +83,8 @@ module.exports = async () => {
             sendMail({
                 title: '米家上新品啦',
                 data: newData,
-                template: ({ url = '', name = '' }) => {
-                    return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br></div>`;
+                template: ({ url = '', name = '', summary = '' }) => {
+                    return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br><div>${summary}</div></div>`;
                 }
             });
         }
