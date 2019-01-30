@@ -34,6 +34,7 @@ module.exports = async () => {
                 gid: goods.gid,
                 url: goods.jump_url,
                 name: goods.name,
+                summary: `<img referrerpolicy="no-referrer" src="${goods.pic_url}"><br>${goods.summary}`,
             });
         });
 
