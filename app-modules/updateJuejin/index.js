@@ -4,23 +4,22 @@ module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const getJuejinData = require('./getJuejinData');
 
-    const offsets = [];
-
-    for (let offset = 0; offset <= 120; offset += 30) {
-        offsets.push(offset);
-    }
+    const offsets = [0];
 
     try {
         return await updateContainer({
             dbName: 'Juejin',
             mail: {
                 title: '掘金有更新了~',
-                template: ({ url = '', title = '' }) => {
+                template: ({ url = '', title = '', summary = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
+                            <div>
+                                ${summary}
+                            </div>
                         </div>
                     `;
                 },

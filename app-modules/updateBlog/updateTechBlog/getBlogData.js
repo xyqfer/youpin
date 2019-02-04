@@ -51,8 +51,8 @@ module.exports = async () => {
     // 'https://rsshub.avosapps.us/facebook/newsroom/news?limit=3',
     'https://rsshub.avosapps.us/opera/blog?limit=3',
     'https://reactjs.org/feed.xml',
-    'https://jsfeeds.com/feed',
-    'https://itnext.io/feed',
+    // 'https://jsfeeds.com/feed',
+    // 'https://itnext.io/feed',
   ];
 
   const data = await Promise.mapSeries(urls, async (url) => {
