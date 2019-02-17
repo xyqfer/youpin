@@ -7,6 +7,7 @@ module.exports = async () => {
   const parser = new Parser();
 
   const urls = [
+    'https://feed.pixnet.net/blog/posts/rss/jht',
     'http://liqi.io/feed/',
     'http://www.zreading.cn/feed',
     'https://rsshub.avosapps.us/wechat/wasi/5ba55623244d4e5506b732c2?filter=%E4%B8%80%E5%91%A8%E7%83%AD%E9%97%A8%E5%9B%BE%E4%B9%A6&limit=2',
