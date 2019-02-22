@@ -20,6 +20,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/weibo/user/1614282004',
         'https://rsshub.avosapps.us/weibo/user/1684197391',
         'https://rsshub.avosapps.us/weibo/user/5339148412',
+        'https://rsshub.avosapps.us/weibo/user/5378866839/1076035378866839',
         // 'https://rsshub.app/twitter/user/Medium',
         // 'https://rsshub.avosapps.us/testerhome/newest',
         // 'https://rsshub.avosapps.us/chouti/hot',
