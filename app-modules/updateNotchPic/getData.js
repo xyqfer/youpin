@@ -9,11 +9,17 @@ module.exports = async () => {
     } = require('app-libs');
 
     const urls = [
-        'https://notch.qdaily.com/api/v2/wallpaper_topics?last_key=0&platform=ios',
-        'https://notch.qdaily.com/api/v2/avatar_topics?platform=ios',
+        {
+            url: 'https://notch.qdaily.com/api/v2/wallpaper_topics?last_key=0&platform=ios',
+            key: 'wallpaper',
+        },
+        {
+            url: 'https://notch.qdaily.com/api/v2/avatar_topics?platform=ios',
+            key: 'avatar',
+        },
     ];
 
-    const data = await Promise.mapSeries(urls, async (url) => {
+    const data = await Promise.mapSeries(urls, async ({ url, key }) => {
         try {
             const result = await http.get({
                 json: true,
@@ -25,7 +31,7 @@ module.exports = async () => {
 
             return result.topics.map((item) => {
                 return {
-                    url: item.id,
+                    url: item.id + key,
                     title: item.title,
                     summary: item.pictures.reduce((acc, picture) => {
                         acc += `
