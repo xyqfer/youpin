@@ -49,7 +49,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateZhihuHot',
-        module: ['updateJuejinPinHot'],
+        module: ['updateJuejinPinHot', 'updateDcard'],
         info: '更新 ZhihuHot'
     },
     {
@@ -91,6 +91,11 @@ const cloudFuncConfig = [
         name: 'updateArticleFragment',
         module: 'updateArticleFragment',
         info: '更新 articleFragment'
+    },
+    {
+        name: 'updateDcard',
+        module: 'updateDcard',
+        info: '更新 Dcard'
     },
     {
         name: 'wake',
