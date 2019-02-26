@@ -50,14 +50,14 @@ module.exports = async () => {
         `;
         return acc;
       }, 'RSSBOT 有更新:\n');
-      // rp.post({
-      //   uri: process.env.qqboturl,
-      //   json: true,
-      //   body: {
-      //     'group_id': parseInt(process.env.qqbotgroupid),
-      //     'message': message,
-      //   },
-      // });
+      rp.post({
+        uri: process.env.qqboturl,
+        json: true,
+        body: {
+          'group_id': parseInt(process.env.qqbotgroupid),
+          'message': message,
+        },
+      });
     }
 
     return {
