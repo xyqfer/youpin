@@ -6,8 +6,7 @@ module.exports = async () => {
         params,
         http,
     } = require('app-libs');
-
-    try {
+    const getMenuContent = async () => {
         const result = await http.post({
             json: true,
             uri: 'https://tv.daydaycook.com.cn/top-content/content-index',
@@ -64,6 +63,35 @@ module.exports = async () => {
         });
 
         return data;
+    };
+    const getTVContent = async () => {
+        const result = await http.post({
+            json: true,
+            uri: 'https://mcn-app.daydaycook.com.cn/mcn/ios/1.0.1/ddctvList',
+            headers: {
+                'User-Agent': params.ua.pc,
+            },
+            body: { "deviceId": "00000000-0000-0000-0000-000000000000", "uid": "", "ip": "192.168.31.105", "regionCode": "156", "deviceType": "1", "userUniqueId": "", "session": "", "sysVersion": 12, "version": "6.2.0", "mainland": "1", "languageId": "3" },
+        });
+        
+        return result.data.map((item) => {
+            return {
+                id: item.tvTypeId + item.bizId + item.tvTypeName,
+                title: item.title,
+                summary: `
+                    ${item.vedioDescribe}<br>
+                    <img src="${item.coverUrl}" referrerpolicy="no-referrer"><br>
+                    <video src="${item.videoUrl}" controls="controls" poster="${item.coverUrl}" style="width: 100%"></video>
+                `,
+            };
+        });
+    };
+
+    try {
+        const menuContent = await getMenuContent();
+        const tvContent = await getTVContent();
+
+        return [...menuContent, ...tvContent];
     } catch (err) {
         console.error(err);
         return [];
