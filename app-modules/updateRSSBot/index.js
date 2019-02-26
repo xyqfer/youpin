@@ -47,7 +47,7 @@ module.exports = async () => {
         const isLast = index === newData.length - 1;
         acc += `${title} ${link}${isLast ? '' : '\n'}`;
         return acc;
-      }, 'RSSBOT 有更新:\n');
+      }, 'RSSBOT 有更新:\n\n');
       rp.post({
         uri: process.env.qqboturl,
         json: true,
