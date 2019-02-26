@@ -98,6 +98,11 @@ const cloudFuncConfig = [
         info: '更新 Dcard'
     },
     {
+        name: 'updateRSSBot',
+        module: 'updateRSSBot',
+        info: '更新 updateRSSBot'
+    },
+    {
         name: 'wake',
         module: 'wake',
         info: '定时唤醒'
