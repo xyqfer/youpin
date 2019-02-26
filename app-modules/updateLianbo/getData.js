@@ -15,8 +15,8 @@ module.exports = async () => {
     });
     const data = result.videoList[0];
 
-    return {
+    return [{
         title: data.article_title,
         url: data.article_url,
-    };
+    }];
 };
