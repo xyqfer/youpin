@@ -7,10 +7,10 @@ module.exports = async () => {
   const { getDbData } = require('app-libs/db');
   let parser = new Parser();
 
-  const data = await getDbData({
+  const dbData = await getDbData({
     dbName: 'RSSURL',
   });
-  const urls = data.map(({ url }) => {
+  const urls = dbData.map(({ url }) => {
     return url;
   });
 
