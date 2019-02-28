@@ -45,7 +45,7 @@ module.exports = async () => {
 
       const message = newData.reduce((acc, { title, link }, index) => {
         const isLast = index === newData.length - 1;
-        acc += `${title} ${link}${isLast ? '' : '\n\n'}`;
+        acc += `${title.trim()} ${link}${isLast ? '' : '\n\n'}`;
         return acc;
       }, 'RSSBOT 有更新:\n\n');
       rp.post({
