@@ -76,7 +76,7 @@ module.exports = async () => {
         
         return result.data.map((item) => {
             return {
-                id: item.tvTypeId + item.bizId + item.tvTypeName,
+                url: item.tvTypeId + item.bizId + item.tvTypeName,
                 title: item.title,
                 summary: `
                     ${item.vedioDescribe}<br>
@@ -90,7 +90,6 @@ module.exports = async () => {
     try {
         const menuContent = await getMenuContent();
         const tvContent = await getTVContent();
-
         return [...menuContent, ...tvContent];
     } catch (err) {
         console.error(err);

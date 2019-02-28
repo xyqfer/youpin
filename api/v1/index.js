@@ -103,4 +103,7 @@ router.post('/azbook', require('./azbook'));
 
 router.get('/ping', require('./ping'));
 
+router.get('/briefread/list', require('./briefread/list'));
+router.get('/briefread/detail/:id', require('./briefread/detail'));
+
 module.exports = router;
