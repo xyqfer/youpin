@@ -13,6 +13,9 @@ module.exports = async () => {
       data: [{
         url: 'life1389://topic?topic_id=6612888851461439758&tab=1',
         title,
+      }, {
+        title: '领蚂蚁积分啦~',
+        url: 'alipays://platformapi/startapp?appId=20000160',
       }],
       template: ({ url = '', title = '' }) => {
         return `
