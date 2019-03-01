@@ -22,6 +22,7 @@ module.exports = async () => {
     'https://github.com/framework7io/framework7/releases.atom',
     'https://coolshell.cn/feed',
     'https://www.codesky.me/feed/',
+    'https://www.nuist.today/rss2.xml',
     'http://damobing.com/?feed=rss2',
     'https://onevcat.com/feed.xml',
     'http://blog.cnbang.net/feed/',
