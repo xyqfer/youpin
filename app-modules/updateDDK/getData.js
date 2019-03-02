@@ -80,7 +80,6 @@ module.exports = async () => {
                 title: item.title,
                 summary: `
                     ${item.vedioDescribe}<br>
-                    <img src="${item.coverUrl}" referrerpolicy="no-referrer"><br>
                     <video src="${item.videoUrl}" controls="controls" poster="${item.coverUrl}" style="width: 100%"></video>
                 `,
             };
