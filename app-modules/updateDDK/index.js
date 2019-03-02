@@ -16,7 +16,7 @@ module.exports = async () => {
                 template: ({ title = '', summary = '', }) => {
                     return `
                         <div style="margin-bottom: 30px">
-                            <h4>${title}</h4>
+                            <h2>${title}</h2>
                             <div>
                                 ${summary}
                             </div>
