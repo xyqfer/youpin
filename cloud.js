@@ -103,6 +103,11 @@ const cloudFuncConfig = [
         info: '更新 updateRSSBot'
     },
     {
+        name: 'updateLyca',
+        module: 'updateLyca',
+        info: '更新 updateLyca'
+    },
+    {
         name: 'wake',
         module: 'wake',
         info: '定时唤醒'
