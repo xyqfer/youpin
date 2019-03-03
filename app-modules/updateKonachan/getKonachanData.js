@@ -89,7 +89,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/douban/channel/30169684?limit=3',
         // 'https://rsshub.avosapps.us/instagram/user/apple',
         // 'https://rsshub.avosapps.us/instagram/user/9gag',
-        'https://rsshub.avosapps.us/instagram/user/rejecteddesign',
+        // 'https://rsshub.avosapps.us/instagram/user/rejecteddesign',
         // 'https://rsshub.avosapps.us/muzei/today',
         // 'https://blog.douban.com/feed/',
         // 'https://rsshub.avosapps.us/guanzhi',
