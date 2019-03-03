@@ -16,6 +16,9 @@ module.exports = async () => {
       }, {
         title: '领蚂蚁积分啦~',
         url: 'alipays://platformapi/startapp?appId=20000160',
+      }, {
+        title: '一个',
+        url: 'http://m.wufazhuce.com/'
       }],
       template: ({ url = '', title = '' }) => {
         return `
