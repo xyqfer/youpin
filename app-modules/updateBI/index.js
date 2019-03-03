@@ -16,8 +16,9 @@ module.exports = async () => {
                 template: ({ title = '', summary = '', url = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">
+                            <h2>${title}</h2>
                             <a href="${url}" target="_blank">
-                                <h2>${title}</h2>
+                                <div>[查看原文]</div>
                             </a>
                             <div>
                                 ${summary}
