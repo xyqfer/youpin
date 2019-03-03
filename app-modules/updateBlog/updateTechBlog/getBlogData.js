@@ -27,6 +27,7 @@ module.exports = async () => {
     'http://damobing.com/?feed=rss2',
     'https://onevcat.com/feed.xml',
     'http://blog.cnbang.net/feed/',
+    'https://tech.youzan.com/rss/',
     'https://www.logcg.com/feed',
     'https://miao.li/index.xml',
     'https://www.xcnte.com/feed/',

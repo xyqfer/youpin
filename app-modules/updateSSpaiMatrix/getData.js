@@ -18,6 +18,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/tianfateng/tag/books',
         // 'https://www.gatesnotes.com/rss',
         'https://museelogue.fireside.fm/rss',
+        'https://sobooks.cc/feed',
         // 'https://rsshub.app/youtube/channel/UCb_CkUzhPsHXdrpQl9Zg5aA',
     ];
 
