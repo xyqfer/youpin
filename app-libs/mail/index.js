@@ -22,6 +22,8 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
     });
     content = $.html();
 
+    const contentCountMsg = `${data.length}条消息`;
+
     const mailQueue = process.env.mailQueue.split(',');
 
     const sendMap = {
@@ -33,7 +35,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
     };
 
     const mailParams = {
-        title,
+        title: `${title} / ${contentCountMsg}`,
         content,
         receivers,
         render,
