@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const {
     params,
     http,
@@ -15,27 +15,24 @@ module.exports = async (req, res) => {
       },
       body: { "uid": "", "version": "6.2.0", "regionCode": "156", "userUniqueId": "", "deviceId": "00000000-0000-0000-0000-000000000000", "deviceType": "1", "businessCategoryId": "2", "mainland": "1", "contentId": id, "ip": "192.168.31.105", "languageId": "3", "sessionId": "", "showTag": "1" }
     });
-    let data = {
-      summary: '',
+    const steps = result.data.contentDetailList.map((item) => {
+      return {
+        title: item.groupTitle,
+        desc: item.detail,
+        img: item.image,
+      };
+    });
+    const ingredients = result.data.contentFoodList.map(({ name, count }) => {
+      return {
+        name,
+        count,
+      };
+    });
+
+    return {
+      steps,
+      ingredients,
     };
-
-    data.summary += result.data.contentDetailList.reduce((acc, item) => {
-      acc += `
-          <strong>${item.groupTitle} - ${item.detail}</strong>
-          <img src="${item.image}" referrerpolicy="no-referrer">
-          <br>
-      `;
-      return acc;
-    }, '');
-
-    data.summary += result.data.contentFoodList.reduce((acc, item) => {
-      acc += `
-          <div>${item.name}${item.count}</div>
-      `;
-      return acc;
-    }, '');
-
-    return data;
   };
 
   const data = await getMenuDetail(id);
