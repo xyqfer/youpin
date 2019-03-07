@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-  const redirectHttp = require('follow-redirects').http;
-  const fs = require('fs');
   const compareVersions = require('compare-versions');
   const {
     params,
@@ -12,7 +10,6 @@ module.exports = async () => {
       updateDbData,
     }
   } = require('app-libs');
-  const ipaExtract = require('./ipaExtract');
   const dbName = 'ipa';
   const name = 'Alipay';
 
@@ -37,27 +34,24 @@ module.exports = async () => {
   });
 
   if (compareVersions(ver, dbData.ver) > 0) {
-    downUrl = Buffer.from(downUrl, 'base64').toString('ascii');
-
-    const downloadPath = '/tmp/a.ipa';
-    const ipaFile = fs.createWriteStream(downloadPath);
-    redirectHttp.get(downUrl, function (response) {
-      const stream = response.pipe(ipaFile);
-      stream.on('finish', function () {
-        ipaExtract(downloadPath, function (error, { metadata }) {
-          if (metadata && metadata.AppBaseInfos) {
-            updateDbData({
-              dbName,
-              data: {
-                info: Object.values(metadata.AppBaseInfos),
-                ver,
-              },
-              id: dbData.objectId
-            })
-          }
-        });
+    (async function() {
+      const result = await http.get({
+        uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}`,
+        timeout: 600 * 1000,
+        json: true,
       });
-    });
+      
+      if (result && result.success) {
+        updateDbData({
+          dbName,
+          data: {
+            info: result.data,
+            ver,
+          },
+          id: dbData.objectId
+        });
+      }
+    })();
   }
 
   return {
