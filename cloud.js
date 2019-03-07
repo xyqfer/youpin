@@ -108,6 +108,11 @@ const cloudFuncConfig = [
         info: '更新 updateLyca'
     },
     {
+        name: 'updateAlipayScheme',
+        module: 'updateAlipayScheme',
+        info: '更新 updateAlipayScheme'
+    },
+    {
         name: 'wake',
         module: 'wake',
         info: '定时唤醒'

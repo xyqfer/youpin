@@ -31,7 +31,7 @@ module.exports = async () => {
 
         return await Promise.mapSeries(result, async (item) => {
             try {
-                const htmlString = await http.post({
+                const htmlString = await http.get({
                     uri: item.url,
                     headers: {
                         'User-Agent': params.ua.pc,
