@@ -32,6 +32,7 @@ module.exports = async () => {
     'https://www.logcg.com/feed',
     'https://miao.li/index.xml',
     'https://www.xcnte.com/feed/',
+    'https://www.bboysoul.com/atom.xml',
     'https://www.hchstudio.cn/atom.xml',
     'https://www.bennythink.com/feed',
     'https://rsshub.avosapps.us/meicai/latest',
