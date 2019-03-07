@@ -43,18 +43,23 @@ module.exports = async () => {
                 const summaryList = $('.summary-list > li').map(function() {
                     const $item = $(this);
                     return `<li><strong>${$item.text()}</strong></li>`;
-                }).get().join('');
+                }).get();
 
-                item.summary = `
-                    <img src="${img}" referrerpolicy="no-referrer">
-                    <div><strong>${alt}</strong></div>
-                    <br>
-                    <ul>
-                        ${summaryList}
-                    </ul>
-                `;
+                if (summaryList && summaryList.length > 0) {
+                    const imgElem = `<img src="${img}" referrerpolicy="no-referrer">`;
+                    item.summary = `
+                        ${(img && img !== '') ? imgElem : ''}
+                        <div><strong>${alt}</strong></div>
+                        <br>
+                        <ul>
+                            ${summaryList.join('')}
+                        </ul>
+                    `;
 
-                return item;
+                    return item;
+                } else {
+                    return null;
+                }
             } catch (err) {
                 console.error(err);
                 return item;
