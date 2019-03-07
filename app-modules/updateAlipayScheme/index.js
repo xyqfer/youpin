@@ -38,7 +38,7 @@ module.exports = async () => {
   });
   console.log(dbData);
 
-  if (compareVersions(dbData.ver, ver) > 0) {
+  if (compareVersions(ver, dbData.ver) > 0) {
     console.log(downUrl);
     downUrl = Buffer.from(downUrl, 'base64').toString('ascii');
 
