@@ -28,6 +28,7 @@ module.exports = async () => {
       id: 333206289
     }
   });
+  console.log(ver, downUrl);
   const [dbData] = await getDbData({
     dbName,
     limit: 1,
@@ -37,6 +38,7 @@ module.exports = async () => {
   });
 
   if (compareVersions(dbData.ver, ver) > 0) {
+    console.log(downUrl);
     downUrl = Buffer.from(downUrl, 'base64').toString('ascii');
 
     const downloadPath = '/tmp/alipaydownload/a.ipa';
@@ -44,7 +46,10 @@ module.exports = async () => {
     redirectHttp.get(downUrl, function (response) {
       const stream = response.pipe(ipaFile);
       stream.on('finish', function () {
+        console.log('finish');
         ipaExtract(downloadPath, function (error, { metadata }) {
+          console.log(err);
+          console.log(metadata);
           if (metadata && metadata.AppBaseInfos) {
             updateDbData({
               dbName,
