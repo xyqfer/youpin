@@ -42,7 +42,7 @@ module.exports = async () => {
     console.log(downUrl);
     downUrl = Buffer.from(downUrl, 'base64').toString('ascii');
 
-    const downloadPath = '/tmp/alipaydownload/a.ipa';
+    const downloadPath = '/tmp/a.ipa';
     const ipaFile = fs.createWriteStream(downloadPath);
     redirectHttp.get(downUrl, function (response) {
       const stream = response.pipe(ipaFile);
