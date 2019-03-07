@@ -29,7 +29,7 @@ module.exports = async () => {
             });
         });
 
-        return await Promise.mapSeries(result, async (item) => {
+        const biList = await Promise.mapSeries(result, async (item) => {
             try {
                 const htmlString = await http.get({
                     uri: item.url,
@@ -64,6 +64,10 @@ module.exports = async () => {
                 console.error(err);
                 return item;
             }
+        });
+
+        return biList.filter((item) => {
+            return !!item;
         });
     } catch (err) {
         console.error(err);
