@@ -20,6 +20,7 @@ module.exports = async () => {
     'https://51.ruyo.net/feed/',
     'https://www.jackpu.com/rss/',
     'https://techblog.toutiao.com/rss/',
+    'https://blog.imalan.cn/feed',
     'https://github.com/framework7io/framework7/releases.atom',
     'http://www.520monkey.com/feed',
     'https://coolshell.cn/feed',
