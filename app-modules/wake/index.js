@@ -8,6 +8,7 @@ module.exports = () => {
         'https://ibdkopi6vn.avosapps.us/',
         'https://rsshub.avosapps.us/',
         'https://ybhdqmyloo.us-south.cf.appdomain.cloud/',
+        'https://extract-ipa.herokuapp.com/',
     ];
 
     Promise.all(
