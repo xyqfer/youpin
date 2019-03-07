@@ -6,9 +6,9 @@ module.exports = () => {
     const urls = [
         'https://sy2bnjwp1a.leanapp.cn',
         'https://ibdkopi6vn.avosapps.us/',
+        'http://gfvlj9un2g.avosapps.us/',
         'https://rsshub.avosapps.us/',
         'https://ybhdqmyloo.us-south.cf.appdomain.cloud/',
-        'https://extract-ipa.herokuapp.com/',
     ];
 
     Promise.all(
