@@ -17,6 +17,7 @@ module.exports = async () => {
     'http://www.alloyteam.com/feed/',
     'https://rsshub.avosapps.us/fundebug/latest?limit=5',
     'https://rsshub.avosapps.us/yuque/book/yubo/words/126420',
+    'https://51.ruyo.net/feed/',
     'https://www.jackpu.com/rss/',
     'https://techblog.toutiao.com/rss/',
     'https://github.com/framework7io/framework7/releases.atom',
