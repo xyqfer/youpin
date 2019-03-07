@@ -36,6 +36,7 @@ module.exports = async () => {
       equalTo: ['name', name]
     }
   });
+  console.log(dbData);
 
   if (compareVersions(dbData.ver, ver) > 0) {
     console.log(downUrl);
