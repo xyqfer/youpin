@@ -6,7 +6,7 @@ module.exports = () => {
     const urls = [
         'https://sy2bnjwp1a.leanapp.cn',
         'https://ibdkopi6vn.avosapps.us/',
-        'http://gfvlj9un2g.avosapps.us/',
+        'https://gfvlj9un2g.avosapps.us/',
         'https://rsshub.avosapps.us/',
         'https://ybhdqmyloo.us-south.cf.appdomain.cloud/',
     ];
@@ -17,9 +17,7 @@ module.exports = () => {
                 uri
             });
         })
-    ).catch((err) => {
-        console.log(err);
-    });
+    ).catch(() => {});
 
     return {
         success: true
