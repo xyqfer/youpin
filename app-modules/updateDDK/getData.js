@@ -50,7 +50,7 @@ module.exports = async () => {
 
                 data.summary += result.data.contentFoodList.reduce((acc, item) => {
                     acc += `
-                        <div>${item.name}${item.count}</div>
+                        <div>${item.name}${item.count || ''}</div>
                     `;
                     return acc;
                 }, '');
