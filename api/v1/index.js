@@ -107,4 +107,6 @@ router.get('/ping', require('./ping'));
 router.get('/dearmeal/list', require('./dearmeal/list'));
 router.get('/dearmeal/detail/:id', require('./dearmeal/detail'));
 
+router.get('/alipayscheme/list', require('./alipayscheme/list'));
+
 module.exports = router;
