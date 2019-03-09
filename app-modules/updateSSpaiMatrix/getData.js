@@ -18,6 +18,11 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/tianfateng/tag/books',
         // 'https://www.gatesnotes.com/rss',
         'https://museelogue.fireside.fm/rss',
+        'https://rsshub.avosapps.us/socialbeta/tag/%E7%8B%AC%E8%A7%92%E4%BC%98%E8%8D%90?limit=1',
+        'https://rsshub.avosapps.us/socialbeta/tag/%E5%93%81%E7%89%8C%E5%88%B6%E7%89%87%E5%8E%82?limit=1',
+        'https://rsshub.avosapps.us/socialbeta/tag/%E8%90%A5%E9%94%80%E5%91%A8%E6%8A%A5?limit=1',
+        'https://rsshub.avosapps.us/socialbeta/tag/%E6%A1%88%E4%BE%8B%E4%B8%80%E5%91%A8?limit=1',
+        'https://rsshub.avosapps.us/socialbeta/tag/%E7%94%B2%E6%96%B9%E4%B9%99%E6%96%B9?limit=1',
         'https://rsshub.avosapps.us/sobooks/newest',
         // 'https://rsshub.app/youtube/channel/UCb_CkUzhPsHXdrpQl9Zg5aA',
     ];
