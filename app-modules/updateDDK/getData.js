@@ -113,7 +113,7 @@ module.exports = async () => {
             summary += '<div><strong>食材:</strong></div>';
             summary += item.ingredients.reduce((acc, item) => {
                 acc += `
-                    <div>${item.name}${item.amount}${item.unit}</div>
+                    <div>${item.name}${item.amount || ''}${item.unit || ''}</div>
                 `;
                 return acc;
             }, '');
