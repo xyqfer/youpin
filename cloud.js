@@ -59,7 +59,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCodrop', 'updateOSChina', 'updateKelemiao', 'updateNotchPic'],
+        module: ['updateBook', 'updateCodrop', 'updateOSChina', 'updateKelemiao', 'updateNotchPic', 'updateNanfengchuang'],
         info: '每日更新'
     },
     {
