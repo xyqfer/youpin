@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ title = '', data = [], render = 'archive', device = 'device1', template = () => ('') }) => {
+module.exports = async ({ title = '', data = [], render = 'archive', device = 'device1', open = 'chrome', template = () => ('') }) => {
     const cheerio = require('cheerio');
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
@@ -40,6 +40,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
         receivers,
         render,
         device,
+        open,
     };
 
     if (params.env.isDev) {
