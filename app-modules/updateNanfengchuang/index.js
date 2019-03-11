@@ -25,6 +25,7 @@ module.exports = async () => {
                     `;
                 },
                 device: 'device2',
+                open: 'safari',
             },
             getTargetData: () => {
                 return getData();

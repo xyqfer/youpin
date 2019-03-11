@@ -8,7 +8,8 @@ module.exports = async () => {
     db: {
       getDbData,
       updateDbData,
-    }
+    },
+    mail: sendMail
   } = require('app-libs');
   const dbName = 'ipa';
   const name = 'Alipay';
@@ -49,6 +50,20 @@ module.exports = async () => {
             ver,
           },
           id: dbData.objectId
+        });
+
+        sendMail({
+          title: 'Alipay Schemes 有更新~',
+          data: [{}],
+          template: () => {
+            return `
+            <div style="margin-bottom: 50px">
+                <a href="https://ibdkopi6vn.avosapps.us/alipayschemes" target="_blank">
+                    <h4>版本${ver}</h4>
+                </a>
+            </div>
+        `;
+          }
         });
       }
     })();

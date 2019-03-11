@@ -16,9 +16,6 @@ module.exports = async () => {
     }, {
       title: '签到~',
       url: 'mnw://',
-    }, {
-      title: '一个',
-      url: 'http://m.wufazhuce.com/'
     }];
     const now = new Date();
     if (now.getDate() === 26) {

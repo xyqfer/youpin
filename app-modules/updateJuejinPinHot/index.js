@@ -13,15 +13,14 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '掘金 pin 有更新~',
-                template: ({ title = '', summary = '', url = '' }) => {
+                template: ({ summary = '', url = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">
-                            <a href="${url}" target="_blank">
-                                <h4>${title}</h4>
-                            </a>
                             <div>
                                 ${summary}
                             </div>
+                            <hr>
+                            <a href="${url}" target="_blank">[查看原文]</a>
                         </div>
                     `;
                 }
