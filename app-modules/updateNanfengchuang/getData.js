@@ -35,7 +35,7 @@ module.exports = async () => {
 
         magazines.push({
             title,
-            url: 'https://www.instapaper.com/text?u=' + encodeURIComponent(link),
+            url: link,
         });
     });
 
