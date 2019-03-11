@@ -8,7 +8,7 @@ module.exports = () => {
         'https://ibdkopi6vn.avosapps.us/',
         'https://gfvlj9un2g.avosapps.us/',
         'https://rsshub.avosapps.us/',
-        'https://ybhdqmyloo.us-south.cf.appdomain.cloud/',
+        // 'https://ybhdqmyloo.us-south.cf.appdomain.cloud/',
     ];
 
     Promise.all(
