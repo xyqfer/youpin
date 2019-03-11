@@ -49,7 +49,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateZhihuHot',
-        module: ['updateJuejinPinHot'],
+        module: ['updateJuejinPinHot', 'updateIfanr2'],
         info: '更新 ZhihuHot'
     },
     {
