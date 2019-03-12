@@ -1,6 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
+const request = require('request');
 const restaurant = require('./restaurant');
 const activities = require('./activities');
 const redirectBook = require('./redirectBook');
@@ -107,5 +108,9 @@ router.get('/dearmeal/list', require('./dearmeal/list'));
 router.get('/dearmeal/detail/:id', require('./dearmeal/detail'));
 
 router.get('/alipayscheme/list', require('./alipayscheme/list'));
+
+router.get('/proxyimage', async (req, res) => {
+    request.get(req.query.url).pipe(res);
+});
 
 module.exports = router;
