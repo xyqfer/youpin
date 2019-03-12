@@ -4,8 +4,6 @@ module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const getJuejinData = require('./getJuejinData');
 
-    const offsets = [0];
-
     try {
         return await updateContainer({
             dbName: 'Juejin',
@@ -26,9 +24,7 @@ module.exports = async () => {
                 device: 'device2',
             },
             getTargetData: () => {
-                return getJuejinData({
-                    offsets
-                });
+                return getJuejinData();
             },
             filterKey: 'postId'
         });
