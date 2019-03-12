@@ -18,8 +18,10 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
 
         let hostName = process.env.hostName;
         if (open === 'chrome') {
-            hostName = process.env.hostName.replace('https://', 'googlechromes://');
+            // todo
+            // hostName = process.env.hostName.replace('https://', 'googlechromes://');
         }
+        hostName = process.env.hostName.replace('https://', 'googlechromes://');
         const url = encodeURIComponent(`${hostName}/archive?id=${uuid}&render=${render}`);
         const response = await rp.get({
             json: true,
