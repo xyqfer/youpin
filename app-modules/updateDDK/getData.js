@@ -2,10 +2,12 @@
 
 module.exports = async () => {
     const Promise = require('bluebird');
+    const moment = require('moment');
     const {
         params,
         http,
     } = require('app-libs');
+
     const getMenuContent = async () => {
         const result = await http.post({
             json: true,
@@ -144,12 +146,33 @@ module.exports = async () => {
             };
         });
     };
+    const getCalendarContent = async () => {
+        const result = await http.post({
+            uri: 'https://api.beitaichufang.com/app/api/v1/food/calendar/detail?phoneKey=&token=',
+            headers: {
+                'User-Agent': params.ua.pc,
+            },
+            form: {
+                'dayTime': moment().format('YYYYMMDD'),
+            },
+            json: true,
+        });
+        const foodCalendar = result.data.foodCalendar;
+        return [{
+            url: foodCalendar.icon,
+            title: `方太厨房日签-${foodCalendar.day}`,
+            summary: `
+                <img src="${foodCalendar.icon}" referrerpolicy="no-referrer">
+            `,
+        }];
+    };
 
     try {
         const menuContent = await getMenuContent();
         const tvContent = await getTVContent();
         const ksContent = await getKSContent();
-        return [...menuContent, ...tvContent, ...ksContent];
+        const calendarContent = await getCalendarContent();
+        return [...menuContent, ...tvContent, ...ksContent, ...calendarContent];
     } catch (err) {
         console.error(err);
         return [];
