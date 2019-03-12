@@ -73,6 +73,30 @@ app.get('/archive', function (req, res) {
     });
 });
 
+app.get('/bbcproxy', async function (req, res) {
+    try {
+        const { http } = require('app-libs');
+        const cheerio = require('cheerio');
+        const utils = require('./app-modules/bbc/utils');
+        const render = 'archive';
+        const { url } = req.query;
+        const htmlString = await http.get(url);
+        const $ = cheerio.load(htmlString);
+        const title = $('.story-body__h1').text();
+
+        res.render(render, {
+            title,
+            content: utils.ProcessFeed($, url),
+        });
+    } catch(err) {
+        console.error(err);
+        res.render(render, {
+            title: '',
+            content: ''
+        });
+    }
+});
+
 app.use('/api', require('./api/index'));
 
 app.use(function (req, res, next) {
