@@ -16,13 +16,14 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
             }]
         });
 
-        let hostName = process.env.hostName;
+        let url = '';
         if (open === 'chrome') {
-            // todo
-            // hostName = process.env.hostName.replace('https://', 'googlechromes://');
+            const hostName = process.env.hostName.replace('https://', 'googlechromes://');
+            url = `${hostName}/archive?id=${uuid}&render=${render}`;
+        } else {
+            url = 'jsbox://run?name=safariproxy&url=' + encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}&render=${render}`);
         }
-        hostName = process.env.hostName.replace('https://', 'googlechromes://');
-        const url = encodeURIComponent(`${hostName}/archive?id=${uuid}&render=${render}`);
+        url = encodeURIComponent(url);
         const response = await rp.get({
             json: true,
             uri: `https://api.day.app/${process.env[device]}/${encodeURIComponent(title)}?url=${url}`,

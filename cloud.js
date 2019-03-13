@@ -44,7 +44,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateKonachan',
-        module: ['updateKonachan', 'updatePrageru'],
+        module: ['updateKonachan'],
         info: '更新 Konachan'
     },
     {
@@ -71,6 +71,11 @@ const cloudFuncConfig = [
         name: 'updateAppStore',
         module: 'updateAppStore',
         info: '更新 app store'
+    },
+    {
+        name: 'updateDuzhihu',
+        module: 'updateDuzhihu',
+        info: '更新 updateDuzhihu'
     },
     {
         name: 'updateLeetcode',
