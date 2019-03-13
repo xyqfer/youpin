@@ -39,7 +39,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily_en',
-        module: ['updateOctocat', 'updateSSpaiMatrix', 'updateBookset', 'updateTerminus'],
+        module: ['updateOctocat', 'updateSSpaiMatrix', 'updateBookset', 'updateTerminus', 'updateFraudInfo', 'updateNBD'],
         info: '每日更新_en'
     },
     {
