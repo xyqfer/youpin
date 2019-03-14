@@ -31,6 +31,12 @@ module.exports = {
         });
       }
     });
+    $('a').each(function () {
+      $(this).attr('target', '_blank').attr('external', 'true');
+    });
+    $('img').each(function () {
+      $(this).attr('referrerpolicy', 'no-referrer');
+    });
 
     return $.html();
   },
