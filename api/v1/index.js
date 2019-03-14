@@ -116,6 +116,7 @@ router.get('/proxyimage', async (req, res) => {
 
 router.get('/readeer/zhihu/list', require('./readeer/zhihu/list'));
 router.get('/readeer/zhihu/content', require('./readeer/zhihu/content'));
+router.get('/readeer/zhihu/random', require('./readeer/zhihu/random'));
 router.get('/readeer/nfcmag/article', require('./readeer/nfcmag/article'));
 router.get('/readeer/nfcmag/category', require('./readeer/nfcmag/category'));
 router.get('/readeer/nfcmag/content', require('./readeer/nfcmag/content'));

@@ -2,11 +2,11 @@
 
 module.exports = async () => {
     const updateSpecialNews = require('./updateSpecialNews');
-    const updateInvestigate = require('./updateInvestigate');
+    const updateInvestage = require('./updateInvestage');
 
     try {
         await updateSpecialNews();
-        await updateInvestigate();
+        await updateInvestage();
 
         return {
             success: true
