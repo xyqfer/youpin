@@ -25,6 +25,12 @@ module.exports = async (req, res) => {
       $elem.find('*').each(function() {
         $(this).removeAttr('style');
       });
+      $elem.find('a').each(function () {
+        $(this).attr('target', '_blank').attr('external', 'true');
+      });
+      $elem.find('img').each(function () {
+        $(this).attr('referrerpolicy', 'no-referrer');
+      });
       return `<p>${$elem.html()}</p>`
     }).get().join('');
 
