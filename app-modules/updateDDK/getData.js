@@ -160,9 +160,10 @@ module.exports = async () => {
         const foodCalendar = result.data.foodCalendar;
         return [{
             url: foodCalendar.icon,
-            title: `方太厨房日签-${foodCalendar.day}`,
+            title: `贝太厨房日签-${foodCalendar.day}`,
             summary: `
-                <img src="${foodCalendar.icon}" referrerpolicy="no-referrer">
+                <img src="${foodCalendar.icon}" referrerpolicy="no-referrer"><br>
+                <a href="http://page.beitaichufang.com/H5Share/menuDetail.html?number=${foodCalendar.directoryNumber}">[查看做法]</a>
             `,
         }];
     };
