@@ -10,7 +10,7 @@ module.exports = async () => {
     } = require('app-libs');
 
     const urls = [
-        'https://rsshub.avosapps.us/juejin/pins',
+        // 'https://rsshub.avosapps.us/juejin/pins',
         // 'https://rsshub.avosapps.us/coding/pp/latest',
         // 'https://rsshub.avosapps.us/ifanr2/digest',
         // 'https://rsshub.avosapps.us/weseepro/newest',
