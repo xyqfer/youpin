@@ -17,7 +17,7 @@ module.exports = async () => {
     // 'https://rsshub.avosapps.us/wubiaoqing/home',
     'https://rsshub.avosapps.us/luojilab/poster/picqqAD838qrRSQj76y0XRB?limit=3',
     'https://mizou.org/rss',
-    'http://growthbox.net/feed/',
+    // 'http://growthbox.net/feed/',
     // 'https://rsshub.avosapps.us/luojilab/course/24/1',
     // 'https://rsshub.avosapps.us/luojilab/course/24/2',
   ];
