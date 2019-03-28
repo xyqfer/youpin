@@ -5,7 +5,7 @@ module.exports = async () => {
     const updateInvestage = require('./updateInvestage');
 
     try {
-        await updateSpecialNews();
+        // await updateSpecialNews();
         await updateInvestage();
 
         return {

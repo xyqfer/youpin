@@ -8,7 +8,7 @@ module.exports = async () => {
     try {
         await updateTechBlog();
         await updateLiteratureBlog();
-        await updateReading();
+        // await updateReading();
 
         return {
             success: true
