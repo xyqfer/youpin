@@ -30,6 +30,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/songshuhui/category/psychology?limit=5',
         'https://rsshub.avosapps.us/songshuhui/category/medi?limit=5',
         'https://rsshub.avosapps.us/matters/latest',
+        'https://rsshub.avosapps.us/kedo/discovery/health',
         'https://rsshub.avosapps.us/iresearch/report',
         'https://rsshub.avosapps.us/mobdata/report',
         // 'https://rsshub.avosapps.us/ukchina/horizon',
