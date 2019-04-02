@@ -38,6 +38,7 @@ module.exports = async () => {
     'https://www.bboysoul.com/atom.xml',
     'https://www.hchstudio.cn/atom.xml',
     'https://www.bennythink.com/feed',
+    'https://luodao.me/rss.html',
     'https://rsshub.avosapps.us/meicai/latest',
     'https://rsshub.avosapps.us/scarletsky/blog?limit=5',
     'https://rsshub.avosapps.us/jartto/blog?limit=3',
