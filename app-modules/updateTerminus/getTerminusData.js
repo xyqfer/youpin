@@ -8,6 +8,9 @@ module.exports = async () => {
 
     const urls = [
         'https://terminus2049.github.io/atom.xml',
+        'http://cnpolitics.org/feed/',
+        'https://chengbao.bitcron.com/feed',
+        'https://jesor.me/feed.xml',
         'https://manjusaka.itscoder.com/atom.xml',
     ];
 
@@ -19,6 +22,7 @@ module.exports = async () => {
                 return {
                     title: item.title,
                     url: item.link,
+                    summary: '',
                 };
             });
         } catch (err) {
@@ -28,11 +32,5 @@ module.exports = async () => {
         }
     });
 
-    return flatten(data).map(({ title, url }) => {
-        return {
-            title,
-            url,
-            summary: '',
-        };
-    });
+    return flatten(data);
 };
