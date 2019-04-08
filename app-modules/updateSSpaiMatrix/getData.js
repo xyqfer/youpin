@@ -34,6 +34,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/mirrormedia/section/596441604bbe120f002a3197',
         'https://rsshub.avosapps.us/mirrormedia/section/5964418a4bbe120f002a3198',
         'https://rsshub.avosapps.us/kedo/discovery/health',
+        'https://rsshub.avosapps.us/ngocn/home?limit=3',
         'https://rsshub.avosapps.us/iresearch/report',
         'https://rsshub.avosapps.us/mobdata/report',
         // 'https://rsshub.avosapps.us/ukchina/horizon',
