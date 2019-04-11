@@ -66,6 +66,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/github/issue/aszx87410/blog?limit=3',
     // 'https://rsshub.avosapps.us/facebook/newsroom/news?limit=3',
     'https://rsshub.avosapps.us/opera/blog?limit=3',
+    'https://matthewstrom.com/feed',
     'https://reactjs.org/feed.xml',
     'https://lob.com/blog/rss',
     // 'https://jsfeeds.com/feed',
