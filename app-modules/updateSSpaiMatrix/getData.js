@@ -24,6 +24,8 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/socialbeta/tag/%E6%A1%88%E4%BE%8B%E4%B8%80%E5%91%A8?limit=1',
         // 'https://rsshub.avosapps.us/socialbeta/tag/%E7%94%B2%E6%96%B9%E4%B9%99%E6%96%B9?limit=1',
         'https://rsshub.avosapps.us/sobooks/newest',
+        'https://rsshub.avosapps.us/kgbook/newest',
+        'https://rsshub.avosapps.us/iamtxt/newest',
         'https://www.duyixing.com/feed',
         'https://rsshub.avosapps.us/amazon/newbook',
         'https://rsshub.avosapps.us/nfcmag/category/2?limit=5',
