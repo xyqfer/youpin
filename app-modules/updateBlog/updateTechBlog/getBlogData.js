@@ -10,7 +10,7 @@ module.exports = async () => {
     'https://www.zhangxinxu.com/wordpress/feed/',
     'https://rsshub.avosapps.us/taobaofed/blog',
     'https://rsshub.avosapps.us/techbridge/blog',
-    'https://rsshub.avosapps.us/upyun/tech',
+    // 'https://rsshub.avosapps.us/upyun/tech',
     'https://rsshub.avosapps.us/timilong/blog',
     'https://dnc1994.com/atom.xml',
     // 'https://www.w3cplus.com/rss.xml',

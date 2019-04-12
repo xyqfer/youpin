@@ -11,7 +11,7 @@ module.exports = async () => {
 
     const urls = [
         'https://rsshub.avosapps.us/sspai/matrix',
-        'https://rsshub.avosapps.us/anitama/channel?limit=5',
+        // 'https://rsshub.avosapps.us/anitama/channel?limit=5',
         'https://luolei.org/rss/',
         'https://rsshub.avosapps.us/qdaily/specialcolumn/63',
         // 'https://rsshub.avosapps.us/reuters/investigates?limit=3',
@@ -30,7 +30,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/nfcmag/category/4?limit=5',
         'https://rsshub.avosapps.us/songshuhui/category/psychology?limit=5',
         'https://rsshub.avosapps.us/songshuhui/category/medi?limit=5',
-        'https://rsshub.avosapps.us/matters/latest',
+        // 'https://rsshub.avosapps.us/matters/latest',
         'https://rsshub.avosapps.us/mirrormedia/section/596441604bbe120f002a3197',
         'https://rsshub.avosapps.us/mirrormedia/section/5964418a4bbe120f002a3198',
         'https://rsshub.avosapps.us/kedo/discovery/health',
