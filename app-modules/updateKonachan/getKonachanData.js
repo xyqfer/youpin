@@ -64,7 +64,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/enjoy/product/newest/216',
         // 'https://linux.pictures/feed',
         // 'https://rsshub.avosapps.us/newseed/invest',
-        'https://cn.nytimes.com/rss/',
+        // 'https://cn.nytimes.com/rss/',
         // 'https://rsshub.app/twitter/user/ChineseWSJ',
         // 'https://rsshub.avosapps.us/jiemian/list/53?limit=3',
         // 'https://rsshub.avosapps.us/newseed/quicklook',
