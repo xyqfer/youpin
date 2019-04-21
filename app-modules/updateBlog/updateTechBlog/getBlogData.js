@@ -53,6 +53,7 @@ module.exports = async () => {
     'https://yrq110.me/index.xml',
     'https://lyric.im/feed',
     'https://webplatform.news/feed.xml',
+    'https://sizovs.net/feed.xml',
     'https://rsshub.avosapps.us/arcentry/blog?limit=3',
     'https://rsshub.avosapps.us/rachelbythebay/feed?limit=3',
     'https://rsshub.avosapps.us/google/developers/web?limit=3',
