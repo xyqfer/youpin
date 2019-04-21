@@ -37,7 +37,7 @@ module.exports = async () => {
   if (compareVersions(ver, dbData.ver) > 0) {
     (async function() {
       const result = await http.get({
-        uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}`,
+        uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}&ver=${ver}`,
         timeout: 600 * 1000,
         json: true,
       });
