@@ -40,6 +40,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/ngocn/home?limit=3',
         'https://rsshub.avosapps.us/iresearch/report',
         'https://rsshub.avosapps.us/mobdata/report',
+        'https://rsshub.avosapps.us/touduyu/sites',
         // 'https://rsshub.avosapps.us/ukchina/horizon',
         // 'https://rsshub.app/youtube/channel/UCb_CkUzhPsHXdrpQl9Zg5aA',
     ];
