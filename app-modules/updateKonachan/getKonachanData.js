@@ -70,6 +70,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/newseed/quicklook',
         'https://www.douban.com/feed/people/shjifeng/notes',
         'https://rsshub.avosapps.us/douban/column/24',
+        'https://rsshub.avosapps.us/bioon/newest',
         // 'https://rsshub.avosapps.us/wsj/video/china?limit=3',
         // 'https://rsshub.avosapps.us/qdaily/tag/594?limit=5',
         // 'https://rsshub.avosapps.us/qdaily/tag/1068?limit=5',
