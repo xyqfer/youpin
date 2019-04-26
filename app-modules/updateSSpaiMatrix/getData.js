@@ -2,12 +2,9 @@
 
 module.exports = async () => {
     const Promise = require('bluebird');
-    const cheerio = require('cheerio');
-    const rp = require('request-promise');
+    const Parser = require('rss-parser');
     const flatten = require('lodash/flatten');
-    const {
-        params
-    } = require('app-libs');
+    const parser = new Parser();
 
     const urls = [
         'https://rsshub.avosapps.us/sspai/matrix',
@@ -47,29 +44,15 @@ module.exports = async () => {
 
     const data = await Promise.mapSeries(urls, async (url) => {
         try {
-            const xmlString = await rp.get({
-                uri: url,
-                headers: {
-                    'User-Agent': params.ua.pc
-                },
-            });
-            const $ = cheerio.load(xmlString, {
-                normalizeWhitespace: true,
-                xmlMode: true
-            });
-            const result = [];
+            const feed = await parser.parseURL(url);
 
-            $('item').each(function() {
-                const $item = $(this);
-
-                result.push({
-                    url: $item.find('link').text(),
-                    title: $item.find('title').text() || '',
-                    summary: $item.find('description').text()
-                });
+            return feed.items.map(item => {
+                return {
+                    title: item.title || '',
+                    url: item.link,
+                    summary: item.content
+                };
             });
-
-            return result;
         } catch (err) {
             console.error(err);
             return [];
