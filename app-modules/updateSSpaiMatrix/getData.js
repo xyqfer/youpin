@@ -8,6 +8,8 @@ module.exports = async () => {
 
     const urls = [
         'https://rsshub.avosapps.us/sspai/matrix',
+        'https://applefans.today/feed/',
+        'http://www.ixiqi.com/feed',
         // 'https://rsshub.avosapps.us/anitama/channel?limit=5',
         'https://luolei.org/rss/',
         'https://rsshub.avosapps.us/qdaily/specialcolumn/63',
