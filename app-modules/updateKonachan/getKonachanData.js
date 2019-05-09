@@ -91,6 +91,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/instagram/user/rejecteddesign',
         'https://rsshub.avosapps.us/instagram/user/beeple_crap?limit=3',
         'https://rsshub.avosapps.us/instagram/user/dailypurrr',
+        'https://rsshub.avosapps.us/instagram/user/simonscatofficial?limit=3',
         'https://rsshub.avosapps.us/twitter/user/wabisabipop2?limit=3',
         'https://rsshub.avosapps.us/twitter/user/learn_reading',
         'https://feeds2.feedburner.com/blogspot/hcCL',

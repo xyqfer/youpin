@@ -113,6 +113,11 @@ const cloudFuncConfig = [
         info: '更新 updateAlipayScheme'
     },
     {
+        name: 'updateInitium',
+        module: 'updateInitium',
+        info: '更新 updateInitium'
+    },
+    {
         name: 'wake',
         module: 'wake',
         info: '定时唤醒'
