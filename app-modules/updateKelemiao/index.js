@@ -27,7 +27,8 @@ module.exports = async () => {
             },
             getTargetData: () => {
                 return getKelemiaoData();
-            }
+            },
+            open: 'safari',
         });
     } catch (err) {
         console.error(err);
