@@ -40,6 +40,7 @@ module.exports = async () => {
     'https://www.bennythink.com/feed',
     'https://luodao.me/rss.html',
     'https://pockies.github.io/feed.xml',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fpoplite.xyz%2Ffeed.xml?limit=1',
     'https://rsshub.avosapps.us/meicai/latest',
     'https://rsshub.avosapps.us/scarletsky/blog?limit=5',
     'https://rsshub.avosapps.us/jartto/blog?limit=3',
