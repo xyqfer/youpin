@@ -40,7 +40,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/iresearch/report',
         // 'https://rsshub.avosapps.us/mobdata/report',
         'https://rsshub.avosapps.us/touduyu/sites',
-        'https://rsshub.avosapps.us/mit/graduateadmissions/index?limit=5',
+        // 'https://rsshub.avosapps.us/mit/graduateadmissions/index?limit=5',
         'https://rsshub.avosapps.us/zhaodao-ai/newest',
         'https://jp.sonic-learning.com/feed/',
         // 'https://rsshub.avosapps.us/ukchina/horizon',

@@ -23,12 +23,12 @@ module.exports = async () => {
                             </h4>
                         </div>
                     `;
-                }
+                },
+                open: 'safari',
             },
             getTargetData: () => {
                 return getKelemiaoData();
             },
-            open: 'safari',
         });
     } catch (err) {
         console.error(err);

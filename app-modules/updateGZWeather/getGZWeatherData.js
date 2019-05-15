@@ -45,7 +45,7 @@ module.exports = async () => {
             },
         });
         const $ = cheerio.load(htmlString);
-        const $weatherList = $('.weatherbox2 > .table_day7');
+        const $weatherList = $('.weatherbox2 .table_day7');
         const todayWeather = parseWeather($weatherList.eq(0));
         const tomorrowWeather = parseWeather($weatherList.eq(1));
         const highestTemperatureDiff = tomorrowWeather.highestTemperature - todayWeather.highestTemperature;
