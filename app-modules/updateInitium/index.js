@@ -22,6 +22,7 @@ module.exports = async () => {
                         </div>
                     `;
                 },
+                device: 'device2',
             },
             getTargetData: () => {
                 return getData();
