@@ -61,6 +61,7 @@ module.exports = async () => {
             });
         } catch (err) {
             console.error(err);
+            console.error(url);
             return [];
         }
     });
