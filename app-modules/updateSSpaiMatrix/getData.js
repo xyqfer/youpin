@@ -32,6 +32,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/songshuhui/category/psychology?limit=5',
         'https://rsshub.avosapps.us/songshuhui/category/medi?limit=5',
         'https://www.darmau.com/rss/',
+        'https://rsshub.avosapps.us/ugediao/category/software?limit=3',
         // 'https://rsshub.avosapps.us/matters/latest',
         // 'https://rsshub.avosapps.us/mirrormedia/section/596441604bbe120f002a3197',
         // 'https://rsshub.avosapps.us/mirrormedia/section/5964418a4bbe120f002a3198',

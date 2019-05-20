@@ -63,6 +63,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/mozilla/blog?limit=3',
     'https://rsshub.avosapps.us/mozilla/hacks?limit=3',
     'https://rsshub.avosapps.us/wechat/miniprogram/developers?limit=3',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.runningcheese.com%2Ffeed?limit=3',
     // 'https://rsshub.avosapps.us/medium/user/netflix-techblog?limit=3',
     'https://rsshub.avosapps.us/medium/user/hulis-blog?limit=3',
     'https://rsshub.avosapps.us/medium/user/@yestyle?limit=3',

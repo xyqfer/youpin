@@ -21,6 +21,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/yuweining/category/p?limit=1',
     'https://rsshub.avosapps.us/yuweining/category/fx?limit=1',
     'https://rsshub.avosapps.us/yuweining/category/shipin?limit=1',
+    'https://rsshub.avosapps.us/ugediao/category/reading?limit=3',
     // 'https://rsshub.avosapps.us/wubiaoqing/home',
     'https://rsshub.avosapps.us/luojilab/poster/picqqAD838qrRSQj76y0XRB?limit=3',
     'https://mizou.org/rss',
