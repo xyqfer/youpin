@@ -27,6 +27,7 @@ module.exports = async () => {
         // 'https://a.jiemian.com/index.php?m=article&a=rss',
         'https://rsshub.avosapps.us/weibo/user/1614282004',
         'https://rsshub.avosapps.us/weibo/user/1684197391',
+        'https://rsshub.avosapps.us/bilibili/user/video/28152409?limit=1',
         // 'https://rsshub.avosapps.us/twitter/user/BBCChina',
         // 'https://rsshub.avosapps.us/weibo/user/5339148412',
         // 'https://rsshub.avosapps.us/weibo/user/5378866839/1076035378866839',

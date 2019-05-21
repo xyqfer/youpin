@@ -13,6 +13,10 @@ module.exports = async () => {
         'https://chengbao.bitcron.com/feed',
         'https://jesor.me/feed.xml',
         'https://manjusaka.itscoder.com/atom.xml',
+        'https://rsshub.avosapps.us/zzz/category/shishipinglun?limit=3',
+        'https://rsshub.avosapps.us/zzz/category/meiriyijian?limit=3',
+        'https://rsshub.avosapps.us/zzz/category/suixinzatan?limit=3',
+        'https://rsshub.avosapps.us/zzz/category/jingcaituijian?limit=3',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
