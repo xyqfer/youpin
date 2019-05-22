@@ -27,6 +27,7 @@
     <script>
         $(function() {
             const $audio = $('#J-audio');
+            const audio = $audio.get(0);
 
             async function randomSong() {
                 const data = await $.ajax({
@@ -44,14 +45,14 @@
             });
 
             $('#J-start').click(function() {
-                const audio = $audio.get(0);
-
                 if (audio.paused) {
                     audio.play();
                 } else {
                     audio.pause();
                 }
             });
+
+            $audio.on('ended', randomSong);
         });
     </script>
 </body>
