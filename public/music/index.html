@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            height: 50vh;
+        }
+    </style>
+</head>
+<body>
+    <audio id="J-audio" playsinline ></audio>
+    <button id="J-start" class="btn">Play / Pause</button>
+    <button id="J-next" class="btn">Next</button>
+
+    <script src="../archive/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function() {
+            const $audio = $('#J-audio');
+
+            async function randomSong() {
+                const data = await $.ajax({
+                    type: 'GET',
+                    url: '../api/v1/music/random',
+                    dataType: 'json',
+                });
+                const src = data.data[0].url;
+                $audio.attr('src', src);
+                $audio.get(0).play();
+            }
+
+            $('#J-next').click(function() {
+                randomSong();
+            });
+
+            $('#J-start').click(function() {
+                const audio = $audio.get(0);
+
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

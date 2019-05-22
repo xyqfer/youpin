@@ -122,4 +122,7 @@ router.get('/readeer/nfcmag/category', require('./readeer/nfcmag/category'));
 router.get('/readeer/nfcmag/content', require('./readeer/nfcmag/content'));
 router.get('/readeer/nfcmag/list', require('./readeer/nfcmag/list'));
 
+router.get('/music/update', require('./music/update'));
+router.get('/music/random', require('./music/random'));
+
 module.exports = router;
