@@ -5,6 +5,7 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
     const uuid = uuidv4();
+    console.log(uuid);
 
     try {
         await saveDbData({

@@ -7,6 +7,7 @@ module.exports = async ({ title = '', content = '', render }) => {
 
     const uuid = uuidv4();
     const scToken = process.env.scToken;
+    console.log(uuid);
 
     try {
         await saveDbData({
