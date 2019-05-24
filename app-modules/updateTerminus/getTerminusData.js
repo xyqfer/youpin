@@ -17,6 +17,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/zzz/category/meiriyijian?limit=3',
         'https://rsshub.avosapps.us/zzz/category/suixinzatan?limit=3',
         'https://rsshub.avosapps.us/zzz/category/jingcaituijian?limit=3',
+        'https://github.com/HuijieL/RenZhengfei/commits.atom',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {

@@ -53,7 +53,7 @@ module.exports = async () => {
     // 'https://rsshub.avosapps.us/yq/publication/22?lilmit=3',
     'http://www.raychase.net/feed',
     'https://yrq110.me/index.xml',
-    'https://lyric.im/feed',
+    'https://rsshub.avosapps.us/lyric/feed',
     'https://webplatform.news/feed.xml',
     'https://sizovs.net/feed.xml',
     'https://rsshub.avosapps.us/arcentry/blog?limit=3',
