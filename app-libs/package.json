@@ -1,6 +1,6 @@
 {
   "name": "app-libs",
-  "version": "1.12.3",
+  "version": "1.12.5",
   "description": "项目公用库",
   "main": "index.js",
   "scripts": {},
