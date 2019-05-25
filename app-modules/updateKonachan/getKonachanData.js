@@ -40,6 +40,7 @@ module.exports = async () => {
         // 'https://rsshub.app/tanwu/products?limit=5',
         'https://feedx.net/rss/bingwallpaper.xml',
         'https://rsshub.avosapps.us/natgeo/dailyphoto',
+        'https://rsshub.avosapps.us/instagram/user/humansofny',
         // 'https://rsshub.app/xiachufang/popular/hot',
         // 'https://rsshub.app/xiachufang/popular/pop',
         // 'https://rsshub.app/xiachufang/popular/week',
