@@ -7,6 +7,7 @@ module.exports = async () => {
     const parser = new Parser();
 
     const urls = [
+        'https://rsshub.avosapps.us/patreon/posts/1968567?limit=1',
         'https://rsshub.avosapps.us/sspai/matrix',
         'https://applefans.today/feed/',
         'http://www.ixiqi.com/feed',
