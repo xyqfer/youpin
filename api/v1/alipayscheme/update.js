@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
     updateDbData({
       dbName,
       data: {
-        info: data,
+        info: JSON.parse(data),
         ver,
       },
       id: dbData.objectId
