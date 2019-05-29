@@ -45,6 +45,11 @@ app.use(cors({
     origin: '*',
 }));
 
+app.use((req, res, next) => {
+    console.log(`${req.originalUrl}, user IP: ${req.ips[0] || req.ip}`);
+    next();
+});
+
 app.get('/', function (req, res) {
     res.render('index', {});
 });
