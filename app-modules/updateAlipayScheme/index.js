@@ -7,9 +7,7 @@ module.exports = async () => {
     http,
     db: {
       getDbData,
-      updateDbData,
     },
-    mail: sendMail
   } = require('app-libs');
   const dbName = 'ipa';
   const name = 'Alipay';
@@ -35,38 +33,9 @@ module.exports = async () => {
   });
 
   if (compareVersions(ver, dbData.ver) > 0) {
-    (async function() {
-      const result = await http.get({
-        uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}&ver=${ver}`,
-        timeout: 600 * 1000,
-        json: true,
-      });
-      
-      if (result && result.success) {
-        updateDbData({
-          dbName,
-          data: {
-            info: result.data,
-            ver,
-          },
-          id: dbData.objectId
-        });
-
-        sendMail({
-          title: 'Alipay Schemes 有更新~',
-          data: [{}],
-          template: () => {
-            return `
-            <div style="margin-bottom: 50px">
-                <a href="https://ibdkopi6vn.avosapps.us/alipayschemes" target="_blank">
-                    <h4>版本${ver}</h4>
-                </a>
-            </div>
-        `;
-          }
-        });
-      }
-    })();
+    http.get({
+      uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}&ver=${ver}`,
+    });
   }
 
   return {

@@ -109,6 +109,7 @@ router.get('/dearmeal/list', require('./dearmeal/list'));
 router.get('/dearmeal/detail/:id', require('./dearmeal/detail'));
 
 router.get('/alipayscheme/list', require('./alipayscheme/list'));
+router.post('/alipayscheme/update', require('./alipayscheme/update'));
 
 router.get('/proxyimage', async (req, res) => {
     request.get(req.query.url).pipe(res);
