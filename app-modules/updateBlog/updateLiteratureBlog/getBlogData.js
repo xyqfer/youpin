@@ -29,6 +29,7 @@ module.exports = async () => {
     'https://mizou.org/rss',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.bukaopu.com%2Ffeed%2F?limit=1',
     'https://rsshub.avosapps.us/shuhui/comics/53',
+    'https://rsshub.avosapps.us/custom/http%3A%2F%2Fwww.calnewport.com%2Fblog%2Ffeed%2F?limit=1',
     // 'https://rsshub.avosapps.us/tophub/LBwdGx6ePx?limit=5',
     // 'https://rsshub.avosapps.us/tophub/Jb0vmWGeB1?limit=5',
     // 'http://growthbox.net/feed/',
