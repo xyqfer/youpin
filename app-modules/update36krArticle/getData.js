@@ -7,8 +7,8 @@ module.exports = async () => {
     const parser = new Parser();
 
     const urls = [
-        'https://rsshub.avosapps.us/36kr/search/article/%E7%A5%9E%E8%AF%91%E5%B1%80?limit=5',
-        'https://rsshub.avosapps.us/36kr/search/topic/%E4%B8%80%E5%91%A8%E5%AE%9D%E8%97%8F%E6%96%87%E7%AB%A0?limit=1',
+        'https://rsshub.avosapps.us/custom/https%3A%2F%2Frsshubhub.herokuapp.com%2F36kr%2Fsearch%2Farticle%2F%25E7%25A5%259E%25E8%25AF%2591%25E5%25B1%2580?limit=5',
+        'https://rsshub.avosapps.us/custom/https%3A%2F%2Frsshubhub.herokuapp.com%2F36kr%2Fsearch%2Ftopic%2F%25E4%25B8%2580%25E5%2591%25A8%25E5%25AE%259D%25E8%2597%258F%25E6%2596%2587%25E7%25AB%25A0?limit=1',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {

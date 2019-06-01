@@ -8,7 +8,7 @@ module.exports = async () => {
     } = require('app-libs');
 
     const htmlString = await rp.get({
-        uri: 'http://kelemiao.cn/',
+        uri: 'http://beiwoo.cn/m/list.php?tid=41',
         headers: {
             'User-Agent': params.ua.pc
         }
@@ -17,16 +17,16 @@ module.exports = async () => {
     const messages = [];
     const $ = cheerio.load(htmlString);
 
-    $('.main_title').each(function () {
+    $('.main_m_title').each(function () {
         const $item = $(this);
-        const $link = $item.find('h2 a');
-        const title = $link.text();
+        const $link = $item.find('a');
+        const title = $item.find('h2').text();
 
         messages.push({
             title,
-            url: `http://kelemiao.cn${$link.attr('href')}`
+            url: `http://beiwoo.cn/m/${$link.attr('href')}`
         });
     });
 
-    return messages;
+    return messages.slice(0, 3);
 };
