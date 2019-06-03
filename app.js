@@ -46,7 +46,8 @@ app.use(cors({
 }));
 
 app.use((req, res, next) => {
-    console.log(`${req.originalUrl}, user IP: ${req.ips[0] || req.ip}`);
+    const ipAddress = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
     next();
 });
 
