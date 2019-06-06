@@ -34,6 +34,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fsexywp.com%2Ffeed?limit=2',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Ftypeblog.net%2Frss?limit=2',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fblanboom.org%2Ffeed%2F?limit=2',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.moeelf.com%2Ffeed%2F?limit=3',
     'https://www.logcg.com/feed',
     'https://miao.li/index.xml',
     'https://www.xcnte.com/feed/',
