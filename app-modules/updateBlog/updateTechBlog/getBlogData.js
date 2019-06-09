@@ -32,6 +32,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.ncameron.org%2Fblog%2Frss%2F?limit=1',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.imperialviolet.org%2Fiv-rss.xml?limit=1',
     'https://www.nuist.today/rss2.xml',
+    'https://rsshub.avosapps.us/custom/http%3A%2F%2Fblog.dngz.net%2Ffeed?limit=3',
     'http://damobing.com/?feed=rss2',
     'https://onevcat.com/feed.xml',
     'http://blog.cnbang.net/feed/',
