@@ -48,6 +48,7 @@ module.exports = async () => {
         // 'https://rsshub.avosapps.us/mit/graduateadmissions/index?limit=5',
         'https://rsshub.avosapps.us/zhaodao-ai/newest',
         'https://jp.sonic-learning.com/feed/',
+        'https://rsshub.avosapps.us/colanekojp/blog?limit=3',
         'https://rsshub.avosapps.us/github/file/leancloud/docs/master/views/leanengine_webhosting_guide.tmpl',
         'https://japanjobs.dev/jobs.xml',
         // 'https://rsshub.avosapps.us/ukchina/horizon',
