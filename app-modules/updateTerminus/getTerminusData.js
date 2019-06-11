@@ -21,7 +21,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/custom/http%3A%2F%2Fwww.googlevoice.net%2Ffeed',
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Fibdkopi6vn.avosapps.us%2Fapi%2Fv1%2Fproxyimage%3Furl%3Dhttps%253A%252F%252Fwww.sunjiwen.com%252Ffeed%252F?limit=3',
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Funee.wang%2Ffeed?limit=1',
-        'https://www.chinesepen.org/feed',
+        // 'https://www.chinesepen.org/feed',
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.fbbi.pw%2Ffeed?limit=1',
     ];
 
