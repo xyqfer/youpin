@@ -29,14 +29,14 @@ module.exports = async () => {
             const $ = cheerio.load(htmlString);
             const repositoryList = [];
 
-            $('.repo-list > li').each(function () {
+            $('article').each(function () {
                 const $elem = $(this);
 
                 repositoryList.push({
-                    name: $elem.find('h3 a').text().replace(/\s+/g, ''),
-                    url: `https://github.com${$elem.find('h3 a').attr('href')}`,
-                    desc: $elem.find('.py-1').text().replace(/\n+/g, '').trim(),
-                    lang: $elem.find('[itemprop="programmingLanguage"]').text().replace(/\n+/g, '').trim()
+                    name: $elem.find('h1').text().replace(/\s+/g, ''),
+                    url: `https://github.com${$elem.find('h1 a').attr('href')}`,
+                    desc: $elem.find('.pr-4').text().replace(/\n+/g, '').trim(),
+                    lang: $elem.find('span[itemprop="programmingLanguage"]').text().replace(/\n+/g, '').trim()
                 });
             });
 
