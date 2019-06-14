@@ -9,7 +9,7 @@ module.exports = async () => {
     const urls = [
         'https://terminus2049.github.io/atom.xml',
         'https://feeds2.feedburner.com/programthink',
-        'http://cnpolitics.org/feed/',
+        // 'http://cnpolitics.org/feed/',
         'https://chengbao.bitcron.com/feed',
         'https://jesor.me/feed.xml',
         'https://manjusaka.itscoder.com/atom.xml',
