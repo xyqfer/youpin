@@ -11,6 +11,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Frsshubhub.herokuapp.com%2F36kr%2Fsearch%2Farticle%2F%25E7%25A7%2591%25E6%258A%2580%25E7%25A5%259E%25E5%259B%259E%25E5%25A4%258D?limit=2',
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Frsshubhub.herokuapp.com%2F36kr%2Fsearch%2Ftopic%2F%25E4%25B8%2580%25E5%2591%25A8%25E5%25AE%259D%25E8%2597%258F%25E6%2596%2587%25E7%25AB%25A0?limit=1',
         'https://rsshub.avosapps.us/github/repos2/awesome-archive',
+        'https://rsshub.avosapps.us/ctolib/latest',
         'https://rsshub.avosapps.us/zhihu/people/answers/cheng-xu-yuan-zai-ri-ben?limit=3',
     ];
 
