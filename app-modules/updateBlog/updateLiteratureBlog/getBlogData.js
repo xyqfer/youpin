@@ -9,7 +9,7 @@ module.exports = async () => {
   const urls = [
     'https://feed.pixnet.net/blog/posts/rss/jht',
     'http://liqi.io/feed/',
-    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fchanghai.org%2Ffeed.xml?limit=5',
+    // 'https://rsshub.avosapps.us/custom/https%3A%2F%2Fchanghai.org%2Ffeed.xml?limit=5',
     'http://yuezhu.org/feed/',
     'http://byte.coffee/feed/podcast/',
     // 'http://www.zreading.cn/feed',
