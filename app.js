@@ -79,6 +79,44 @@ app.get('/archive', function (req, res) {
     });
 });
 
+app.get('/archives', function (req, res) {
+    const { token } = req.query;
+    if (token !== process.env.ARCHIVES_TOKEN) {
+        res.send('err');
+    }
+
+    const getDbData = require('app-libs/db/getDbData');
+
+    getDbData({
+        dbName: 'Archive',
+        limit: 30,
+    }).then((archives) => {
+        const content = archives.reduce((acc, item) => {
+            acc += `
+                <div style="margin-bottom: 50px">
+                    <a href="${process.env.hostName}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
+                        <h4>${item.title}</h4>
+                    </a>
+                    <h5>${item.createdAt}</h5>
+                </div>
+            `;
+
+            return acc;
+        }, '');
+
+        res.render('archive', {
+            title: 'Archives',
+            content
+        });
+    }).catch(err => {
+        console.error(err);
+        res.render(render, {
+            title: '',
+            content: ''
+        });
+    });
+});
+
 app.get('/bbcproxy', async function (req, res) {
     try {
         const { http } = require('app-libs');
