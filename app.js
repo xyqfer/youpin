@@ -90,6 +90,9 @@ app.get('/archives', function (req, res) {
     getDbData({
         dbName: 'Archive',
         limit: 30,
+        query: {
+            descending: ['createdAt']
+        }
     }).then((archives) => {
         const content = archives.reduce((acc, item) => {
             acc += `
