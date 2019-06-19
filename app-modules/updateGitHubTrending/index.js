@@ -74,7 +74,8 @@ module.exports = async () => {
                             </p>
                         </div>
                     `;
-                    }
+                    },
+                    device: 'device2',
                 });
             }
         }
