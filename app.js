@@ -82,7 +82,8 @@ app.get('/archive', function (req, res) {
 app.get('/archives', function (req, res) {
     const { token } = req.query;
     if (token !== process.env.ARCHIVES_TOKEN) {
-        res.send('err');
+        res.status(400).send('Bad Request')
+        return;
     }
 
     const getDbData = require('app-libs/db/getDbData');
@@ -113,11 +114,68 @@ app.get('/archives', function (req, res) {
         });
     }).catch(err => {
         console.error(err);
-        res.render(render, {
+        res.render('archive', {
             title: '',
             content: ''
         });
     });
+});
+
+app.get('/notes', async (req, res) => {
+    const { token } = req.query;
+    if (token !== process.env.NOTES_TOKEN) {
+        res.send('err');
+        return;
+    }
+
+    const getDbData = require('app-libs/db/getDbData');
+
+    try {
+        const notes = await getDbData({
+            dbName: 'Notes',
+            limit: 50,
+            query: {
+                descending: ['createdAt']
+            }
+        });
+    
+        res.render('notes', {
+            title: 'Notes',
+            notes,
+            token,
+        });
+    } catch (err) {
+        console.error(err);
+        res.render('archive', {
+            title: '',
+            content: ''
+        });
+    }
+});
+
+app.post('/note', async (req, res) => {
+    const { token, message } = req.body;
+    if (token !== process.env.NOTES_TOKEN) {
+        res.status(400).send('Bad Request')
+        return;
+    }
+
+    const saveDbData = require('app-libs/db/saveDbData');
+
+    try {
+        await saveDbData({
+            dbName: 'Notes',
+            data: [{
+                message,
+            }],
+        });
+        res.json({
+            success: true,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(400).send('Bad Request')
+    }
 });
 
 app.get('/bbcproxy', async function (req, res) {
