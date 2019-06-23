@@ -26,6 +26,8 @@ module.exports = async () => {
     'http://www.520monkey.com/feed',
     'https://coolshell.cn/feed',
     'https://www.codesky.me/feed/',
+    'https://rsshub.avosapps.us/tutespace/topics?limit=3',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Finsights.thoughtworks.cn%2Ffeed%2F?limit=5',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fimjad.cn%2Ffeed?limit=1',
     'https://rsshub.avosapps.us/zhihu/zhuanlan/mm-fe?limit=2',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.quirksmode.org%2Fblog%2Fatom.xml?limit=1',
