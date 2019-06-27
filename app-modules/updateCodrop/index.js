@@ -45,7 +45,8 @@ module.exports = async () => {
                 data: newData,
                 template: ({ url = '', name = '' }) => {
                     return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br></div>`;
-                }
+                },
+                device: 'device2',
             });
         }
 
