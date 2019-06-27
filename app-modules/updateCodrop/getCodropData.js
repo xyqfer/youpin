@@ -15,11 +15,11 @@ module.exports = async () => {
     const $ = cheerio.load(htmlString);
     const postList = [];
 
-    $('.ct-row article').each(function () {
+    $('.ct-archive-container > article').each(function () {
         postList.push({
             postId: $(this).attr('id'),
-            url: $(this).find('h3 > a').attr('href'),
-            name: $(this).find('h3 > a').text()
+            url: $(this).find('h2 > a').attr('href'),
+            name: $(this).find('h2 > a').text()
         });
     });
 

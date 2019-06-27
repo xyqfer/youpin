@@ -5,24 +5,24 @@ module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const getWechatAnnounceData = require('./getWechatAnnounceData');
 
-    try {
-        // 晚上18点15分前发天气预报邮件
-        const today = new Date();
-        const needSendWeather = today.getHours() === 18 && today.getMinutes() <= 15;
+    // try {
+    //     // 晚上18点15分前发天气预报邮件
+    //     const today = new Date();
+    //     const needSendWeather = today.getHours() === 18 && today.getMinutes() <= 15;
 
-        if (needSendWeather) {
-            await AV.Cloud.run('updateGZWeather', {});
-        }
+    //     if (needSendWeather) {
+    //         await AV.Cloud.run('updateGZWeather', {});
+    //     }
 
-        const needSendLeetcode = today.getHours() === 12 && today.getMinutes() <= 15
-            && (today.getDay() >= 1 && today.getDay() <= 5);
+    //     const needSendLeetcode = today.getHours() === 12 && today.getMinutes() <= 15
+    //         && (today.getDay() >= 1 && today.getDay() <= 5);
 
-        if (needSendLeetcode) {
-            // await AV.Cloud.run('updateLeetcode', {});
-        }
-    } catch (err) {
-        console.log(err);
-    }
+    //     if (needSendLeetcode) {
+    //         // await AV.Cloud.run('updateLeetcode', {});
+    //     }
+    // } catch (err) {
+    //     console.log(err);
+    // }
 
     try {
         const filterKey = 'url';
