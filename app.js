@@ -90,7 +90,7 @@ app.get('/archives', function (req, res) {
 
     getDbData({
         dbName: 'Archive',
-        limit: 30,
+        limit: 200,
         query: {
             descending: ['createdAt']
         }
