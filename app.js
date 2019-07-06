@@ -197,7 +197,7 @@ app.get('/sspaimatrix', async (req, res) => {
                 'User-Agent': params.ua.pc,
             },
         });
-        const content = list.reduce((acc, { id, title, created_at, words_count, banner, }) => {
+        const content = list.reduce((acc, { id, title, created_at, words_count, banner, summary, }) => {
             const date = (new Date(created_at * 1000)).toISOString().split('T')[0];
             
             acc += `
@@ -208,6 +208,7 @@ app.get('/sspaimatrix', async (req, res) => {
                     <div>
                         <p>${date}  / 约 ${words_count} 字</p>
                         <img referrerpolicy="no-referrer" src="https://cdn.sspai.com/${banner}"><br>
+                        ${summary}
                     </div>
                 </div>
             `;
