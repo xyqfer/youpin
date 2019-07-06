@@ -199,6 +199,9 @@ app.get('/sspaimatrix', async (req, res) => {
         });
         const content = list.reduce((acc, { id, title, created_at, words_count, banner, summary, }) => {
             const date = (new Date(created_at * 1000)).toISOString().split('T')[0];
+            const img = banner == '' ?
+                '' : 
+                `<img referrerpolicy="no-referrer" src="https://cdn.sspai.com/${banner}">`;
             
             acc += `
                 <div style="margin-bottom: 30px">
@@ -206,8 +209,8 @@ app.get('/sspaimatrix', async (req, res) => {
                         <h4>${title}</h4>
                     </a>
                     <div>
-                        <p>${date}  / 约 ${words_count} 字</p>
-                        <img referrerpolicy="no-referrer" src="https://cdn.sspai.com/${banner}"><br>
+                        <p>${date} / 约 ${words_count} 字</p>
+                        ${img}<br>
                         ${summary}
                     </div>
                 </div>
