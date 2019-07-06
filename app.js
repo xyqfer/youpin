@@ -208,7 +208,6 @@ app.get('/sspaimatrix', async (req, res) => {
                     <div>
                         <p>${date}  / 约 ${words_count} 字</p>
                         <img referrerpolicy="no-referrer" src="https://cdn.sspai.com/${banner}"><br>
-                        ${summary}
                     </div>
                 </div>
             `;
