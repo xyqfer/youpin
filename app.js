@@ -178,6 +178,56 @@ app.post('/note', async (req, res) => {
     }
 });
 
+app.get('/sspaimatrix', async (req, res) => {
+    const { token, limit = 5 } = req.query;
+    if (token !== process.env.SSPAIMATRIX_TOKEN) {
+        res.send('err');
+        return;
+    }
+
+    const render = 'archive';
+    try {
+        const { http, params, } = require('app-libs');
+        const total = 3477 + 1;
+        const offset = Math.floor(Math.random() * total);
+        const { list } = await http.get({
+            uri: `https://sspai.com/api/v1/articles?offset=${offset}&limit=${limit}&is_matrix=1&sort=matrix_at&include_total=false`,
+            json: true,
+            headers: {
+                'User-Agent': params.ua.pc,
+            },
+        });
+        const content = list.reduce((acc, { id, title, created_at, words_count, banner, }) => {
+            const date = (new Date(created_at * 1000)).toISOString().split('T')[0];
+            
+            acc += `
+                <div style="margin-bottom: 30px">
+                    <a href="https://sspai.com/post/${id}" target="_blank">
+                        <h4>${title}</h4>
+                    </a>
+                    <div>
+                        <p>${date}  / 约 ${words_count} 字</p>
+                        <img referrerpolicy="no-referrer" src="https://cdn.sspai.com/${banner}"><br>
+                        ${summary}
+                    </div>
+                </div>
+            `;
+            return acc;
+        }, '');
+
+        res.render(render, {
+            title: 'sspaimatrix',
+            content,
+        });
+    } catch (err) {
+        console.error(err);
+        res.render(render, {
+            title: '',
+            content: ''
+        });
+    }
+});
+
 app.get('/bbcproxy', async function (req, res) {
     try {
         const { http } = require('app-libs');
