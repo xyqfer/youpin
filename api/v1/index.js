@@ -125,5 +125,6 @@ router.get('/readeer/nfcmag/list', require('./readeer/nfcmag/list'));
 
 router.get('/music/update', require('./music/update'));
 router.get('/music/random', require('./music/random'));
+router.get('/weibo/showData', require('./weibo/showData'));
 
 module.exports = router;
