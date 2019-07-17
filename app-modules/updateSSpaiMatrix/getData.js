@@ -10,7 +10,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/patreon/posts/1968567?limit=1',
         'https://rsshub.avosapps.us/sspai/matrix',
         'https://applefans.today/feed/',
-        'http://www.ixiqi.com/feed',
+        // 'http://www.ixiqi.com/feed',
         // 'https://rsshub.avosapps.us/anitama/channel?limit=5',
         'https://luolei.org/rss/',
         // 'https://rsshub.avosapps.us/qdaily/specialcolumn/63',

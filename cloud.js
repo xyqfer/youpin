@@ -39,7 +39,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily_en',
-        module: ['updateOctocat', 'updateSSpaiMatrix', 'update36krArticle', 'updateTerminus', 'updateFraudInfo', 'updateNBD', 'updateEco'],
+        module: ['updateOctocat', 'updateSSpaiMatrix', 'update36krArticle', 'updateTerminus', 'updateFraudInfo', 'updateNBD'],
         info: '每日更新_en'
     },
     {
@@ -49,7 +49,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateZhihuHot',
-        module: ['updateJuejinPinHot', 'updateAlipayScheme'],
+        module: [],
         info: '更新 ZhihuHot'
     },
     {
