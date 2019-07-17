@@ -23,7 +23,7 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Funee.wang%2Ffeed?limit=1',
         // 'https://www.chinesepen.org/feed',
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.fbbi.pw%2Ffeed?limit=1',
-        'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.twreporter.org%2Fa%2Frss2.xml?limit=5',
+        // 'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.twreporter.org%2Fa%2Frss2.xml?limit=5',
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
