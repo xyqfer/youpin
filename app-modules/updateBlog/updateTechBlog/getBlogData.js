@@ -34,7 +34,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/cythilya/latest?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fharttle.land%2Ffeed.xml?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.barretlee.com%2Frss2.xml?limit=3',
-    'https://rsshub.avosapps.us/custom/https%3A%2F%2Ftodayqq.github.io%2Ffeed',
+    // 'https://rsshub.avosapps.us/custom/https%3A%2F%2Ftodayqq.github.io%2Ffeed',
     'https://rsshub.avosapps.us/custom/http%3A%2F%2Ftaoweng.site%2Findex.php%2Ffeed?limit=3',
     'https://rsshub.avosapps.us/tutespace/topics?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Finsights.thoughtworks.cn%2Ffeed%2F?limit=5',
