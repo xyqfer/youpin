@@ -26,6 +26,7 @@ module.exports = async () => {
     'https://www.jackpu.com/rss/',
     'https://techblog.toutiao.com/rss/',
     'https://blog.imalan.cn/feed',
+    'https://rsshub.avosapps.us/custom/http%3A%2F%2Ffeed.cnblogs.com%2Fblog%2Fu%2F517048%2Frss',
     'https://github.com/framework7io/framework7/releases.atom',
     'http://www.520monkey.com/feed',
     'https://coolshell.cn/feed',
