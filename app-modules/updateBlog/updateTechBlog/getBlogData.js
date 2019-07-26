@@ -59,7 +59,7 @@ module.exports = async () => {
     'https://www.xcnte.com/feed/',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fhunterx.xyz%2Fatom.xml?limit=3',
     'https://qust.me/atom.xml',
-    'https://rsshub.avosapps.us/barryliu1995/blog?limit=3',
+    // 'https://rsshub.avosapps.us/barryliu1995/blog?limit=3',
     'https://www.bboysoul.com/atom.xml',
     'https://www.hchstudio.cn/atom.xml',
     'https://www.bennythink.com/feed',
