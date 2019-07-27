@@ -70,6 +70,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/meicai/latest',
     'https://rsshub.avosapps.us/scarletsky/blog?limit=5',
     'https://rsshub.avosapps.us/jartto/blog?limit=3',
+    'https://rsshub.avosapps.us/custom/http%3A%2F%2Fsunseekers.cn%2Ffeed.xml?limit=3',
     // 'https://rsshub.avosapps.us/ioin/wiki',
     // 'https://rsshub.avosapps.us/yq/publication/14?lilmit=3',
     // 'https://rsshub.avosapps.us/yq/publication/19?lilmit=3',
