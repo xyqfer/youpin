@@ -11,28 +11,21 @@ module.exports = async ({
     try {
         const results = await Promise.mapSeries(offsets, async (page) => {
             try {
-                const result = await rp.post({
+                const result = await rp.get({
                     json: true,
-                    uri: 'https://www.epubit.com/book/search',
+                    uri: 'https://www.pubcloud.com/pubcloud/content/front/portal/getUbookList?page=1&row=20&dateSort=desc&startPrice=&endPrice=&tagId=',
                     headers: {
-                        'User-Agent': params.ua.pc
+                        'User-Agent': params.ua.pc,
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Origin-Domain': 'www.epubit.com',
                     },
-                    form: {
-                        page,
-                        rows: 12,
-                        order: 'desc',
-                        sort: 'publishDate',
-                        listed: 1,
-                        isPaper: 1,
-                        condition: 'booklist'
-                    }
                 });
 
-                return result.data.rows.map((item) => {
+                return result.data.records.map((item) => {
                     return {
                         title: item.name,
-                        url: `https://www.epubit.com/book/detail?id=${item.id}`,
-                        cover: `https://www.epubit.com/oldres/writeBookImg/${item.id}`
+                        url: `https://www.epubit.com/bookDetails?id=${item.code}`,
+                        cover: item.logo,
                     };
                 });
             } catch (err) {
