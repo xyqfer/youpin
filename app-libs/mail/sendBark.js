@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ title = '', content = '', render, device = 'device1', open = 'chrome' }) => {
+module.exports = async ({ title = '', content = '', render, device = 'device1', open = 'chrome', proxy = false, }) => {
     const saveDbData = require('../db/saveDbData');
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
@@ -22,7 +22,7 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
             const hostName = process.env.hostName.replace('https://', 'googlechromes://');
             url = `${hostName}/archive?id=${uuid}&render=${render}`;
         } else {
-            url = 'jsbox://run?name=safariproxy&url=' + encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}&render=${render}`);
+            url = 'jsbox://run?name=safariproxy&url=' + encodeURIComponent(`${proxy ? process.env.proxyUrl : ''}${process.env.hostName}/archive?id=${uuid}&render=${render}`);
         }
         url = encodeURIComponent(url);
         const response = await rp.get({
