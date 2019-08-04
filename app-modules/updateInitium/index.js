@@ -23,7 +23,9 @@ module.exports = async () => {
                 </a>
             </div>
         `;
-      }
+      },
+      device: 'device2',
+      open: 'safari',
     });
 
     return {
