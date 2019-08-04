@@ -24,6 +24,8 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/yuque/book/yubo/words/126420',
     // 'https://51.ruyo.net/feed/',
     'https://www.jackpu.com/rss/',
+    'https://rsshub.avosapps.us/futu/blog?limit=3',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.byvoid.com%2Ffeed?limit=3',
     'https://rsshub.avosapps.us/zhihu/zhuanlan/dreawer?limit=3',
     'https://techblog.toutiao.com/rss/',
     'https://blog.imalan.cn/feed',
