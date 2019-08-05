@@ -41,6 +41,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
         render,
         device,
         open,
+        proxy,
     };
 
     if (params.env.isDev) {
