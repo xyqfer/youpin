@@ -24,6 +24,7 @@ module.exports = async () => {
                 },
                 device: 'device2',
                 open: 'safari',
+                proxy: true,
             },
             getTargetData: () => {
                 return getTerminusData();
