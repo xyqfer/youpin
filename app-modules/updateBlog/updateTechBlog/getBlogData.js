@@ -9,7 +9,7 @@ module.exports = async () => {
   const urls = [
     'http://rsshub.avosapps.us/leancloud/forum/11?limit=5',
     'https://www.zhangxinxu.com/wordpress/feed/',
-    'https://rsshub.avosapps.us/taobaofed/blog',
+    'https://rsshub.avosapps.us/taobaofed/blog?limit=3',
     'https://rsshub.avosapps.us/techbridge/blog',
     // 'https://rsshub.avosapps.us/upyun/tech',
     'https://rsshub.avosapps.us/timilong/blog',
