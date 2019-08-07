@@ -9,7 +9,7 @@ module.exports = async () => {
     const title = 'Initium有更新~';
     let data = [{
       title: '每日简报',
-      url: `${process.env.proxyUrl}https://theinitium.com/channel/news-brief/`,
+      url: `${process.env.proxyUrl}https://theinitium.com`,
     }];
 
     sendMail({
