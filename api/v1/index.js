@@ -127,4 +127,6 @@ router.get('/music/update', require('./music/update'));
 router.get('/music/random', require('./music/random'));
 router.get('/weibo/showData', require('./weibo/showData'));
 
+router.post('/furigana/translate', require('./furigana'));
+
 module.exports = router;
