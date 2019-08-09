@@ -18,14 +18,27 @@ module.exports = async (content = '') => {
     const $ = cheerio.load(data, {
         xmlMode: true,
     });
-    const result = $('Word').map(function() {
+    let result = [];
+    $('Word').each(function() {
         const $item = $(this);
+        let text = $item.find('Surface').text();
+        let furigana = $item.find('Furigana').text();
 
-        return {
-            text: $item.find('Surface').text(),
-            furigana: $item.find('Furigana').text(),
-        };
-    }).get();
+        if ($item.find('SubWordList').length > 0) {
+            $item.find('SubWordList > SubWord').each(function() {
+                const $item = $(this);
+                result.push({
+                    text: $item.find('Surface').text(),
+                    furigana: $item.find('Furigana').text(),
+                });
+            });
+        } else {
+            result.push({
+                text,
+                furigana,
+            });
+        }
+    });
 
     return result;
 };
