@@ -86,6 +86,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/lyric/feed',
     'https://webplatform.news/feed.xml',
     'https://sizovs.net/feed.xml',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.chenhuijing.com%2Ffeed?limit=3',
     'https://rsshub.avosapps.us/arcentry/blog?limit=3',
     'https://rsshub.avosapps.us/rachelbythebay/feed?limit=3',
     'https://rsshub.avosapps.us/google/developers/web?limit=3',
