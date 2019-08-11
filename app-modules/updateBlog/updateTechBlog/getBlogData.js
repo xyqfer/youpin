@@ -107,6 +107,7 @@ module.exports = async () => {
     'https://matthewstrom.com/feed.xml',
     'https://reactjs.org/feed.xml',
     'https://lob.com/blog/rss',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Ffrontendweekly.tokyo%2Ffeed?limit=1',
     // 'https://jsfeeds.com/feed',
     // 'https://itnext.io/feed',
   ];
