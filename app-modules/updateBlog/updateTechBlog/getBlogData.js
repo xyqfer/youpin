@@ -34,6 +34,8 @@ module.exports = async () => {
     'http://www.520monkey.com/feed',
     'https://coolshell.cn/feed',
     'https://www.codesky.me/feed/',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Frebornix.com%2Fatom?limit=3',
+    'https://rsshub.avosapps.us/zhihu/zhuanlan/c_1138411370197536768?limit=5',
     'https://rsshub.avosapps.us/404forest/latest?limit=3',
     'https://rsshub.avosapps.us/cythilya/latest?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fharttle.land%2Ffeed.xml?limit=3',

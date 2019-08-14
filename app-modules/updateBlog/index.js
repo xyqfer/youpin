@@ -9,7 +9,7 @@ module.exports = async () => {
     try {
         await updateTechBlog();
         await updateLiteratureBlog();
-        await updateJpBlog();
+        // await updateJpBlog();
         // await updateReading();
 
         return {

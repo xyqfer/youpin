@@ -26,6 +26,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/custom/https%3A%2F%2F1078503.org%2Findex.xml?limit=5&filterout=%E6%B1%BD%E8%BD%A6',
     // 'https://qingniantuzhai.com/rss/',
     'https://rsshub.avosapps.us/zhihu/zhuanlan/c_1085975047386050560?limit=1',
+    'https://rsshub.avosapps.us/zhihu/people/answers/xiang-yu-90-16-61?limit=5',
     // 'https://rsshub.avosapps.us/yuweining/category/b?limit=1',
     // 'https://rsshub.avosapps.us/yuweining/category/p?limit=1',
     // 'https://rsshub.avosapps.us/yuweining/category/fx?limit=1',
