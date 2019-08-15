@@ -22,6 +22,7 @@ module.exports = async () => {
     'http://www.alloyteam.com/feed/',
     // 'https://rsshub.avosapps.us/fundebug/latest?limit=5',
     'https://rsshub.avosapps.us/yuque/book/yubo/words/126420',
+    'https://rsshub.avosapps.us/zhihu/zhuanlan/c_1142388050335309824?limit=3',
     // 'https://51.ruyo.net/feed/',
     'https://www.jackpu.com/rss/',
     'https://rsshub.avosapps.us/futu/blog?limit=3',
