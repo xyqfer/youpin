@@ -23,7 +23,8 @@ module.exports = async () => {
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Funee.wang%2Ffeed?limit=1',
         // 'https://www.chinesepen.org/feed',
         'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.fbbi.pw%2Ffeed?limit=1',
-        'https://rsshub.avosapps.us/tophub/7GdaK3YoQy?filter=%E6%99%A8%E8%AE%AF',
+        // 'https://rsshub.avosapps.us/tophub/7GdaK3YoQy?filter=%E6%99%A8%E8%AE%AF',
+        'https://rsshub.avosapps.us/pintu360/search/%E9%80%94%E5%B0%8F%E8%90%8C?filter=%E6%99%A8%E8%AE%AF&limit=2',
         // 'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.twreporter.org%2Fa%2Frss2.xml?limit=5',
     ];
 
