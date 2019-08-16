@@ -107,6 +107,7 @@ module.exports = async () => {
     'https://rsshub.avosapps.us/github/issue/aszx87410/blog?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fwww.codewall.co.uk%2Ffeed%2F?limit=3',
     'https://rsshub.avosapps.us/michaelnthiessen/blog?limit=5',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Ffeeds.feedburner.com%2F2ality?limit=3',
     // 'http://rsshub.avosapps.us/zapier/blog/recent?limit=3',
     // 'https://rsshub.avosapps.us/facebook/newsroom/news?limit=3',
     'https://rsshub.avosapps.us/opera/blog?limit=3',
