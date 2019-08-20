@@ -120,6 +120,7 @@ module.exports = async () => {
     'https://matthewstrom.com/feed.xml',
     'https://reactjs.org/feed.xml',
     'https://lob.com/blog/rss',
+    'https://rsshub.avosapps.us/custom/http%3A%2F%2Ffeeds.feedburner.com%2Facko%2FGMkJ?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fcss-tricks.com%2Fauthor%2Fsimevidas%2Ffeed%2F?limit=1',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Ffrontendweekly.tokyo%2Ffeed?limit=1',
     // 'https://jsfeeds.com/feed',
