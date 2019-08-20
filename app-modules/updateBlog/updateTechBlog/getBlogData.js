@@ -36,6 +36,7 @@ module.exports = async () => {
     'https://coolshell.cn/feed',
     'https://www.codesky.me/feed/',
     'https://rsshub.avosapps.us/zhihu/zhuanlan/vczh-nichijou?limit=3',
+    'https://rsshub.avosapps.us/zhihu/people/answers/zi-yun-fei?limit=3',
     'https://rsshub.avosapps.us/custom/http%3A%2F%2Fblog.devtang.com%2Fatom.xml?limit=3',
     'https://rsshub.avosapps.us/custom/https%3A%2F%2Fhijiangtao.github.io%2Ffeed?limit=3',
     'https://rsshub.avosapps.us/github/issue/riskers/blog?limit=3',
