@@ -7,7 +7,7 @@ module.exports = async () => {
   let parser = new Parser();
 
   const urls = [
-    'http://rsshub.avosapps.us/leancloud/forum/11?limit=5',
+    'https://rsshub.avosapps.us/leancloud/forum/11?limit=5',
     'https://www.zhangxinxu.com/wordpress/feed/',
     'https://rsshub.avosapps.us/taobaofed/blog?limit=3',
     'https://rsshub.avosapps.us/techbridge/blog',
