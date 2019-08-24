@@ -27,6 +27,8 @@ module.exports = async () => {
     // 'https://qingniantuzhai.com/rss/',
     'https://rsshub.avosapps.us/zhihu/zhuanlan/c_1085975047386050560?limit=1',
     'https://rsshub.avosapps.us/zhihu/people/answers/xiang-yu-90-16-61?limit=5',
+    'https://rsshub.avosapps.us/custom/https%3A%2F%2Fchengbaoyuedu.cn%2Ffeed%2F',
+    'https://rsshub.avosapps.us/iyiou/search/%E4%B8%80%E5%91%A8%E9%A4%90%E9%A5%AE?filter=%E4%B8%80%E5%91%A8%E9%A4%90%E9%A5%AE&limit=1',
     // 'https://rsshub.avosapps.us/yuweining/category/b?limit=1',
     // 'https://rsshub.avosapps.us/yuweining/category/p?limit=1',
     // 'https://rsshub.avosapps.us/yuweining/category/fx?limit=1',
