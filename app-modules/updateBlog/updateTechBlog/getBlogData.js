@@ -11,6 +11,7 @@ module.exports = async () => {
     'https://www.zhangxinxu.com/wordpress/feed/',
     'https://rsshub.avosapps.us/taobaofed/blog?limit=3',
     'https://rsshub.avosapps.us/techbridge/blog',
+    'https://jacobchang.cn/archives/',
     // 'https://rsshub.avosapps.us/upyun/tech',
     'https://rsshub.avosapps.us/timilong/blog',
     'https://rsshub.avosapps.us/tophub/3QeLXYxe7k?limit=1',
