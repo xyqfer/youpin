@@ -10,10 +10,8 @@ const {
 } = require('app-libs/db');
 
 const mapKey = (item) => {
-  if (item.link) {
-    item.url = item.link;
-    delete item.link;
-  }
+  item.url = item.link;
+  delete item.link;
 
   if (item.content) {
     item.summary = item.content;
