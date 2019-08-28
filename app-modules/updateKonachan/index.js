@@ -2,7 +2,7 @@
 
 module.exports = async () => {
     const updateContainer = require('app-containers/update');
-    const getKonachanData = require('./getKonachanData');
+    const fetchRSS = require('app-containers/fetchRSS');
 
     const filterKey = 'url';
     const dbName = 'Konachan';
@@ -30,7 +30,10 @@ module.exports = async () => {
                 proxy: true,
             },
             getTargetData: () => {
-                return getKonachanData();
+                return fetchRSS({
+                    source: 'RSS_Konachan',
+                    field: ['title', 'link', 'content'],
+                });
             },
         });
     } catch (err) {

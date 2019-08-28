@@ -1,15 +1,15 @@
 'use strict';
 
-module.exports = () => {
+module.exports = async () => {
     const rp = require('request-promise');
+    const { getDbData } = require('app-libs/db');
 
-    const urls = [
-        'https://sy2bnjwp1a.leanapp.cn',
-        'https://ibdkopi6vn.avosapps.us/',
-        'https://gfvlj9un2g.avosapps.us/',
-        'https://rsshub.avosapps.us/',
-        // 'https://ybhdqmyloo.us-south.cf.appdomain.cloud/',
-    ];
+    const dbData = await getDbData({
+        dbName: 'Wake',
+      });
+    const urls = dbData.map(({ url, }) => {
+        return url;
+    });
 
     Promise.all(
         urls.map((uri) => {

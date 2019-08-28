@@ -2,7 +2,7 @@
 
 module.exports = async () => {
   const updateContainer = require('app-containers/update');
-  const getBlogData = require('./getBlogData');
+  const fetchRSS = require('app-containers/fetchRSS');
 
   const filterKey = 'url';
   const dbName = 'WechatAnnounce';
@@ -25,7 +25,9 @@ module.exports = async () => {
         device: 'device2',
       },
       getTargetData: () => {
-        return getBlogData();
+        return fetchRSS({
+          source: 'RSS_TechBlog',
+        });
       }
     });
   } catch (err) {

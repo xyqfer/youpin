@@ -2,7 +2,7 @@
 
 module.exports = async () => {
     const updateContainer = require('app-containers/update');
-    const getBooksetData = require('./getBooksetData');
+    const fetchRSS = require('app-containers/fetchRSS');
 
     const filterKey = 'url';
     const dbName = 'Konachan';
@@ -29,7 +29,10 @@ module.exports = async () => {
                 open: 'safari',
             },
             getTargetData: () => {
-                return getBooksetData();
+                return fetchRSS({
+                    source: 'RSS_Bookset',
+                    field: ['title', 'link', 'content'],
+                });
             },
         });
     } catch (err) {

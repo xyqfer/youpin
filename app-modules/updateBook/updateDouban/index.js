@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async () => {
-    const getDoubanData = require('./getDoubanData');
+    const fetchRSS = require('app-containers/fetchRSS');
     const {
         db: {
             getDbData,
@@ -19,7 +19,25 @@ module.exports = async () => {
                 descending: ['updatedAt']
             }
         });
-        const doubanData = await getDoubanData();
+        const doubanData = await fetchRSS({
+            source: 'RSS_DoubanBook',
+            field: ['title', 'link', 'content'],
+            map: (item) => {
+                const url = item.link;
+                const cover = '';
+                const name = item.title;
+                const desc = item.content;
+                const pubInfo = '';
+        
+                return {
+                    url,
+                    cover,
+                    name,
+                    desc,
+                    pubInfo,
+                };
+            },
+        });
 
         const newData = doubanData.filter((item) => {
             for (let i = 0; i < dbData.length; i++) {

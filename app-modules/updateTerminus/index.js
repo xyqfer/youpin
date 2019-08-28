@@ -2,7 +2,7 @@
 
 module.exports = async () => {
     const updateContainer = require('app-containers/update');
-    const getTerminusData = require('./getTerminusData');
+    const fetchRSS = require('app-containers/fetchRSS');
 
     const filterKey = 'url';
     const dbName = 'Konachan';
@@ -27,7 +27,19 @@ module.exports = async () => {
                 proxy: true,
             },
             getTargetData: () => {
-                return getTerminusData();
+                return fetchRSS({
+                    source: 'RSS_Terminus',
+                    field: ['title', 'link'],
+                    map: (item) => {
+                        if (item.link) {
+                          item.url = item.link;
+                          delete item.link;
+                        }
+                      
+                        item.summary = '';
+                        return item;
+                    },
+                });
             },
         });
     } catch (err) {
