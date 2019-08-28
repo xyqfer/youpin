@@ -29,6 +29,7 @@ module.exports = (params = {}) => {
         filterKey: '',
         filterData: function (dbData, targetData) {
             return Promise.filter(targetData, async (item) => {
+                console.log(this.filterKey)
                 for (let i = 0; i < dbData.length; i++) {
                     if (item[this.filterKey] === dbData[i][this.filterKey]) {
                         return false;
