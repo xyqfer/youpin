@@ -48,6 +48,11 @@ const cloudFuncConfig = [
         info: '更新 Konachan'
     },
     {
+        name: 'update36krArticle',
+        module: ['update36krArticle'],
+        info: '更新 update36krArticle'
+    },
+    {
         name: 'updateZhihuHot',
         module: [],
         info: '更新 ZhihuHot'
