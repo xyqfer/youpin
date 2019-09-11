@@ -34,7 +34,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateGitHubAndGitLabTrending',
-        module: ['updateGitHubTrending', 'updateGitLabTrending'],
+        module: ['updateGitHubTrending'],
         info: '更新 GitHub Trending && GitLab Trending'
     },
     {
