@@ -231,6 +231,34 @@ app.get('/sspaimatrix', async (req, res) => {
     }
 });
 
+app.get('/theinitium', async (req, res) => {
+    const { slug, } = req.query;
+
+    const render = 'archive';
+    try {
+        const { http, params, } = require('app-libs');
+        const response = await http.get({
+            uri: `https://api.theinitium.com/api/v1/article/detail/?language=zh-hans&slug=${slug}`,
+            json: true,
+            headers: {
+                'User-Agent': params.ua.pc,
+                'Authorization': `Basic ${process.env.THEINITIUM_TOKEN}`,
+            },
+        });
+
+        res.render(render, {
+            title: response.headline,
+            content: response.content,
+        });
+    } catch (err) {
+        console.error(err);
+        res.render(render, {
+            title: '',
+            content: ''
+        });
+    }
+});
+
 app.get('/bbcproxy', async function (req, res) {
     try {
         const { http } = require('app-libs');
