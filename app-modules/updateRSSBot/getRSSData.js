@@ -52,5 +52,7 @@ module.exports = async () => {
     }
   });
 
-  return uniqBy(flatten(data), 'link');
+  return uniqBy(flatten(data).filter(({ link }) => {
+    return !!link;
+  }), 'link');
 };

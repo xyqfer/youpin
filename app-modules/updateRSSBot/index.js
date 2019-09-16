@@ -24,7 +24,6 @@ module.exports = async () => {
     });
     const filterKey = 'link';
     newData = await Promise.filter(newData, async (item) => {
-      console.log(item)
       const dbItem = await getDbData({
         dbName,
         limit: 1,
