@@ -27,6 +27,7 @@ module.exports = async () => {
         return {
           title,
           link,
+          source: url,
         };
       });
 
