@@ -113,7 +113,17 @@ router.post('/alipayscheme/update', require('./alipayscheme/update'));
 
 router.get('/proxyimage', async (req, res) => {
     console.log(req.headers)
-    request.get(req.query.url).pipe(res);
+    const { url } = req.query
+    const headers = {};
+
+    if (req.headers.range) {
+        headers.Range = req.headers.range;
+    }
+
+    request.get({
+        url,
+        headers,
+    }).pipe(res);
 });
 
 router.get('/readeer/zhihu/list', require('./readeer/zhihu/list'));
