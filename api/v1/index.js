@@ -112,7 +112,6 @@ router.get('/alipayscheme/list', require('./alipayscheme/list'));
 router.post('/alipayscheme/update', require('./alipayscheme/update'));
 
 router.get('/proxyimage', async (req, res) => {
-    console.log(req.headers)
     const { url } = req.query
     const headers = {};
 
