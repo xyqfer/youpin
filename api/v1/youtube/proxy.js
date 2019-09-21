@@ -8,29 +8,35 @@ const getUrl = async (id) => {
     const dbName = 'Youtube';
     let url = '';
 
-    const dbItem = await getDbData({
-        dbName,
-        limit: 1,
-        query: {
-          equalTo: ['id', id]
-        }
-    });
-
-    if (dbItem.length === 0) {
-        const { formats } = await ytdl.getInfo(id);
-        url = formats.filter((item) => {
-            return item.container === "mp4";
-        })[0].url;
-
-        await saveDbData({
-            dbName,
-            data: [{
-                id,
-                url,
-            }],
-        });
+    if (process.env.YOUTUBE_MAP[id]) {
+        url = process.env.YOUTUBE_MAP[id];
     } else {
-        url = dbItem[0].url;
+        const dbItem = await getDbData({
+            dbName,
+            limit: 1,
+            query: {
+              equalTo: ['id', id]
+            }
+        });
+
+        if (dbItem.length === 0) {
+            const { formats } = await ytdl.getInfo(id);
+            url = formats.filter((item) => {
+                return item.container === "mp4";
+            })[0].url;
+    
+            await saveDbData({
+                dbName,
+                data: [{
+                    id,
+                    url,
+                }],
+            });
+        } else {
+            url = dbItem[0].url;
+        }
+
+        process.env.YOUTUBE_MAP[id] = url;
     }
 
     return url;
