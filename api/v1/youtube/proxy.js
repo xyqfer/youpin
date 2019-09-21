@@ -2,18 +2,48 @@
 
 const ytdl = require('ytdl-core');
 const request = require('request');
+const { getDbData, saveDbData } = require('app-libs/db');
+
+const getUrl = async (id) => {
+    const dbName = 'Youtube';
+    let url = '';
+
+    const dbItem = await getDbData({
+        dbName,
+        limit: 1,
+        query: {
+          equalTo: ['id', id]
+        }
+    });
+
+    if (dbItem.length === 0) {
+        const { formats } = await ytdl.getInfo(id);
+        url = formats.filter((item) => {
+            return item.container === "mp4";
+        })[0].url;
+
+        await saveDbData({
+            dbName,
+            data: [{
+                id,
+                url,
+            }],
+        });
+    } else {
+        url = dbItem[0].url;
+    }
+
+    return url;
+};
 
 module.exports = async (req, res) => {
     const { id } = req.params;
-  
-    const { formats } = await ytdl.getInfo(id);
-    const { url } = formats.filter((item) => {
-        return item.container === "mp4" && item.resolution === '1080p';
-    })[0];
+    const url = await getUrl(id);
     const headers = {};
 
     if (req.headers.range) {
         headers.Range = req.headers.range;
+        console.log(req.headers.range);
     }
 
     request.get({
