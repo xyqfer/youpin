@@ -7,9 +7,10 @@ const { getDbData, saveDbData } = require('app-libs/db');
 const getUrl = async (id) => {
     const dbName = 'Youtube';
     let url = '';
+    let YOUTUBE_MAP = JSON.parse(process.env.YOUTUBE_MAP);
 
-    if (process.env.YOUTUBE_MAP[id]) {
-        url = process.env.YOUTUBE_MAP[id];
+    if (YOUTUBE_MAP[id]) {
+        url = YOUTUBE_MAP[id];
     } else {
         const dbItem = await getDbData({
             dbName,
@@ -36,7 +37,8 @@ const getUrl = async (id) => {
             url = dbItem[0].url;
         }
 
-        process.env.YOUTUBE_MAP[id] = url;
+        YOUTUBE_MAP[id] = url;
+        process.env.YOUTUBE_MAP = JSON.stringify(YOUTUBE_MAP);
     }
 
     return url;
