@@ -44,7 +44,8 @@
     "simple-plist": "^1.0.0",
     "subtitles-parser": "0.0.2",
     "unescape": "^1.0.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "ytdl-core": "^0.29.7"
   },
   "devDependencies": {
     "jest": "^22.4.2",
