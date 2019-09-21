@@ -129,6 +129,6 @@ router.get('/weibo/showData', require('./weibo/showData'));
 
 router.post('/furigana/translate', require('./furigana'));
 
-router.get('/youtube/proxy/:id', require('./youtube/proxy'));
+router.get('/youtube/proxy/:id.mp4', require('./youtube/proxy'));
 
 module.exports = router;
