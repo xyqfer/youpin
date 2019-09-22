@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ dbName = '', limit = 1000, query = {} }) => {
+module.exports = async ({ dbName = '', limit = 1000, query = {}, select, }) => {
     const AV = require('leanengine');
     const isString = require('lodash/isString');
 
@@ -19,6 +19,10 @@ module.exports = async ({ dbName = '', limit = 1000, query = {} }) => {
     });
 
     q.limit(limit);
+
+    if (select) {
+        q.select(select);
+    }
 
     const data = await q.find();
     return data.map((item) => {

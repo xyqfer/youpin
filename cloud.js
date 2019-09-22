@@ -59,7 +59,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'update3PerDay',
-        module: ['updateWechatAnnounce', 'updateJpAnnounce', 'updateNbdNews'],
+        module: ['updateWechatAnnounce', 'updateJpAnnounce', 'updateNbdNews', 'updateNHKEasyNews'],
         info: '每日三更'
     },
     {
@@ -121,6 +121,11 @@ const cloudFuncConfig = [
         name: 'updateInitium',
         module: 'updateInitium',
         info: '更新 updateInitium'
+    },
+    {
+        name: 'updateNHKEasyNews',
+        module: 'updateNHKEasyNews',
+        info: '更新 updateNHKEasyNews'
     },
     {
         name: 'wake',
