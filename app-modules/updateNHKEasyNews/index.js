@@ -9,7 +9,7 @@ module.exports = async () => {
   const dbName = 'NHKEasyNews';
 
   try {
-    const filterKey = 'url';
+    const filterKey = 'easyUrl';
     let [dbData, newsData] = await Promise.all([
       db.getDbData({
         dbName,
@@ -18,8 +18,8 @@ module.exports = async () => {
       getData(),
     ]);
     
-    let newData = newsData.filter(({ url }) => {
-        return !dbData.includes(url);
+    let newData = newsData.filter(({ easyUrl }) => {
+        return !dbData.includes(easyUrl);
     });
     newData = await Promise.filter(newData, async (item) => {
       const dbItem = await db.getDbData({
@@ -40,7 +40,7 @@ module.exports = async () => {
         newData = await Promise.mapSeries(newData, async (item) => {
             try {
                 const htmlString = await http.get({
-                    uri: item.url,
+                    uri: item.easyUrl,
                     headers: {
                         'User-Agent': params.ua.pc
                     },

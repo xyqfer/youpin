@@ -24,7 +24,8 @@ module.exports = async () => {
         items.forEach((news) => {
             let newsData = {
                 title: news.title,
-                url: news.news_web_url,
+                easyUrl: `https://www3.nhk.or.jp/news/easy/${news.news_id}/${news.news_id}.html`,
+                webUrl: news.news_web_url,
                 time: news.news_prearranged_time,
             };
 
