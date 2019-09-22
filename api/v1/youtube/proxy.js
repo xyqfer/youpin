@@ -2,7 +2,6 @@
 
 const ytdl = require('ytdl-core');
 const request = require('request');
-const URL = require('url');
 
 const getUrl = async (id) => {
     let url = '';
