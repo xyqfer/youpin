@@ -2,42 +2,25 @@
 
 const ytdl = require('ytdl-core');
 const request = require('request');
-const { getDbData, saveDbData } = require('app-libs/db');
+const URL = require('url');
 
 const getUrl = async (id) => {
-    const dbName = 'Youtube';
     let url = '';
     let YOUTUBE_MAP = JSON.parse(process.env.YOUTUBE_MAP);
 
-    if (YOUTUBE_MAP[id]) {
-        url = YOUTUBE_MAP[id];
+    if (YOUTUBE_MAP[id] && (YOUTUBE_MAP[id].expire - Date.now() > 0)) {
+        url = YOUTUBE_MAP[id].url;
     } else {
-        const dbItem = await getDbData({
-            dbName,
-            limit: 1,
-            query: {
-              equalTo: ['id', id]
-            }
-        });
+        const { formats } = await ytdl.getInfo(id);
+        url = formats.filter((item) => {
+            return item.container === "mp4";
+        })[0].url;
+        const expire = (new URL(url)).searchParams.get('expire') * 1000;
 
-        if (dbItem.length === 0) {
-            const { formats } = await ytdl.getInfo(id);
-            url = formats.filter((item) => {
-                return item.container === "mp4";
-            })[0].url;
-    
-            await saveDbData({
-                dbName,
-                data: [{
-                    id,
-                    url,
-                }],
-            });
-        } else {
-            url = dbItem[0].url;
-        }
-
-        YOUTUBE_MAP[id] = url;
+        YOUTUBE_MAP[id] = {
+            url,
+            expire,
+        };
         process.env.YOUTUBE_MAP = JSON.stringify(YOUTUBE_MAP);
     }
 
