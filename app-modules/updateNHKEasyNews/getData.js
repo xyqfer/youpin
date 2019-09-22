@@ -6,7 +6,7 @@ const {
 } = require('app-libs');
 
 module.exports = async () => {
-    const result = await http.get({
+    let result = await http.get({
         uri: 'https://www3.nhk.or.jp/news/easy/news-list.json',
         headers: {
             'User-Agent': params.ua.pc
