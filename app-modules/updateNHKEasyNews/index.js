@@ -22,7 +22,7 @@ module.exports = async () => {
         return !dbData.includes(url);
     });
     newData = await Promise.filter(newData, async (item) => {
-      const dbItem = await getDbData({
+      const dbItem = await db.getDbData({
         dbName,
         limit: 1,
         query: {
