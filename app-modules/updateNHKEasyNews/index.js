@@ -38,22 +38,33 @@ module.exports = async () => {
 
     if (newData.length > 0) {
         newData = await Promise.mapSeries(newData, async (item) => {
-            const htmlString = await http.get({
-                uri: item.url,
-                headers: {
-                    'User-Agent': params.ua.pc
-                },
+            try {
+                const htmlString = await http.get({
+                    uri: item.url,
+                    headers: {
+                        'User-Agent': params.ua.pc
+                    },
+                });
+                const $ = cheerio.load(htmlString);
+                item.content = $('#js-article-body').html();
+
+                return item;
+            } catch(err) {
+                console.log(err);
+                return null;
+            }
+        });
+
+        newData = newData.filter((item) => {
+            return !!item;
+        });
+
+        if (newData.length > 0) {
+            db.saveDbData({
+                dbName,
+                data: newData,
             });
-            const $ = cheerio.load(htmlString);
-            item.content = $('#js-article-body').html();
-
-            return item;
-        });
-
-        db.saveDbData({
-            dbName,
-            data: newData,
-        });
+        }
     }
 
     return {
