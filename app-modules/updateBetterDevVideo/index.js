@@ -39,7 +39,7 @@ module.exports = async () => {
     if (newData.length > 0) {
         newData = await Promise.mapSeries(newData, async (item) => {
             try {
-                const info = await ytdl.getInfo(id);
+                const info = await ytdl.getInfo(item.link);
                 item.id = info.video_id;
                 item.title = info.title;
                 item.description = info.description;
