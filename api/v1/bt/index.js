@@ -5,16 +5,20 @@ const createRangeObj = (range) => {
     let rangeObj = {};
 
     try {
-        let [ start, end ] = range.split('-');
-        start = parseInt(start);
-        end = parseInt(end);
+        let [ unit, ranges ] = range.split('=');
 
-        if (!isNaN(start)) {
-            rangeObj.start = start;
-        }
+        if (unit.toLowerCase() === 'bytes') {
+            let [ start, end ] = ranges.split('-');
+            start = parseInt(start);
+            end = parseInt(end);
 
-        if (!isNaN(end)) {
-            rangeObj.end = end;
+            if (!isNaN(start)) {
+                rangeObj.start = start;
+            }
+
+            if (!isNaN(end)) {
+                rangeObj.end = end;
+            }
         }
     } catch(err) {
         console.error(err);
