@@ -37,13 +37,18 @@ module.exports = async (req, res) => {
         rangeObj = createRangeObj(req.headers.range);
     }
 
-    utils.getBt(torrentId, (data) => {
+    utils.getBt(torrentId, ({ file, length, }) => {
         if (rangeObj.start && rangeObj.end) {
+            const { start, end = length } = rangeObj;
             res.status(206);
-            res.set('Content-Range', `bytes ${rangeObj.start}-${rangeObj.end}/${data.length}`);
+            res.set({
+                'Content-Type': 'video/mp4',
+                'Content-Length': end - start + 1,
+                'Content-Range': `bytes ${start}-${end}/${length}`,
+                'Accept-Ranges': 'bytes',
+            });
         }
         
-        console.log(rangeObj);
-        data.file.createReadStream(rangeObj).pipe(res);
+        file.createReadStream(rangeObj).pipe(res);
     });
 };
