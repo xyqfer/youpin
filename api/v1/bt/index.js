@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
     }
 
     utils.getBt(torrentId, ({ file, length, }) => {
-        if (rangeObj.start && rangeObj.end) {
+        if (rangeObj.start !== undefined && rangeObj.end) {
             const { start, end = length } = rangeObj;
             res.status(206);
             res.set({
@@ -49,8 +49,7 @@ module.exports = async (req, res) => {
             });
         }
 
-        console.log(rangeObj)
-        
+        console.log(rangeObj);
         file.createReadStream(rangeObj).pipe(res);
     });
 };
