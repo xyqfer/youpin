@@ -10,8 +10,12 @@ module.exports = {
             const onResponse = (torrent) => {
                 if (torrent.files.length > 0) {
                     const file = torrent.files[0];
-                    cb(file);
-                    map[id] = file;
+                    const data = {
+                        file,
+                        length: file.length,
+                    }
+                    cb(data);
+                    map[id] = data;
                 }
             };
 
