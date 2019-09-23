@@ -60,6 +60,7 @@ module.exports = async () => {
                 return item;
             } catch(err) {
                 console.log(err);
+                console.error(item.link);
                 return null;
             }
         });

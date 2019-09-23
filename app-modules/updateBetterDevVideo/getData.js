@@ -20,7 +20,7 @@ module.exports = async () => {
     const linkList = $('.issue-item').map(function() {
         const $elem = $(this);
         return 'https://betterdev.link' + $elem.find('.finder-item-link').attr('href');
-    }).get();
+    }).get().reverse().slice(0, 1);
 
     const videoList = await Promise.mapSeries(linkList, async (link) => {
         const htmlString = await http.get({
