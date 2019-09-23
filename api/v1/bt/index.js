@@ -3,6 +3,8 @@
 const WebTorrent = require('webtorrent')
 
 module.exports = async (req, res) => {
+    console.log(req.headers);
+
     const client = new WebTorrent();
     const torrentId = process.env.torrentId;
     const onResponse = (torrent) => {
