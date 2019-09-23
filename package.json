@@ -45,6 +45,7 @@
     "subtitles-parser": "0.0.2",
     "unescape": "^1.0.1",
     "uuid": "^3.3.2",
+    "webtorrent": "^0.107.16",
     "ytdl-core": "^0.29.7"
   },
   "devDependencies": {

@@ -144,4 +144,6 @@ router.get('/betterDev/video', require('./betterDev/video'));
 
 router.get('/nhk/easynews', require('./nhk/easynews'));
 
+router.get('/bt/test', require('./bt/index'));
+
 module.exports = router;
