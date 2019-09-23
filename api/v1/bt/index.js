@@ -48,6 +48,8 @@ module.exports = async (req, res) => {
                 'Accept-Ranges': 'bytes',
             });
         }
+
+        console.log(rangeObj)
         
         file.createReadStream(rangeObj).pipe(res);
     });
