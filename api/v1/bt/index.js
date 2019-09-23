@@ -1,17 +1,12 @@
 'use strict';
 
-const WebTorrent = require('webtorrent')
+const utils = require('./data.js');
 
 module.exports = async (req, res) => {
     console.log(req.headers);
 
-    const client = new WebTorrent();
-    const torrentId = process.env.torrentId;
-    const onResponse = (torrent) => {
-        if (torrent.files.length > 0) {
-            torrent.files[0].createReadStream().pipe(res);
-        }
-    };
-
-    client.add(torrentId, onResponse);
+    const { torrentId } = process.env;
+    utils.getBt(torrentId, (file) => {
+        file.createReadStream().pipe(res);
+    });
 };
