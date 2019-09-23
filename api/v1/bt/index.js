@@ -54,6 +54,7 @@ module.exports = async (req, res) => {
         }
 
         console.log(rangeObj);
+        console.log(req.headers);
         file.createReadStream(rangeObj).pipe(res);
     });
 };
