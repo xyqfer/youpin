@@ -142,4 +142,6 @@ router.post('/furigana/translate', require('./furigana'));
 router.get('/youtube/proxy/:id', require('./youtube/proxy'));
 router.get('/betterDev/video', require('./betterDev/video'));
 
+router.get('/nhk/easynews', require('./nhk/easynews'));
+
 module.exports = router;
