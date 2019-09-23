@@ -39,10 +39,14 @@ module.exports = async (req, res) => {
 
     utils.getBt(torrentId, ({ file, length, }) => {
         if (rangeObj.start !== undefined) {
-            const { start, end = length } = rangeObj;
+            if (!rangeObj.end) {
+                rangeObj.end = length;
+            }
+
+            const { start, end, } = rangeObj;
             res.status(206);
             res.set({
-                // 'Content-Type': 'video/mp4',
+                'Content-Type': 'video/mp4',
                 'Content-Length': end - start + 1,
                 'Content-Range': `bytes ${start}-${end}/${length}`,
                 'Accept-Ranges': 'bytes',
