@@ -42,6 +42,8 @@ module.exports = async (req, res) => {
             res.status(206);
             res.set('Content-Range', `bytes ${rangeObj.start}-${rangeObj.end}/${data.length}`);
         }
+        
+        console.log(rangeObj);
         data.file.createReadStream(rangeObj).pipe(res);
     });
 };
