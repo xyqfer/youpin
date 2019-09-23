@@ -35,6 +35,7 @@ module.exports = async (req, res) => {
 
     utils.getBt(torrentId, (data) => {
         if (rangeObj.start && rangeObj.end) {
+            res.status(206);
             res.set('Content-Range', `bytes ${rangeObj.start}-${rangeObj.end}/${data.length}`);
         }
         data.file.createReadStream(rangeObj).pipe(res);
