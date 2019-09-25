@@ -34,8 +34,14 @@ module.exports = async () => {
 
   if (compareVersions(ver, dbData.ver) > 0) {
     http.get({
-      uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}&ver=${ver}`,
+      uri: 'https://extract-ipa.herokuapp.com',
     });
+    
+    setTimeout(() => {
+      http.get({
+        uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}&ver=${ver}`,
+      });
+    }, 10 * 1000);
   }
 
   return {
