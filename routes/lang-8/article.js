@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     zhContent = [title].concat(zhContent);
     const jpCotent = $('#body_show_mo').html().split('<br>').filter(isValidItem);
 
-    const content = jpCotent
+    let content = jpCotent
         .reduce((acc, item, index) => {
             acc += `
                 <div style="margin-bottom: 30px">
@@ -33,6 +33,15 @@ module.exports = async (req, res) => {
 
             return acc;
         }, '');
+
+    content += `
+        <script>
+            const height = window.innerHeight;
+            const div = document.createElement('div');
+            div.style.height = height + 'px';
+            document.body.appendChild(div);
+        </script>;
+    `;
 
     res.render('archive', {
         title,
