@@ -287,6 +287,9 @@ app.get('/bbcproxy', async function (req, res) {
 
 app.use('/api', require('./api/index'));
 
+app.get('/lang-8/journals/:id', require('./routes/index/lang-8/journals'));
+app.get('/lang-8/article/:userId/:articleId', require('./routes/index/lang-8/article'));
+
 app.use(function (req, res, next) {
     // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
     if (!res.headersSent) {
