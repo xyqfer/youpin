@@ -3,6 +3,9 @@ const cheerio = require('cheerio');
 
 module.exports = async (req, res) => {
     const { userId, articleId, } = req.params;
+    const isValidItem = (item) => {
+        return item !== '' && item !== '\n';
+    };
     const htmlString = await http.get({
         uri: `http://lang-8.com/${userId}/journals/${articleId}`,
         headers: {
@@ -11,13 +14,9 @@ module.exports = async (req, res) => {
     });
     const $ = cheerio.load(htmlString);
     const title = $('#subject_show').text();
-    let zhContent = $('#body_show_ori').text().split('\n').filter((item) => {
-        return item !== '';
-    });
+    let zhContent = $('#body_show_ori').html().split('<br>').filter(isValidItem);
     zhContent = [title].concat(zhContent);
-    const jpCotent = $('#body_show_mo').text().split('\n').filter((item) => {
-        return item !== '';
-    });
+    const jpCotent = $('#body_show_mo').html().split('<br>').filter(isValidItem);
 
     const content = jpCotent
         .reduce((acc, item, index) => {
