@@ -48,12 +48,9 @@ module.exports = async (req, res) => {
         },
         json: true,
     });
-    const dicContent = Object.values(dicData.reikai.entries).reduce((acc, item) => {
+    const dicContent = Object.entries(dicData.reikai.entries).reduce((acc, { key, item }) => {
         const { hyouki } = item[0];
-        const word = words.find(({ kanji }) => {
-            return kanji === hyouki;
-        });
-        const furigana = word ? word.furigana : '';
+        const furigana = $(`#id-${key}`).find('rt').text().trim();
         
         acc += `
             <ruby>${hyouki}<rt>${furigana}</rt></ruby>
