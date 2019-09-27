@@ -4,6 +4,9 @@ module.exports = async (req, res) => {
     const dbName = 'NHKEasyNews';
     const data = await db.getDbData({
         dbName,
+        query: {
+            descending: ['createdAt'],
+        },
     });
 
     const content = data
