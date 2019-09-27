@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     }, '');
 
     const dicData = await http.get({
-        uri: data.url.replace('.html', '.out.dic'),
+        uri: data.easyUrl.replace('.html', '.out.dic'),
         headers: {
             'User-Agent': params.ua.pc,
         },
