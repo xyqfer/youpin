@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
                     <video controls webkit-playsinline playsinline src="${item.enclosure.url}"></video>
                 </div>
                 <div style="margin-bottom: 10px">
-                    ${item.description}
+                    ${item.content}
                 </div>
             </div>
         `;
