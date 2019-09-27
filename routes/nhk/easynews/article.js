@@ -24,6 +24,12 @@ module.exports = async (req, res) => {
             furigana,
         };
     }).get();
+
+    $('.dicWin').each(function() {
+        $(this).removeAttr('href');
+    });
+    const articleContent = $.html();
+
     const wordsContent = words.reduce((acc, item) => {
         acc += `
             <div class="word-container">
@@ -43,7 +49,15 @@ module.exports = async (req, res) => {
         json: true,
     });
     const dicContent = Object.values(dicData.reikai.entries).reduce((acc, item) => {
-        acc += item[0].hyouki;
+        const { hyouki } = item[0];
+        const word = words.find(({ kanji }) => {
+            return kanji === hyouki;
+        });
+        const furigana = word ? word.furigana : '';
+        
+        acc += `
+            <ruby>${hyouki}<rt>${furigana}</rt></ruby>
+        `;
         
         item.forEach(({ def }, index) => {
             acc += `
@@ -78,7 +92,7 @@ module.exports = async (req, res) => {
             <video controls webkit-playsinline playsinline src="${process.env.IMAGE_PROXY}${data.audioUrl}"></video>
         </div>
         <div style="margin-bottom: 30px">
-            ${data.content}
+            ${articleContent}
         </div>
         <div id="J-word-container" style="margin-bottom: 30px">
             ${wordsContent}
