@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
     });
     const dicContent = Object.entries(dicData.reikai.entries).reduce((acc, [ key, item ]) => {
         const { hyouki } = item[0];
-        const furigana = $(`#id-${key}`).find('rt').text().trim();
+        const furigana = $(`#id-${key}`).find('rt').eq(0).text().trim();
         
         acc += `
             <ruby>${hyouki}<rt>${furigana}</rt></ruby>
