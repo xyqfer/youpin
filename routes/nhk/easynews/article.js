@@ -52,6 +52,8 @@ module.exports = async (req, res) => {
                 </div>
             `;
         });
+
+        acc += `<div style="margin-bottom: 20px"></div>`;
         
         return acc;
     }, '');
@@ -69,7 +71,7 @@ module.exports = async (req, res) => {
             }
 
             .word-item.hide {
-                visibility: hidden;
+                opacity: 0;
             }
         </style>
         <div style="margin-bottom: 30px">
@@ -89,9 +91,9 @@ module.exports = async (req, res) => {
             ${dicContent}
         </div>
         <script>
-            document.getElementById("J-word-container").addEventListener("click", ({ srcElement }) => {
-                if (srcElement.classList.contains('J-furigana')) {
-                    srcElement.classList.remove('hide');
+            document.getElementById("J-word-container").addEventListener("click", ({ target }) => {
+                if (target.classList.contains('J-furigana')) {
+                    target.classList.remove('hide');
                 }
             });
 
