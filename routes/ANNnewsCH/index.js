@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
                 const index = target.getAttribute('data-index');
                 const id = "J-content-" + index;
                 const elem = document.getElementById(id);
-                const content = elem.innerHTML;
+                const content = elem.textContent;
 
                 const data = {
                     content,
