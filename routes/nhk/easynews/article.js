@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 module.exports = async (req, res) => {
     const { id } = req.params;
     const dbName = 'NHKEasyNews';
-    const [ data ] = await getDbData({
+    const [ data ] = await db.getDbData({
         dbName,
         limit: 1,
         query: {
@@ -37,6 +37,9 @@ module.exports = async (req, res) => {
 
     const dicData = await http.get({
         uri: data.url.replace('.html', '.out.dic'),
+        headers: {
+            'User-Agent': params.ua.pc,
+        },
         json: true,
     });
     const dicContent = Object.values(dicData.reikai.entries).reduce((acc, item) => {
