@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
         },
         json: true,
     });
-    const dicContent = Object.entries(dicData.reikai.entries).reduce((acc, { key, item }) => {
+    const dicContent = Object.entries(dicData.reikai.entries).reduce((acc, [ key, item ]) => {
         const { hyouki } = item[0];
         const furigana = $(`#id-${key}`).find('rt').text().trim();
         
