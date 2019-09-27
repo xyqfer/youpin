@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
             }
 
             .word-item.hide {
-                display: none;
+                visibility: hidden;
             }
         </style>
         <div style="margin-bottom: 30px">
@@ -89,9 +89,9 @@ module.exports = async (req, res) => {
             ${dicContent}
         </div>
         <script>
-            document.getElementById("J-word-container").addEventListener("click", ({ targe }) => {
-                if (target.classList.has('J-furigana')) {
-                    target.classList.remove('hide');
+            document.getElementById("J-word-container").addEventListener("click", ({ srcElement }) => {
+                if (srcElement.classList.has('J-furigana')) {
+                    srcElement.classList.remove('hide');
                 }
             });
 
