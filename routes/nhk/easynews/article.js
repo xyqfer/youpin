@@ -104,7 +104,7 @@ module.exports = async (req, res) => {
         <script>
             document.getElementById("J-word-container").addEventListener("click", ({ target }) => {
                 if (target.classList.contains('J-furigana')) {
-                    target.classList.remove('hide');
+                    target.classList.toggle('hide');
                 }
             });
 
