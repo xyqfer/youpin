@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
         </div>
         <script>
             document.getElementById("J-word-container").addEventListener("click", ({ srcElement }) => {
-                if (srcElement.classList.has('J-furigana')) {
+                if (srcElement.classList.contains('J-furigana')) {
                     srcElement.classList.remove('hide');
                 }
             });
