@@ -30,8 +30,11 @@ module.exports = async (req, res) => {
     });
     $('p').each(function() {
         const html = $(this).html();
-        const textarea = `<textarea rows="4" class="textarea"></textarea>`;
-        $(this).html(html + textarea);
+
+        if (html !== '') {
+            const textarea = `<textarea rows="4" class="textarea"></textarea>`;
+            $(this).html(html + textarea);
+        }
     });
     const articleContent = $.html();
 
@@ -125,7 +128,7 @@ module.exports = async (req, res) => {
         </script>
     `;
 
-    res.render('archive', {
+    res.render('archive3', {
         title: data.title,
         content,
     });
