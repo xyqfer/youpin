@@ -28,6 +28,11 @@ module.exports = async (req, res) => {
     $('.dicWin').each(function() {
         $(this).removeAttr('href');
     });
+    $('p').each(function() {
+        const html = $(this).html();
+        const textarea = `<textarea rows="4" class="textarea"></textarea>`;
+        $(this).html(html + textarea);
+    });
     const articleContent = $.html();
 
     const wordsContent = words.reduce((acc, item) => {
@@ -83,6 +88,10 @@ module.exports = async (req, res) => {
 
             .word-item.hide {
                 opacity: 0;
+            }
+
+            .textarea {
+                width: 100%;
             }
         </style>
         <div style="margin-bottom: 30px">
