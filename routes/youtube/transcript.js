@@ -12,7 +12,10 @@ module.exports = async (req, res) => {
             acc += `
                 <div style="margin-bottom: 20px">
                     <div>
-                        ${item.start} ${item.text}
+                        ${item.start}
+                    </div>
+                    <div style="margin-top: 10px">
+                        ${item.text}
                     </div>
                 </div>
             `;
