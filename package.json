@@ -46,6 +46,7 @@
     "unescape": "^1.0.1",
     "uuid": "^3.3.2",
     "webtorrent": "^0.107.16",
+    "youtube-captions-scraper": "^1.0.3",
     "ytdl-core": "^0.29.7"
   },
   "devDependencies": {
