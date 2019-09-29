@@ -1,7 +1,7 @@
 'use strict';
 
 const request = require('request');
-const utils = reuqire('./utils');
+const utils = require('./utils');
 
 module.exports = async (req, res) => {
     const { id } = req.params;
