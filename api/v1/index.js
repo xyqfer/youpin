@@ -140,6 +140,7 @@ router.get('/weibo/showData', require('./weibo/showData'));
 router.post('/furigana/translate', require('./furigana'));
 
 router.get('/youtube/proxy/:id', require('./youtube/proxy'));
+router.get('/youtube/geturl/:id', require('./youtube/geturl'));
 router.get('/betterDev/video', require('./betterDev/video'));
 
 router.get('/nhk/easynews', require('./nhk/easynews'));
