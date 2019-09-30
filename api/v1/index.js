@@ -144,5 +144,6 @@ router.get('/youtube/geturl/:id', require('./youtube/geturl'));
 router.get('/betterDev/video', require('./betterDev/video'));
 
 router.get('/nhk/easynews', require('./nhk/easynews'));
+router.get('/nhk/easynews/article/:id', require('./nhk/easynews-article'));
 
 module.exports = router;

@@ -1,9 +1,9 @@
 'use strict';
 const cheerio = require('cheerio');
+const { getDbData } = require('app-libs/db');
 
 module.exports = async (req, res) => {
     const { offset = 0, limit = 20, } = req.query;
-    const { getDbData } = require('app-libs/db');
     const dbName = 'NHKEasyNews';
 
     try {

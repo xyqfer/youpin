@@ -287,11 +287,8 @@ app.get('/bbcproxy', async function (req, res) {
 
 app.use('/api', require('./api/index'));
 
-app.get('/lang-8/journals/:id', require('./routes/lang-8/journals'));
-app.get('/lang-8/article/:userId/:articleId', require('./routes/lang-8/article'));
 app.get('/nhk/easynews', require('./routes/nhk/easynews'));
 app.get('/nhk/easynews/article/:id', require('./routes/nhk/easynews/article'));
-app.get('/ANNnewsCH', require('./routes/ANNnewsCH'));
 app.get('/youtube/transcript', require('./routes/youtube/transcript'));
 
 app.use(function (req, res, next) {
