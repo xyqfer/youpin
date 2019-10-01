@@ -11,6 +11,9 @@ module.exports = async () => {
   const dbName = 'RSSURL';
   const dbData = await getDbData({
     dbName,
+    query: {
+      ascending: ['createdAt'],
+    },
   });
   const urls = dbData.map(({ url, isInit, objectId }) => {
     return {

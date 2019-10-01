@@ -10,7 +10,7 @@ module.exports = async ({ dbName = '', limit = 1000, query = {}, select, }) => {
 
     const q = new AV.Query(dbName);
 
-    if (!query.descending) {
+    if (!query.descending && !query.ascending && !query.addAscending && !query.addDescending) {
         query.descending = ['createdAt'];
     }
 
