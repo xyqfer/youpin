@@ -73,6 +73,7 @@ module.exports = async (req, res) => {
                 htmlContentList,
                 wordList,
                 dicList,
+                audioUrl: data.audioUrl,
             },
         });
     } catch (err) {
