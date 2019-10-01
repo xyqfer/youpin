@@ -23,6 +23,9 @@ const mapKey = (item) => {
 module.exports = async ({ source, field = ['title', 'link'], map = mapKey }) => {
     const dbData = await getDbData({
         dbName: source,
+        query: {
+          ascending: ['createdAt'],
+        },
     });
     const urls = dbData.map(({ url, }) => {
         return {
