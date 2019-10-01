@@ -10,6 +10,10 @@ module.exports = async ({ dbName = '', limit = 1000, query = {}, select, }) => {
 
     const q = new AV.Query(dbName);
 
+    if (!query.descending) {
+        query.descending = ['createdAt'];
+    }
+
     Object.entries(query).forEach(([ key, params ]) => {
         if (isString(params)) {
             params = [params];
