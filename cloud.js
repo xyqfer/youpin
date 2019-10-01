@@ -59,7 +59,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'update3PerDay',
-        module: ['updateWechatAnnounce', 'updateJpAnnounce', 'updateNbdNews', 'updateNHKEasyNews'],
+        module: ['updateWechatAnnounce', 'updateJpAnnounce', 'updateNbdNews', 'updateNHKEasyNews', 'updateNHKWebNews'],
         info: '每日三更'
     },
     {
@@ -126,6 +126,11 @@ const cloudFuncConfig = [
         name: 'updateNHKEasyNews',
         module: 'updateNHKEasyNews',
         info: '更新 updateNHKEasyNews'
+    },
+    {
+        name: 'updateNHKWebNews',
+        module: 'updateNHKWebNews',
+        info: '更新 updateNHKWebNews'
     },
     {
         name: 'updateBetterDevVideo',
