@@ -6,4 +6,5 @@ module.exports = {
     params: require('./params'),
     telegram: require('./telegram'),
     http: require('./http'),
+    crawl: require('./crawl'),
 };
