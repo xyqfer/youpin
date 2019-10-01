@@ -37,10 +37,10 @@ module.exports = async () => {
     });
 
     if (newData.length > 0) {
-        newData = await Promise.mapSeries(newData, async ({ link }) => {
+        newData = await Promise.mapSeries(newData, async (item) => {
             try {
                 const htmlString = await http.get({
-                    uri: `https://newswebeasy.github.io${link}`,
+                    uri: `https://newswebeasy.github.io${item.link}`,
                     headers: {
                         'User-Agent': params.ua.pc,
                     },
@@ -64,6 +64,7 @@ module.exports = async () => {
                 return {
                     htmlContent: $(ARTICLE_CONTAINER).html(),
                     wordList,
+                    ...item,
                 };
             } catch(err) {
                 console.log(err);
