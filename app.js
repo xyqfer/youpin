@@ -234,6 +234,7 @@ app.get('/sspaimatrix', async (req, res) => {
 });
 
 app.get('/theinitium', async (req, res) => {
+    const cheerio = require('cheerio');
     const { slug, } = req.query;
 
     const render = 'archive';
@@ -248,9 +249,19 @@ app.get('/theinitium', async (req, res) => {
             },
         });
 
+        const $ = cheerio.load(response.content);
+        $('img').each(function() {
+            const $elem = $(this);
+            const src = $elem.attr('src');
+
+            if (!src.startsWith('data:')) {
+                $elem.attr('src', process.env.IMAGE_PROXY + src);
+            }
+        });
+
         res.render(render, {
             title: response.headline,
-            content: response.content,
+            content: $.html(),
         });
     } catch (err) {
         console.error(err);
