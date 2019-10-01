@@ -18,7 +18,11 @@ module.exports = async (req, res) => {
         });
 
         const list = data.map((item) => {
-            item.cover = process.env.IMAGE_PROXY + item.cover;
+            const cover = item.cover;
+
+            if (cover) {
+                item.cover = process.env.IMAGE_PROXY + cover;
+            }
             return item;
         });
 
