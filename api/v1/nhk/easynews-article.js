@@ -73,7 +73,7 @@ module.exports = async (req, res) => {
                 htmlContentList,
                 wordList,
                 dicList,
-                audioUrl: data.audioUrl,
+                audioUrl: process.env.IMAGE_PROXY + data.audioUrl,
                 title: data.title,
             },
         });
