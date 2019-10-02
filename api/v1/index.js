@@ -138,6 +138,7 @@ router.get('/music/random', require('./music/random'));
 router.get('/weibo/showData', require('./weibo/showData'));
 
 router.post('/furigana/translate', require('./furigana'));
+router.post('/furigana/translate-article', require('./furigana/kuroshiro'));
 
 router.get('/youtube/proxy/:id', require('./youtube/proxy'));
 router.get('/youtube/geturl/:id', require('./youtube/geturl'));
