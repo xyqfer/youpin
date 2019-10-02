@@ -148,4 +148,6 @@ router.get('/nhk/easynews/article/:id', require('./nhk/easynews-article'));
 router.get('/nhk/webnews', require('./nhk/webnews'));
 router.get('/nhk/webnews/article/:id', require('./nhk/webnews-article'));
 
+router.get('/server-status/storage', require('./server-status/storage'));
+
 module.exports = router;
