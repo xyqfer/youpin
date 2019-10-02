@@ -8,6 +8,9 @@ module.exports = async () => {
   try {
     const title = '刷书啦~';
     let data = [{
+      title: 'Server Storage Status',
+      url: `${process.env.NUXT_URL}/server-status/storage`,
+    }, {
       title: '领蚂蚁积分啦~',
       url: 'alipays://platformapi/startapp?appId=20000160',
     }, {
