@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kuroshiro</title>
+</head>
+<body>
+    <script src="./js/kuroshiro.min.js"></script>
+    <script src="./js/kuroshiro-analyzer-kuromoji.min.js"></script>
+    <script>
+        (async () => {
+            const kuroshiro = new Kuroshiro();
+            await kuroshiro.init(new KuromojiAnalyzer({ 
+                dictPath: "./dict/" 
+            }));
+
+            console.log('ok1')
+            self.addEventListener('message', async ({data}) => {
+                console.log('ok2')
+                const result = await kuroshiro.convert(data.html, {mode:"furigana", to:"hiragana"});
+                console.log('ok3');
+                self.parent.postMessage({
+                    html: result,
+                }, '*');
+                console.log('ok4');
+            });
+        })();
+    </script>
+</body>
+</html>

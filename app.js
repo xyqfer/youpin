@@ -21,13 +21,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.static('public', {
-    etag: false,
-    lastModified: false,
-    setHeaders: function (res, path, stat) {
-        res.set('Cache-Control', 'no-cache')
-    }
-}));
+app.use(express.static('public'));
 
 // 设置默认超时时间
 app.use(timeout('600s'));
