@@ -4,9 +4,12 @@ module.exports = (req, res) => {
     const rp = require('request-promise');
 
     try {
-        const { ref } = req.body;
+        const { ref, commits, } = req.body;
+        const isBot = !!commits.find(({ author }) => {
+            return author.name.includes('[bot]');
+        });
 
-        if (ref === 'refs/heads/master') {
+        if (ref === 'refs/heads/master' && !isBot) {
             rp.post({
                 uri: `${process.env.deployUrl}`
             }).catch((err) => {
