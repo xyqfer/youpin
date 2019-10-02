@@ -21,8 +21,8 @@ module.exports = (params = {}) => {
             return getDbData({
                 dbName: this.dbName,
                 query: {
-                    descending: ['updatedAt']
-                }
+                    descending: ['createdAt']
+                },
             });
         },
         getTargetData: () => [],
