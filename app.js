@@ -292,8 +292,6 @@ app.get('/bbcproxy', async function (req, res) {
 
 app.use('/api', require('./api/index'));
 
-app.get('/nhk/easynews', require('./routes/nhk/easynews'));
-app.get('/nhk/easynews/article/:id', require('./routes/nhk/easynews/article'));
 app.get('/youtube/transcript', require('./routes/youtube/transcript'));
 
 app.use(function (req, res, next) {
