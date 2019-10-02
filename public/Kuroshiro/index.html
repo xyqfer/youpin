@@ -14,9 +14,12 @@
                 dictPath: "./dict/" 
             }));
 
-            console.log('ok1')
+            console.log('ok1');
+            self.parent.postMessage({
+                waitToStart: 1,
+            }, '*');
             self.addEventListener('message', async ({data}) => {
-                console.log('ok2')
+                console.log('ok2');
                 const result = await kuroshiro.convert(data.html, {mode:"furigana", to:"hiragana"});
                 console.log('ok3');
                 self.parent.postMessage({
