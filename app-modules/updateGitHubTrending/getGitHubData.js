@@ -1,32 +1,21 @@
 'use strict';
 
-module.exports = async () => {
-    const Promise = require('bluebird');
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const flatten = require('lodash/flatten');
-    const uniqBy = require('lodash/uniqBy');
-    const { params } = require('app-libs');
+const Promise = require('bluebird');
+const _ = require('lodash');
+const { crawl, } = require('app-libs');
 
+module.exports = async () => {
     const urls = [
         'https://github.com/trending',
         'https://github.com/trending/javascript',
         'https://github.com/trending/css',
         'https://github.com/trending/vue',
-        // 'https://github.com/trending/java',
         'https://github.com/trending/unknown'
     ];
 
     const data = await Promise.mapSeries(urls, async (url) => {
         try {
-            const htmlString = await rp.get({
-                uri: url,
-                headers: {
-                    'User-Agent': params.ua.pc
-                },
-            });
-
-            const $ = cheerio.load(htmlString);
+            const $ = await crawl(url);
             const repositoryList = [];
 
             $('article').each(function () {
@@ -47,5 +36,5 @@ module.exports = async () => {
         }
     });
 
-    return uniqBy(flatten(data), 'url');
+    return _.uniqBy(_.flatten(data), 'url');
 };

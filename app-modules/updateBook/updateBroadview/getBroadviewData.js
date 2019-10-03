@@ -1,27 +1,18 @@
 'use strict';
 
-module.exports = async ({
-    offsets = [0]
-}) => {
-    const Promise = require('bluebird');
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const flatten = require('lodash/flatten');
-    const { params } = require('app-libs');
+const Promise = require('bluebird');
+const _ = require('lodash');
+const { crawl, } = require('app-libs');
 
+module.exports = async ({
+    offsets = [0],
+}) => {
     const hostPrefix = 'http://www.broadview.com.cn';
 
     try {
         const results = await Promise.mapSeries(offsets, async (page) => {
             try {
-                const htmlString = await rp.get({
-                    uri: `http://www.broadview.com.cn/book?tab=book&sort=new&page=${page}`,
-                    headers: {
-                        'User-Agent': params.ua.pc
-                    }
-                });
-
-                const $ = cheerio.load(htmlString);
+                const $ = await crawl(`http://www.broadview.com.cn/book?tab=book&sort=new&page=${page}`);
                 const newBookList = [];
 
                 $('.block-item').each(function () {
@@ -39,7 +30,7 @@ module.exports = async ({
             }
         });
 
-        return flatten(results);
+        return _.flatten(results);
     } catch (err) {
         console.error(err);
         return [];

@@ -1,16 +1,16 @@
 'use strict';
 
 const Promise = require('bluebird');
-const cheerio = require('cheerio');
+const _ = require('lodash');
 const getData = require('./getData');
-const { db, http, params, } = require('app-libs');
+const { db, crawl, } = require('app-libs');
 
 module.exports = async () => {
   const dbName = 'NHKWebNews';
 
   try {
     const filterKey = 'link';
-    let [dbData, newsData] = await Promise.all([
+    let [ dbData, newsData ] = await Promise.all([
       db.getDbData({
         dbName,
         select: [filterKey]
@@ -18,11 +18,7 @@ module.exports = async () => {
       getData(),
     ]);
     
-    let newData = newsData.filter(({ link }) => {
-        return !dbData.find((dbItem) => {
-          return dbItem.link === link;
-        });
-    });
+    let newData = _.differenceBy(newsData, dbData, filterKey);
     newData = await Promise.filter(newData, async (item) => {
       const dbItem = await db.getDbData({
         dbName,
@@ -41,13 +37,7 @@ module.exports = async () => {
     if (newData.length > 0) {
         newData = await Promise.mapSeries(newData, async (item) => {
             try {
-                const htmlString = await http.get({
-                    uri: `https://newswebeasy.github.io${item.link}`,
-                    headers: {
-                        'User-Agent': params.ua.pc,
-                    },
-                });
-                const $ = cheerio.load(htmlString);
+                const $ = await crawl(`https://newswebeasy.github.io${item.link}`);
                 const ARTICLE_CONTAINER = '.article_content';
                 const wordList = $(`${ARTICLE_CONTAINER} ruby`).map(function() {
                     const $elem = $(this);

@@ -1,8 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
-const uniqBy = require('lodash/uniqBy');
-const flatten = require('lodash/flatten');
+const _ = require('lodash');
 const Parser = require('rss-parser');
 const parser = new Parser();
 const {
@@ -20,20 +19,17 @@ const mapKey = (item) => {
 
   return item;
 };
+
 module.exports = async ({ source, field = ['title', 'link'], map = mapKey }) => {
     const dbData = await getDbData({
         dbName: source,
         query: {
           ascending: ['createdAt'],
+          select: ['url'],
         },
     });
-    const urls = dbData.map(({ url, }) => {
-        return {
-          url,
-        };
-    });
 
-    const data = await Promise.mapSeries(urls, async ({ url, }) => {
+    const data = await Promise.mapSeries(dbData, async ({ url, }) => {
         try {
           const feed = await parser.parseURL(url);
           const data = feed.items.map((item) => {
@@ -51,5 +47,5 @@ module.exports = async ({ source, field = ['title', 'link'], map = mapKey }) => 
         }
     });
     
-    return uniqBy(flatten(data), 'link').map(map);
+    return _.uniqBy(_.flatten(data), 'link').map(map);
 };
