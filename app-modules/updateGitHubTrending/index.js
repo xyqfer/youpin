@@ -23,7 +23,8 @@ module.exports = async () => {
         const dbCount = await getDbCount({
             dbName,
         });
-        const limit = Math.ceil(dbCount / per);
+        const maxDbFetchTimes = 10;
+        const limit = Math.min(Math.ceil(dbCount / per), maxDbFetchTimes);
 
         for (let offset = 0; offset < limit; offset += 1) {
             offsets.push(offset * per);
