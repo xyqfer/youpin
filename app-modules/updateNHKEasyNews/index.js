@@ -19,7 +19,9 @@ module.exports = async () => {
     ]);
     
     let newData = newsData.filter(({ easyUrl }) => {
-        return !dbData.includes(easyUrl);
+        return !dbData.find((dbItem) => {
+          return dbItem.easyUrl === easyUrl;
+        });
     });
     newData = await Promise.filter(newData, async (item) => {
       const dbItem = await db.getDbData({
