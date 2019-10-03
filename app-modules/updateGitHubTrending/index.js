@@ -1,26 +1,47 @@
 'use strict';
 
-module.exports = async () => {
-    const Promise = require('bluebird');
-    const getGitHubData = require('./getGitHubData');
-    const {
-        db: {
-            getDbData,
-            saveDbData
-        },
-        mail: sendMail
-    } = require('app-libs');
+const Promise = require('bluebird');
+const getGitHubData = require('./getGitHubData');
+const {
+    db: {
+        getDbData,
+        getDbCount,
+        saveDbData
+    },
+    mail: sendMail
+} = require('app-libs');
+const flattenDeep = require('lodash/flattenDeep')
 
+module.exports = async () => {
     const dbName = 'GitHubTrending';
     const filterKey = 'name';
 
     try {
-        const dbData = await getDbData({
+        const offsets = [];
+        const per = 1000;
+
+        const dbCount = await getDbCount({
             dbName,
-            query: {
-                descending: ['updatedAt']
-            }
         });
+        const limit = Math.ceil(dbCount / per);
+
+        for (let offset = 0; offset < limit; offset += 1) {
+            offsets.push(offset * per);
+        }
+
+        let dbData = await Promise.mapSeries(offsets, async (offset) => {
+            const dbData = await getDbData({
+                dbName,
+                query: {
+                    descending: ['updatedAt'],
+                    skip: [offset],
+                },
+            });
+
+            return dbData;
+        });
+        dbData = flattenDeep(dbData);
+
         const githubData = await getGitHubData();
 
         let newData = githubData.filter((item) => {
