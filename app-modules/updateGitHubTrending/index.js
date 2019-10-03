@@ -10,7 +10,7 @@ const {
     },
     mail: sendMail
 } = require('app-libs');
-const flattenDeep = require('lodash/flattenDeep')
+const flattenDeep = require('lodash/flattenDeep');
 
 module.exports = async () => {
     const dbName = 'GitHubTrending';
