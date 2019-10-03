@@ -3,17 +3,47 @@
 module.exports = async () => {
   const Promise = require('bluebird');
   const rp = require('request-promise');
+  const flattenDeep = require('lodash/flattenDeep');
   const getRSSData = require('./getRSSData');
-  const { getDbData, saveDbData } = require('app-libs/db');
+  const { getDbData, getDbCount, saveDbData } = require('app-libs/db');
 
   const dbName = 'RSSDATA';
 
   try {
+    const filterKey = 'link';
+    const fetchAllDbData = async () => {
+      const offsets = [];
+      const per = 1000;
+
+      const dbCount = await getDbCount({
+          dbName,
+      });
+      const maxDbFetchTimes = 10;
+      const limit = Math.min(Math.ceil(dbCount / per), maxDbFetchTimes);
+
+      for (let offset = 0; offset < limit; offset += 1) {
+          offsets.push(offset * per);
+      }
+
+      let dbData = await Promise.mapSeries(offsets, async (offset) => {
+          const dbData = await getDbData({
+              dbName,
+              query: {
+                  descending: ['updatedAt'],
+                  skip: [offset],
+                  select: [filterKey],
+              },
+          });
+
+          return dbData;
+      });
+      return flattenDeep(dbData);
+    };
+
+
     let [dbData, rssData] = await Promise.all([
-      getDbData({
-        dbName,
-      }),
-      getRSSData()
+      fetchAllDbData(),
+      getRSSData(),
     ]);
     dbData = dbData.map(({ link }) => {
       return link;
@@ -22,7 +52,6 @@ module.exports = async () => {
     let newData = rssData.filter(({ link }) => {
       return !dbData.includes(link);
     });
-    const filterKey = 'link';
     newData = await Promise.filter(newData, async (item) => {
       const dbItem = await getDbData({
         dbName,
