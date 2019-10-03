@@ -1,14 +1,12 @@
 'use strict';
 
+const _ = require('lodash');
+const updateContainer = require('app-containers/update');
+const getBroadviewData = require('./getBroadviewData');
+
 module.exports = async () => {
-    const updateContainer = require('app-containers/update');
-    const getBroadviewData = require('./getBroadviewData');
-
-    const offsets = [];
-
-    for (let offset = 0; offset <= 4; offset += 1) {
-        offsets.push(offset);
-    }
+    const times = 4;
+    const offsets = _.times(times);
 
     try {
         return await updateContainer({

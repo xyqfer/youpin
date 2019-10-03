@@ -1,9 +1,9 @@
 'use strict';
 
 const Promise = require('bluebird');
-const cheerio = require('cheerio');
+const _ = require('lodash');
 const getData = require('./getData');
-const { db, http, params, } = require('app-libs');
+const { db, crawl, } = require('app-libs');
 
 module.exports = async () => {
   const dbName = 'NHKEasyNews';
@@ -18,11 +18,7 @@ module.exports = async () => {
       getData(),
     ]);
     
-    let newData = newsData.filter(({ easyUrl }) => {
-        return !dbData.find((dbItem) => {
-          return dbItem.easyUrl === easyUrl;
-        });
-    });
+    let newData = _.differenceBy(newsData, dbData, filterKey);
     newData = await Promise.filter(newData, async (item) => {
       const dbItem = await db.getDbData({
         dbName,
@@ -41,13 +37,7 @@ module.exports = async () => {
     if (newData.length > 0) {
         newData = await Promise.mapSeries(newData, async (item) => {
             try {
-                const htmlString = await http.get({
-                    uri: item.easyUrl,
-                    headers: {
-                        'User-Agent': params.ua.pc
-                    },
-                });
-                const $ = cheerio.load(htmlString);
+                const $ = await crawl(item.easyUrl);
                 item.content = $('#js-article-body').html();
 
                 return item;

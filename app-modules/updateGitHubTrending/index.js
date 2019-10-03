@@ -1,6 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
+const _ = require('lodash');
 const getGitHubData = require('./getGitHubData');
 const {
     db: {
@@ -10,25 +11,21 @@ const {
     },
     mail: sendMail
 } = require('app-libs');
-const flattenDeep = require('lodash/flattenDeep');
 
 module.exports = async () => {
     const dbName = 'GitHubTrending';
     const filterKey = 'name';
 
     try {
-        const offsets = [];
         const per = 1000;
-
         const dbCount = await getDbCount({
             dbName,
         });
         const maxDbFetchTimes = 10;
-        const limit = Math.min(Math.ceil(dbCount / per), maxDbFetchTimes);
-
-        for (let offset = 0; offset < limit; offset += 1) {
-            offsets.push(offset * per);
-        }
+        const times = Math.min(Math.ceil(dbCount / per), maxDbFetchTimes);
+        const offsets = _.times(times, (i) => {
+            return i * per;
+        });
 
         let dbData = await Promise.mapSeries(offsets, async (offset) => {
             const dbData = await getDbData({
@@ -41,19 +38,10 @@ module.exports = async () => {
 
             return dbData;
         });
-        dbData = flattenDeep(dbData);
+        dbData = _.flattenDeep(dbData);
 
         const githubData = await getGitHubData();
-
-        let newData = githubData.filter((item) => {
-            for (let i = 0; i < dbData.length; i++) {
-                if (item[filterKey] === dbData[i][filterKey]) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
+        let newData = _.differenceBy(githubData, dbData, filterKey);
 
         if (newData.length > 0) {
             newData = await Promise.filter(newData, async (item) => {
@@ -84,18 +72,18 @@ module.exports = async () => {
                     data: newData,
                     template: ({ url = '', name = '', desc = '', lang = '' }) => {
                         return `
-                        <div style="margin-bottom: 50px">
-                            <a href="${url}" target="_blank">
-                                <h4>${name}</h4>
-                            </a>
-                            <p>
-                                ${desc}
-                            </p>
-                            <p>
-                                ${lang}
-                            </p>
-                        </div>
-                    `;
+                            <div style="margin-bottom: 50px">
+                                <a href="${url}" target="_blank">
+                                    <h4>${name}</h4>
+                                </a>
+                                <p>
+                                    ${desc}
+                                </p>
+                                <p>
+                                    ${lang}
+                                </p>
+                            </div>
+                        `;
                     },
                     device: 'device2',
                 });
