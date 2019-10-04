@@ -1,8 +1,8 @@
 const ytdl = require('ytdl-core');
+const YOUTUBE_MAP = {};
 
 const getUrl = async (id) => {
     let url = '';
-    let YOUTUBE_MAP = JSON.parse(process.env.YOUTUBE_MAP);
 
     if (YOUTUBE_MAP[id] && (YOUTUBE_MAP[id].expire - Date.now() > 0)) {
         url = YOUTUBE_MAP[id].url;
@@ -17,7 +17,6 @@ const getUrl = async (id) => {
             url,
             expire,
         };
-        process.env.YOUTUBE_MAP = JSON.stringify(YOUTUBE_MAP);
     }
 
     return url;
