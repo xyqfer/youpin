@@ -2,7 +2,7 @@
 
 const Promise = require('bluebird');
 const _ = require('lodash');
-const { crawl, } = require('app-libs');
+const { crawler, } = require('app-libs');
 
 module.exports = async () => {
     const urls = [
@@ -15,7 +15,7 @@ module.exports = async () => {
 
     const data = await Promise.mapSeries(urls, async (url) => {
         try {
-            const $ = await crawl(url);
+            const $ = await crawler(url);
             const repositoryList = [];
 
             $('article').each(function () {
