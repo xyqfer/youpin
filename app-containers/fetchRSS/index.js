@@ -2,6 +2,7 @@
 
 const Promise = require('bluebird');
 const _ = require('lodash');
+const retry = require('async-retry');
 const Parser = require('rss-parser');
 const parser = new Parser();
 const {
@@ -31,7 +32,12 @@ module.exports = async ({ source, field = ['title', 'link'], map = mapKey }) => 
 
     const data = await Promise.mapSeries(dbData, async ({ url, }) => {
         try {
-          const feed = await parser.parseURL(url);
+          const feed = await retry(async () => {
+            return await parser.parseURL(url);
+          }, {
+            retries: 2,
+            minTimeout: 5000,
+          });
           const data = feed.items.map((item) => {
             return field.reduce((acc, key) => {
                 acc[key] = item[key] || '';
