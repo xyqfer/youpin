@@ -3,7 +3,7 @@
 const Promise = require('bluebird');
 const _ = require('lodash');
 const getData = require('./getData');
-const { db, crawl, } = require('app-libs');
+const { db, crawler, } = require('app-libs');
 
 module.exports = async () => {
   const dbName = 'NHKWebNews';
@@ -37,7 +37,7 @@ module.exports = async () => {
     if (newData.length > 0) {
         newData = await Promise.mapSeries(newData, async (item) => {
             try {
-                const $ = await crawl(`https://newswebeasy.github.io${item.link}`);
+                const $ = await crawler(`https://newswebeasy.github.io${item.link}`);
                 const ARTICLE_CONTAINER = '.article_content';
                 const wordList = $(`${ARTICLE_CONTAINER} ruby`).map(function() {
                     const $elem = $(this);

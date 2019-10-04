@@ -2,7 +2,7 @@
 
 const Promise = require('bluebird');
 const _ = require('lodash');
-const { crawl, } = require('app-libs');
+const { crawler, } = require('app-libs');
 
 module.exports = async ({
     offsets = [0],
@@ -12,7 +12,7 @@ module.exports = async ({
     try {
         const results = await Promise.mapSeries(offsets, async (page) => {
             try {
-                const $ = await crawl(`http://www.broadview.com.cn/book?tab=book&sort=new&page=${page}`);
+                const $ = await crawler(`http://www.broadview.com.cn/book?tab=book&sort=new&page=${page}`);
                 const newBookList = [];
 
                 $('.block-item').each(function () {

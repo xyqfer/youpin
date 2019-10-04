@@ -3,7 +3,7 @@
 const Promise = require('bluebird');
 const _ = require('lodash');
 const getData = require('./getData');
-const { db, crawl, } = require('app-libs');
+const { db, crawler, } = require('app-libs');
 
 module.exports = async () => {
   const dbName = 'NHKEasyNews';
@@ -37,7 +37,7 @@ module.exports = async () => {
     if (newData.length > 0) {
         newData = await Promise.mapSeries(newData, async (item) => {
             try {
-                const $ = await crawl(item.easyUrl);
+                const $ = await crawler(item.easyUrl);
                 item.content = $('#js-article-body').html();
 
                 return item;
