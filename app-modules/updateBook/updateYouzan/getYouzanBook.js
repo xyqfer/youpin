@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const Promise = require('bluebird');
     const flatten = require('lodash/flatten');
     const uniqBy = require('lodash/uniqBy');
     const { params, http } = require('app-libs');

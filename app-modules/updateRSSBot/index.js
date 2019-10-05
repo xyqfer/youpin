@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-  const Promise = require('bluebird');
   const rp = require('request-promise');
   const flattenDeep = require('lodash/flattenDeep');
   const getRSSData = require('./getRSSData');

@@ -4,7 +4,6 @@ module.exports = (req, res, next) => {
     const qcloudSDK = require('qcloud-cdn-node-sdk');
     const OSS = require('ali-oss');
     const COS = require('cos-nodejs-sdk-v5');
-    const Promise = require('bluebird');
     const rp = require('request-promise');
 
     const getFormatTime = require('./_formatTime');

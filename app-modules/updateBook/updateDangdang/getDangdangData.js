@@ -3,7 +3,6 @@
 module.exports = async ({
     offsets = [1]
 }) => {
-    const Promise = require('bluebird');
     const cheerio = require('cheerio');
     const flattenDeep = require('lodash/flattenDeep');
     const iconv = require('iconv-lite');

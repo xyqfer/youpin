@@ -1,6 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
 const uniqBy = require('lodash/uniqBy');
 const flattenDeep = require('lodash/flattenDeep');
 const {

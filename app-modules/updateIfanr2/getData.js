@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const Promise = require('bluebird');
     const Parser = require('rss-parser');
     const flatten = require('lodash/flatten');
     const parser = new Parser();

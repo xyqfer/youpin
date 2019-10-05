@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async (req, res) => {
-  const Promise = require('bluebird');
   const {
     params,
     http,

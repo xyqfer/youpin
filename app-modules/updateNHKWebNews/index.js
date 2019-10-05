@@ -1,6 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
 const _ = require('lodash');
 const getData = require('./getData');
 const { db, crawler, } = require('app-libs');

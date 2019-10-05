@@ -2,7 +2,6 @@
 
 module.exports = (req, res) => {
   require('isomorphic-fetch');
-  const Promise = require('bluebird');
   const Dropbox = require('dropbox').Dropbox;
   const cheerio = require('cheerio');
   const {

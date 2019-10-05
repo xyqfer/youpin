@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const AV = require('leanengine');
+const bluebird = require('bluebird');
+
+global.Promise = bluebird;
 
 require('module-alias/register');
 
