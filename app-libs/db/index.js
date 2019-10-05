@@ -1,8 +1,14 @@
 'use strict';
 
+const { getCount, getData, saveData, updateData, } = require('leancloud-db');
+
 module.exports = {
-    saveDbData: require('./saveDbData'),
-    getDbData: require('./getDbData'),
-    updateDbData: require('./updateDbData'),
-    getDbCount: require('./getDbCount'),
+    getCount,
+    getData,
+    saveData,
+    updateData,
+    getDbCount: getCount,
+    getDbData: getData,
+    saveDbData: saveData,
+    updateDbData: updateData,
 };
