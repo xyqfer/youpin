@@ -53,7 +53,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/archive', function (req, res) {
-    const getDbData = require('app-libs/db/getDbData');
+    const { getDbData } = require('app-libs/db');
     const { id, render = 'archive' } = req.query;
 
     getDbData({
@@ -83,7 +83,7 @@ app.get('/archives', function (req, res) {
         return;
     }
 
-    const getDbData = require('app-libs/db/getDbData');
+    const { getDbData } = require('app-libs/db');
 
     getDbData({
         dbName: 'Archive',
@@ -125,7 +125,7 @@ app.get('/notes', async (req, res) => {
         return;
     }
 
-    const getDbData = require('app-libs/db/getDbData');
+    const { getDbData } = require('app-libs/db');
 
     try {
         const notes = await getDbData({
@@ -157,7 +157,7 @@ app.post('/note', async (req, res) => {
         return;
     }
 
-    const saveDbData = require('app-libs/db/saveDbData');
+    const { saveDbData } = require('app-libs/db');
 
     try {
         await saveDbData({
