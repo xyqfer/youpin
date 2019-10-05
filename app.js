@@ -345,10 +345,10 @@ app.use(function (err, req, res, next) {
 const { setHook, } = require('app-libs/db');
 setHook({
     dbName: 'ArticleFragment',
-    hostName: ['afterUpdate'],
+    hookName: ['afterUpdate'],
     cb: ({object}) => {
         console.log('ArticleFragment+afterUpdate');
-        console.log(object);
+        console.log(object.get('count'));
     },
 });
 
