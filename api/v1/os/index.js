@@ -1,4 +1,5 @@
 const os = require('os');
+const bytes = require('bytes');
 
 module.exports = (req, res) => {
     res.json({
@@ -11,8 +12,8 @@ module.exports = (req, res) => {
             cpus: os.cpus(),
             LEANCLOUD_AVAILABLE_CPUS: process.env.LEANCLOUD_AVAILABLE_CPUS,
             endianness: os.endianness(),
-            totalmem: os.totalmem(),
-            freemem: os.freemem(),
+            totalmem: bytes(os.totalmem()),
+            freemem: bytes(os.freemem()),
             homedir: os.homedir(),
             tmpdir: os.tmpdir(),
             hostname: os.hostname(),
