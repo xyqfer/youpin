@@ -3,7 +3,6 @@
 module.exports = async () => {
   const Epub = require('epub-gen');
   const cheerio = require('cheerio');
-  const Promise = require('bluebird');
   const {
     params,
     http,

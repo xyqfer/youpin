@@ -7,7 +7,6 @@ const {
 } = require('app-libs');
 const cheerio = require('cheerio');
 const flatten = require('lodash/flatten');
-const Promise = require('bluebird');
 
 module.exports = async (req, res) => {
   res.json({

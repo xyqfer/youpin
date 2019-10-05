@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const Promise = require('bluebird');
     const cheerio = require('cheerio');
     const {
         params,

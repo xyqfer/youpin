@@ -1,6 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
 const flatten = require('lodash/flatten');
 const cheerio = require('cheerio');
 const {

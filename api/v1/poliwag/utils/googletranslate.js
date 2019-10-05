@@ -5,7 +5,6 @@
  */
 
 module.exports = (text = '') => {
-  const Promise = require('bluebird');
   const http = require('./http');
   const { params } = require('app-libs');
 

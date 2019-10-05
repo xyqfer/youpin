@@ -1,7 +1,6 @@
 'use strict';
 
 const AV = require('leanengine');
-const Promise = require('bluebird');
 const {
     http
 } = require('app-libs');

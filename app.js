@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const AV = require('leanengine');
+const bluebird = require('bluebird');
+
+global.Promise = bluebird;
 
 require('module-alias/register');
 
@@ -168,7 +171,7 @@ app.post('/note', async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(400).send('Bad Request')
+        res.status(400).send('Bad Request');
     }
 });
 

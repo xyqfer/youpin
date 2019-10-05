@@ -1,6 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
 const _ = require('lodash');
 const retry = require('async-retry');
 const Parser = require('rss-parser');

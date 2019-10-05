@@ -5,7 +5,6 @@ module.exports = async ({
     latitude = process.env.latitude,
     longitude = process.env.longitude
 }) => {
-    const Promise = require('bluebird');
     const rp = require('request-promise');
     const flatten = require('lodash/flatten');
     const {

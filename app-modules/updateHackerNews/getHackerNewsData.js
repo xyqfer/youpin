@@ -3,7 +3,6 @@
 module.exports = async ({
     offsets = [1]
 }) => {
-    const Promise = require('bluebird');
     const rp = require('request-promise');
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');

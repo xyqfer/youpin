@@ -2,7 +2,6 @@
 
 module.exports = async () => {
   const Parser = require('rss-parser');
-  const Promise = require('bluebird');
   const flatten = require('lodash/flatten');
   const parser = new Parser();
 

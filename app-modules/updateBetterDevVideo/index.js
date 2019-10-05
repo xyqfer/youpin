@@ -1,6 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
 const ytdl = require('ytdl-core');
 const getData = require('./getData');
 const { db, } = require('app-libs');

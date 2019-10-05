@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const Promise = require('bluebird');
     const AV = require('leanengine');
     const getYoupinData = require('./getYoupinData');
     const saveYoupinData = require('./saveYoupinData');

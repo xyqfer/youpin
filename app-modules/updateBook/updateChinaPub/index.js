@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = async () => {
-    const Promise = require('bluebird');
     const getChinaPubData = require('./getChinaPubData');
     const getNewData = require('./getNewData');
     const {
