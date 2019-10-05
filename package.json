@@ -10,6 +10,8 @@
     "test": "jest ./test/**"
   },
   "dependencies": {
+    "@xyqfer/env-info": "^1.0.1",
+    "@xyqfer/leancloud-db": "^1.1.0",
     "ali-oss": "^6.1.1",
     "async-retry": "^1.2.3",
     "bluebird": "^3.5.1",
@@ -24,7 +26,6 @@
     "decompress-zip": "^0.2.2",
     "dropbox": "^4.0.9",
     "ejs": "2.7.1",
-    "env-info": "git+https://github.com/xyqfer/env-info.git",
     "epub-gen": "^0.1.0",
     "express": "4.17.1",
     "follow-redirects": "^1.7.0",
@@ -33,7 +34,6 @@
     "isomorphic-fetch": "^2.2.1",
     "kuroshiro": "^1.1.2",
     "kuroshiro-analyzer-kuromoji": "^1.1.0",
-    "leancloud-db": "git+https://github.com/xyqfer/leancloud-db.git",
     "leancloud-storage": "^3.0.0",
     "leanengine": "^3.0.0",
     "lodash": "^4.17.4",

@@ -1,6 +1,6 @@
 'use strict';
 
-const { getCount, getData, saveData, updateData, setHook, } = require('leancloud-db');
+const { getCount, getData, saveData, updateData, setHook, } = require('@xyqfer/leancloud-db');
 
 module.exports = {
     getCount,
