@@ -12,7 +12,9 @@ module.exports = async () => {
     let [dbData, newsData] = await Promise.all([
       db.getDbData({
         dbName,
-        select: [filterKey]
+        query: {
+          select: [filterKey],
+        },
       }),
       getData(),
     ]);
@@ -23,9 +25,9 @@ module.exports = async () => {
         dbName,
         limit: 1,
         query: {
-          equalTo: [filterKey, item[filterKey]]
+          equalTo: [filterKey, item[filterKey]],
+          select: [filterKey],
         },
-        select: [filterKey],
       });
 
       return dbItem.length === 0;
