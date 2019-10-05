@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async ({ title = '', content = '', render }) => {
-    const saveDbData = require('../db/saveDbData');
+    const { saveDbData } = require('../db');
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
 

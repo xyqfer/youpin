@@ -2,7 +2,7 @@
 
 module.exports = async ({ title = '', content = '', render }) => {
     const uuidv4 = require('uuid/v4');
-    const saveDbData = require('../db/saveDbData');
+    const { saveDbData } = require('../db');
     const sendMessage = require('../telegram/sendMessage');
     const uuid = uuidv4();
     console.log(`${title}: ${uuid}`);
