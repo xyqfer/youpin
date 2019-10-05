@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const { params } = require('app-libs');
 
 async function makeText(text) {
