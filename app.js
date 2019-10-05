@@ -338,18 +338,4 @@ app.use(function (err, req, res, next) {
     });
 });
 
-
-
-
-// test hook
-const { setHook, } = require('app-libs/db');
-setHook({
-    dbName: 'ArticleFragment',
-    hookName: ['afterUpdate'],
-    cb: ({object}) => {
-        console.log('ArticleFragment+afterUpdate');
-        console.log(object.get('count'));
-    },
-});
-
 module.exports = app;
