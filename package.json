@@ -24,6 +24,7 @@
     "decompress-zip": "^0.2.2",
     "dropbox": "^4.0.9",
     "ejs": "2.5.7",
+    "env-info": "git+https://github.com/xyqfer/env-info.git",
     "epub-gen": "^0.1.0",
     "express": "4.12.3",
     "follow-redirects": "^1.7.0",

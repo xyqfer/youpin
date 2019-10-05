@@ -171,7 +171,7 @@ app.post('/note', async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(400).send('Bad Request')
+        res.status(400).send('Bad Request');
     }
 });
 

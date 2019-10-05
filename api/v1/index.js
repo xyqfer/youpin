@@ -151,5 +151,6 @@ router.get('/nhk/webnews/article/:id', require('./nhk/webnews-article'));
 
 router.get('/server-status/storage', require('./server-status/storage'));
 router.get('/os', require('./os'));
+router.post('/sandbox', require('./sandbox'));
 
 module.exports = router;
