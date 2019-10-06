@@ -9,11 +9,13 @@ const cors = require('cors');
 const AV = require('leanengine');
 const expressWs = require('express-ws');
 const deployMiddleware = require('@xyqfer/deploy-middleware');
+const leancloudGraphQL = require('leancloud-graphql').express;
 const bluebird = require('bluebird');
 
 global.Promise = bluebird;
 
 require('module-alias/register');
+const { params, } = require('app-libs');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./cloud');
@@ -49,6 +51,10 @@ app.use((req, res, next) => {
     console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
     next();
 });
+
+app.use('/graphql', leancloudGraphQL({
+    graphiql: params.env.isDev,
+}));
 
 app.use(deployMiddleware({
     path: '/api/v1/deploy',
