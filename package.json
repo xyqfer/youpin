@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@xyqfer/env-info": "^1.0.1",
+    "@xyqfer/init-leancloud-engine": "^1.0.0",
     "@xyqfer/leancloud-db": "^1.1.0",
     "ali-oss": "^6.1.1",
     "async-retry": "^1.2.3",

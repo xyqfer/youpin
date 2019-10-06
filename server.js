@@ -1,15 +1,22 @@
 'use strict';
 
-const AV = require('leanengine');
+const { initCloudEngine } = require('@xyqfer/init-leancloud-engine');
+initCloudEngine();
 
-AV.init({
-  appId: process.env.LEANCLOUD_APP_ID,
-  appKey: process.env.LEANCLOUD_APP_KEY,
-  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
-});
+function init() {
+  const AV = require('leanengine');
 
-// 如果不希望使用 masterKey 权限，可以将下面一行删除
-AV.Cloud.useMasterKey();
+  console.log(process.env.LEANCLOUD_APP_ID, process.env.LEANCLOUD_APP_KEY, process.env.LEANCLOUD_APP_MASTER_KEY)
+  
+  AV.init({
+    appId: process.env.LEANCLOUD_APP_ID,
+    appKey: process.env.LEANCLOUD_APP_KEY,
+    masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
+  });
+  
+  AV.Cloud.useMasterKey();
+}
+// init();
 
 const app = require('./app');
 
