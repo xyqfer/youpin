@@ -10,6 +10,7 @@
     "test": "jest ./test/**"
   },
   "dependencies": {
+    "@xyqfer/deploy-middleware": "^1.0.0",
     "@xyqfer/env-info": "^1.0.1",
     "@xyqfer/init-leancloud-engine": "^1.1.0",
     "@xyqfer/leancloud-db": "^1.1.0",

@@ -16,8 +16,6 @@ const uplabsCollection = require('./uplabs/collection');
 const uplabsCollections = require('./uplabs/collections');
 const uplabsAuthor = require('./uplabs/author');
 
-const deploy = require('./deploy');
-
 const {
     today: getTodayStatusLog,
     history: getHistoryStatusLog,
@@ -91,8 +89,6 @@ router.post('/v2ex/logout', v2exLogout);
 router.get('/v2ex/search', v2exSearch);
 router.get('/v2ex/recent', v2exRecent);
 router.get('/v2ex/checkLogin', v2exCheckLogin);
-
-router.post('/deploy', deploy);
 
 router.get('/dailyStatusLog/today', getTodayStatusLog);
 router.post('/dailyStatusLog/update', updateTodayStatusLog);

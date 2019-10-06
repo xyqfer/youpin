@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const AV = require('leanengine');
 const expressWs = require('express-ws');
+const deployMiddleware = require('@xyqfer/deploy-middleware');
 const bluebird = require('bluebird');
 
 global.Promise = bluebird;
@@ -48,6 +49,10 @@ app.use((req, res, next) => {
     console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
     next();
 });
+
+app.use(deployMiddleware({
+    path: '/api/v1/deploy',
+}));
 
 app.get('/', function (req, res) {
     res.render('index', {});
