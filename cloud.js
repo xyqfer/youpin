@@ -161,17 +161,3 @@ cloudFuncConfig.forEach((config) => {
         return info;
     });
 });
-
-AV.Cloud.define('execCloud', (req) => {
-    const { name, params = {} } = req.params;
-    http.post({
-        uri: `${process.env.cloudUrl}${name}`,
-        headers: {
-            'x-avoscloud-application-id': process.env.appId || '',
-            'x-avoscloud-application-key': process.env.appKey || '',
-        },
-        body: params,
-        json: true,
-    });
-    return `execCloud: ${name}`;
-});
