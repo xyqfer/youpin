@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const AV = require('leanengine');
+const expressWs = require('express-ws');
 const bluebird = require('bluebird');
 
 global.Promise = bluebird;
@@ -294,6 +295,14 @@ app.get('/bbcproxy', async function (req, res) {
 app.use('/api', require('./api/index'));
 
 app.get('/youtube/transcript', require('./routes/youtube/transcript'));
+
+expressWs(app);
+
+app.ws('/echo', function(ws, req) {
+    ws.on('message', function(msg) {
+      ws.send(msg);
+    });
+});
 
 app.use(function (req, res, next) {
     // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
