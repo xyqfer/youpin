@@ -9,7 +9,7 @@ const cors = require('cors');
 const AV = require('leanengine');
 const expressWs = require('express-ws');
 const deployMiddleware = require('@xyqfer/deploy-middleware');
-const leancloudGraphQL = require('leancloud-graphql').express;
+const leancloudGraphQL = require('@xyqfer/leancloud-graphql-express-middleware').express;
 const bluebird = require('bluebird');
 
 global.Promise = bluebird;
