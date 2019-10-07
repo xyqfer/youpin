@@ -52,7 +52,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/graphql', leancloudGraphQL({
+app.use(`/graphql${process.env.GRAPHQL_TOKEN}`, leancloudGraphQL({
     graphiql: params.env.isDev,
 }));
 
