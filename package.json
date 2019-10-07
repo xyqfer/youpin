@@ -16,7 +16,7 @@
     "@xyqfer/env-info": "^1.0.1",
     "@xyqfer/init-leancloud-engine": "^1.1.1",
     "@xyqfer/leancloud-db": "^1.3.0",
-    "@xyqfer/leancloud-graphql-express-middleware": "^1.0.2",
+    "@xyqfer/leancloud-graphql-express-middleware": "^1.1.1",
     "ali-oss": "^6.1.1",
     "async-retry": "^1.2.3",
     "bluebird": "^3.5.1",

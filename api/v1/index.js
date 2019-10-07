@@ -142,8 +142,6 @@ router.get('/betterDev/video', require('./betterDev/video'));
 
 router.get('/nhk/easynews', require('./nhk/easynews'));
 router.get('/nhk/easynews/article/:id', require('./nhk/easynews-article'));
-router.get('/nhk/webnews', require('./nhk/webnews'));
-router.get('/nhk/webnews/article/:id', require('./nhk/webnews-article'));
 
 router.get('/server-status/storage', require('./server-status/storage'));
 router.get('/os', require('./os'));
