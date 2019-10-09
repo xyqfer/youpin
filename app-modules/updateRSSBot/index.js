@@ -73,10 +73,6 @@ module.exports = async () => {
 
       const message = newData.reduce((acc, { title, link }, index) => {
         const isLast = index === newData.length - 1;
-        const url = new URL(link);
-        if (url.hostname === 'www.zhihu.com') {
-          link = `${process.env.CF_WORKER_URL}${url.pathname}`;
-        }
         acc += `${title.trim()} ${link}${isLast ? '' : '\n\n'}`;
         return acc;
       }, 'RSSBOT 有更新:\n\n');
