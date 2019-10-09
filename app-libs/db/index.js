@@ -1,6 +1,15 @@
 'use strict';
 
-const { getCount, getData, saveData, updateData, setHook, } = require('@xyqfer/leancloud-db');
+const { 
+    getCount, 
+    getData, 
+    saveData, 
+    updateData, 
+    updateData2,
+    setHook, 
+    syncEnv,
+    cache,
+} = require('@xyqfer/leancloud-db');
 
 module.exports = {
     getCount,
@@ -12,4 +21,7 @@ module.exports = {
     getDbData: getData,
     saveDbData: saveData,
     updateDbData: updateData,
+    updateData2,
+    syncEnv,
+    cache,
 };

@@ -52,7 +52,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(`/graphql${process.env.GRAPHQL_TOKEN}`, leancloudGraphQL({
+const GRAPHQL_TOKEN = params.env.isProd ? process.env.GRAPHQL_TOKEN : '';
+app.use(`/graphql${GRAPHQL_TOKEN}`, leancloudGraphQL({
     graphiql: params.env.isDev,
 }));
 

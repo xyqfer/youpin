@@ -1,20 +1,20 @@
 'use strict';
+const { db, http, } = require('app-libs');
+const { cache } = db;
 
 module.exports = async () => {
-    const rp = require('request-promise');
-    const { getDbData } = require('app-libs/db');
-
-    const dbData = await getDbData({
-        dbName: 'Wake',
-      });
-    const urls = dbData.map(({ url, }) => {
-        return url;
+    const dbName = 'Wake';
+    const dbData = await cache.init({
+        dbName,
+        query: {
+            select: ['url'],
+        },
     });
 
     Promise.all(
-        urls.map((uri) => {
-            return rp.get({
-                uri
+        dbData.map(({ url, }) => {
+            return http.get({
+                uri: url,
             });
         })
     ).catch(() => {});
