@@ -1,85 +1,60 @@
 'use strict';
 
 const uniqBy = require('lodash/uniqBy');
-const flattenDeep = require('lodash/flattenDeep');
 const {
-    db: {
-        getDbData,
-        getDbCount,
-        saveDbData,
-    },
+    db,
     mail: sendMail
 } = require('app-libs');
+const {
+    saveDbData,
+    cache,
+} = db;
 
-module.exports = (params = {}) => {
+module.exports = async (params = {}) => {
     const baseParams = {
         dbName: '',
-        maxDbFetchTimes: 10,
         mail: {
             title: '',
             template: () => ''
         },
         getDbData: async function () {
-            const offsets = [];
-            const per = 1000;
-
-            const dbCount = await getDbCount({
+            return await cache.init({
                 dbName: this.dbName,
+                query: {
+                    select: [this.filterKey],
+                },
+                count: 10 * 1000,
             });
-            const limit = Math.min(Math.ceil(dbCount / per), this.maxDbFetchTimes);
-
-            for (let offset = 0; offset < limit; offset += 1) {
-                offsets.push(offset * per);
-            }
-
-            let dbData = await Promise.mapSeries(offsets, async (offset) => {
-                const dbData = await getDbData({
-                    dbName: this.dbName,
-                    query: {
-                        descending: ['createdAt'],
-                        skip: [offset],
-                    },
-                });
-    
-                return dbData;
-            });
-            return flattenDeep(dbData);
         },
         getTargetData: () => [],
         filterKey: '',
-        filterData: function (dbData, targetData) {
-            return Promise.filter(targetData, async (item) => {
-                for (let i = 0; i < dbData.length; i++) {
-                    if (item[this.filterKey] === dbData[i][this.filterKey]) {
-                        return false;
-                    }
-                }
+        alreadySaved: false,
+        filterData: async function (dbData, targetData) {
+            const newData = await cache.findAndSet({
+                dbName: this.dbName, 
+                source: targetData, 
+                key: this.filterKey,
+            });
+            this.alreadySaved = true;
 
-                const dbItem = await getDbData({
-                    dbName: this.dbName,
-                    limit: 1,
-                    query: {
-                        equalTo: [this.filterKey, item[this.filterKey]]
-                    }
-                });
-
-                return dbItem.length === 0;
-            }, {
-                    concurrency: 1
-                });
+            return newData;
         },
         saveData: function (data = []) {
-            return saveDbData({
-                dbName: this.dbName,
-                data
-            });
+            if (!this.alreadySaved) {
+                this.alreadySaved = true;
+
+                return saveDbData({
+                    dbName: this.dbName,
+                    data,
+                });
+            }
         },
         notify: function (data = []) {
             return sendMail({ ...this.mail, data });
-        }
+        },
     };
 
-    const mergeParams = Object.assign(baseParams, params);
+    const mergeParams = Object.assign({}, baseParams, params);
     return (async function () {
         const dbData = await this.getDbData();
         const targetData = uniqBy(await this.getTargetData(), this.filterKey);
