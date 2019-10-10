@@ -9,7 +9,7 @@ module.exports = async () => {
     const dbName = 'RSSDATA';
     const filterKey = 'link';
 
-    const initCache = () => {
+    const initCache = async () => {
       await cache.init({
         dbName,
         query: {
