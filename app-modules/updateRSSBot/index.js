@@ -9,15 +9,22 @@ module.exports = async () => {
     const dbName = 'RSSDATA';
     const filterKey = 'link';
 
-    await cache.init({
-      dbName,
-      query: {
-        descending: ['createdAt'],
-        select: [filterKey],
-      },
-      count: 10 * 1000,
-    });
-    const rssData = await getRSSData();
+    const initCache = async () => {
+      await cache.init({
+        dbName,
+        query: {
+          descending: ['createdAt'],
+          select: [filterKey],
+        },
+        count: 10 * 1000,
+      });
+    };
+
+    const [, rssData] = await Promise.all([
+      initCache(),
+      getRSSData(),
+    ]);
+
     const newData = await cache.findAndSet({
       dbName,
       source: rssData,
