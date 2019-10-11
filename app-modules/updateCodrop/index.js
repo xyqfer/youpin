@@ -47,6 +47,8 @@ module.exports = async () => {
                     return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br></div>`;
                 },
                 device: 'device2',
+                open: 'safari',
+                proxy: true,
             });
         }
 
