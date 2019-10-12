@@ -1,10 +1,9 @@
 'use strict';
 
-module.exports = async () => {
-    const rp = require('request-promise');
-    const { params } = require('app-libs');
+const { http, params, } = require('app-libs');
 
-    const data = await rp.get({
+module.exports = async () => {
+    const data = await http.get({
         json: true,
         uri: 'https://home.mi.com/lasagne/page/4',
         headers: {
