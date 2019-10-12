@@ -20,7 +20,7 @@ module.exports = async () => {
             },
             notify: async (newData) => {
                 sendMail({
-                    title: 'NbdNews 有更新~',
+                    title: 'NbdNews 有更新',
                     template: ({ title = '', url = '', content = '', }) => {
                         return `
                             <div style="margin-bottom: 30px">

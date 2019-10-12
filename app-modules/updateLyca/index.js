@@ -6,7 +6,7 @@ module.exports = async () => {
   } = require('app-libs');
 
   try {
-    const title = '刷新 Lyca 啦~';
+    const title = '刷新 Lyca';
 
     sendMail({
       title,

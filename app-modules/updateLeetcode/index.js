@@ -30,7 +30,7 @@ module.exports = async () => {
       const title = question.stat.question__title;
 
       await sendMail({
-        title: '要刷 Leetcode 啦~',
+        title: '要刷 Leetcode 啦',
         data: [{
           url: questionUrl,
           title,

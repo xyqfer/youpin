@@ -10,7 +10,7 @@ module.exports = async () => {
         const html = await getData();
         if (html) {
             sendMail({
-                title: 'Dcard 更新~',
+                title: 'Dcard 更新',
                 data: [{}],
                 template: () => {
                     return `

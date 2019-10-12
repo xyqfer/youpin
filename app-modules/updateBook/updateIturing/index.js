@@ -14,7 +14,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'Ituring',
             mail: {
-                title: '图灵有新书啦~',
+                title: '图灵有新书',
                 template: ({ url = '', title = '', cover = '', desc = '' }) => {
                     return `
                         <div style="margin-bottom: 60px">

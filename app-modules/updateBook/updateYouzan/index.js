@@ -38,7 +38,7 @@ module.exports = async () => {
             });
 
             sendMail({
-                title: '有赞商城有新书啦~',
+                title: '有赞商城有新书',
                 data: newData,
                 template: ({ url = '', name = '', cover = '' }) => {
                     return `

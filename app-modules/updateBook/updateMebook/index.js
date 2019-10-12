@@ -8,7 +8,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'Blogread',
             mail: {
-                title: 'Mebook 有新书啦~',
+                title: 'Mebook 有新书',
                 template: ({ url = '', title = '', summary = '' }) => {
                     return `
                         <div style="margin-bottom: 60px">

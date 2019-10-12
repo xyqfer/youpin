@@ -6,15 +6,15 @@ module.exports = async () => {
   } = require('app-libs');
 
   try {
-    const title = '刷书啦~';
+    const title = '刷书啦';
     let data = [{
       title: 'Server Storage Status',
       url: `${process.env.NUXT_URL}/server-status/storage`,
     }, {
-      title: '领蚂蚁积分啦~',
+      title: '领蚂蚁积分',
       url: 'alipays://platformapi/startapp?appId=20000160',
     }, {
-      title: '签到~',
+      title: '签到',
       url: 'mnw://',
     }];
     const now = new Date();

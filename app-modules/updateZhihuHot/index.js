@@ -12,7 +12,7 @@ module.exports = async () => {
             dbName,
             filterKey,
             mail: {
-                title: '知乎热榜有更新~',
+                title: '知乎热榜有更新',
                 template: ({ url = '', title = '' }) => {
                     if (url.startsWith('https://zhuanlan.zhihu.com')) {
                         url = `https://oia.zhihu.com/articles/${url.replace('https://zhuanlan.zhihu.com/p/', '')}`;

@@ -56,7 +56,7 @@ module.exports = async () => {
             });
 
             sendMail({
-                title: '豆瓣有新书啦~',
+                title: '豆瓣有新书',
                 data: newData,
                 template: ({ name = '', url = '', desc = '' }) => {
                     return `

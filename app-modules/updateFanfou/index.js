@@ -11,7 +11,7 @@ module.exports = async () => {
             dbName,
             filterKey,
             mail: {
-                title: '饭否有更新啦~',
+                title: '饭否有更新啦',
                 template: ({ content = '', postId = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">

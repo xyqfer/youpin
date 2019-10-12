@@ -34,7 +34,7 @@ module.exports = async () => {
         const url = 'http://res.wokanxing.info/jpgramma/' + $link.attr('href');
 
         await sendMail({
-          title: '要刷JP啦~',
+          title: '要刷JP啦',
           data: [{
             url,
             title,

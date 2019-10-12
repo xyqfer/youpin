@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
     });
 
     sendMail({
-      title: 'Alipay Schemes 有更新~',
+      title: 'Alipay Schemes 有更新',
       data: [{}],
       template: () => {
         return `

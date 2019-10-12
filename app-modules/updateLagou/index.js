@@ -29,7 +29,7 @@ module.exports = async () => {
             });
 
             sendMail({
-                title: '拉勾有新职位啦~',
+                title: '拉勾有新职位',
                 data,
                 template: ({ url = '', title = '', summary = '' }) => {
                     return `

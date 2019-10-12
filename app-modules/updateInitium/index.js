@@ -6,7 +6,7 @@ module.exports = async () => {
   } = require('app-libs');
 
   try {
-    const title = 'Initium有更新~';
+    const title = 'Initium 有更新';
     let data = [{
       title: '每日简报',
       url: `https://node-aliyun-hk-1.etherdream.com:8443/-----https://theinitium.com/channel/news-brief/`,

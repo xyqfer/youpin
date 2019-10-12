@@ -8,7 +8,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'LagouComment',
             mail: {
-                title: '拉勾评论有更新~',
+                title: '拉勾评论有更新',
                 template: ({ commentId = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">

@@ -12,7 +12,7 @@ module.exports = async () => {
             dbName,
             filterKey,
             mail: {
-                title: 'Fraud Info 有更新~',
+                title: 'Fraud Info 有更新',
                 template: ({ url = '', title = '', summary = '', }) => {
                     return `
                         <div style="margin-bottom: 30px">

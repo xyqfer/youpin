@@ -37,7 +37,7 @@ module.exports = async () => {
                 data: newData
             });
             sendMail({
-                title: '众成翻译有更新了~',
+                title: '众成翻译有更新',
                 data: newData,
                 template: ({ url = '', title = '', desc = '' }) => {
                     return `

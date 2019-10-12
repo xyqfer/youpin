@@ -8,7 +8,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'DoubanBook',
             mail: {
-                title: '知乎有新书啦~',
+                title: '知乎有新书',
                 template: ({ name = '', url = '', pubInfo = '', desc = '', cover = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">

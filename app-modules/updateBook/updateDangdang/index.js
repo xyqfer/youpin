@@ -13,7 +13,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'Broadview',
             mail: {
-                title: '当当有新书啦~',
+                title: '当当有新书',
                 template: ({ url = '', title = '', cover = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">

@@ -8,7 +8,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'Medium',
             mail: {
-                title: 'Medium-JavaScript更新了~',
+                title: 'Medium-JavaScript 有更新',
                 template: ({ url = '', title = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">

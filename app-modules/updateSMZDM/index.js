@@ -8,7 +8,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'SMZDM',
             mail: {
-                title: '什么值得买有更新了~',
+                title: '什么值得买有更新',
                 template: ({ url = '', title = '', cover = '', desc = '' }) => {
                     return `
                         <div style="margin-bottom: 50px">

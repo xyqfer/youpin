@@ -17,7 +17,7 @@ module.exports = async () => {
     });
 
     sendMail({
-      title: '看经济学人啦~',
+      title: '看经济学人啦',
       data,
       template: ({ url = '', title = '' }) => {
         return `

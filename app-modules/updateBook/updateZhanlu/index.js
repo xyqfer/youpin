@@ -14,7 +14,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'Zhanlu',
             mail: {
-                title: '湛庐有新书啦~',
+                title: '湛庐有新书',
                 template: ({ url = '', title = '', cover = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">

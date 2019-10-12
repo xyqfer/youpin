@@ -12,7 +12,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'Broadview',
             mail: {
-                title: 'Broadview有新书啦~',
+                title: 'Broadview 有新书',
                 template: ({ url = '', title = '', cover = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">

@@ -14,7 +14,7 @@ module.exports = async () => {
         return await updateContainer({
             dbName: 'WeiboBook',
             mail: {
-                title: '微博新书快讯~',
+                title: '微博新书快讯',
                 template: ({ title = '', cover = '', desc = '' }) => {
                     return `
                         <div style="margin-bottom: 30px">
