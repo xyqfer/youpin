@@ -260,6 +260,12 @@ expressWs(app);
 app.ws('/echo', function(ws, req) {
     ws.on('message', function(msg) {
       ws.send(msg);
+      setTimeout(() => {
+        ws.send(msg + 1);
+        setTimeout(() => {
+            ws.send(msg + 2);
+        }, 2000);
+      }, 1000);
     });
 });
 
