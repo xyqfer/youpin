@@ -1,7 +1,7 @@
 const { crawler, } = require('app-libs');
 
 module.exports = async (data) => {
-    return await Promise.mapSeries(data, async (item) => {
+    return await Promise.mapSeries(data.reverse(), async (item) => {
         const $ = await crawler(item.url);
         const title = $('h1').text();
 
