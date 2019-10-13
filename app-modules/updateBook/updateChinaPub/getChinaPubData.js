@@ -1,18 +1,13 @@
 'use strict';
+const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
+const uniqBy = require('lodash/uniqBy');
+const { http, } = require('app-libs');
 
 module.exports = async () => {
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const iconv = require('iconv-lite');
-    const uniqBy = require('lodash/uniqBy');
-    const { params } = require('app-libs');
-
     try {
-        const htmlString = await rp.get({
+        const htmlString = await http.get({
             uri: 'http://www.china-pub.com/xinshu/',
-            headers: {
-                'User-Agent': params.ua.pc
-            }
         });
         const $ = cheerio.load(htmlString);
         const targetUrlList = [];
@@ -23,12 +18,9 @@ module.exports = async () => {
 
         const result = await Promise.map(targetUrlList, async (url) => {
             try {
-                return await rp.get({
+                return await http.get({
                     uri: url,
                     encoding : null,
-                    headers: {
-                        'User-Agent': params.ua.pc
-                    }
                 });
             } catch (err) {
                 console.error(err);
@@ -45,7 +37,7 @@ module.exports = async () => {
                 $('.bookshow').each(function () {
                     bookList.push({
                         name: $(this).find('.bookName a').attr('title'),
-                        url: $(this).find('.bookName a').attr('href')
+                        url: $(this).find('.bookName a').attr('href'),
                     });
                 });
             }

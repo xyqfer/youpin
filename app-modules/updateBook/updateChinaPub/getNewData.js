@@ -1,30 +1,15 @@
 'use strict';
+const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
+const { http, } = require('app-libs');
 
-module.exports = async ({ dbData = [], chinaPubData = [] }) => {
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const iconv = require('iconv-lite');
-    const { params } = require('app-libs');
-
-    const newData = chinaPubData.filter((book) => {
-        for (let i = 0; i < dbData.length; i++) {
-            if (book.url === dbData[i].url) {
-                return false;
-            }
-        }
-
-        return true;
-    });
-
+module.exports = async (data) => {
     try {
-        const result = await Promise.mapSeries(newData, async (book) => {
+        const result = await Promise.mapSeries(data, async (book) => {
             try {
-                const htmlString = await rp.get({
+                const htmlString = await http.get({
                     uri: book.url,
                     encoding : null,
-                    headers: {
-                        'User-Agent': params.ua.pc
-                    }
                 });
 
                 const $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
