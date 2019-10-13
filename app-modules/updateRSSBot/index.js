@@ -16,7 +16,7 @@ module.exports = async () => {
           descending: ['createdAt'],
           select: [filterKey],
         },
-        count: 10 * 1000,
+        count: 5 * 1000,
       });
     };
 
