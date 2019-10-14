@@ -5,5 +5,8 @@
             "app-libs/*": ["./app-libs/*"],
             "app-containers/*": ["./app-containers/*"]
         }
-    }
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
