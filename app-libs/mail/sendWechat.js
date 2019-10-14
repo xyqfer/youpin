@@ -32,6 +32,7 @@ module.exports = async ({ title = '', content = '', render }) => {
         });
 
         console.log(response);
+        /* eslint-disable eqeqeq */
         return {
             success: response.errno == 0,
         };

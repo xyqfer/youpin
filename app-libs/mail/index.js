@@ -48,7 +48,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
 
     try {
         let sendSuccess = false;
-
+        /* eslint-disable no-await-in-loop */
         while (mailQueue.length > 0 && !sendSuccess) {
             const mapKey = (mailQueue.shift() || 'wechat').toLowerCase();
             const status = await sendMap[mapKey](mailParams);

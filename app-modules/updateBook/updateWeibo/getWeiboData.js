@@ -36,7 +36,7 @@ module.exports = async ({ offsets = [1] }) => {
             },
             []
         );
-
+        /* eslint-disable eqeqeq */
         return uniqBy(flatten(results), 'id')
             .map((item) => {
                 try {

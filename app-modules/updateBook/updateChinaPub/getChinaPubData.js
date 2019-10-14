@@ -35,6 +35,7 @@ module.exports = async () => {
         const bookList = [];
 
         result.forEach((htmlString) => {
+            /* eslint-disable eqeqeq */
             if (htmlString != null) {
                 const $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
 

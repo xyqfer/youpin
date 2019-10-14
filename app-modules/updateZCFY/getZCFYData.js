@@ -27,7 +27,7 @@ module.exports = async () => {
             $('.uk-card').each(function() {
                 const $elem = $(this);
                 const url = $elem.find('.uk-link-reset').attr('href');
-
+                /* eslint-disable eqeqeq */
                 if (url != null && url !== '') {
                     postList.push({
                         title: $elem.find('.uk-card-header .uk-link-reset').text(),

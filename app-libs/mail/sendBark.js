@@ -33,6 +33,7 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
         });
 
         console.log(response);
+        /* eslint-disable eqeqeq */
         return {
             success: response.code == 200,
         };

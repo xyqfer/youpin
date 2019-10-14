@@ -23,7 +23,7 @@ module.exports = async ({ dbName = 'Test', data = [] }) => {
 
     try {
         const saveData = [];
-
+        /* eslint-disable no-await-in-loop */
         for (let i = 0; i < rawSaveData.length; i++) {
             const item = rawSaveData[i];
             const dbItem = await getDbData({

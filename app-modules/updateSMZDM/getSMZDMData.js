@@ -61,6 +61,7 @@ module.exports = async () => {
         .last()
         .attr('timesort');
 
+    /* eslint-disable no-await-in-loop */
     for (let i = 1; i <= 5; i++) {
         const postData = await rp.get({
             json: true,
