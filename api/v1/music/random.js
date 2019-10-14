@@ -13,8 +13,8 @@ module.exports = async (req, res) => {
         dbName,
         limit,
         query: {
-            skip: [index]
-        }
+            skip: [index],
+        },
     });
 
     res.json({

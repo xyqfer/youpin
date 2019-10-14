@@ -1,6 +1,6 @@
 'use strict';
 
-const { http, params, } = require('app-libs');
+const { http, params } = require('app-libs');
 
 module.exports = async () => {
     const data = await http.get({
@@ -19,9 +19,7 @@ module.exports = async () => {
         } else if (item.data.tabs) {
             goodsList = item.data.tabs.reduce((acc, tab) => {
                 if (tab.result) {
-                    tab.result.goods_list.forEach((goods) => {
-                        return goods;
-                    });
+                    tab.result.goods_list.forEach((goods) => goods);
                 }
 
                 return acc;

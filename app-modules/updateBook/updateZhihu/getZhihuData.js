@@ -8,11 +8,11 @@ module.exports = async () => {
             uri: 'https://api.zhihu.com/books/features/new',
             json: true,
             headers: {
-                'User-Agent': params.ua.pc
-            }
+                'User-Agent': params.ua.pc,
+            },
         });
 
-        return result.data.map(book => {
+        return result.data.map((book) => {
             const authors = book.authors.map((author) => author.name).join('、');
 
             return {
@@ -20,7 +20,7 @@ module.exports = async () => {
                 url: book.url,
                 cover: book.cover.replace(/_.+\.jpg/g, '.jpg'),
                 pubInfo: authors,
-                desc: book.description
+                desc: book.description,
             };
         });
     } catch (err) {

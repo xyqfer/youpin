@@ -10,7 +10,5 @@ test('更新LagouComment', async () => {
     try {
         const result = await updateLagouComment({});
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

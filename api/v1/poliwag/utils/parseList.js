@@ -5,32 +5,35 @@
  */
 
 module.exports = (htmlString) => {
-  const cheerio = require('cheerio');
+    const cheerio = require('cheerio');
 
-  let $ = cheerio.load(htmlString);
-  let data = [];
+    const $ = cheerio.load(htmlString);
+    const data = [];
 
-  $('.article-list > li').each(function () {
-    let $elem = $(this);
-    let elemClass = $(this).attr('class');
+    $('.article-list > li').each(function() {
+        const $elem = $(this);
+        const elemClass = $(this).attr('class');
 
-    if (elemClass && !elemClass.includes('photospot-slideshow-item')) {
-      let $link = $elem.find('a');
-      let title = $link.attr('title');
+        if (elemClass && !elemClass.includes('photospot-slideshow-item')) {
+            const $link = $elem.find('a');
+            let title = $link.attr('title');
 
-      if (!title) {
-        title = $link.find('h2').text().trim();
-      }
+            if (!title) {
+                title = $link
+                    .find('h2')
+                    .text()
+                    .trim();
+            }
 
-      let news = {
-        title,
-        url: $link.attr('href').replace('https://cn.nytimes.com', ''),
-        summary: $elem.find('.summary-container').text(),
-      };
+            const news = {
+                title,
+                url: $link.attr('href').replace('https://cn.nytimes.com', ''),
+                summary: $elem.find('.summary-container').text(),
+            };
 
-      data.push(news);
-    }
-  });
+            data.push(news);
+        }
+    });
 
-  return data;
+    return data;
 };

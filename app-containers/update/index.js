@@ -1,23 +1,17 @@
 'use strict';
 
 const uniqBy = require('lodash/uniqBy');
-const {
-    db,
-    mail: sendMail
-} = require('app-libs');
-const {
-    saveDbData,
-    cache,
-} = db;
+const { db, mail: sendMail } = require('app-libs');
+const { saveDbData, cache } = db;
 
 module.exports = async (params = {}) => {
     const baseParams = {
         dbName: '',
         mail: {
             title: '',
-            template: () => ''
+            template: () => '',
         },
-        getDbData: async function () {
+        getDbData: async function() {
             return await cache.init({
                 dbName: this.dbName,
                 query: {
@@ -29,17 +23,17 @@ module.exports = async (params = {}) => {
         getTargetData: () => [],
         filterKey: '',
         alreadySaved: false,
-        filterData: async function (dbData, targetData) {
+        filterData: async function(dbData, targetData) {
             const newData = await cache.findAndSet({
-                dbName: this.dbName, 
-                source: targetData, 
+                dbName: this.dbName,
+                source: targetData,
                 key: this.filterKey,
             });
             this.alreadySaved = true;
 
             return newData;
         },
-        saveData: function (data = []) {
+        saveData: function(data = []) {
             if (!this.alreadySaved) {
                 this.alreadySaved = true;
 
@@ -49,13 +43,13 @@ module.exports = async (params = {}) => {
                 });
             }
         },
-        notify: function (data = []) {
+        notify: function(data = []) {
             return sendMail({ ...this.mail, data });
         },
     };
 
     const mergeParams = Object.assign({}, baseParams, params);
-    return (async function () {
+    return async function() {
         const dbData = await this.getDbData();
         const targetData = uniqBy(await this.getTargetData(), this.filterKey);
         const newData = await this.filterData(dbData, targetData);
@@ -69,5 +63,5 @@ module.exports = async (params = {}) => {
         }
 
         return newData;
-    }.bind(mergeParams))();
+    }.bind(mergeParams)();
 };

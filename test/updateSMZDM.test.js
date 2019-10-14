@@ -10,7 +10,5 @@ test('更新SMZDM', async () => {
     try {
         const result = await updateSMZDM({});
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

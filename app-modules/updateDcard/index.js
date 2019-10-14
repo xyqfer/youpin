@@ -2,9 +2,7 @@
 
 module.exports = async () => {
     const getData = require('./getData');
-    const {
-        mail: sendMail
-    } = require('app-libs');
+    const { mail: sendMail } = require('app-libs');
 
     try {
         const html = await getData();
@@ -12,20 +10,18 @@ module.exports = async () => {
             sendMail({
                 title: 'Dcard 更新',
                 data: [{}],
-                template: () => {
-                    return `
+                template: () => `
                         <div style="margin-bottom: 50px">
                             ${html}
                         </div>
-                    `;
-                },
+                    `,
                 device: 'device2',
             });
         }
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

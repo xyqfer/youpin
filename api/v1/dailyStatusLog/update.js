@@ -18,27 +18,27 @@ module.exports = (req, res) => {
                 dbName,
                 limit,
                 query: {
-                    equalTo: ['time', today]
-                }
+                    equalTo: ['time', today],
+                },
             });
 
             if (todayData.length > 0) {
                 updateDbData({
                     dbName,
                     id: todayData[0].objectId,
-                    data: todayStatusLog
+                    data: todayStatusLog,
                 });
             } else {
                 throw '今日数据不存在';
             }
 
             res.json({
-                success: true
+                success: true,
             });
         } catch (err) {
             console.error(err);
             res.json({
-                success: false
+                success: false,
             });
         }
     })();

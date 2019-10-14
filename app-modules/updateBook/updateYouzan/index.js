@@ -3,11 +3,8 @@
 module.exports = async () => {
     const getYouzanBook = require('./getYouzanBook');
     const {
-        db: {
-            getDbData,
-            saveDbData
-        },
-        mail: sendMail
+        db: { getDbData, saveDbData },
+        mail: sendMail,
     } = require('app-libs');
 
     try {
@@ -15,8 +12,8 @@ module.exports = async () => {
         const dbData = await getDbData({
             dbName,
             query: {
-                descending: ['updatedAt']
-            }
+                descending: ['updatedAt'],
+            },
         });
 
         const youzanData = await getYouzanBook();
@@ -34,14 +31,13 @@ module.exports = async () => {
         if (newData.length > 0) {
             saveDbData({
                 dbName,
-                data: newData
+                data: newData,
             });
 
             sendMail({
                 title: '有赞商城有新书',
                 data: newData,
-                template: ({ url = '', name = '', cover = '' }) => {
-                    return `
+                template: ({ url = '', name = '', cover = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${name}</h4>
@@ -50,8 +46,7 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             });
         }
 
@@ -59,7 +54,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

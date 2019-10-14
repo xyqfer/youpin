@@ -9,8 +9,7 @@ module.exports = async () => {
             dbName: 'Blogread',
             mail: {
                 title: 'Mebook 有新书',
-                template: ({ url = '', title = '', summary = '' }) => {
-                    return `
+                template: ({ url = '', title = '', summary = '' }) => `
                         <div style="margin-bottom: 60px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -19,18 +18,15 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getMebookData();
-            },
-            filterKey: 'url'
+            getTargetData: () => getMebookData(),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

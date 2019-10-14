@@ -1,11 +1,9 @@
 'use strict';
 
 const _ = require('lodash');
-const { crawler, } = require('app-libs');
+const { crawler } = require('app-libs');
 
-module.exports = async ({
-    offsets = [0],
-}) => {
+module.exports = async ({ offsets = [0] }) => {
     const hostPrefix = 'http://www.broadview.com.cn';
 
     try {
@@ -14,11 +12,20 @@ module.exports = async ({
                 const $ = await crawler(`http://www.broadview.com.cn/book?tab=book&sort=new&page=${page}`);
                 const newBookList = [];
 
-                $('.block-item').each(function () {
+                $('.block-item').each(function() {
                     newBookList.push({
-                        title: $(this).find('.book-img img').attr('alt'),
-                        url: hostPrefix + $(this).find('.book-img a').attr('href'),
-                        cover: $(this).find('.book-img img').attr('src').replace('SmallCover', 'LargeCover')
+                        title: $(this)
+                            .find('.book-img img')
+                            .attr('alt'),
+                        url:
+                            hostPrefix +
+                            $(this)
+                                .find('.book-img a')
+                                .attr('href'),
+                        cover: $(this)
+                            .find('.book-img img')
+                            .attr('src')
+                            .replace('SmallCover', 'LargeCover'),
                     });
                 });
 

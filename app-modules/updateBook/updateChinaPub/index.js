@@ -13,12 +13,10 @@ module.exports = async () => {
         return await updateContainer({
             dbName,
             filterKey,
-            getTargetData: () => {
-                return getChinaPubData();
-            },
-            notify: async function (data) {
-                let newData = await getNewData(data);
-                return sendMail({ 
+            getTargetData: () => getChinaPubData(),
+            notify: async function(data) {
+                const newData = await getNewData(data);
+                return sendMail({
                     title: 'ChinaPub 有新书啦',
                     data: newData,
                     template: ({ url = '', name = '', intro = '', cover = '' }) => {
@@ -43,7 +41,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-          success: false
+            success: false,
         };
     }
 };

@@ -15,8 +15,7 @@ module.exports = async () => {
             dbName: 'Zhanlu',
             mail: {
                 title: '湛庐有新书',
-                template: ({ url = '', title = '', cover = '' }) => {
-                    return `
+                template: ({ url = '', title = '', cover = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -25,20 +24,18 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getZhanluData({
-                    offsets
-                });
-            },
-            filterKey: 'bookId'
+            getTargetData: () =>
+                getZhanluData({
+                    offsets,
+                }),
+            filterKey: 'bookId',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

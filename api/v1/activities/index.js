@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const { getDbData } = require('app-libs/db');
 
     (async () => {
@@ -12,21 +12,21 @@ module.exports = (req, res, next) => {
                 limit,
                 query: {
                     ascending: ['startTime'],
-                    greaterThanOrEqualTo: ['endTime', new Date()]
-                }
+                    greaterThanOrEqualTo: ['endTime', new Date()],
+                },
             });
 
             res.json({
                 success: true,
                 data,
-                msg: '查询成功'
+                msg: '查询成功',
             });
         } catch (err) {
             console.error(err);
             res.json({
                 success: false,
                 data: null,
-                msg: '查询失败'
+                msg: '查询失败',
             });
         }
     })();

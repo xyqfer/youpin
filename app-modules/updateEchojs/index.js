@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'Echojs 有更新',
-                template: ({ title = '', summary = '', url = '' }) => {
-                    return `
+                template: ({ title = '', summary = '', url = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -23,17 +22,14 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getEchojsData();
-            }
+            getTargetData: () => getEchojsData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

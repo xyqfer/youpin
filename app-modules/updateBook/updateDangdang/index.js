@@ -14,8 +14,7 @@ module.exports = async () => {
             dbName: 'Broadview',
             mail: {
                 title: '当当有新书',
-                template: ({ url = '', title = '', cover = '' }) => {
-                    return `
+                template: ({ url = '', title = '', cover = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -24,20 +23,18 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getDangdangData({
-                    offsets
-                });
-            },
-            filterKey: 'url'
+            getTargetData: () =>
+                getDangdangData({
+                    offsets,
+                }),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

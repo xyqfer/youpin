@@ -3,11 +3,8 @@
 module.exports = async () => {
     const getZCFYData = require('./getZCFYData');
     const {
-        db: {
-            getDbData,
-            saveDbData
-        },
-        mail: sendMail
+        db: { getDbData, saveDbData },
+        mail: sendMail,
     } = require('app-libs');
 
     const dbName = 'ZCFY';
@@ -16,8 +13,8 @@ module.exports = async () => {
         const dbData = await getDbData({
             dbName,
             query: {
-                descending: ['updatedAt']
-            }
+                descending: ['updatedAt'],
+            },
         });
         const zcfyData = await getZCFYData();
 
@@ -34,13 +31,12 @@ module.exports = async () => {
         if (newData.length > 0) {
             saveDbData({
                 dbName,
-                data: newData
+                data: newData,
             });
             sendMail({
                 title: '众成翻译有更新',
                 data: newData,
-                template: ({ url = '', title = '', desc = '' }) => {
-                    return `
+                template: ({ url = '', title = '', desc = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -49,8 +45,7 @@ module.exports = async () => {
                                 ${desc}
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             });
         }
 
@@ -58,7 +53,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -11,13 +11,10 @@ module.exports = async () => {
         return await updateContainer({
             dbName,
             filterKey,
-            getTargetData: () => {
-                return getGitHubData();
-            },
+            getTargetData: () => getGitHubData(),
             mail: {
                 title: 'GitHub NEW Trending',
-                template: ({ url = '', name = '', desc = '', lang = '', }) => {
-                    return `
+                template: ({ url = '', name = '', desc = '', lang = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${name}</h4>
@@ -29,15 +26,14 @@ module.exports = async () => {
                                 ${lang}
                             </p>
                         </div>
-                    `;
-                },
+                    `,
                 device: 'device2',
             },
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -10,7 +10,5 @@ test('更新ChinaPub', async () => {
     try {
         const result = await updateChinaPub();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

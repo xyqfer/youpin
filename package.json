@@ -7,7 +7,13 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js --preserve-symlinks -- ",
+    "format": "eslint \"**/*.js\" --fix && prettier \"**/*.js\" --write",
+    "format:staged": "eslint \"**/*.js\" --fix && pretty-quick --staged --verbose --pattern \"**/*.js\"",
+    "format:check": "eslint \"**/*.js\" && prettier-check \"**/*.js\"",
     "test": "jest ./test/**"
+  },
+  "gitHooks": {
+    "pre-commit": "npm run format:staged"
   },
   "dependencies": {
     "@leancloud/client-engine": "^0.8.0-beta.0",
@@ -64,7 +70,13 @@
     "ytdl-core": "^1.0.0"
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "prettier-check": "^2.0.0",
+    "pretty-quick": "^2.0.0"
   },
   "engines": {
     "node": "10.x"

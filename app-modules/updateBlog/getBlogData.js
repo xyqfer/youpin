@@ -4,9 +4,7 @@ module.exports = async () => {
     const rp = require('request-promise');
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
-    const {
-        params
-    } = require('app-libs');
+    const { params } = require('app-libs');
 
     const urls = [
         // 'http://fex.baidu.com/feed.xml',
@@ -54,13 +52,13 @@ module.exports = async () => {
             const xmlString = await rp.get({
                 uri: url,
                 headers: {
-                    'User-Agent': params.ua.pc
+                    'User-Agent': params.ua.pc,
                 },
             });
 
             const $ = cheerio.load(xmlString, {
                 normalizeWhitespace: true,
-                xmlMode: true
+                xmlMode: true,
             });
             const result = [];
 
@@ -68,9 +66,12 @@ module.exports = async () => {
                 const $item = $(this);
 
                 result.push({
-                    url: $item.find('link').text().replace('http://localhost:4000', 'http://fex.baidu.com'),
-                    title: $item.find('title').text()
-                })
+                    url: $item
+                        .find('link')
+                        .text()
+                        .replace('http://localhost:4000', 'http://fex.baidu.com'),
+                    title: $item.find('title').text(),
+                });
             });
 
             $('entry').each(function() {
@@ -78,8 +79,8 @@ module.exports = async () => {
 
                 result.push({
                     url: $item.find('link').attr('href'),
-                    title: $item.find('title').text()
-                })
+                    title: $item.find('title').text(),
+                });
             });
 
             return result;
@@ -89,10 +90,8 @@ module.exports = async () => {
         }
     });
 
-    return flatten(data).map(({ title, url }) => {
-        return {
-            title,
-            url,
-        };
-    });
+    return flatten(data).map(({ title, url }) => ({
+        title,
+        url,
+    }));
 };

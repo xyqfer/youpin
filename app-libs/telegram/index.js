@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  sendMessage: require('./sendMessage'),
+    sendMessage: require('./sendMessage'),
 };

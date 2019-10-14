@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'Pixiv 有更新',
-                template: ({ title = '', img = '', url = '' }) => {
-                    return `
+                template: ({ title = '', img = '', url = '' }) => `
                       <div style="margin-bottom: 30px">
                         <a href="${url}" target="_blank">
                             <h4>${title}</h4>
@@ -23,17 +22,14 @@ module.exports = async () => {
                             <img src="${img}" alt="">
                         </div>
                       </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getPixivData();
-            }
+            getTargetData: () => getPixivData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

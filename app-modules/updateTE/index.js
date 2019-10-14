@@ -14,8 +14,7 @@ module.exports = async () => {
             mail: {
                 title: 'TE 杂志有更新',
                 device: 'device2',
-                template: ({ title = '', summary = '', url = '' }) => {
-                    return `
+                template: ({ title = '', summary = '', url = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -24,17 +23,14 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getTEData();
-            },
+            getTargetData: () => getTEData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

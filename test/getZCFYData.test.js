@@ -9,7 +9,5 @@ test('获取zcfy数据', async () => {
     try {
         const result = await getZCFYData();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

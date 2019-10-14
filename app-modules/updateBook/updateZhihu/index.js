@@ -9,8 +9,7 @@ module.exports = async () => {
             dbName: 'DoubanBook',
             mail: {
                 title: '知乎有新书',
-                template: ({ name = '', url = '', pubInfo = '', desc = '', cover = '' }) => {
-                    return `
+                template: ({ name = '', url = '', pubInfo = '', desc = '', cover = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${name}</h4>
@@ -25,18 +24,15 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getZhihuData();
-            },
-            filterKey: 'url'
+            getTargetData: () => getZhihuData(),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -9,7 +9,5 @@ test('获取Codrop数据', async () => {
     try {
         const result = await getCodropData();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

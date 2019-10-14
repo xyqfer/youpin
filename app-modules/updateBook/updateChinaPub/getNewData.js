@@ -1,7 +1,7 @@
 'use strict';
 const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
-const { http, } = require('app-libs');
+const { http } = require('app-libs');
 
 module.exports = async (data) => {
     try {
@@ -9,28 +9,31 @@ module.exports = async (data) => {
             try {
                 const htmlString = await http.get({
                     uri: book.url,
-                    encoding : null,
+                    encoding: null,
                 });
 
                 const $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
                 let time;
 
-                $('#con_a_1 .pro_r_deta').eq(0).find('li').each(function () {
-                    const text = $(this).text();
+                $('#con_a_1 .pro_r_deta')
+                    .eq(0)
+                    .find('li')
+                    .each(function() {
+                        const text = $(this).text();
 
-                    if (text.includes('上架时间')) {
-                        time = text.replace('上架时间：', '');
-                    }
-                });
+                        if (text.includes('上架时间')) {
+                            time = text.replace('上架时间：', '');
+                        }
+                    });
 
                 if (time) {
-                    const year = +time.split("-")[0];
+                    const year = +time.split('-')[0];
 
                     if (year <= 2016) {
                         return false;
                     } else {
                         const cover = $('.gray12a img').attr('src');
-                        const intro = $(".pro_name_intr").text();
+                        const intro = $('.pro_name_intr').text();
 
                         book.cover = cover;
                         book.intro = intro;
@@ -45,9 +48,7 @@ module.exports = async (data) => {
             }
         });
 
-        return result.filter((book) => {
-            return book;
-        });
+        return result.filter((book) => book);
     } catch (err) {
         console.error(err);
         return [];

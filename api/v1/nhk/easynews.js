@@ -3,11 +3,11 @@
 const { getDbData } = require('app-libs/db');
 
 module.exports = async (req, res) => {
-    const { offset = 0, limit = 20, } = req.query;
+    const { offset = 0, limit = 20 } = req.query;
     const dbName = 'NHKEasyNews';
 
     try {
-        let data = await getDbData({
+        const data = await getDbData({
             dbName,
             limit,
             query: {

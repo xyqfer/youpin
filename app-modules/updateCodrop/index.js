@@ -3,11 +3,8 @@
 module.exports = async () => {
     const getCodropData = require('./getCodropData');
     const {
-        db: {
-            getDbData,
-            saveDbData
-        },
-        mail: sendMail
+        db: { getDbData, saveDbData },
+        mail: sendMail,
     } = require('app-libs');
 
     const dbName = 'Codrop';
@@ -16,8 +13,8 @@ module.exports = async () => {
         const dbData = await getDbData({
             dbName,
             query: {
-                descending: ['updatedAt']
-            }
+                descending: ['updatedAt'],
+            },
         });
         const codropData = await getCodropData();
 
@@ -34,18 +31,14 @@ module.exports = async () => {
         if (newData.length > 0) {
             saveDbData({
                 dbName,
-                data: newData.map((item) => {
-                    return {
-                        postId: item.postId
-                    };
-                })
+                data: newData.map((item) => ({
+                    postId: item.postId,
+                })),
             });
             sendMail({
                 title: 'Codrop 更新啦',
                 data: newData,
-                template: ({ url = '', name = '' }) => {
-                    return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br></div>`;
-                },
+                template: ({ url = '', name = '' }) => `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br></div>`,
                 device: 'device2',
                 open: 'safari',
                 proxy: true,
@@ -56,7 +49,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

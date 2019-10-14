@@ -10,7 +10,5 @@ test('获取Echojs数据', async () => {
     try {
         const result = await getEchojsData();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

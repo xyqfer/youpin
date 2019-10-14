@@ -1,10 +1,10 @@
-const { db, http, params, } = require('app-libs');
+const { db, http, params } = require('app-libs');
 const cheerio = require('cheerio');
 
 module.exports = async (req, res) => {
     const { id } = req.params;
     const dbName = 'NHKEasyNews';
-    const [ data ] = await db.getDbData({
+    const [data] = await db.getDbData({
         dbName,
         limit: 1,
         query: {
@@ -13,17 +13,22 @@ module.exports = async (req, res) => {
     });
 
     const $ = cheerio.load(data.content);
-    const words = $('ruby').map(function() {
-        const $elem = $(this);
-        const furigana = $elem.find('rt').text().trim();
-        const text = $elem.text().replace(/\s*/g, '');
-        const kanji = text.slice(0, text.indexOf(furigana));
+    const words = $('ruby')
+        .map(function() {
+            const $elem = $(this);
+            const furigana = $elem
+                .find('rt')
+                .text()
+                .trim();
+            const text = $elem.text().replace(/\s*/g, '');
+            const kanji = text.slice(0, text.indexOf(furigana));
 
-        return {
-            kanji,
-            furigana,
-        };
-    }).get();
+            return {
+                kanji,
+                furigana,
+            };
+        })
+        .get();
 
     $('.dicWin').each(function() {
         $(this).removeAttr('href');
@@ -56,14 +61,18 @@ module.exports = async (req, res) => {
         },
         json: true,
     });
-    const dicContent = Object.entries(dicData.reikai.entries).reduce((acc, [ key, item ]) => {
+    const dicContent = Object.entries(dicData.reikai.entries).reduce((acc, [key, item]) => {
         const { hyouki } = item[0];
-        const furigana = $(`#id-${key}`).find('rt').eq(0).text().trim();
-        
+        const furigana = $(`#id-${key}`)
+            .find('rt')
+            .eq(0)
+            .text()
+            .trim();
+
         acc += `
             <ruby>${hyouki}<rt>${furigana}</rt></ruby>
         `;
-        
+
         item.forEach(({ def }, index) => {
             acc += `
                 <div style="margin-bottom: 10px">
@@ -73,7 +82,7 @@ module.exports = async (req, res) => {
         });
 
         acc += `<div style="margin-bottom: 20px"></div>`;
-        
+
         return acc;
     }, '');
 

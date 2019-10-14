@@ -9,8 +9,7 @@ module.exports = async () => {
             dbName: 'SMZDM',
             mail: {
                 title: '什么值得买有更新',
-                template: ({ url = '', title = '', cover = '', desc = '' }) => {
-                    return `
+                template: ({ url = '', title = '', cover = '', desc = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -23,18 +22,15 @@ module.exports = async () => {
                                     alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getSMZDMData();
-            },
-            filterKey: 'url'
+            getTargetData: () => getSMZDMData(),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

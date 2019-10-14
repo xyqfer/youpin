@@ -10,7 +10,5 @@ test('更新HackerNews', async () => {
     try {
         const result = await updateHackerNews();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

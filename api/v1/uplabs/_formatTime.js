@@ -13,5 +13,5 @@ module.exports = () => {
     month = month < 10 ? '0' + month : month;
     const date = currentZoneDate.getDate() < 10 ? '0' + currentZoneDate.getDate() : currentZoneDate.getDate();
 
-    return { year, month, date};
+    return { year, month, date };
 };

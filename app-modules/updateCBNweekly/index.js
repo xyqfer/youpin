@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'CBNweekly 更新',
-                template: ({ no = '', time = '', title = '', img = '', url = '' }) => {
-                    return `
+                template: ({ no = '', time = '', title = '', img = '', url = '' }) => `
                         <div style="margin-bottom: 50px">
                             <h4>
                               <a href="${url}" target="_blank">
@@ -27,17 +26,14 @@ module.exports = async () => {
                                     alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getCBNweeklyData();
-            }
+            getTargetData: () => getCBNweeklyData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

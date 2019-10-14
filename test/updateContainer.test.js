@@ -8,10 +8,8 @@ test('更新容器', async () => {
 
     try {
         const result = await updateContainer({
-            dbName: 'Test'
+            dbName: 'Test',
         });
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

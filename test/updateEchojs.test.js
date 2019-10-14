@@ -10,7 +10,5 @@ test('更新Echojs', async () => {
     try {
         const result = await updateEchojs();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

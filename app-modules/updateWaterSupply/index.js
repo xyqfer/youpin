@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '有新的停水通知',
-                template: ({ title = '', url = '' }) => {
-                    return `
+                template: ({ title = '', url = '' }) => `
                         <div style="margin-bottom: 50px">
                             <h4>
                               <a href="${url}" target="_blank">
@@ -22,17 +21,14 @@ module.exports = async () => {
                               </a>
                             </h4>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getWaterSupplyData();
-            }
+            getTargetData: () => getWaterSupplyData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

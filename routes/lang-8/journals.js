@@ -1,4 +1,4 @@
-const { http, params, } = require('app-libs');
+const { http, params } = require('app-libs');
 const cheerio = require('cheerio');
 
 module.exports = async (req, res) => {
@@ -53,7 +53,6 @@ module.exports = async (req, res) => {
     content += `
         <div><a href='/lang-8/journals/${id}?page=${page + 1}'>下一页</a></div> <br />
     `;
-
 
     res.render('archive', {
         title: `${id}-journals`,

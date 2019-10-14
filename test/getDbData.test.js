@@ -10,7 +10,7 @@ test('获取数据', async () => {
     expect.assertions(1);
 
     const dbData = await getDbData({
-        dbName
+        dbName,
     });
     expect(dbData.length).toBeGreaterThan(0);
 });
@@ -21,7 +21,7 @@ test('获取两条数据', async () => {
     const limit = 2;
     const dbData = await getDbData({
         dbName,
-        limit
+        limit,
     });
     expect(dbData.length).toBe(limit);
 });
@@ -33,8 +33,8 @@ test('查询', async () => {
     const dbData = await getDbData({
         dbName,
         query: {
-            equalTo: ['a', a]
-        }
+            equalTo: ['a', a],
+        },
     });
     expect(dbData.length).toBe(1);
     expect(dbData[0].a).toBe(a);

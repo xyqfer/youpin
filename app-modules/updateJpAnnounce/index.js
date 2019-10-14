@@ -13,26 +13,23 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '日语考试信息有更新',
-                template: ({ title = '', url = '', }) => {
-                    return `
+                template: ({ title = '', url = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                         </div>
-                    `;
-                },
+                    `,
             },
-            getTargetData: () => {
-                return fetchRSS({
+            getTargetData: () =>
+                fetchRSS({
                     source: 'RSS_JpAnnounce',
-                });
-            },
+                }),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

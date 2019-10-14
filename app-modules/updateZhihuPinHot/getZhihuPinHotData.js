@@ -1,17 +1,14 @@
 'use strict';
 
 module.exports = async () => {
-    const {
-        params,
-        http
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
 
     const result = await http.get({
         json: true,
         uri: 'https://api.zhihu.com/pins/hot_list?reverse_order=0',
         headers: {
             'User-Agent': params.ua.pc,
-        }
+        },
     });
 
     return result.data.map(({ target }) => {
@@ -53,6 +50,6 @@ module.exports = async () => {
             url,
             title,
             summary,
-        }
+        };
     });
 };

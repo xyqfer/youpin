@@ -1,8 +1,9 @@
 module.exports = async (req, res) => {
-    const { token, code = '', needReturn = false, } = req.body;
+    const { token, code = '', needReturn = false } = req.body;
 
-    if (token === process.env.SANDBOX_TOKEN) {        
+    if (token === process.env.SANDBOX_TOKEN) {
         console.log('开始执行沙盒');
+        /* eslint-disable no-eval */
         const result = await eval(`
             (async () => {
                 ${decodeURIComponent(code)}
@@ -14,7 +15,7 @@ module.exports = async (req, res) => {
         res.json({
             success: true,
             data: {
-                result: needReturn ? result: null,
+                result: needReturn ? result : null,
             },
         });
     } else {

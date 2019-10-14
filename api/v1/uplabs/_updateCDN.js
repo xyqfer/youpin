@@ -5,10 +5,10 @@ module.exports = (data) => {
 
     qcloudSDK.config({
         secretId: process.env.CDNSecretId,
-        secretKey: process.env.CDNSecretKey
+        secretKey: process.env.CDNSecretKey,
     });
 
-    let urlObj = {};
+    const urlObj = {};
     let urlIndex = 0;
 
     if (!Array.isArray(data)) {
@@ -22,7 +22,7 @@ module.exports = (data) => {
             urlObj[`urls.${urlIndex++}`] = imgItem;
         });
 
-        if (ossItem.avatar && ossItem.avatar != '') {
+        if (ossItem.avatar && ossItem.avatar !== '') {
             urlObj[`urls.${urlIndex++}`] = ossItem.avatar;
         }
     });

@@ -12,12 +12,12 @@ test('更新数据', async () => {
 
     const now = Date.now();
     const data = {
-        a: now
+        a: now,
     };
     const result = await updateDbData({
         dbName,
         id,
-        data
+        data,
     });
     expect(result.a).toBe(now);
 });
@@ -46,7 +46,7 @@ test('不传data不报错', async () => {
     expect.assertions(1);
     await updateDbData({
         dbName,
-        id
+        id,
     });
 
     expect(true).toBe(true);
@@ -57,7 +57,7 @@ test('不传id报错', async () => {
 
     try {
         await updateDbData({
-            dbName
+            dbName,
         });
     } catch (err) {
         expect(true).toBe(true);

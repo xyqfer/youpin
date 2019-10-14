@@ -1,15 +1,14 @@
 const { getSubtitles } = require('youtube-captions-scraper');
 
 module.exports = async (req, res) => {
-    let { lang, v, } = req.query;
+    const { lang, v } = req.query;
     const captions = await getSubtitles({
         videoID: v,
         lang,
     });
 
-    const content = captions
-        .reduce((acc, item) => {
-            acc += `
+    const content = captions.reduce((acc, item) => {
+        acc += `
                 <div style="margin-bottom: 20px">
                     <div>
                         ${item.start}
@@ -20,8 +19,8 @@ module.exports = async (req, res) => {
                 </div>
             `;
 
-            return acc;
-        }, '');
+        return acc;
+    }, '');
 
     res.render('archive', {
         title: `${v}-transcript`,

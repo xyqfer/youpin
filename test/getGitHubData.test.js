@@ -10,7 +10,5 @@ test('获取github trending数据', async () => {
     try {
         const result = await getGitHubData();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

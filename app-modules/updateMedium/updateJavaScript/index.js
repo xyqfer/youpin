@@ -9,25 +9,21 @@ module.exports = async () => {
             dbName: 'Medium',
             mail: {
                 title: 'Medium-JavaScript 有更新',
-                template: ({ url = '', title = '' }) => {
-                    return `
+                template: ({ url = '', title = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getJavaScriptData();
-            },
-            filterKey: 'url'
+            getTargetData: () => getJavaScriptData(),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -1,20 +1,20 @@
 'use strict';
 
 module.exports = (data) => {
-    if (data.animated_teaser_url == null) {
+    if (!data.animated_teaser_url) {
         return data;
     }
 
     const assetReg = /^https:\/\/assets\.materialup\.com/g;
     const cdnHost = 'https://uplabscompress-1252013833.image.myqcloud.com';
 
-    let card = {
+    const card = {
         backgroundColor: data.background_color,
         id: data.id,
         animated: data.animated,
         name: data.name,
         detail: data.description_without_html,
-        category: data.subcategory_friendly_name_plural
+        category: data.subcategory_friendly_name_plural,
     };
 
     data.animated_teaser_url = data.animated_teaser_url.replace(assetReg, cdnHost) + '?imageView2/q/75';
@@ -32,7 +32,7 @@ module.exports = (data) => {
             card.verified = marker.verified;
         }
 
-        if (data.maker_name == null || data.maker_name == '') {
+        if (!data.maker_name || data.maker_name === '') {
             data.maker_name = marker.full_name;
         }
 
@@ -44,7 +44,7 @@ module.exports = (data) => {
 
     if (data.images.length > 0) {
         data.images.forEach((img) => {
-            let url = img.urls.full.replace(assetReg, cdnHost);
+            const url = img.urls.full.replace(assetReg, cdnHost);
             card.urls.push(url);
         });
     }

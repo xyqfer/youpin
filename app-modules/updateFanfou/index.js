@@ -12,8 +12,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '饭否有更新啦',
-                template: ({ content = '', postId = '' }) => {
-                    return `
+                template: ({ content = '', postId = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="http://fanfou.com/statuses/${postId}" target="_blank">
                                 <h4>${postId}</h4>
@@ -22,17 +21,14 @@ module.exports = async () => {
                                 ${content}
                             </p>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getFanfouData();
-            }
+            getTargetData: () => getFanfouData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -1,15 +1,12 @@
 'use strict';
 
-const {
-    params,
-    http,
-} = require('app-libs');
+const { params, http } = require('app-libs');
 
 module.exports = async () => {
     let result = await http.get({
         uri: 'https://www3.nhk.or.jp/news/easy/news-list.json',
         headers: {
-            'User-Agent': params.ua.pc
+            'User-Agent': params.ua.pc,
         },
         json: true,
     });
@@ -22,7 +19,7 @@ module.exports = async () => {
     const newsList = [];
     Object.values(data).forEach((items) => {
         items.forEach((news) => {
-            let newsData = {
+            const newsData = {
                 title: news.title,
                 easyUrl: `https://www3.nhk.or.jp/news/easy/${news.news_id}/${news.news_id}.html`,
                 webUrl: news.news_web_url,

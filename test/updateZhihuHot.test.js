@@ -9,7 +9,5 @@ test('更新ZhihuHot', async () => {
     try {
         const result = await updateZhihuHot();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

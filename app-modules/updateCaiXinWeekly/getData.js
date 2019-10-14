@@ -2,10 +2,7 @@
 
 module.exports = async () => {
     const cheerio = require('cheerio');
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
 
     const htmlString = await http.get({
         uri: 'http://weekly.caixin.com/index-mob.html',
@@ -17,7 +14,10 @@ module.exports = async () => {
     const magazines = [];
     const $ = cheerio.load(htmlString);
     const $magazine = $('.new-issue');
-    const magazineUrl = $magazine.find('.new-issue-info > h2').attr('onclick').slice(24, -1);
+    const magazineUrl = $magazine
+        .find('.new-issue-info > h2')
+        .attr('onclick')
+        .slice(24, -1);
 
     magazines.push({
         img: $magazine.find('.new-fm > img').attr('src'),

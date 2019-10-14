@@ -1,10 +1,7 @@
 'use strict';
 
 module.exports = async () => {
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
     const cheerio = require('cheerio');
 
     try {
@@ -16,18 +13,20 @@ module.exports = async () => {
         });
         const $ = cheerio.load(htmlString);
 
-        return $('.answer_item').map((index, item) => {
-            item = $(item);
-            const title = item.find('h3 > a').text();
-            const url = item.find('#answer_content > a').attr('href');
-            const summary = item.find('#answer_content > a').text();
+        return $('.answer_item')
+            .map((index, item) => {
+                item = $(item);
+                const title = item.find('h3 > a').text();
+                const url = item.find('#answer_content > a').attr('href');
+                const summary = item.find('#answer_content > a').text();
 
-            return {
-                url,
-                title,
-                summary,
-            };
-        }).get();
+                return {
+                    url,
+                    title,
+                    summary,
+                };
+            })
+            .get();
     } catch (err) {
         console.error(err);
         return [];

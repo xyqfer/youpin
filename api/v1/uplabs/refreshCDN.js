@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const qcloudSDK = require('qcloud-cdn-node-sdk');
     const COS = require('cos-nodejs-sdk-v5');
     const loadData = require('./_loadData');
@@ -13,79 +13,88 @@ module.exports = (req, res, next) => {
     const currentDate = timeObj.date;
     const path = 'https://uplabs-image-1252013833.file.myqcloud.com/api/v1';
     let allData = [];
-    let urlObj = {};
+    const urlObj = {};
 
     const cos = new COS({
         SecretId: process.env.COSSecretId,
-        SecretKey: process.env.COSSecretKey
+        SecretKey: process.env.COSSecretKey,
     });
 
-    let taskList = [];
+    const taskList = [];
 
     for (let i = 0; i < pageCount; i++) {
         urlObj[`urls.${i}`] = `${path}/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
 
-        taskList.push(new Promise((resolve, reject) => {
-            let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=0&per_page=12&page=${i}`;
+        taskList.push(
+            new Promise((resolve, reject) => {
+                let url = `https://www.uplabs.com/showcases/all/more.json?days_ago=0&per_page=12&page=${i}`;
 
-            if (i == 0) {
-                url = `https://www.uplabs.com/all.json?days_ago=0&page=1`;
-            }
-
-            loadData({
-                url: url,
-                platform: ''
-            }).then((data) => {
-                if (data && data.length > 0) {
-                    const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
-
-                    if (i == 0) {
-                        allData = data;
-                    }
-
-                    cos.putObject({
-                        Bucket: process.env.COSBucket,
-                        Region: process.env.COSRegion,
-                        Key: objectKey,
-                        Body: Buffer.from(JSON.stringify(data))
-                    }, function (err, data) {
-                        console.log(objectKey);
-
-                        if (err) {
-                            console.log(err);
-                        }
-
-                        resolve(data);
-                    });
-                } else {
-                    reject({});
+                if (i === 0) {
+                    url = `https://www.uplabs.com/all.json?days_ago=0&page=1`;
                 }
-            }).catch((err) => {
-                reject(err);
-            });
-        }));
+
+                loadData({
+                    url: url,
+                    platform: '',
+                })
+                    .then((data) => {
+                        if (data && data.length > 0) {
+                            const objectKey = `api/v1/uplabs/uplabs_${currentYear}-${currentMonth}-${currentDate}_${i}.json`;
+
+                            if (i === 0) {
+                                allData = data;
+                            }
+
+                            cos.putObject(
+                                {
+                                    Bucket: process.env.COSBucket,
+                                    Region: process.env.COSRegion,
+                                    Key: objectKey,
+                                    Body: Buffer.from(JSON.stringify(data)),
+                                },
+                                function(err, data) {
+                                    console.log(objectKey);
+
+                                    if (err) {
+                                        console.log(err);
+                                    }
+
+                                    resolve(data);
+                                }
+                            );
+                        } else {
+                            reject({});
+                        }
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            })
+        );
     }
 
-    Promise.all(taskList).then((resultList) => {
-        qcloudSDK.config({
-            secretId: process.env.CDNSecretId,
-            secretKey: process.env.CDNSecretKey
-        });
+    Promise.all(taskList)
+        .then(() => {
+            qcloudSDK.config({
+                secretId: process.env.CDNSecretId,
+                secretKey: process.env.CDNSecretKey,
+            });
 
-        let coverUrlIndex = pageCount;
+            let coverUrlIndex = pageCount;
 
-        allData.forEach((item) => {
-            urlObj[`urls.${coverUrlIndex++}`] = item.cover;
-        });
+            allData.forEach((item) => {
+                urlObj[`urls.${coverUrlIndex++}`] = item.cover;
+            });
 
-        console.log(urlObj);
+            console.log(urlObj);
 
-        qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
-            console.log(result);
+            qcloudSDK.request('RefreshCdnUrl', urlObj, (result) => {
+                console.log(result);
+                res.end();
+            });
+        })
+        .catch((err) => {
+            console.log(err);
             res.end();
         });
-    }).catch((err) => {
-        console.log(err);
-        res.end();
-    });
 };

@@ -10,7 +10,5 @@ test('获取LagouComment数据', async () => {
     try {
         const result = await getLagouCommentData({});
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

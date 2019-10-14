@@ -10,12 +10,14 @@ test('保存1条数据', async () => {
     expect.assertions(2);
 
     const now = Date.now();
-    const data = [{
-        a: now
-    }];
+    const data = [
+        {
+            a: now,
+        },
+    ];
     const result = await saveDbData({
         dbName,
-        data
+        data,
     });
 
     expect(result.length).toBe(1);
@@ -25,14 +27,17 @@ test('保存1条数据', async () => {
 test('保存2条数据', async () => {
     expect.assertions(1);
 
-    const data = [{
-        a: Date.now()
-    }, {
-        a: Date.now() + 6
-    }];
+    const data = [
+        {
+            a: Date.now(),
+        },
+        {
+            a: Date.now() + 6,
+        },
+    ];
     const result = await saveDbData({
         dbName,
-        data
+        data,
     });
 
     expect(result.length).toBe(2);
@@ -44,7 +49,7 @@ test('保存0条数据', async () => {
     const data = [];
     const result = await saveDbData({
         dbName,
-        data
+        data,
     });
 
     expect(result.length).toBe(0);
@@ -73,7 +78,7 @@ test('传空Object报错', async () => {
 test('不传data不报错', async () => {
     expect.assertions(1);
     const result = await saveDbData({
-        dbName
+        dbName,
     });
 
     expect(result.length).toBe(0);

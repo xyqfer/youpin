@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const { getDbData } = require('app-libs/db');
 
     (async () => {
@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
             const limit = +(req.query.limit || 5);
 
             const dbData = await getDbData({
-                dbName
+                dbName,
             });
 
             const data = [];
@@ -19,13 +19,8 @@ module.exports = (req, res, next) => {
             while (limit > count) {
                 const restaurant = dbData[Math.floor(Math.random() * dbDataCount)];
 
-                if (restaurant.rate >= 4 &&
-                    !restaurant.name.includes('超市') &&
-                    !restaurant.name.includes('商行')) {
-
-                    const idx = data.findIndex((item) => {
-                        return item.restaurantId === restaurant.restaurantId;
-                    });
+                if (restaurant.rate >= 4 && !restaurant.name.includes('超市') && !restaurant.name.includes('商行')) {
+                    const idx = data.findIndex((item) => item.restaurantId === restaurant.restaurantId);
 
                     if (idx === -1) {
                         data.push(restaurant);
@@ -37,14 +32,14 @@ module.exports = (req, res, next) => {
             res.json({
                 success: true,
                 data: data,
-                msg: '查询成功'
+                msg: '查询成功',
             });
         } catch (err) {
             console.error(err);
             res.json({
                 success: false,
                 data: null,
-                msg: '查询失败'
+                msg: '查询失败',
             });
         }
     })();

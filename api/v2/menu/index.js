@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const rp = require('request-promise');
     const { params } = require('app-libs');
 
@@ -14,8 +14,8 @@ module.exports = (req, res, next) => {
         json: true,
         uri: `https://restapi.ele.me/shopping/v2/restaurants/search?offset=0&limit=20&keyword=${name}&latitude=${latitude}&longitude=${longitude}&is_rewrite=1&extras[]=activities&extras[]=coupon&terminal=h5`,
         headers: {
-            'User-Agent': params.ua.mobile
-        }
+            'User-Agent': params.ua.mobile,
+        },
     }).then((data) => {
         let resultList = [];
 
@@ -27,15 +27,15 @@ module.exports = (req, res, next) => {
                     restaurantWithFoods.forEach((item) => {
                         if (resultList.length < restaurantLimit) {
                             if (item && item.restaurant.type === 0) {
-                                let menu = [];
+                                const menu = [];
 
                                 for (let i = 0; i < menuLimit; i++) {
-                                    let food = item.foods[i];
+                                    const food = item.foods[i];
 
                                     if (food) {
                                         menu.push({
                                             name: food.name,
-                                            price: food.price
+                                            price: food.price,
                                         });
                                     }
                                 }
@@ -43,7 +43,7 @@ module.exports = (req, res, next) => {
                                 if (menu.length > 0) {
                                     resultList.push({
                                         name: item.restaurant.name,
-                                        menu: menu
+                                        menu: menu,
                                     });
                                 }
                             }
@@ -56,17 +56,17 @@ module.exports = (req, res, next) => {
             resultList = [];
         }
 
-        if (resultList.length == 0) {
+        if (resultList.length === 0) {
             res.json({
                 success: false,
                 data: null,
-                msg: '查询失败'
+                msg: '查询失败',
             });
         } else {
             res.json({
                 success: true,
                 data: resultList,
-                msg: '查询成功'
+                msg: '查询成功',
             });
         }
     });

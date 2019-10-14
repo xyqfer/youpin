@@ -13,25 +13,21 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'Poems 啦',
-                template: ({ title = '',  url = '' }) => {
-                    return `
+                template: ({ title = '', url = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                         </div>
-                    `;
-                },
+                    `,
                 device: 'device2',
             },
-            getTargetData: () => {
-                return getData();
-            },
+            getTargetData: () => getData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

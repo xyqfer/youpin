@@ -15,7 +15,7 @@ const bluebird = require('bluebird');
 global.Promise = bluebird;
 
 require('module-alias/register');
-const { params, } = require('app-libs');
+const { params } = require('app-libs');
 
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
 require('./cloud');
@@ -38,13 +38,15 @@ app.enable('trust proxy');
 // 需要重定向到 HTTPS
 app.use(AV.Cloud.HttpsRedirect());
 
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(cookieParser());
 
-app.use(cors({
-    origin: '*',
-}));
+app.use(
+    cors({
+        origin: '*',
+    })
+);
 
 app.use((req, res, next) => {
     const ipAddress = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -53,19 +55,24 @@ app.use((req, res, next) => {
 });
 
 const GRAPHQL_TOKEN = params.env.isProd ? process.env.GRAPHQL_TOKEN : '';
-app.use(`/graphql${GRAPHQL_TOKEN}`, leancloudGraphQL({
-    graphiql: params.env.isDev,
-}));
+app.use(
+    `/graphql${GRAPHQL_TOKEN}`,
+    leancloudGraphQL({
+        graphiql: params.env.isDev,
+    })
+);
 
-app.use(deployMiddleware({
-    path: '/api/v1/deploy',
-}));
+app.use(
+    deployMiddleware({
+        path: '/api/v1/deploy',
+    })
+);
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
     res.render('index', {});
 });
 
-app.get('/archive', function (req, res) {
+app.get('/archive', function(req, res) {
     const { getDbData } = require('app-libs/db');
     const { id, render = 'archive' } = req.query;
 
@@ -73,26 +80,28 @@ app.get('/archive', function (req, res) {
         dbName: 'Archive',
         limit: 1,
         query: {
-            equalTo: ['uuid', id]
-        }
-    }).then(([{ title = '', content = '' }]) => {
-        res.render(render, {
-            title,
-            content
+            equalTo: ['uuid', id],
+        },
+    })
+        .then(([{ title = '', content = '' }]) => {
+            res.render(render, {
+                title,
+                content,
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.render(render, {
+                title: '',
+                content: '',
+            });
         });
-    }).catch(err => {
-        console.error(err);
-        res.render(render, {
-            title: '',
-            content: ''
-        });
-    });
 });
 
-app.get('/archives', function (req, res) {
+app.get('/archives', function(req, res) {
     const { token } = req.query;
     if (token !== process.env.ARCHIVES_TOKEN) {
-        res.status(400).send('Bad Request')
+        res.status(400).send('Bad Request');
         return;
     }
 
@@ -102,11 +111,12 @@ app.get('/archives', function (req, res) {
         dbName: 'Archive',
         limit: 200,
         query: {
-            descending: ['createdAt']
-        }
-    }).then((archives) => {
-        const content = archives.reduce((acc, item) => {
-            acc += `
+            descending: ['createdAt'],
+        },
+    })
+        .then((archives) => {
+            const content = archives.reduce((acc, item) => {
+                acc += `
                 <div style="margin-bottom: 50px">
                     <a href="${process.env.hostName}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
                         <h4>${item.title}</h4>
@@ -115,20 +125,21 @@ app.get('/archives', function (req, res) {
                 </div>
             `;
 
-            return acc;
-        }, '');
+                return acc;
+            }, '');
 
-        res.render('archive', {
-            title: 'Archives',
-            content
+            res.render('archive', {
+                title: 'Archives',
+                content,
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.render('archive', {
+                title: '',
+                content: '',
+            });
         });
-    }).catch(err => {
-        console.error(err);
-        res.render('archive', {
-            title: '',
-            content: ''
-        });
-    });
 });
 
 app.get('/notes', async (req, res) => {
@@ -145,10 +156,10 @@ app.get('/notes', async (req, res) => {
             dbName: 'Notes',
             limit: 50,
             query: {
-                descending: ['createdAt']
-            }
+                descending: ['createdAt'],
+            },
         });
-    
+
         res.render('notes', {
             title: 'Notes',
             notes,
@@ -158,7 +169,7 @@ app.get('/notes', async (req, res) => {
         console.error(err);
         res.render('archive', {
             title: '',
-            content: ''
+            content: '',
         });
     }
 });
@@ -166,7 +177,7 @@ app.get('/notes', async (req, res) => {
 app.post('/note', async (req, res) => {
     const { token, message } = req.body;
     if (token !== process.env.NOTES_TOKEN) {
-        res.status(400).send('Bad Request')
+        res.status(400).send('Bad Request');
         return;
     }
 
@@ -175,9 +186,11 @@ app.post('/note', async (req, res) => {
     try {
         await saveDbData({
             dbName: 'Notes',
-            data: [{
-                message,
-            }],
+            data: [
+                {
+                    message,
+                },
+            ],
         });
         res.json({
             success: true,
@@ -190,17 +203,17 @@ app.post('/note', async (req, res) => {
 
 app.get('/theinitium', async (req, res) => {
     const cheerio = require('cheerio');
-    const { slug, } = req.query;
+    const { slug } = req.query;
 
     const render = 'archive';
     try {
-        const { http, params, } = require('app-libs');
+        const { http, params } = require('app-libs');
         const response = await http.get({
             uri: `https://api.theinitium.com/api/v1/article/detail/?language=zh-hans&slug=${slug}`,
             json: true,
             headers: {
                 'User-Agent': params.ua.pc,
-                'Authorization': `Basic ${process.env.THEINITIUM_TOKEN}`,
+                Authorization: `Basic ${process.env.THEINITIUM_TOKEN}`,
             },
         });
 
@@ -222,17 +235,19 @@ app.get('/theinitium', async (req, res) => {
         console.error(err);
         res.render(render, {
             title: '',
-            content: ''
+            content: '',
         });
     }
 });
 
-app.get('/bbcproxy', async function (req, res) {
+app.get('/bbcproxy', async function(req, res) {
+    const render = 'archive';
+
     try {
         const { http } = require('app-libs');
         const cheerio = require('cheerio');
         const utils = require('./app-modules/bbc/utils');
-        const render = 'archive';
+
         const { url } = req.query;
         const htmlString = await http.get(url);
         const $ = cheerio.load(htmlString);
@@ -242,11 +257,11 @@ app.get('/bbcproxy', async function (req, res) {
             title,
             content: utils.ProcessFeed($, url),
         });
-    } catch(err) {
+    } catch (err) {
         console.error(err);
         res.render(render, {
             title: '',
-            content: ''
+            content: '',
         });
     }
 });
@@ -257,22 +272,22 @@ app.get('/youtube/transcript', require('./routes/youtube/transcript'));
 
 expressWs(app);
 
-app.ws('/echo', function(ws, req) {
+app.ws('/echo', function(ws) {
     ws.on('message', function(msg) {
-      ws.send(msg);
-      setTimeout(() => {
-        ws.send(msg + 1);
+        ws.send(msg);
         setTimeout(() => {
-            ws.send(msg + 2);
-        }, 2000);
-      }, 1000);
+            ws.send(msg + 1);
+            setTimeout(() => {
+                ws.send(msg + 2);
+            }, 2000);
+        }, 1000);
     });
 });
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
     if (!res.headersSent) {
-        let err = new Error('Not Found');
+        const err = new Error('Not Found');
 
         err.status = 404;
         next(err);
@@ -280,13 +295,13 @@ app.use(function (req, res, next) {
 });
 
 // error handlers
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res) {
     if (req.timedout && req.headers.upgrade === 'websocket') {
         // 忽略 websocket 的超时
         return;
     }
 
-    let statusCode = err.status || 500;
+    const statusCode = err.status || 500;
 
     if (statusCode === 500) {
         console.error(err.stack || err);
@@ -308,7 +323,7 @@ app.use(function (err, req, res, next) {
 
     res.render('error', {
         message: err.message,
-        error: error
+        error: error,
     });
 });
 

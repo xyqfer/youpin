@@ -13,25 +13,21 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '每日新菜有更新',
-                template: ({ title = '', summary = '', }) => {
-                    return `
+                template: ({ title = '', summary = '' }) => `
                         <div style="margin-bottom: 30px">
                             <h2>${title}</h2>
                             <div>
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getData();
-            }
+            getTargetData: () => getData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

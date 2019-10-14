@@ -9,7 +9,5 @@ test('获取36Kr Next数据', async () => {
     try {
         const result = await get36KrNextData();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

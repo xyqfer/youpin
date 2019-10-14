@@ -10,7 +10,5 @@ test('更新juejin', async () => {
     try {
         const result = await updateJuejin();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

@@ -15,8 +15,7 @@ module.exports = async () => {
             dbName: 'Epubit',
             mail: {
                 title: '异步有新书',
-                template: ({ url = '', title = '', cover = '' }) => {
-                    return `
+                template: ({ url = '', title = '', cover = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -25,20 +24,18 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getEpubitData({
-                    offsets
-                });
-            },
-            filterKey: 'url'
+            getTargetData: () =>
+                getEpubitData({
+                    offsets,
+                }),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -9,17 +9,16 @@ module.exports = async (req, res) => {
         },
     });
 
-    const content = data
-        .reduce((acc, item) => {
-            acc += `
+    const content = data.reduce((acc, item) => {
+        acc += `
                 <div style="margin-bottom: 30px">
                     <a href="/nhk/easynews/article/${item.objectId}" target="_blank">
                         <h4>${item.title}</h4>
                     </a>
                 </div>
             `;
-            return acc;
-        }, '');
+        return acc;
+    }, '');
 
     res.render('archive', {
         title: 'nhk-easynews',

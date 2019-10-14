@@ -107,13 +107,11 @@ module.exports = async () => {
         try {
             const feed = await parser.parseURL(url);
 
-            return feed.items.map(item => {
-                return {
-                    title: item.title || '',
-                    url: item.link,
-                    summary: item.content
-                };
-            });
+            return feed.items.map((item) => ({
+                title: item.title || '',
+                url: item.link,
+                summary: item.content,
+            }));
         } catch (err) {
             console.error(err);
             console.error(url);

@@ -17,14 +17,14 @@ module.exports = async () => {
             const htmlString = await rp.get({
                 uri,
                 headers: {
-                    'User-Agent': params.ua.pc
-                }
+                    'User-Agent': params.ua.pc,
+                },
             });
 
             const $ = cheerio.load(htmlString);
             const postList = [];
 
-            $('.uk-card').each(function () {
+            $('.uk-card').each(function() {
                 const $elem = $(this);
                 const url = $elem.find('.uk-link-reset').attr('href');
 
@@ -32,7 +32,7 @@ module.exports = async () => {
                     postList.push({
                         title: $elem.find('.uk-card-header .uk-link-reset').text(),
                         url: `http://www.zcfy.cc${$elem.find('.uk-link-reset').attr('href')}`,
-                        desc: $elem.find('.uk-card-body .uk-card-body').text()
+                        desc: $elem.find('.uk-card-body .uk-card-body').text(),
                     });
                 }
             });

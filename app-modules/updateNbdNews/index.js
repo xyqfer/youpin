@@ -13,24 +13,21 @@ module.exports = async () => {
         return await updateContainer({
             dbName,
             filterKey,
-            getTargetData: () => {
-                return fetchRSS({
+            getTargetData: () =>
+                fetchRSS({
                     source: 'RSS_NbdNews',
-                });
-            },
+                }),
             notify: async (newData) => {
                 sendMail({
                     title: 'NbdNews 有更新',
-                    template: ({ title = '', url = '', content = '', }) => {
-                        return `
+                    template: ({ title = '', url = '', content = '' }) => `
                             <div style="margin-bottom: 30px">
                                 <a href="${url}" target="_blank">
                                     <h4>${title}</h4>
                                 </a>
                                 <div style="margin-top: 20px">${content}</div>
                             </div>
-                        `;
-                    },
+                        `,
                     data: await fetchPage(newData),
                 });
             },
@@ -38,7 +35,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

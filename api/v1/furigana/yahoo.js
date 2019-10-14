@@ -1,6 +1,4 @@
-const {
-    http,
-} = require('app-libs');
+const { http } = require('app-libs');
 const cheerio = require('cheerio');
 
 module.exports = async (content = '') => {
@@ -18,11 +16,11 @@ module.exports = async (content = '') => {
     const $ = cheerio.load(data, {
         xmlMode: true,
     });
-    let result = [];
+    const result = [];
     $('Word').each(function() {
         const $item = $(this);
-        let text = $item.find('Surface').text();
-        let furigana = $item.find('Furigana').text();
+        const text = $item.find('Surface').text();
+        const furigana = $item.find('Furigana').text();
 
         if ($item.find('SubWordList').length > 0) {
             $item.find('SubWordList > SubWord').each(function() {

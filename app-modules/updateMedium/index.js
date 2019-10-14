@@ -7,12 +7,12 @@ module.exports = async () => {
         await updateJavaScript();
 
         return {
-            success: true
+            success: true,
         };
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

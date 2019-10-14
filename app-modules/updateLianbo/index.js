@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '新闻联播有更新',
-                template: ({ title = '', url = '' }) => {
-                    return `
+                template: ({ title = '', url = '' }) => `
                         <div style="margin-bottom: 50px">
                             <h4>
                               <a href="${url}" target="_blank">
@@ -22,17 +21,14 @@ module.exports = async () => {
                               </a>
                             </h4>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getData();
-            }
+            getTargetData: () => getData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

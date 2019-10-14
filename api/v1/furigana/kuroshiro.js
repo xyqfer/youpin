@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
         const kuroshiro = new Kuroshiro();
         await kuroshiro.init(new KuromojiAnalyzer());
 
-        const result = await kuroshiro.convert(content, { 
+        const result = await kuroshiro.convert(content, {
             to: 'hiragana',
             mode: 'furigana',
         });
@@ -17,7 +17,9 @@ module.exports = async (req, res) => {
             decodeEntities: false,
         });
         $('ruby rp').remove();
-        const htmlContent = $('div').eq(0).html();
+        const htmlContent = $('div')
+            .eq(0)
+            .html();
 
         res.json({
             success: true,

@@ -9,7 +9,5 @@ test('获取ele数据', async () => {
     try {
         const result = await getEleData({});
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

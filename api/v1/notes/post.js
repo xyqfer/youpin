@@ -2,7 +2,7 @@ const { saveDbData } = require('app-libs/db');
 
 module.exports = async (req, res) => {
     const { token, message } = req.body;
-    
+
     if (token !== process.env.NOTES_TOKEN) {
         res.status(400).send('Bad Request');
         return;
@@ -10,9 +10,11 @@ module.exports = async (req, res) => {
 
     await saveDbData({
         dbName: 'Notes',
-        data: [{
-            message,
-        }],
+        data: [
+            {
+                message,
+            },
+        ],
     });
     res.json({
         success: true,

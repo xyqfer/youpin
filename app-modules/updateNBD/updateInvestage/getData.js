@@ -1,10 +1,7 @@
 'use strict';
 
 module.exports = async () => {
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
     const cheerio = require('cheerio');
 
     try {
@@ -29,10 +26,10 @@ module.exports = async () => {
                 summary: `
                     <img src="${img}" referrerpolicy="no-referrer"><br>
                     ${desc}
-                `
+                `,
             });
         });
-        $('.swiper-slide').each(function () {
+        $('.swiper-slide').each(function() {
             const elem = $(this);
             const url = elem.find('a').attr('href');
             const title = elem.find('.u-carouselText').text();
@@ -43,7 +40,7 @@ module.exports = async () => {
                 url,
                 summary: `
                     <img src="${img}" referrerpolicy="no-referrer">
-                `
+                `,
             });
         });
         return result;

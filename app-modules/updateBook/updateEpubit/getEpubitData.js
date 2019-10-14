@@ -1,14 +1,12 @@
 'use strict';
 
-module.exports = async ({
-    offsets = [1]
-}) => {
+module.exports = async ({ offsets = [1] }) => {
     const rp = require('request-promise');
     const flatten = require('lodash/flatten');
     const { params } = require('app-libs');
 
     try {
-        const results = await Promise.mapSeries(offsets, async (page) => {
+        const results = await Promise.mapSeries(offsets, async () => {
             try {
                 const result = await rp.get({
                     json: true,
@@ -20,13 +18,11 @@ module.exports = async ({
                     },
                 });
 
-                return result.data.records.map((item) => {
-                    return {
-                        title: item.name,
-                        url: `https://www.epubit.com/bookDetails?id=${item.code}`,
-                        cover: item.logo,
-                    };
-                });
+                return result.data.records.map((item) => ({
+                    title: item.name,
+                    url: `https://www.epubit.com/bookDetails?id=${item.code}`,
+                    cover: item.logo,
+                }));
             } catch (err) {
                 console.error(err);
                 return [];

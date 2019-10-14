@@ -2,71 +2,73 @@
 
 const _ = require('lodash');
 const getData = require('./getData');
-const { db, crawler, } = require('app-libs');
+const { db, crawler } = require('app-libs');
 
 module.exports = async () => {
-  const dbName = 'NHKEasyNews';
+    const dbName = 'NHKEasyNews';
 
-  try {
-    const filterKey = 'easyUrl';
-    let [dbData, newsData] = await Promise.all([
-      db.getDbData({
-        dbName,
-        query: {
-          select: [filterKey],
-        },
-      }),
-      getData(),
-    ]);
-    
-    let newData = _.differenceBy(newsData, dbData, filterKey);
-    newData = await Promise.filter(newData, async (item) => {
-      const dbItem = await db.getDbData({
-        dbName,
-        limit: 1,
-        query: {
-          equalTo: [filterKey, item[filterKey]],
-          select: [filterKey],
-        },
-      });
+    try {
+        const filterKey = 'easyUrl';
+        const [dbData, newsData] = await Promise.all([
+            db.getDbData({
+                dbName,
+                query: {
+                    select: [filterKey],
+                },
+            }),
+            getData(),
+        ]);
 
-      return dbItem.length === 0;
-    }, {
-      concurrency: 1,
-    });
+        let newData = _.differenceBy(newsData, dbData, filterKey);
+        newData = await Promise.filter(
+            newData,
+            async (item) => {
+                const dbItem = await db.getDbData({
+                    dbName,
+                    limit: 1,
+                    query: {
+                        equalTo: [filterKey, item[filterKey]],
+                        select: [filterKey],
+                    },
+                });
 
-    if (newData.length > 0) {
-        newData = await Promise.mapSeries(newData, async (item) => {
-            try {
-                const $ = await crawler(item.easyUrl);
-                item.content = $('#js-article-body').html();
-
-                return item;
-            } catch(err) {
-                console.log(err);
-                return null;
+                return dbItem.length === 0;
+            },
+            {
+                concurrency: 1,
             }
-        });
-
-        newData = newData.filter((item) => {
-            return !!item;
-        });
+        );
 
         if (newData.length > 0) {
-            db.saveDbData({
-                dbName,
-                data: newData,
-            });
-        }
-    }
+            newData = await Promise.mapSeries(newData, async (item) => {
+                try {
+                    const $ = await crawler(item.easyUrl);
+                    item.content = $('#js-article-body').html();
 
-    return {
-      success: true
-    };
-  } catch (err) {
-    console.error(err);
-    return {
-      success: false
-    };
-  }
+                    return item;
+                } catch (err) {
+                    console.log(err);
+                    return null;
+                }
+            });
+
+            newData = newData.filter((item) => !!item);
+
+            if (newData.length > 0) {
+                db.saveDbData({
+                    dbName,
+                    data: newData,
+                });
+            }
+        }
+
+        return {
+            success: true,
+        };
+    } catch (err) {
+        console.error(err);
+        return {
+            success: false,
+        };
+    }
 };

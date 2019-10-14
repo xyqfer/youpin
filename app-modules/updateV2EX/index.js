@@ -4,11 +4,8 @@ module.exports = async () => {
     const moment = require('moment');
     const getV2EXData = require('./getV2EXData');
     const {
-        db: {
-            getDbData,
-            saveDbData
-        },
-        mail: sendMail
+        db: { getDbData, saveDbData },
+        mail: sendMail,
     } = require('app-libs');
 
     const dbName = 'V2EXHot';
@@ -19,20 +16,23 @@ module.exports = async () => {
 
     try {
         if (needSendMail) {
-            const time = new Date(`${moment().add(-22, 'hours').format('YYYY-MM-DD 00:00:00')}`);
+            const time = new Date(
+                `${moment()
+                    .add(-22, 'hours')
+                    .format('YYYY-MM-DD 00:00:00')}`
+            );
 
             const data = await getDbData({
                 dbName,
                 query: {
-                    greaterThanOrEqualTo: ['updatedAt', time]
-                }
+                    greaterThanOrEqualTo: ['updatedAt', time],
+                },
             });
 
             sendMail({
                 title: 'v2 热议主题',
                 data,
-                template: ({ url = '', title = '', content = '' }) => {
-                    return `
+                template: ({ url = '', title = '', content = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}?p=1" target="_blank">
                                 <h4>${title}</h4>
@@ -41,20 +41,19 @@ module.exports = async () => {
                                 ${content}
                             </p>
                         </div>
-                    `;
-                }
+                    `,
             });
 
             return data;
         } else {
-            const [ dbData, v2exData ] = await Promise.all([
+            const [dbData, v2exData] = await Promise.all([
                 getDbData({
                     dbName,
                     query: {
-                        descending: ['updatedAt']
-                    }
+                        descending: ['updatedAt'],
+                    },
                 }),
-                getV2EXData()
+                getV2EXData(),
             ]);
 
             const newData = v2exData.filter((item) => {
@@ -70,7 +69,7 @@ module.exports = async () => {
             if (newData.length > 0) {
                 saveDbData({
                     dbName,
-                    data: newData
+                    data: newData,
                 });
             }
 
@@ -79,7 +78,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

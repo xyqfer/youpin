@@ -9,7 +9,5 @@ test('更新v2ex', async () => {
     try {
         const result = await updateV2EX();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

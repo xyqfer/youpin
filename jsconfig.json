@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "app-libs": ["./app-libs/*"],
+            "app-containers": ["./app-containers/*"]
+        }
+    }
+}

@@ -9,7 +9,5 @@ test('更新36Kr Next', async () => {
     try {
         const result = await update36KrNext();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

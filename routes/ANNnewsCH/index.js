@@ -2,7 +2,7 @@ const Parser = require('rss-parser');
 const parser = new Parser();
 
 module.exports = async (req, res) => {
-    const { offset = 0, count = 5, } = req.query;
+    const { offset = 0, count = 5 } = req.query;
     const feed = await parser.parseURL(process.env.ANNnewsCH_rss);
     let content = feed.items.slice(parseInt(offset), parseInt(count)).reduce((acc, item, index) => {
         acc += `

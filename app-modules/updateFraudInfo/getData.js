@@ -1,10 +1,7 @@
 'use strict';
 
 module.exports = async () => {
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
 
     try {
         const result = await http.post({
@@ -13,16 +10,14 @@ module.exports = async () => {
             headers: {
                 'User-Agent': params.ua.pc,
             },
-            body: { "param": { "page": "2", "num": "10", "pflag": "1" } }
+            body: { param: { page: '2', num: '10', pflag: '1' } },
         });
 
-        return result.response.data.FraudinfoRst.map((item) => {
-            return {
-                url: item.Fraudreportlink,
-                title: item.Fraudcompanyname + '/' + item.Fraudname,
-                summary: item.Fraudreporttitle,
-            };
-        });
+        return result.response.data.FraudinfoRst.map((item) => ({
+            url: item.Fraudreportlink,
+            title: item.Fraudcompanyname + '/' + item.Fraudname,
+            summary: item.Fraudreporttitle,
+        }));
     } catch (err) {
         console.error(err);
         return [];

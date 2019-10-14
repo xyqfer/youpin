@@ -10,20 +10,16 @@ module.exports = async () => {
         return await updateContainer({
             dbName,
             filterKey,
-            getTargetData: () => {
-                return getYoupinData();
-            },
+            getTargetData: () => getYoupinData(),
             mail: {
                 title: '米家上新品啦',
-                template: ({ url = '', name = '', summary = '', }) => {
-                    return `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br><div>${summary}</div></div>`;
-                }
+                template: ({ url = '', name = '', summary = '' }) => `<div><a href='${url}' target='_blank'><h4>${name}</h4></a><br><div>${summary}</div></div>`,
             },
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

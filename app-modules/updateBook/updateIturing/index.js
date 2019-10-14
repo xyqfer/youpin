@@ -15,8 +15,7 @@ module.exports = async () => {
             dbName: 'Ituring',
             mail: {
                 title: '图灵有新书',
-                template: ({ url = '', title = '', cover = '', desc = '' }) => {
-                    return `
+                template: ({ url = '', title = '', cover = '', desc = '' }) => `
                         <div style="margin-bottom: 60px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -28,20 +27,18 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getIturingData({
-                    offsets
-                });
-            },
-            filterKey: 'url'
+            getTargetData: () =>
+                getIturingData({
+                    offsets,
+                }),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

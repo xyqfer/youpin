@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '掘金 pin 有更新',
-                template: ({ summary = '', url = '' }) => {
-                    return `
+                template: ({ summary = '', url = '' }) => `
                         <div style="margin-bottom: 30px">
                             <div>
                                 ${summary}
@@ -22,17 +21,14 @@ module.exports = async () => {
                             <hr>
                             <a href="${url}" target="_blank">[查看原文]</a>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getPinData();
-            }
+            getTargetData: () => getPinData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

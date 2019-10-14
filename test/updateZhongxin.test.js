@@ -9,7 +9,5 @@ test('更新中信', async () => {
     try {
         const result = await updateZhongxin();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

@@ -8,18 +8,22 @@ module.exports = async () => {
     const htmlString = await rp.get({
         uri: 'https://tympanus.net/codrops/all-articles/',
         headers: {
-            'User-Agent': params.ua.mobile
-        }
+            'User-Agent': params.ua.mobile,
+        },
     });
 
     const $ = cheerio.load(htmlString);
     const postList = [];
 
-    $('.ct-archive-container > article').each(function () {
+    $('.ct-archive-container > article').each(function() {
         postList.push({
             postId: $(this).attr('id'),
-            url: $(this).find('h2 > a').attr('href'),
-            name: $(this).find('h2 > a').text()
+            url: $(this)
+                .find('h2 > a')
+                .attr('href'),
+            name: $(this)
+                .find('h2 > a')
+                .text(),
         });
     });
 

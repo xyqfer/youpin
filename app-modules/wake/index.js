@@ -1,5 +1,5 @@
 'use strict';
-const { db, http, } = require('app-libs');
+const { db, http } = require('app-libs');
 const { cache } = db;
 
 module.exports = async () => {
@@ -12,14 +12,14 @@ module.exports = async () => {
     });
 
     Promise.all(
-        dbData.map(({ url, }) => {
-            return http.get({
+        dbData.map(({ url }) =>
+            http.get({
                 uri: url,
-            });
-        })
+            })
+        )
     ).catch(() => {});
 
     return {
-        success: true
+        success: true,
     };
 };

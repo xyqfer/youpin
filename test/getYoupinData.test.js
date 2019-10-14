@@ -9,7 +9,5 @@ test('获取youpin数据', async () => {
     try {
         const result = await getYoupinData();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

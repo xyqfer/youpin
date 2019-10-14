@@ -3,10 +3,7 @@
 module.exports = async () => {
     const flatten = require('lodash/flatten');
     const uniqBy = require('lodash/uniqBy');
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
     const urls = [
         'https://timeline-merger-ms.juejin.im/v1/get_tag_entry?src=web&tagId=5597a05ae4b08a686ce56f6f&page=0&pageSize=50&sort=createdAt',
         'https://timeline-merger-ms.juejin.im/v1/get_entry_by_rank?src=web&before=&limit=50&category=all',
@@ -30,12 +27,10 @@ module.exports = async () => {
         }
     });
 
-    return uniqBy(flatten(results), 'objectId').map((item) => {
-        return {
-            postId: item.objectId,
-            title: item.title,
-            url: item.originalUrl,
-            summary: item.summaryInfo,
-        };
-    });
+    return uniqBy(flatten(results), 'objectId').map((item) => ({
+        postId: item.objectId,
+        title: item.title,
+        url: item.originalUrl,
+        summary: item.summaryInfo,
+    }));
 };

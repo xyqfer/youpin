@@ -10,7 +10,5 @@ test('获取HackerNews数据', async () => {
     try {
         const result = await getHackerNewsData({});
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

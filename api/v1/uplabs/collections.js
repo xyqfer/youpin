@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const rp = require('request-promise');
     const formatData = require('./_formatData');
 
@@ -12,13 +12,13 @@ module.exports = (req, res, next) => {
         json: true,
         uri: url,
         headers: {
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60'
-        }
-    }).then((result) => {
-        res.json(result.map((item) => {
-            return formatData(item);
-        }));
-    }).catch(() => {
-        res.json([]);
-    });
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60',
+        },
+    })
+        .then((result) => {
+            res.json(result.map((item) => formatData(item)));
+        })
+        .catch(() => {
+            res.json([]);
+        });
 };

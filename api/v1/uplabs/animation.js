@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const loadData = require('./_loadData');
     const saveDbData = require('./_saveDbData');
 
@@ -15,16 +15,18 @@ module.exports = (req, res, next) => {
     }
 
     loadData({
-        url
-    }).then((data) => {
-        if (data && data.length > 0) {
-            saveDbData(data);
-            res.json(data);
-        } else {
+        url,
+    })
+        .then((data) => {
+            if (data && data.length > 0) {
+                saveDbData(data);
+                res.json(data);
+            } else {
+                redirectUplabs();
+            }
+        })
+        .catch((err) => {
+            console.log(err);
             redirectUplabs();
-        }
-    }).catch((err) => {
-        console.log(err);
-        redirectUplabs();
-    });
+        });
 };

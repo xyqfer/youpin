@@ -16,8 +16,8 @@ module.exports = (req, res) => {
                 dbName,
                 limit,
                 query: {
-                    descending: ['time']
-                }
+                    descending: ['time'],
+                },
             });
 
             const result = data.map((item) => {

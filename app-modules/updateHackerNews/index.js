@@ -15,27 +15,24 @@ module.exports = async () => {
             dbName: 'HackerNews',
             mail: {
                 title: 'HackerNews 有更新',
-                template: ({ url = '', title = '' }) => {
-                    return `
+                template: ({ url = '', title = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getHackerNewsData({
-                    offsets
-                });
-            },
-            filterKey: 'newsId'
+            getTargetData: () =>
+                getHackerNewsData({
+                    offsets,
+                }),
+            filterKey: 'newsId',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -2,10 +2,7 @@
 
 module.exports = async () => {
     const flatten = require('lodash/flatten');
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
 
     const urls = [
         {
@@ -28,20 +25,18 @@ module.exports = async () => {
                 },
             });
 
-            return result.topics.map((item) => {
-                return {
-                    url: item.id + key,
-                    title: item.title,
-                    summary: item.pictures.reduce((acc, picture) => {
-                        acc += `
+            return result.topics.map((item) => ({
+                url: item.id + key,
+                title: item.title,
+                summary: item.pictures.reduce((acc, picture) => {
+                    acc += `
                         <img src="${picture.pic_info.medium}" referrerpolicy="no-referrer">
                         <a href="${picture.pic_info.original}" target="_blank">查看原图</a>
                         <br>
                     `;
-                        return acc;
-                    }, item.description + '<br>'),
-                };
-            });
+                    return acc;
+                }, item.description + '<br>'),
+            }));
         } catch (err) {
             console.error(err);
             return [];

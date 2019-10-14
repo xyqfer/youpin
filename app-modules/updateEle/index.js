@@ -4,9 +4,7 @@ module.exports = async () => {
     const getEleData = require('./getEleData');
     const saveEleData = require('./saveEleData');
     const {
-        db: {
-            getDbData,
-        },
+        db: { getDbData },
     } = require('app-libs');
 
     const dbName = 'Ele_restaurant';
@@ -20,18 +18,18 @@ module.exports = async () => {
     const longitude = process.env.longitude || 120.10598;
 
     try {
-        const [ dbData, eleData ] = await Promise.all([
+        const [dbData, eleData] = await Promise.all([
             getDbData({
                 dbName,
                 query: {
-                    descending: ['updatedAt']
-                }
+                    descending: ['updatedAt'],
+                },
             }),
             getEleData({
                 offsets,
                 latitude,
-                longitude
-            })
+                longitude,
+            }),
         ]);
 
         const newData = eleData.filter((item) => {
@@ -52,9 +50,7 @@ module.exports = async () => {
                 const dbItem = dbData[i];
 
                 if (item.id === dbItem.restaurantId) {
-                    return item.name === dbItem.name &&
-                        item.rating === dbItem.rate &&
-                        discountTip === dbItem.discountTip;
+                    return item.name === dbItem.name && item.rating === dbItem.rate && discountTip === dbItem.discountTip;
                 }
             }
 
@@ -64,7 +60,7 @@ module.exports = async () => {
         if (newData.length > 0) {
             saveEleData({
                 dbName,
-                data: newData
+                data: newData,
             });
         }
 
@@ -72,7 +68,7 @@ module.exports = async () => {
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const loadData = require('./_loadData');
     const getFormatTime = require('./_formatTime');
     const saveDbData = require('./_saveDbData');
@@ -15,12 +15,9 @@ module.exports = (req, res, next) => {
     const currentYear = timeObj.year;
     const currentMonth = timeObj.month;
     const currentDate = timeObj.date;
-    const offset = (((new Date(`${currentYear}-${currentMonth}-${currentDate}`)).getTime()) -
-        ((new Date(`${year}-${month}-${date}`)).getTime())) / (24 * 60 * 60 * 1000);
+    const offset = (new Date(`${currentYear}-${currentMonth}-${currentDate}`).getTime() - new Date(`${year}-${month}-${date}`).getTime()) / (24 * 60 * 60 * 1000);
 
-    const url = page == 0 ?
-        `https://www.uplabs.com/all.json?days_ago=${offset}&page=1` :
-        `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
+    const url = page === 0 ? `https://www.uplabs.com/all.json?days_ago=${offset}&page=1` : `https://www.uplabs.com/showcases/all/more.json?days_ago=${offset}&per_page=12&page=${page}`;
 
     function redirectUplabs() {
         console.log('uplabs 异常');
@@ -28,16 +25,18 @@ module.exports = (req, res, next) => {
     }
 
     loadData({
-        url
-    }).then((data) => {
-        if (data && data.length > 0) {
-            saveDbData(data);
-            res.json(data);
-        } else {
+        url,
+    })
+        .then((data) => {
+            if (data && data.length > 0) {
+                saveDbData(data);
+                res.json(data);
+            } else {
+                redirectUplabs();
+            }
+        })
+        .catch((err) => {
+            console.log(err);
             redirectUplabs();
-        }
-    }).catch((err) => {
-        console.log(err);
-        redirectUplabs();
-    });
+        });
 };

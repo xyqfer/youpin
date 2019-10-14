@@ -17,7 +17,7 @@ module.exports = async ({ dbName = 'Test', data = [] }) => {
             restaurantId: item.id,
             rate: +item.rating.toFixed(1),
             name: item.name,
-            discountTip: discountTip
+            discountTip: discountTip,
         };
     });
 
@@ -30,8 +30,8 @@ module.exports = async ({ dbName = 'Test', data = [] }) => {
                 dbName,
                 limit: 1,
                 query: {
-                    equalTo: ['restaurantId', item.restaurantId]
-                }
+                    equalTo: ['restaurantId', item.restaurantId],
+                },
             });
 
             if (dbItem.length === 0) {
@@ -41,16 +41,16 @@ module.exports = async ({ dbName = 'Test', data = [] }) => {
 
         await saveDbData({
             dbName,
-            data: saveData
+            data: saveData,
         });
 
         return {
-            success: true
+            success: true,
         };
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

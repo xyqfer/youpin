@@ -1,8 +1,6 @@
 'use strict';
 
-module.exports = async ({
-    offsets = [1]
-}) => {
+module.exports = async ({ offsets = [1] }) => {
     const rp = require('request-promise');
     const flatten = require('lodash/flatten');
     const { params } = require('app-libs');
@@ -14,8 +12,8 @@ module.exports = async ({
                     json: true,
                     uri: `https://h5.youzan.com/wscshop/showcase/goods/allGoods.json?page=${page}&pageSize=20&offlineId=0&kdtId=18826691`,
                     headers: {
-                        'User-Agent': params.ua.pc
-                    }
+                        'User-Agent': params.ua.pc,
+                    },
                 });
 
                 return result.data.list;
@@ -25,14 +23,12 @@ module.exports = async ({
             }
         });
 
-        return flatten(results).map((item) => {
-            return {
-                title: item.title,
-                url: item.url,
-                cover: item.image_url,
-                bookId: item.id + ''
-            };
-        });
+        return flatten(results).map((item) => ({
+            title: item.title,
+            url: item.url,
+            cover: item.image_url,
+            bookId: item.id + '',
+        }));
     } catch (err) {
         console.error(err);
         return [];

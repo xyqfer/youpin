@@ -12,12 +12,10 @@ module.exports = (data) => {
     }
 
     getDbData().then((dbData) => {
-        let newData = [];
+        const newData = [];
 
         data.forEach((item) => {
-            const index = dbData.findIndex((dbItem) => {
-                return item.id === dbItem.get('postId');
-            });
+            const index = dbData.findIndex((dbItem) => item.id === dbItem.get('postId'));
 
             if (index === -1) {
                 const UplabsPost = AV.Object.extend(dbName);
@@ -25,7 +23,7 @@ module.exports = (data) => {
 
                 post.set('postId', item.id);
                 post.save(null, {
-                    useMasterKey: false
+                    useMasterKey: false,
                 });
 
                 newData.push(item);

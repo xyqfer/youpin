@@ -9,7 +9,5 @@ test('更新Codrop', async () => {
     try {
         const result = await updateCodrop();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

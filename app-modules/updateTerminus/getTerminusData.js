@@ -32,13 +32,11 @@ module.exports = async () => {
         try {
             const feed = await parser.parseURL(url);
 
-            return feed.items.map(item => {
-                return {
-                    title: item.title,
-                    url: item.link,
-                    summary: '',
-                };
-            });
+            return feed.items.map((item) => ({
+                title: item.title,
+                url: item.link,
+                summary: '',
+            }));
         } catch (err) {
             console.error(err);
             console.error(url);

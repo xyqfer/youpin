@@ -9,8 +9,7 @@ module.exports = async () => {
             dbName: 'Epubit',
             mail: {
                 title: '人邮有新书',
-                template: ({ url = '', title = '', cover = '' }) => {
-                    return `
+                template: ({ url = '', title = '', cover = '' }) => `
                         <div style="margin-bottom: 30px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -19,18 +18,15 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getPtpressData();
-            },
-            filterKey: 'url'
+            getTargetData: () => getPtpressData(),
+            filterKey: 'url',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

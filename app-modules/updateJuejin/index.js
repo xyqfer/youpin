@@ -9,8 +9,7 @@ module.exports = async () => {
             dbName: 'Juejin',
             mail: {
                 title: '掘金有更新',
-                template: ({ url = '', title = '', summary = '' }) => {
-                    return `
+                template: ({ url = '', title = '', summary = '' }) => `
                         <div style="margin-bottom: 50px">
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
@@ -19,19 +18,16 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                },
+                    `,
                 device: 'device2',
             },
-            getTargetData: () => {
-                return getJuejinData();
-            },
-            filterKey: 'postId'
+            getTargetData: () => getJuejinData(),
+            filterKey: 'postId',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

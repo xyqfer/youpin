@@ -19,8 +19,8 @@ module.exports = (req, res) => {
                 dbName,
                 limit,
                 query: {
-                    equalTo: ['time', today]
-                }
+                    equalTo: ['time', today],
+                },
             });
 
             if (todayData.length === 0) {
@@ -28,9 +28,9 @@ module.exports = (req, res) => {
                     dbName,
                     data: [
                         {
-                            time: today
-                        }
-                    ]
+                            time: today,
+                        },
+                    ],
                 });
             }
 

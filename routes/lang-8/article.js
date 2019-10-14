@@ -1,11 +1,9 @@
-const { http, params, } = require('app-libs');
+const { http, params } = require('app-libs');
 const cheerio = require('cheerio');
 
 module.exports = async (req, res) => {
-    const { userId, articleId, } = req.params;
-    const isValidItem = (item) => {
-        return item !== '' && item !== '\n';
-    };
+    const { userId, articleId } = req.params;
+    const isValidItem = (item) => item !== '' && item !== '\n';
     const htmlString = await http.get({
         uri: `http://lang-8.com/${userId}/journals/${articleId}`,
         headers: {
@@ -14,13 +12,18 @@ module.exports = async (req, res) => {
     });
     const $ = cheerio.load(htmlString);
     const title = $('#subject_show').text();
-    let zhContent = $('#body_show_ori').html().split('<br>').filter(isValidItem);
+    let zhContent = $('#body_show_ori')
+        .html()
+        .split('<br>')
+        .filter(isValidItem);
     zhContent = [title].concat(zhContent);
-    const jpCotent = $('#body_show_mo').html().split('<br>').filter(isValidItem);
+    const jpCotent = $('#body_show_mo')
+        .html()
+        .split('<br>')
+        .filter(isValidItem);
 
-    let content = jpCotent
-        .reduce((acc, item, index) => {
-            acc += `
+    let content = jpCotent.reduce((acc, item, index) => {
+        acc += `
                 <div style="margin-bottom: 30px">
                     <div style="margin-bottom: 10px">
                         ${item}
@@ -31,8 +34,8 @@ module.exports = async (req, res) => {
                 </div>
             `;
 
-            return acc;
-        }, '');
+        return acc;
+    }, '');
 
     content += `
         <script>

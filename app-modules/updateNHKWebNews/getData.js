@@ -2,10 +2,7 @@
 
 const flatten = require('lodash/flatten');
 const cheerio = require('cheerio');
-const {
-    params,
-    http,
-} = require('app-libs');
+const { params, http } = require('app-libs');
 
 module.exports = async () => {
     const ua = params.ua.pc;
@@ -22,9 +19,7 @@ module.exports = async () => {
             'User-Agent': ua,
         },
     });
-    const { url: commitUrl } = commitsList.find(({ commit }) => {
-        return commit.message.includes('calendar.json');
-    });
+    const { url: commitUrl } = commitsList.find(({ commit }) => commit.message.includes('calendar.json'));
 
     const commitInfo = await http.get({
         uri: commitUrl,
@@ -36,7 +31,7 @@ module.exports = async () => {
     const fileName = commitInfo.files[0].filename;
 
     const WEB_HOST = 'https://newswebeasy.github.io/news/';
-    const [ , year, month ] = fileName.match(/data\/(\d+?)\/(\d+?)\//);
+    const [, year, month] = fileName.match(/data\/(\d+?)\/(\d+?)\//);
 
     const calendarData = await http.get({
         uri: `${WEB_HOST}${fileName}`,
@@ -45,14 +40,14 @@ module.exports = async () => {
             'User-Agent': ua,
         },
     });
-    const orderDateList = Object.entries(calendarData.dates).sort(([ dateA ], [ dateB ]) => {
-        return parseInt(dateA) - parseInt(dateB)
-    }).reverse();
+    const orderDateList = Object.entries(calendarData.dates)
+        .sort(([dateA], [dateB]) => parseInt(dateA) - parseInt(dateB))
+        .reverse();
     const dateList = [];
     const limit = 5;
-    
+
     for (let i = 0; i < orderDateList.length; i++) {
-        const [ date, dateInfo ] = orderDateList[i];
+        const [date, dateInfo] = orderDateList[i];
 
         if (dateInfo.web) {
             dateList.push(`${year}/${month}/${date}/`);
@@ -71,14 +66,16 @@ module.exports = async () => {
             },
         });
         const $ = cheerio.load(htmlString);
-        const linkList = $('.summary').map(function() {
-            const $link = $(this).find('.title > a');
+        const linkList = $('.summary')
+            .map(function() {
+                const $link = $(this).find('.title > a');
 
-            return {
-                title: $link.text(),
-                link: $link.attr('href'),
-            };
-        }).get();
+                return {
+                    title: $link.text(),
+                    link: $link.attr('href'),
+                };
+            })
+            .get();
 
         return linkList;
     });

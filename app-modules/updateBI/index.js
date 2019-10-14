@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'BI有更新',
-                template: ({ title = '', summary = '', url = '' }) => {
-                    return `
+                template: ({ title = '', summary = '', url = '' }) => `
                         <div style="margin-bottom: 30px">
                             <h2>${title}</h2>
                             <a href="${url}" target="_blank">
@@ -24,18 +23,15 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                },
+                    `,
                 device: 'device2',
             },
-            getTargetData: () => {
-                return getData();
-            },
+            getTargetData: () => getData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
     const loadData = require('./_loadData');
 
     const params = req.params;
@@ -9,10 +9,12 @@ module.exports = (req, res, next) => {
     const url = `https://www.uplabs.com/${author}.json?page=${page}`;
 
     loadData({
-        url
-    }).then((data) => {
-        res.json(data);
-    }).catch((err) => {
-        res.json([]);
-    });
+        url,
+    })
+        .then((data) => {
+            res.json(data);
+        })
+        .catch(() => {
+            res.json([]);
+        });
 };

@@ -2,29 +2,26 @@
 
 module.exports = async () => {
     const cheerio = require('cheerio');
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
 
     try {
         const htmlString = await http.get({
             uri: 'https://www.businessinsider.com/',
             headers: {
-                'User-Agent': params.ua.pc
+                'User-Agent': params.ua.pc,
             },
         });
         const $ = cheerio.load(htmlString);
-        let result = [];
+        const result = [];
 
-        $('#content .overridable').each(function () {
+        $('#content .overridable').each(function() {
             const $item = $(this);
             const $link = $item.find('a');
 
             result.push({
                 url: $link.attr('href'),
                 title: $link.text(),
-                summary: ''
+                summary: '',
             });
         });
 
@@ -37,17 +34,23 @@ module.exports = async () => {
                     },
                 });
                 const $ = cheerio.load(htmlString);
-                const img = $('.image-figure-image > img').eq(0).attr('src');
-                const alt = $('.image-source-caption').eq(0).text();
-                const summaryList = $('.summary-list > li').map(function() {
-                    const $item = $(this);
-                    return `<li><strong>${$item.text()}</strong></li>`;
-                }).get();
+                const img = $('.image-figure-image > img')
+                    .eq(0)
+                    .attr('src');
+                const alt = $('.image-source-caption')
+                    .eq(0)
+                    .text();
+                const summaryList = $('.summary-list > li')
+                    .map(function() {
+                        const $item = $(this);
+                        return `<li><strong>${$item.text()}</strong></li>`;
+                    })
+                    .get();
 
                 if (summaryList && summaryList.length > 0) {
                     const imgElem = `<img src="${img}" referrerpolicy="no-referrer">`;
                     item.summary = `
-                        ${(img && img !== '') ? imgElem : ''}
+                        ${img && img !== '' ? imgElem : ''}
                         <div><strong>${alt}</strong></div>
                         <br>
                         <ul>
@@ -65,9 +68,7 @@ module.exports = async () => {
             }
         });
 
-        return biList.filter((item) => {
-            return !!item;
-        });
+        return biList.filter((item) => !!item);
     } catch (err) {
         console.error(err);
         return [];

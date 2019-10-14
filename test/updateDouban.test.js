@@ -9,7 +9,5 @@ test('更新豆瓣', async () => {
     try {
         const result = await updateDouban();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

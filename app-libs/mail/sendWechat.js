@@ -12,31 +12,33 @@ module.exports = async ({ title = '', content = '', render }) => {
     try {
         await saveDbData({
             dbName: 'Archive',
-            data: [{
-                uuid,
-                title,
-                content
-            }]
+            data: [
+                {
+                    uuid,
+                    title,
+                    content,
+                },
+            ],
         });
 
-        let markdownContent = `- [${title}](${process.env.hostName}/archive?id=${uuid}&render=${render})`;
+        const markdownContent = `- [${title}](${process.env.hostName}/archive?id=${uuid}&render=${render})`;
         const response = await rp.post({
             json: true,
             uri: `https://sc.ftqq.com/${scToken}.send`,
             form: {
                 text: title,
-                desp: markdownContent
-            }
+                desp: markdownContent,
+            },
         });
 
         console.log(response);
         return {
-            success: response.errno == 0
+            success: response.errno == 0,
         };
     } catch (err) {
         console.error(title, err);
         return {
-            success: false
+            success: false,
         };
     }
 };

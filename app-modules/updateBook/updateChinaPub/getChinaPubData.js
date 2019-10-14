@@ -2,7 +2,7 @@
 const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
 const uniqBy = require('lodash/uniqBy');
-const { http, } = require('app-libs');
+const { http } = require('app-libs');
 
 module.exports = async () => {
     try {
@@ -12,15 +12,19 @@ module.exports = async () => {
         const $ = cheerio.load(htmlString);
         const targetUrlList = [];
 
-        $('.nb_sec1').each(function () {
-            targetUrlList.push($(this).find('.nb_sec1_left h1 a').attr('href'));
+        $('.nb_sec1').each(function() {
+            targetUrlList.push(
+                $(this)
+                    .find('.nb_sec1_left h1 a')
+                    .attr('href')
+            );
         });
 
         const result = await Promise.map(targetUrlList, async (url) => {
             try {
                 return await http.get({
                     uri: url,
-                    encoding : null,
+                    encoding: null,
                 });
             } catch (err) {
                 console.error(err);
@@ -34,10 +38,14 @@ module.exports = async () => {
             if (htmlString != null) {
                 const $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
 
-                $('.bookshow').each(function () {
+                $('.bookshow').each(function() {
                     bookList.push({
-                        name: $(this).find('.bookName a').attr('title'),
-                        url: $(this).find('.bookName a').attr('href'),
+                        name: $(this)
+                            .find('.bookName a')
+                            .attr('title'),
+                        url: $(this)
+                            .find('.bookName a')
+                            .attr('href'),
                     });
                 });
             }

@@ -10,11 +10,13 @@ module.exports = async ({ title = '', content = '', render }) => {
     try {
         await saveDbData({
             dbName: 'Archive',
-            data: [{
-                uuid,
-                title,
-                content
-            }]
+            data: [
+                {
+                    uuid,
+                    title,
+                    content,
+                },
+            ],
         });
 
         const url = `${process.env.hostName}/archive?id=${uuid}&render=${render}`;
@@ -23,12 +25,12 @@ module.exports = async ({ title = '', content = '', render }) => {
 
         console.log(response);
         return {
-            success: response.success
+            success: response.success,
         };
     } catch (err) {
         console.error(title, err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -10,7 +10,5 @@ test('获取SMZDM数据', async () => {
     try {
         const result = await getSMZDMData({});
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ title = '', data = [], render = 'archive', device = 'device1', open = 'chrome', template = () => (''), proxy = false, }) => {
+module.exports = async ({ title = '', data = [], render = 'archive', device = 'device1', open = 'chrome', template = () => '', proxy = false }) => {
     const cheerio = require('cheerio');
     const sendCloud = require('./sendCloud');
     const sendOutlook = require('./sendOutlook');
@@ -8,13 +8,9 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
     const sendBark = require('./sendBark');
     const sendTelegram = require('./sendTelegram');
     const params = require('../params');
-    const {
-        mailReceivers: receivers,
-    } = process.env;
+    const { mailReceivers: receivers } = process.env;
 
-    let content = data.map((item) => {
-        return template(item);
-    }).join('');
+    let content = data.map((item) => template(item)).join('');
     const $ = cheerio.load(content);
     $('a').each(function() {
         $(this).attr('target', '_blank');
@@ -31,7 +27,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
         wechat: sendWechat,
         sendcloud: sendCloud,
         bark: sendBark,
-        tg: sendTelegram
+        tg: sendTelegram,
     };
 
     const mailParams = {
@@ -46,7 +42,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
 
     if (params.env.isDev) {
         return {
-            success: true
+            success: true,
         };
     }
 
@@ -68,12 +64,12 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
         }
 
         return {
-            success: sendSuccess
-        }
+            success: sendSuccess,
+        };
     } catch (err) {
         console.error(err);
         return {
-            success: false
-        }
+            success: false,
+        };
     }
 };

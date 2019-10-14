@@ -9,7 +9,5 @@ test('发送邮件', async () => {
     try {
         const result = await sendMail({});
         expect(result.success).toBe(true);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

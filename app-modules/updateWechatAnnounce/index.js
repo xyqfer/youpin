@@ -1,28 +1,8 @@
 'use strict';
-const AV = require('leanengine');
 
 module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const getWechatAnnounceData = require('./getWechatAnnounceData');
-
-    // try {
-    //     // 晚上18点15分前发天气预报邮件
-    //     const today = new Date();
-    //     const needSendWeather = today.getHours() === 18 && today.getMinutes() <= 15;
-
-    //     if (needSendWeather) {
-    //         await AV.Cloud.run('updateGZWeather', {});
-    //     }
-
-    //     const needSendLeetcode = today.getHours() === 12 && today.getMinutes() <= 15
-    //         && (today.getDay() >= 1 && today.getDay() <= 5);
-
-    //     if (needSendLeetcode) {
-    //         // await AV.Cloud.run('updateLeetcode', {});
-    //     }
-    // } catch (err) {
-    //     console.log(err);
-    // }
 
     try {
         const filterKey = 'url';
@@ -33,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '有新的微信公众平台-系统公告',
-                template: ({ title = '', url = '' }) => {
-                    return `
+                template: ({ title = '', url = '' }) => `
                         <div style="margin-bottom: 50px">
                             <h4>
                               <a href="${url}" target="_blank">
@@ -42,17 +21,14 @@ module.exports = async () => {
                               </a>
                             </h4>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getWechatAnnounceData();
-            }
+            getTargetData: () => getWechatAnnounceData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

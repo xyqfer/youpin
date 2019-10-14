@@ -13,8 +13,7 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'App Store Today 有更新',
-                template: ({ title = '', url = '', summary = '' }) => {
-                    return `
+                template: ({ title = '', url = '', summary = '' }) => `
                         <div style="margin-bottom: 50px">
                             <h4>
                               <a href="${url}">
@@ -25,17 +24,14 @@ module.exports = async () => {
                                 ${summary}
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getAppStoreData();
-            }
+            getTargetData: () => getAppStoreData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

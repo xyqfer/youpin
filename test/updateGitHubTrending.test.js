@@ -10,7 +10,5 @@ test('更新github trending', async () => {
     try {
         const result = await updateGitHubTrending();
         expect(result.length).toBeGreaterThanOrEqual(0);
-    } catch (err) {
-
-    }
+    } catch (err) {}
 });

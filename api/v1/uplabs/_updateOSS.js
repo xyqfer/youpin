@@ -8,7 +8,7 @@ module.exports = (data) => {
         accessKeyId: process.env.OSSAccessKeyId,
         accessKeySecret: process.env.OSSAccessKeySecret,
         region: process.env.OSSRegion,
-        bucket: process.env.OSSBucket
+        bucket: process.env.OSSBucket,
     });
 
     if (!Array.isArray(data)) {
@@ -16,11 +16,11 @@ module.exports = (data) => {
     }
 
     data.forEach((ossItem) => {
-        oss.put(`api/v1/uplabs/${ossItem.id}.json`, Buffer.from(JSON.stringify(ossItem))).then((data) => {
-
-        }).catch((err) => {
-            console.log(err);
-        });
+        oss.put(`api/v1/uplabs/${ossItem.id}.json`, Buffer.from(JSON.stringify(ossItem)))
+            .then(() => {})
+            .catch((err) => {
+                console.log(err);
+            });
     });
 
     updateCDN(data);

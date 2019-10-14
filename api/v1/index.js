@@ -16,11 +16,7 @@ const uplabsCollection = require('./uplabs/collection');
 const uplabsCollections = require('./uplabs/collections');
 const uplabsAuthor = require('./uplabs/author');
 
-const {
-    today: getTodayStatusLog,
-    history: getHistoryStatusLog,
-    update: updateTodayStatusLog
-} = require('./dailyStatusLog');
+const { today: getTodayStatusLog, history: getHistoryStatusLog, update: updateTodayStatusLog } = require('./dailyStatusLog');
 
 const {
     hot: v2exHot,
@@ -39,7 +35,7 @@ const {
     recent: v2exRecent,
     checkLogin: v2exCheckLogin,
     tag: v2exTag,
-    'allNodes': v2exAllNodes,
+    allNodes: v2exAllNodes,
 } = require('./v2ex');
 
 const poliwagRouters = require('./poliwag');
@@ -62,6 +58,7 @@ router.get('/activities', activities);
 
 router.get('/book/redirect', redirectBook);
 
+/* eslint-disable no-useless-escape */
 router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAll);
 router.get(/^\/uplabs\/uplabs_ios_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsiOS);
 router.get(/^\/uplabs\/uplabs_android_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAndroid);
@@ -108,17 +105,19 @@ router.get('/alipayscheme/list', require('./alipayscheme/list'));
 router.post('/alipayscheme/update', require('./alipayscheme/update'));
 
 router.get('/proxyimage', async (req, res) => {
-    const { url } = req.query
+    const { url } = req.query;
     const headers = {};
 
     if (req.headers.range) {
         headers.Range = req.headers.range;
     }
 
-    request.get({
-        url,
-        headers,
-    }).pipe(res);
+    request
+        .get({
+            url,
+            headers,
+        })
+        .pipe(res);
 });
 
 router.get('/readeer/zhihu/list', require('./readeer/zhihu/list'));

@@ -17,7 +17,7 @@ module.exports = async () => {
                     if (url.startsWith('https://zhuanlan.zhihu.com')) {
                         url = `https://oia.zhihu.com/articles/${url.replace('https://zhuanlan.zhihu.com/p/', '')}`;
                     } else {
-                        url = url.replace('www.zhihu.com', 'oia.zhihu.com')
+                        url = url.replace('www.zhihu.com', 'oia.zhihu.com');
                     }
 
                     return `
@@ -27,16 +27,14 @@ module.exports = async () => {
                             </a>
                         </div>
                     `;
-                }
+                },
             },
-            getTargetData: () => {
-                return getZhihuHotData();
-            },
+            getTargetData: () => getZhihuHotData(),
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

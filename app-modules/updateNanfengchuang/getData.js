@@ -2,16 +2,13 @@
 
 module.exports = async () => {
     const cheerio = require('cheerio');
-    const {
-        params,
-        http,
-    } = require('app-libs');
+    const { params, http } = require('app-libs');
 
     let htmlString = await http.get({
         uri: 'https://www.nfcmag.com/magazine.html',
         headers: {
-            'User-Agent': params.ua.pc
-        }
+            'User-Agent': params.ua.pc,
+        },
     });
 
     let $ = cheerio.load(htmlString);
@@ -21,13 +18,13 @@ module.exports = async () => {
     htmlString = await http.get({
         uri: link,
         headers: {
-            'User-Agent': params.ua.pc
-        }
+            'User-Agent': params.ua.pc,
+        },
     });
     $ = cheerio.load(htmlString);
 
     const magazines = [];
-    $('.article-box.comBox > ul >li').each(function () {
+    $('.article-box.comBox > ul >li').each(function() {
         const $item = $(this);
         const $link = $item.find('h5 > a');
         const title = $link.text();

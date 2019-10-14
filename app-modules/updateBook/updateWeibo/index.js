@@ -15,8 +15,7 @@ module.exports = async () => {
             dbName: 'WeiboBook',
             mail: {
                 title: '微博新书快讯',
-                template: ({ title = '', cover = '', desc = '' }) => {
-                    return `
+                template: ({ title = '', cover = '', desc = '' }) => `
                         <div style="margin-bottom: 30px">
                             <h4>${title}</h4>
                             <p>
@@ -26,20 +25,18 @@ module.exports = async () => {
                                 <img src="${cover}" alt="">
                             </div>
                         </div>
-                    `;
-                }
+                    `,
             },
-            getTargetData: () => {
-                return getWeiboData({
-                    offsets
-                });
-            },
-            filterKey: 'bookId'
+            getTargetData: () =>
+                getWeiboData({
+                    offsets,
+                }),
+            filterKey: 'bookId',
         });
     } catch (err) {
         console.error(err);
         return {
-            success: false
+            success: false,
         };
     }
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async ({ title = '', content = '', render, device = 'device1', open = 'chrome', proxy = false, }) => {
+module.exports = async ({ title = '', content = '', render, device = 'device1', open = 'chrome', proxy = false }) => {
     const { saveDbData } = require('../db');
     const uuidv4 = require('uuid/v4');
     const rp = require('request-promise');
@@ -10,11 +10,13 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
     try {
         await saveDbData({
             dbName: 'Archive',
-            data: [{
-                uuid,
-                title,
-                content
-            }]
+            data: [
+                {
+                    uuid,
+                    title,
+                    content,
+                },
+            ],
         });
 
         let url = '';
@@ -32,12 +34,12 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
 
         console.log(response);
         return {
-            success: response.code == 200
+            success: response.code == 200,
         };
     } catch (err) {
         console.error(title, err);
         return {
-            success: false
+            success: false,
         };
     }
 };

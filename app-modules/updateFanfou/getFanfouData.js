@@ -3,11 +3,7 @@
 module.exports = async () => {
     const cheerio = require('cheerio');
     const flatten = require('lodash/flatten');
-    const {
-        params,
-        http,
-        db
-    } = require('app-libs');
+    const { params, http, db } = require('app-libs');
 
     const dbName = 'Fanfou';
     const name = process.env.fanfouName || '';
@@ -22,15 +18,15 @@ module.exports = async () => {
             form: {
                 loginname: name,
                 loginpass: pwd,
-                action: 'login'
+                action: 'login',
             },
-            resolveWithFullResponse: true
+            resolveWithFullResponse: true,
         });
-        const cookies = resp.headers['set-cookie'].slice(1).map(cookie => {
+        const cookies = resp.headers['set-cookie'].slice(1).map((cookie) => {
             const [key, value] = cookie.split(';')[0].split('=');
             return {
                 key,
-                value
+                value,
             };
         });
         let cookie;
@@ -45,31 +41,35 @@ module.exports = async () => {
     };
     const parseContent = async ({ userList = [], cookie = '' }) => {
         try {
-            return flatten(await Promise.mapSeries(userList, async (user) => {
-                try {
-                    const htmlString = await http.get({
-                        uri: `http://fanfou.com/${user}`,
-                        headers: {
-                            'User-Agent': params.ua.pc,
-                            'Cookie': cookie,
-                        }
-                    });
-                    const $ = cheerio.load(htmlString);
-                    return $('#stream li').map(function() {
-                        const $item = $(this);
-                        const content = $item.find('.content').html();
-                        const postId = $item.find('.op > .reply').attr('ffid');
+            return flatten(
+                await Promise.mapSeries(userList, async (user) => {
+                    try {
+                        const htmlString = await http.get({
+                            uri: `http://fanfou.com/${user}`,
+                            headers: {
+                                'User-Agent': params.ua.pc,
+                                Cookie: cookie,
+                            },
+                        });
+                        const $ = cheerio.load(htmlString);
+                        return $('#stream li')
+                            .map(function() {
+                                const $item = $(this);
+                                const content = $item.find('.content').html();
+                                const postId = $item.find('.op > .reply').attr('ffid');
 
-                        return {
-                            postId,
-                            content
-                        };
-                    }).get();
-                } catch (err) {
-                    console.error(err);
-                    return [];
-                }
-            }));
+                                return {
+                                    postId,
+                                    content,
+                                };
+                            })
+                            .get();
+                    } catch (err) {
+                        console.error(err);
+                        return [];
+                    }
+                })
+            );
         } catch (err) {
             console.error(err);
             return [];
@@ -81,24 +81,22 @@ module.exports = async () => {
                 uri: `http://fanfou.com/home`,
                 headers: {
                     'User-Agent': params.ua.pc,
-                    'Cookie': cookie,
+                    Cookie: cookie,
                 },
-                followRedirect: false
+                followRedirect: false,
             });
             return true;
         } catch (err) {
             return false;
         }
     };
-    let [ cookieData ]  = await db.getDbData({
+    let [cookieData] = await db.getDbData({
         dbName,
         query: {
-            equalTo: ['name', name]
-        }
+            equalTo: ['name', name],
+        },
     });
-    const userList = [
-        'wangxing'
-    ];
+    const userList = ['wangxing'];
 
     if (!cookieData || !(await validateCookie(cookieData.cookie))) {
         const cookie = await getCookie({ name, pwd });
@@ -108,20 +106,22 @@ module.exports = async () => {
                     dbName,
                     data: {
                         name,
-                        cookie
+                        cookie,
                     },
                     id: cookieData.objectId,
                 });
             } else {
                 cookieData = {
-                    cookie
+                    cookie,
                 };
                 db.saveDbData({
                     dbName,
-                    data: [{
-                        name,
-                        cookie,
-                    }]
+                    data: [
+                        {
+                            name,
+                            cookie,
+                        },
+                    ],
                 });
             }
         } else {
@@ -132,6 +132,6 @@ module.exports = async () => {
 
     return await parseContent({
         userList,
-        cookie: cookieData.cookie
+        cookie: cookieData.cookie,
     });
 };
