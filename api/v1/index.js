@@ -147,5 +147,6 @@ router.get('/os', require('./os'));
 router.post('/sandbox', require('./sandbox'));
 router.get('/notes', require('./notes/get'));
 router.post('/note', require('./notes/post'));
+router.get('/leetcode/status', require('./leetcode/status'));
 
 module.exports = router;
