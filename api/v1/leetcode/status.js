@@ -48,7 +48,13 @@ module.exports = async (req, res) => {
     const problemList = res3.stat_status_pairs;
     const finishedProblems = problemList.reverse().reduce((acc, item, index) => {
         if (item.status === 'ac') {
-            acc.push(index);
+            acc.push({
+                index,
+                level: item.difficulty.level,
+                questionId: item.stat.question_id,
+                questionTitle: item.stat.question__title,
+                questionDisplayId: item.stat.frontend_question_id,
+            });
         }
         return acc;
     }, []);
