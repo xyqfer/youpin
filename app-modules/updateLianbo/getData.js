@@ -7,7 +7,6 @@ module.exports = async () => {
         json: true,
     });
     const data = result.videoList[0];
-    console.log(data);
 
     return [
         {
