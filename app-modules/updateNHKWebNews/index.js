@@ -10,9 +10,7 @@ module.exports = async () => {
 
     try {
         const nhkData = await getData();
-        const containedInKeys = nhkData.map((item) => {
-            return item[filterKey];
-        });
+        const containedInKeys = nhkData.map((item) => item[filterKey]);
         const containedData = await db.getData({
             dbName,
             query: {
