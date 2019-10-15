@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js --preserve-symlinks -- ",
+    "dev": "lean up --port 3010 --cmd nodemon server.js --preserve-symlinks -- ",
     "format": "eslint \"**/*.js\" --fix && prettier \"**/*.js\" --write",
     "format:staged": "eslint \"**/*.js\" --fix && pretty-quick --staged --verbose --pattern \"**/*.js\"",
     "format:check": "eslint \"**/*.js\" && prettier-check \"**/*.js\"",
@@ -20,7 +20,6 @@
     "@leancloud/play": "0.18.0-beta.5",
     "@xyqfer/deploy-middleware": "1.0.4",
     "@xyqfer/env-info": "1.0.1",
-    "@xyqfer/get-port": "1.0.1",
     "@xyqfer/init-leancloud-engine": "1.1.1",
     "@xyqfer/leancloud-db": "1.5.6",
     "@xyqfer/leancloud-graphql-express-middleware": "1.1.2",

@@ -3,11 +3,10 @@
 const { initCloudEngine } = require('@xyqfer/init-leancloud-engine');
 initCloudEngine();
 
-const getPort = require('@xyqfer/get-port');
 const app = require('./app');
 
 (async () => {
-    const PORT = await getPort();
+    const PORT = parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000);
 
     app.listen(PORT, function() {
         console.log('Node app is running on port:', PORT);

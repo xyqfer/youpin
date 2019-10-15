@@ -143,6 +143,7 @@ router.get('/nhk/easynews', require('./nhk/easynews'));
 router.get('/nhk/easynews/article/:id', require('./nhk/easynews-article'));
 
 router.get('/server-status/storage', require('./server-status/storage'));
+router.get('/server-status/error', require('./server-status/error'));
 router.get('/os', require('./os'));
 router.post('/sandbox', require('./sandbox'));
 router.get('/notes', require('./notes/get'));
