@@ -140,6 +140,7 @@ router.get('/youtube/geturl/:id', require('./youtube/geturl'));
 router.get('/betterDev/video', require('./betterDev/video'));
 
 router.get('/nhk/easynews', require('./nhk/easynews'));
+router.get('/nhk/easynews/wordlist', require('./nhk/easynews-wordlist'));
 router.get('/nhk/easynews/article/:id', require('./nhk/easynews-article'));
 
 router.get('/server-status/storage', require('./server-status/storage'));
