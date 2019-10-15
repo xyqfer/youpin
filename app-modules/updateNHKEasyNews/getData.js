@@ -1,13 +1,10 @@
 'use strict';
 
-const { params, http } = require('app-libs');
+const { http } = require('app-libs');
 
 module.exports = async () => {
     let result = await http.get({
         uri: 'https://www3.nhk.or.jp/news/easy/news-list.json',
-        headers: {
-            'User-Agent': params.ua.pc,
-        },
         json: true,
     });
 

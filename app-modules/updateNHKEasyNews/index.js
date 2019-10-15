@@ -6,45 +6,26 @@ const { db, crawler } = require('app-libs');
 
 module.exports = async () => {
     const dbName = 'NHKEasyNews';
+    const filterKey = 'easyUrl';
 
     try {
-        const filterKey = 'easyUrl';
-        const [dbData, newsData] = await Promise.all([
-            db.getDbData({
-                dbName,
-                query: {
-                    select: [filterKey],
-                },
-            }),
-            getData(),
-        ]);
-
-        let newData = _.differenceBy(newsData, dbData, filterKey);
-        newData = await Promise.filter(
-            newData,
-            async (item) => {
-                const dbItem = await db.getDbData({
-                    dbName,
-                    limit: 1,
-                    query: {
-                        equalTo: [filterKey, item[filterKey]],
-                        select: [filterKey],
-                    },
-                });
-
-                return dbItem.length === 0;
+        const nhkData = await getData();
+        const containedInKeys = nhkData.map((item) => {
+            return item[filterKey];
+        });
+        const containedData = await db.getData({
+            dbName,
+            query: {
+                containedIn: [filterKey, containedInKeys],
             },
-            {
-                concurrency: 1,
-            }
-        );
+        });
+        let newData = _.differenceBy(nhkData, containedData, filterKey);
 
         if (newData.length > 0) {
             newData = await Promise.mapSeries(newData, async (item) => {
                 try {
                     const $ = await crawler(item.easyUrl);
                     item.content = $('#js-article-body').html();
-
                     return item;
                 } catch (err) {
                     console.log(err);

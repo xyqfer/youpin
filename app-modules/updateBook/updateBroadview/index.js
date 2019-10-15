@@ -11,24 +11,24 @@ module.exports = async () => {
     try {
         return await updateContainer({
             dbName: 'Broadview',
-            mail: {
-                title: 'Broadview 有新书',
-                template: ({ url = '', title = '', cover = '' }) => `
-                        <div style="margin-bottom: 30px">
-                            <a href="${url}" target="_blank">
-                                <h4>${title}</h4>
-                            </a>
-                            <div>
-                                <img src="${cover}" alt="">
-                            </div>
-                        </div>
-                    `,
-            },
+            filterKey: 'url',
             getTargetData: () =>
                 getBroadviewData({
                     offsets,
                 }),
-            filterKey: 'url',
+            mail: {
+                title: 'Broadview 有新书',
+                template: ({ url = '', title = '', cover = '' }) => `
+                    <div style="margin-bottom: 30px">
+                        <a href="${url}" target="_blank">
+                            <h4>${title}</h4>
+                        </a>
+                        <div>
+                            <img src="${cover}" alt="">
+                        </div>
+                    </div>
+                `,
+            },
         });
     } catch (err) {
         console.error(err);
