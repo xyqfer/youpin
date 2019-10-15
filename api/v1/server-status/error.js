@@ -1,5 +1,6 @@
 'use strict';
 
+const moment = require('moment');
 const { http, db } = require('app-libs');
 
 module.exports = async (req, res) => {
@@ -7,6 +8,9 @@ module.exports = async (req, res) => {
     const startTime = new Date(since).getTime();
     const serverInfo = await db.getData({
         dbName: 'ServerInfo',
+        query: {
+            ascending: ['createdAt'],
+        },
     });
 
     const errorInfoList = await Promise.mapSeries(serverInfo, async (item) => {
@@ -18,10 +22,17 @@ module.exports = async (req, res) => {
             },
             json: true,
         });
-        errorInfo = errorInfo.filter(({ time }) => {
-            const timestamp = new Date(time).getTime();
-            return timestamp > startTime;
-        });
+        errorInfo = errorInfo
+            .filter(({ time }) => {
+                const timestamp = new Date(time).getTime();
+                return timestamp > startTime;
+            })
+            .map((item) => {
+                item.displayTime = moment(item.time)
+                    .utcOffset(8)
+                    .format('HH:mm:ss');
+                return item;
+            });
 
         return {
             name: item.name,
