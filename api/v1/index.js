@@ -149,5 +149,6 @@ router.post('/sandbox', require('./sandbox'));
 router.get('/notes', require('./notes/get'));
 router.post('/note', require('./notes/post'));
 router.get('/leetcode/status', require('./leetcode/status'));
+router.post('/jp/log', require('./jp/log'));
 
 module.exports = router;
