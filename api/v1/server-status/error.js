@@ -27,6 +27,7 @@ module.exports = async (req, res) => {
                 const timestamp = new Date(time).getTime();
                 return timestamp > startTime;
             })
+            .reverse()
             .map((item) => {
                 item.displayTime = moment(item.time)
                     .utcOffset(8)
