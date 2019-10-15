@@ -1,7 +1,9 @@
 'use strict';
+const moment = require('moment');
+const { mail: sendMail } = require('app-libs');
 
 module.exports = async () => {
-    const { mail: sendMail } = require('app-libs');
+    const since = moment().format('YYYY-MM-DD');
 
     try {
         const title = '刷书啦';
@@ -9,6 +11,10 @@ module.exports = async () => {
             {
                 title: 'Server Storage Status',
                 url: `${process.env.NUXT_URL}/server-status/storage`,
+            },
+            {
+                title: 'Server Error Status',
+                url: `${process.env.NUXT_URL}/server-status/error=since=${since}`,
             },
             {
                 title: '领蚂蚁积分',
@@ -31,12 +37,12 @@ module.exports = async () => {
             title,
             data,
             template: ({ url = '', title = '' }) => `
-            <div style="margin-bottom: 50px">
-                <a href="${url}" target="_blank">
-                    <h4>${title}</h4>
-                </a>
-            </div>
-        `,
+                <div style="margin-bottom: 50px">
+                    <a href="${url}" target="_blank">
+                        <h4>${title}</h4>
+                    </a>
+                </div>
+            `,
         });
 
         return {
