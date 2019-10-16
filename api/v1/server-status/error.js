@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const moment = require('moment');
 const { http, db } = require('app-libs');
 
@@ -34,6 +35,15 @@ module.exports = async (req, res) => {
                     .format('HH:mm:ss');
                 return item;
             });
+
+        errorInfo = Object.entries(_.groupBy(errorInfo, 'displayTime')).map(([time, item]) => {
+            const contentList = item.slice(0, 3).map(({ content }) => content);
+
+            return {
+                time,
+                contentList,
+            };
+        });
 
         return {
             name: item.name,
