@@ -14,7 +14,7 @@ module.exports = async () => {
             },
             {
                 title: 'Server Error Status',
-                url: `${process.env.NUXT_URL}/server-status/error=since=${since}`,
+                url: `${process.env.NUXT_URL}/server-status/error?since=${since}`,
             },
             {
                 title: '领蚂蚁积分',
