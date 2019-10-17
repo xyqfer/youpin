@@ -1,9 +1,8 @@
 'use strict';
+const updateContainer = require('app-containers/update');
+const fetchRSS = require('app-containers/fetchRSS');
 
 module.exports = async () => {
-    const updateContainer = require('app-containers/update');
-    const fetchRSS = require('app-containers/fetchRSS');
-
     const filterKey = 'url';
     const dbName = 'WechatAnnounce';
 

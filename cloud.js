@@ -89,8 +89,8 @@ const cloudFuncConfig = [
         info: '更新车票',
     },
     {
-        name: 'updateJp',
-        module: 'updateJp',
+        name: 'updateJpGrammar',
+        module: 'updateJpGrammar',
         info: '更新语法',
     },
     {
