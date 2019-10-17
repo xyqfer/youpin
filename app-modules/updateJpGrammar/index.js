@@ -1,11 +1,11 @@
 const _ = require('lodash');
-const { db, crawler, } = require('app-libs');
+const { db, crawler } = require('app-libs');
 
 module.exports = async () => {
     const levelList = _.times(5, (time) => time + 1);
     const list = await Promise.mapSeries(levelList, async (level) => {
         let page = 1;
-        let result = [];
+        const result = [];
 
         let $ = await crawler(`https://grammar.izaodao.com/grammar.php?action=list&op=ajaxMoreList&level=${level}&cat=&cha=&page=${page}`);
         /* eslint-disable no-await-in-loop */
@@ -33,12 +33,14 @@ module.exports = async () => {
         };
     });
 
-    await Promise.mapSeries(list, async ({ level, data, }) => {
-        return await db.saveData({
-            dbName: `JP_Grammar_${level}`,
-            data,
-        });
-    });
+    await Promise.mapSeries(
+        list,
+        async ({ level, data }) =>
+            await db.saveData({
+                dbName: `JP_Grammar_${level}`,
+                data,
+            })
+    );
 
     return {
         success: true,
