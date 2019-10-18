@@ -68,11 +68,19 @@ module.exports = async (req, res) => {
                 defList,
             };
         });
+        const rawContentList = htmlContentList.map((html) => {
+            const id = 'CONTAINER_ID';
+            const $ = cheerio.load(`<div id="${id}">${html}</div>`);
+            $('rt').remove();
+
+            return encodeURIComponent($(`#${id}`).text());
+        });
 
         res.json({
             success: true,
             data: {
                 htmlContentList,
+                rawContentList,
                 wordList,
                 dicList,
                 audioUrl: process.env.IMAGE_PROXY + data.audioUrl,
