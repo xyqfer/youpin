@@ -69,11 +69,9 @@ module.exports = async (req, res) => {
             };
         });
         const rawContentList = htmlContentList.map((html) => {
-            const id = 'CONTAINER_ID';
-            const $ = cheerio.load(`<div id="${id}">${html}</div>`);
+            const $ = cheerio.load(html);
             $('rt').remove();
-
-            return encodeURIComponent($(`#${id}`).text());
+            return encodeURIComponent(cheerio.text($('body')));
         });
 
         res.json({
