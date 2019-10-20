@@ -1,7 +1,7 @@
 const { http } = require('app-libs');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const jisx0208 = fs.readFileSync('./jis-x-0208-utf8.txt');
+const jisx0208 = fs.readFileSync(`${__dirname}/jis-x-0208-utf8.txt`);
 
 module.exports = async (content = '') => {
     let jisxStr = '';
