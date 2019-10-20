@@ -1,14 +1,24 @@
 const { http } = require('app-libs');
 const cheerio = require('cheerio');
+const fs = require('fs');
+const jisx0208 = fs.readFileSync('./jis-x-0208-utf8.txt');
 
 module.exports = async (content = '') => {
+    let jisxStr = '';
+    for (let i = 0; i < content.length; i++) {
+        const str = content[i];
+        if (jisx0208.includes(str)) {
+            jisxStr += str;
+        }
+    }
+
     const data = await http.post({
         uri: 'https://jlp.yahooapis.jp/FuriganaService/V1/furigana',
         headers: {
             'User-Agent': `Yahoo AppID:  ${process.env.YAHOO_APP_ID}`,
         },
         form: {
-            sentence: content,
+            sentence: jisxStr,
             grade: 1,
         },
     });

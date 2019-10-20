@@ -71,7 +71,7 @@ module.exports = async (req, res) => {
         const rawContentList = htmlContentList.map((html) => {
             const $ = cheerio.load(html);
             $('rt').remove();
-            return encodeURIComponent(cheerio.text($('body')));
+            return cheerio.text($('body'));
         });
 
         res.json({
