@@ -7,7 +7,7 @@ module.exports = async (content = '') => {
     let jisxStr = '';
     for (let i = 0; i < content.length; i++) {
         const str = content[i];
-        if (jisx0208.includes(str)) {
+        if (str === '|' || jisx0208.includes(str)) {
             jisxStr += str;
         }
     }
