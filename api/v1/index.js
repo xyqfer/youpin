@@ -152,5 +152,6 @@ router.post('/note', require('./notes/post'));
 router.get('/leetcode/status', require('./leetcode/status'));
 router.post('/jp/log', require('./jp/log'));
 router.post('/jp/parse', require('./jp/parse'));
+router.get('/outline', require('./outline'));
 
 module.exports = router;
