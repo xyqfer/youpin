@@ -47,7 +47,7 @@ module.exports = async (content = '') => {
 
     try {
         result = await fetchFurigana(content);
-    } catch(err) {
+    } catch (err) {
         let jisxStr = '';
         for (let i = 0; i < content.length; i++) {
             const str = content[i];
@@ -57,6 +57,6 @@ module.exports = async (content = '') => {
         }
         result = await fetchFurigana(jisxStr);
     }
-    
+
     return result;
 };
