@@ -80,7 +80,7 @@
     "yorkie": "2.0.0"
   },
   "engines": {
-    "node": "10.x"
+    "node": "12.x"
   },
   "_moduleAliases": {
     "app-libs": "./app-libs",
