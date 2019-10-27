@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="referrer" content="never">
+    <title><%=title%></title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background-color: #222831;
+      }
+
+      img, video, table {
+        display: block;
+        max-width: 100%;
+      }
+
+      body {
+        padding: 0 18px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-size: 24px;
+        line-height: 1.6;
+        color: #f9ffee;
+        word-break: break-word;
+      }
+
+      blockquote {
+          border-left: 3px solid #FAE042;
+          margin-left: 2px;
+          margin-right: 6px;
+          padding-left: 16px;
+      }
+
+      @media screen and (min-width: 704px) {
+        body {
+          padding-left: 42px; 
+          padding-right: 42px; 
+        }
+      }
+
+      @media screen and (min-width: 736px) {
+        body { 
+          padding-left: 60px; 
+          padding-right: 60px;
+        }
+      }
+
+      a {
+        color: rgb(223, 166, 18);
+        text-decoration: none;
+      }
+
+      code, pre {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><%=title%></h2>
+    <div>
+        <%-content%>
+    </div>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 const { http } = require('app-libs');
 
 module.exports = async (req, res) => {
-    const { url } = req.query;
+    const { url, render = 'archive' } = req.query;
     const { data } = await http.get({
         uri: `https://outlineapi.com/article?source_url=${encodeURIComponent(url)}`,
         headers: {
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
         json: true,
     });
 
-    res.render('archive', {
+    res.render(render, {
         title: data.title,
         content: data.html,
     });
