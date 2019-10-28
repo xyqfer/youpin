@@ -153,5 +153,7 @@ router.get('/leetcode/status', require('./leetcode/status'));
 router.post('/jp/log', require('./jp/log'));
 router.post('/jp/parse', require('./jp/parse'));
 router.get('/outline', require('./outline'));
+router.get('/wewe/groups', require('./wewe/groups'));
+router.get('/wewe/group', require('./wewe/group'));
 
 module.exports = router;
