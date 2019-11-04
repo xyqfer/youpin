@@ -6,11 +6,11 @@ module.exports = async ({ offsets = [1] }) => {
     const { params } = require('app-libs');
 
     try {
-        const results = await Promise.mapSeries(offsets, async () => {
+        const results = await Promise.mapSeries(offsets, async (offset) => {
             try {
                 const result = await rp.get({
                     json: true,
-                    uri: 'https://www.pubcloud.com/pubcloud/content/front/portal/getUbookList?page=1&row=20&dateSort=desc&startPrice=&endPrice=&tagId=',
+                    uri: `https://pubcloud.ptpress.cn/pubcloud/content/front/portal/getUbookList?page=${offset}&row=20&dateSort=desc&startPrice=&endPrice=&tagId=`,
                     headers: {
                         'User-Agent': params.ua.pc,
                         'X-Requested-With': 'XMLHttpRequest',
