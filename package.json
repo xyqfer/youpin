@@ -61,7 +61,7 @@
     "rxjs": "6.5.3",
     "set-cookie-parser": "2.4.0",
     "shelljs": "0.8.3",
-    "simple-plist": "1.0.0",
+    "simple-plist": "1.1.0",
     "subtitles-parser": "0.0.2",
     "unescape": "1.0.1",
     "uuid": "3.3.3",
