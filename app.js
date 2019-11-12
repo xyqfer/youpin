@@ -289,7 +289,7 @@ app.get('/cf-log0', (req, res) => {
     res.json({
         success: true,
     });
-})
+});
 
 app.use(function(req, res, next) {
     // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器

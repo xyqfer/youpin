@@ -65,7 +65,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateBlog',
-        module: ['updateBlog', 'updateXincao', 'updateLianbo'],
+        module: ['updateBlog', 'updateNewsitems', 'updateXincao', 'updateLianbo'],
         info: '每日更新 blog',
     },
     {
