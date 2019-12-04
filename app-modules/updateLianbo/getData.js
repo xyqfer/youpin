@@ -6,12 +6,10 @@ module.exports = async () => {
         uri: 'https://api.cntv.cn/list/getWxArticleList?id=PAGEb3A73LquTUFIbR5GjLgg180411&serviceId=lianboplus&date=',
         json: true,
     });
-    const data = result.videoList[0];
+    const data = result.videoList.map((item) => ({
+        title: item.article_title,
+        url: item.article_url,
+    }));
 
-    return [
-        {
-            title: data.article_title,
-            url: data.article_url,
-        },
-    ];
+    return data;
 };
