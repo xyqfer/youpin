@@ -284,11 +284,19 @@ app.ws('/echo', function(ws) {
     });
 });
 
-app.get('/cf-log0', (req, res) => {
-    console.log(req.query);
-    res.json({
-        success: true,
+app.get('/cf-log0', async (req, res) => {
+    const { http } = require('app-libs');
+
+    const result = await http.get({
+        uri: 'https://api.cntv.cn/list/getWxArticleList?id=PAGEb3A73LquTUFIbR5GjLgg180411&serviceId=lianboplus&date=',
+        json: true,
     });
+    const data = result.videoList.map((item) => ({
+        title: item.article_title,
+        url: item.article_url,
+    }));
+
+    res.json(data[0]);
 });
 
 app.use(function(req, res, next) {
