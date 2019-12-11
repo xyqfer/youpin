@@ -288,7 +288,7 @@ app.get('/cf-log0', async (req, res) => {
     const { http } = require('app-libs');
 
     const result = await http.get({
-        uri: 'https://api.cntv.cn/list/getWxArticleList?id=PAGEb3A73LquTUFIbR5GjLgg180411&serviceId=lianboplus&date=',
+        uri: `https://api.cntv.cn/list/getWxArticleList?id=PAGEb3A73LquTUFIbR5GjLgg180411&serviceId=lianboplus&date=&rand=${Date.now()}`,
         json: true,
     });
     const data = result.videoList.map((item) => ({
