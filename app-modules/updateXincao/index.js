@@ -21,10 +21,6 @@ module.exports = async () => {
                 title: '领蚂蚁积分',
                 url: 'alipays://platformapi/startapp?appId=20000160',
             },
-            {
-                title: '签到',
-                url: 'mnw://',
-            },
         ];
         const now = new Date();
         if (now.getDate() === 26) {
