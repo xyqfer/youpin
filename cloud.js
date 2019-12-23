@@ -40,7 +40,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateKonachan',
-        module: ['updateKonachan', 'updateAlipayScheme'],
+        module: ['updateAlipayScheme'],
         info: '更新 Konachan',
     },
     {
