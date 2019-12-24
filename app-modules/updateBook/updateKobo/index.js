@@ -23,7 +23,7 @@ module.exports = async () => {
                     </div>
                 `,
                 open: 'safari',
-                proxy: true,
+                proxy: false,
             },
             getTargetData: () =>
                 fetchRSS({
