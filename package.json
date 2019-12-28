@@ -55,7 +55,7 @@
     "puppeteer-core": "2.0.0",
     "qcloud-cdn-node-sdk": "1.0.0",
     "request": "2.88.0",
-    "request-promise": "4.2.4",
+    "request-promise": "4.2.5",
     "rimraf": "3.0.0",
     "rss-parser": "3.7.3",
     "rxjs": "6.5.4",
