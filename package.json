@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@leancloud/client-engine": "0.8.0-beta.0",
-    "@leancloud/play": "0.18.0-beta.5",
+    "@leancloud/play": "0.18.0-beta.11",
     "@xyqfer/deploy-middleware": "1.0.4",
     "@xyqfer/env-info": "1.0.1",
     "@xyqfer/init-leancloud-engine": "1.1.1",
