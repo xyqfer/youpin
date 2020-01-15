@@ -22,7 +22,7 @@ module.exports = async () => {
                         </div>
                     </div>
                 `,
-                open: 'safari',
+                open: 'chrome',
                 proxy: false,
             },
             getTargetData: () =>
