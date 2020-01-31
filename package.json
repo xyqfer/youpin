@@ -42,7 +42,7 @@
     "express-ws": "4.0.0",
     "follow-redirects": "1.10.0",
     "glob": "7.1.6",
-    "iconv-lite": "0.5.0",
+    "iconv-lite": "0.5.1",
     "isomorphic-fetch": "2.2.1",
     "kuroshiro": "1.1.2",
     "kuroshiro-analyzer-kuromoji": "1.1.0",
