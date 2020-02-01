@@ -59,7 +59,7 @@
     "rimraf": "3.0.1",
     "rss-parser": "3.7.4",
     "rxjs": "6.5.4",
-    "set-cookie-parser": "2.4.1",
+    "set-cookie-parser": "2.4.3",
     "shelljs": "0.8.3",
     "simple-plist": "1.1.0",
     "subtitles-parser": "0.0.2",
