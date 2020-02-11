@@ -54,7 +54,7 @@
     "nodemailer": "6.4.2",
     "puppeteer-core": "2.1.1",
     "qcloud-cdn-node-sdk": "1.0.0",
-    "request": "2.88.0",
+    "request": "2.88.2",
     "request-promise": "4.2.5",
     "rimraf": "3.0.2",
     "rss-parser": "3.7.5",
