@@ -50,12 +50,12 @@ const cloudFuncConfig = [
     },
     {
         name: 'update3PerDay',
-        module: ['updateWechatAnnounce', 'updateJpAnnounce', 'updateNbdNews', 'getRandomMDN', 'updateNHKEasyNews', 'updateNHKWebNews'],
+        module: ['updateWechatAnnounce', 'updateJpAnnounce', 'updateNbdNews', 'updateNHKEasyNews', 'updateNHKWebNews'],
         info: '每日三更',
     },
     {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCBNweekly', 'updateBetterDevVideo'],
+        module: ['updateBook', 'updateCBNweekly', 'updateBetterDevVideo', 'getRandomMDN'],
         info: '每日更新',
     },
     {
