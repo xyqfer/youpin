@@ -39,11 +39,6 @@ const cloudFuncConfig = [
         info: '每日更新_en',
     },
     {
-        name: 'updateKonachan',
-        module: ['updateAlipayScheme'],
-        info: '更新 Konachan',
-    },
-    {
         name: 'update36krArticle',
         module: ['update36krArticle'],
         info: '更新 update36krArticle',
