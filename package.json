@@ -63,7 +63,7 @@
     "subtitles-parser": "0.0.2",
     "unescape": "1.0.1",
     "uuid": "3.4.0",
-    "webtorrent": "0.107.17",
+    "webtorrent": "0.108.0",
     "youtube-captions-scraper": "1.0.3",
     "ytdl-core": "2.0.1"
   },
