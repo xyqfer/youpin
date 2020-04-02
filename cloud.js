@@ -55,7 +55,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCBNweekly', 'updateBetterDevVideo', 'getRandomMDN'],
+        module: ['updateBook', 'updateCBNweekly', 'getRandomMDN'],
         info: '每日更新',
     },
     {
