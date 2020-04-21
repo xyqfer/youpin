@@ -7,14 +7,13 @@ const getUrls = async () => {
     const result = [];
     
     let $ = await crawler(`${BASE_URL}documentation`);
-    console.log($(ID).html())
     const entryDocs = JSON.parse($(ID).html().trim()).modules;
 
     for (let i = 0; i < COUNT; i++) {
         const entryPath = entryDocs[Math.floor(entryDocs.length * Math.random())].paths[0];
         $ = await crawler(`${BASE_URL}${entryPath}`);
 
-        const { tasks } = JSON.parse($(ID).text().trim());
+        const { tasks } = JSON.parse($(ID).html().trim());
         const symbols = tasks.reduce((acc, item) => {
             item.symbols.forEach((symbol) => {
                 acc.push({
