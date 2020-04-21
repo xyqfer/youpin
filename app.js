@@ -201,6 +201,33 @@ app.post('/note', async (req, res) => {
     }
 });
 
+app.get('/modules-test', async (req, res) => {
+    const { token } = req.query;
+    if (token !== process.env.MODULE_TEST_TOKEN) {
+        res.send('err');
+        return;
+    }
+
+    res.render('modules-test', {
+        token,
+    });
+});
+
+app.post('/modules-test', async (req, res) => {
+    const { token, name } = req.body;
+    if (token !== process.env.MODULE_TEST_TOKEN) {
+        res.status(400).send('Bad Request');
+        return;
+    }
+
+    const func = require(`./app-modules/${name}`) || function () { };
+    func();
+
+    res.json({
+        success: true,
+    });
+});
+
 app.get('/theinitium', async (req, res) => {
     const cheerio = require('cheerio');
     const { slug } = req.query;

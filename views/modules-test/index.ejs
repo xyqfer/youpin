@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>module-test</title>
+</head>
+<body>
+    <input type="text" id="J-name">
+    <br>
+    <button id="J-test">Test</button>
+
+    <script>
+        const $name = document.getElementById('J-name');
+        const $btn = document.getElementById('J-test');
+        const token = '<%=token%>';
+    </script>
+    <script>
+        $btn.addEventListener('click', () => {
+            const name = $name.value();
+
+            if (name && name !== '') {
+                fetch('/module-test', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        token,
+                        name,
+                    }),
+                });
+            }
+        });
+    </script>
+</body>
+</html>

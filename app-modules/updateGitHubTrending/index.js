@@ -27,7 +27,8 @@ module.exports = async () => {
                             </p>
                         </div>
                     `,
-                device: 'device2',
+                device: 'device1',
+                open: 'jsbox',
             },
         });
     } catch (err) {
