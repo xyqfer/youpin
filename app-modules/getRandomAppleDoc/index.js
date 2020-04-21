@@ -18,7 +18,7 @@ const getUrls = async () => {
             item.symbols.forEach((symbol) => {
                 acc.push({
                     url: symbol.paths[0],
-                    title: symbol.name,
+                    title: symbol.name || symbol.title.content,
                 });
             });
 
