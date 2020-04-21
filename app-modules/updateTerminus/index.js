@@ -20,8 +20,8 @@ module.exports = async () => {
                             </a>
                         </div>
                     `,
-                device: 'device2',
-                open: 'chrome',
+                device: 'device1',
+                open: 'jsbox',
                 proxy: false,
             },
             getTargetData: () =>
