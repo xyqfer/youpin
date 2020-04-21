@@ -25,10 +25,13 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
             url = `${hostName}/archive?id=${uuid}&render=${render}`;
         } else if (open === 'jsbox') {
             url = 'jsbox://run?name=PrivatePush&url=' + encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}&render=${render}`);
+            console.log(url);
         } else {
             url = 'jsbox://run?name=safariproxy&url=' + encodeURIComponent(`${proxy ? process.env.proxyUrl : ''}${process.env.hostName}/archive?id=${uuid}&render=${render}`);
         }
         url = encodeURIComponent(url);
+
+        console.log(`https://api.day.app/${process.env[device]}/${encodeURIComponent(title)}?url=${url}`);
         const response = await rp.get({
             json: true,
             uri: `https://api.day.app/${process.env[device]}/${encodeURIComponent(title)}?url=${url}`,
