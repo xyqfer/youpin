@@ -22,11 +22,11 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
         let url = '';
         if (open === 'chrome') {
             const hostName = process.env.hostName.replace('https://', 'googlechromes://');
-            url = `${hostName}/archive/?id=${uuid}&render=${render}`;
+            url = `${hostName}/archive?id=${uuid}&render=${render}`;
         } else if (open === 'jsbox') {
-            url = 'jsbox://run?name=PrivatePush&url=' + encodeURIComponent(`${process.env.hostName}/archive/?id=${uuid}&render=${render}`);
+            url = 'jsbox://run?name=PrivatePush&url=' + encodeURIComponent(`${process.env.hostName}/archive?id=${uuid}&render=${render}`);
         } else {
-            url = 'jsbox://run?name=safariproxy&url=' + encodeURIComponent(`${proxy ? process.env.proxyUrl : ''}${process.env.hostName}/archive/?id=${uuid}&render=${render}`);
+            url = 'jsbox://run?name=safariproxy&url=' + encodeURIComponent(`${proxy ? process.env.proxyUrl : ''}${process.env.hostName}/archive?id=${uuid}&render=${render}`);
         }
         url = encodeURIComponent(url);
 
