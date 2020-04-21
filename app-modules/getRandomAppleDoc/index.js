@@ -48,6 +48,7 @@ module.exports = async () => {
                     </a>
                 </div>
             `,
+            open: 'jsbox',
         });
 
         return {
