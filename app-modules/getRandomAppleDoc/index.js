@@ -7,6 +7,7 @@ const getUrls = async () => {
     const result = [];
     
     let $ = await crawler(`${BASE_URL}documentation`);
+    console.log($(ID).text())
     const entryDocs = JSON.parse($(ID).text().trim()).modules;
 
     for (let i = 0; i < COUNT; i++) {
