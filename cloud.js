@@ -35,7 +35,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily_en',
-        module: ['updateOctocat', 'updateSSpaiMatrix', 'update36krArticle', 'updateTerminus', 'updateFraudInfo', 'updateNBD'],
+        module: ['updateOctocat', 'updateSSpaiMatrix', 'update36krArticle', 'updateFraudInfo', 'updateNBD'],
         info: '每日更新_en',
     },
     {
@@ -55,12 +55,12 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCBNweekly', 'getRandomMDN'],
+        module: ['updateBook', 'updateCBNweekly', 'updateTerminus'],
         info: '每日更新',
     },
     {
         name: 'updateBlog',
-        module: ['updateBlog', 'updateXincao', 'getRandomAppleDoc'],
+        module: ['updateBlog', 'updateXincao', 'getRandomAppleDoc', 'getRandomMDN'],
         info: '每日更新 blog',
     },
     {

@@ -6,18 +6,25 @@
     <title>module-test</title>
 </head>
 <body>
-    <input type="text" id="J-name">
+    <input type="text" id="J-text1">
     <br>
-    <button id="J-test">Test</button>
-
+    <button id="J-test1">Test Cloud Function</button>
+    <br>
+    <br>
+    <input type="text" id="J-text2">
+    <br>
+    <button id="J-test2">Test Proxy</button>
+    
     <script>
-        const $name = document.getElementById('J-name');
-        const $btn = document.getElementById('J-test');
+        const $text1 = document.getElementById('J-text1');
+        const $text2 = document.getElementById('J-text2');
+        const $btn1 = document.getElementById('J-test1');
+        const $btn2 = document.getElementById('J-test2');
         const token = '<%=token%>';
     </script>
     <script>
-        $btn.addEventListener('click', () => {
-            const name = $name.value;
+        $btn1.addEventListener('click', () => {
+            const name = $text1.value;
 
             if (name && name !== '') {
                 fetch('/module-test', {
@@ -31,6 +38,10 @@
                     }),
                 });
             }
+        });
+
+        $btn2.addEventListener('click', () => {
+            window.open(process.env.IMAGE_PROXY + encodeURIComponent($text2.value));
         });
     </script>
 </body>
