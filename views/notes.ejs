@@ -70,7 +70,13 @@
         <% notes.forEach (function (note) { %>
             <div style="margin-bottom: 50px">
                 <p><%=note.createdAt%></p>
-                <div><%=note.message%></div>
+                <div>
+                  <% if (note.message.startsWith('http')) { %>
+                    <a target="_blank" href="<%=note.message%>"><%=note.message%></a>
+                  <% } else { %>
+                    <%=note.message%>
+                  <% } %>
+                </div>
             </div>
         <% }); %>
     </div>
