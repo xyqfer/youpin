@@ -14,17 +14,18 @@ module.exports = async () => {
             mail: {
                 title: 'App Store Today 有更新',
                 template: ({ title = '', url = '', summary = '' }) => `
-                        <div style="margin-bottom: 50px">
-                            <h4>
-                              <a href="${url}">
-                                ${title}
-                              </a>
-                            </h4>
-                            <div>
-                                ${summary}
-                            </div>
+                    <div style="margin-bottom: 50px">
+                        <h4>
+                            <a href="${url}">
+                            ${title}
+                            </a>
+                        </h4>
+                        <div>
+                            ${summary}
                         </div>
-                    `,
+                    </div>
+                `,
+                device: 'device2',
             },
             getTargetData: () => getAppStoreData(),
         });
