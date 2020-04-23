@@ -211,6 +211,7 @@ app.get('/module-test', async (req, res) => {
 
     res.render('module-test', {
         token,
+        imageProxy: process.env.IMAGE_PROXY,
     });
 });
 

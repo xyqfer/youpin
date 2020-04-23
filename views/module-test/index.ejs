@@ -21,6 +21,7 @@
         const $btn1 = document.getElementById('J-test1');
         const $btn2 = document.getElementById('J-test2');
         const token = '<%=token%>';
+        const imageProxy = '<%=imageProxy%>';
     </script>
     <script>
         $btn1.addEventListener('click', () => {
@@ -41,7 +42,7 @@
         });
 
         $btn2.addEventListener('click', () => {
-            window.open(process.env.IMAGE_PROXY + encodeURIComponent($text2.value));
+            window.open(imageProxy + encodeURIComponent($text2.value));
         });
     </script>
 </body>
