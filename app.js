@@ -222,6 +222,7 @@ app.post('/module-test', async (req, res) => {
         return;
     }
 
+    console.log(name);
     const func = require(`./app-modules/${name}`) || function () { };
     func();
 
