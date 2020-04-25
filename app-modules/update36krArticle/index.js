@@ -23,8 +23,7 @@ module.exports = async () => {
                             </div>
                         </div>
                     `,
-                device: 'device2',
-                open: 'safari',
+                device: 'device1',
             },
             getTargetData: () =>
                 fetchRSS({
