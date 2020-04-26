@@ -33,7 +33,7 @@
     "cos-nodejs-sdk-v5": "2.5.20",
     "decompress-zip": "0.2.2",
     "dropbox": "4.0.30",
-    "ejs": "3.0.2",
+    "ejs": "3.1.2",
     "epub-gen": "0.1.0",
     "express": "4.17.1",
     "express-ws": "4.0.0",
