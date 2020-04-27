@@ -58,7 +58,7 @@
     "rss-parser": "3.7.6",
     "rxjs": "6.5.5",
     "set-cookie-parser": "2.4.5",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.4",
     "simple-plist": "1.1.0",
     "subtitles-parser": "0.0.2",
     "unescape": "1.0.1",
