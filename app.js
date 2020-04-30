@@ -52,6 +52,16 @@ app.use(
 app.use((req, res, next) => {
     const ipAddress = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
+
+    if (req.socket) {
+        const { socket } = req;
+        try {
+            console.log('local', socket.localAddress, socket.localPort);
+            console.log('remove', socket.remoteAddress, socket.remotePort);
+        } catch(e) {
+
+        }
+    }
     next();
 });
 
