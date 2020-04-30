@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = async ({ title = '', content = '', render }) => {
-    const uuidv4 = require('uuid/v4');
+    const { v4: uuidv4 } = require('uuid');
     const { saveDbData } = require('../db');
     const sendMessage = require('../telegram/sendMessage');
     const uuid = uuidv4();

@@ -2,7 +2,7 @@
 
 module.exports = async ({ title = '', content = '', render }) => {
     const { saveDbData } = require('../db');
-    const uuidv4 = require('uuid/v4');
+    const { v4: uuidv4 } = require('uuid');
     const rp = require('request-promise');
 
     const uuid = uuidv4();
