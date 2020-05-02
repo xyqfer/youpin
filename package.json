@@ -48,7 +48,7 @@
     "leanengine": "3.6.0",
     "lodash": "4.17.15",
     "module-alias": "2.2.2",
-    "moment": "2.24.0",
+    "moment": "2.25.1",
     "nodemailer": "6.4.6",
     "puppeteer-core": "3.0.2",
     "qcloud-cdn-node-sdk": "1.0.0",
