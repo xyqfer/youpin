@@ -31,15 +31,12 @@ module.exports = async () => {
                     source: 'RSS_HN',
                     field: ['title', 'link', 'content'],
                     map: (item) => {
-                        const { title, link, content } = item;
+                        const { content } = item;
                         const $ = cheerio.load(content);
                         $('img').removeAttr('style');
 
-                        return {
-                            title,
-                            link,
-                            summary: $.html(),
-                        };
+                        item.summary = $.html();
+                        return item;
                     },
                 }),
         });

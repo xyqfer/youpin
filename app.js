@@ -53,15 +53,6 @@ app.use((req, res, next) => {
     const ipAddress = req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
 
-    if (req.socket) {
-        const { socket } = req;
-        try {
-            console.log('local', socket.localAddress, socket.localPort);
-            console.log('remove', socket.remoteAddress, socket.remotePort);
-        } catch(e) {
-
-        }
-    }
     next();
 });
 
@@ -339,47 +330,18 @@ app.get('/cf-log0', async (req, res) => {
     res.json(data[0]);
 });
 
-app.use(function(req, res, next) {
-    // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
-    if (!res.headersSent) {
-        console.log(req.url);
-        const err = new Error('Not Found');
-
-        err.status = 404;
-        next(err);
-    }
-});
-
 // error handlers
 app.use(function(err, req, res) {
+    console.log(req.originalUrl);
+
     if (req.timedout && req.headers.upgrade === 'websocket') {
         // 忽略 websocket 的超时
         return;
     }
 
-    const statusCode = err.status || 500;
-
-    if (statusCode === 500) {
-        console.error(err.stack || err);
-    }
-
-    if (req.timedout) {
-        console.error(`请求超时: url=${req.originalUrl}, timeout=${err.timeout}, 请确认方法执行耗时很长，或没有正确的 response 回调。`);
-    }
-
-    res.status(statusCode);
-
-    // 默认不输出异常详情
-    let error = {};
-
-    if (app.get('env') === 'development') {
-        // 如果是开发环境，则将异常堆栈输出到页面，方便开发调试
-        error = err;
-    }
-
     res.render('error', {
-        message: err.message,
-        error: error,
+        message: 'error',
+        error: err || {},
     });
 });
 
