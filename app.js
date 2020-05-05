@@ -331,7 +331,7 @@ app.get('/cf-log0', async (req, res) => {
 });
 
 // error handlers
-app.use(function(err, req, res) {
+app.use(function(req, res) {
     console.log(req.originalUrl);
 
     if (req.timedout && req.headers.upgrade === 'websocket') {
@@ -341,7 +341,7 @@ app.use(function(err, req, res) {
 
     res.render('error', {
         message: 'error',
-        error: err || {},
+        error: {},
     });
 });
 

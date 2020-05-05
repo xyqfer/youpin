@@ -33,7 +33,16 @@ module.exports = async () => {
                     map: (item) => {
                         const { link, content } = item;
                         const $ = cheerio.load(content);
-                        $('img').removeAttr('style');
+                        const $img = $('img');
+
+                        if ($img && $img.length > 0) {
+                            $img.removeAttr('style');
+                            $img.each(function() {
+                                const $item = $(this);
+                                $item.attr('src', process.env.IMAGE_PROXY + encodeURIComponent($item.attr('src')));
+                                $item.attr('referrerpolicy', 'no-referrer');
+                            });
+                        }
 
                         item.url = link;
                         item.summary = $.html();
