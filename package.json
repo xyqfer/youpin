@@ -50,7 +50,7 @@
     "module-alias": "2.2.2",
     "moment": "2.25.3",
     "nodemailer": "6.4.6",
-    "puppeteer-core": "3.0.2",
+    "puppeteer-core": "3.0.3",
     "qcloud-cdn-node-sdk": "1.0.0",
     "request": "2.88.2",
     "request-promise": "4.2.5",
