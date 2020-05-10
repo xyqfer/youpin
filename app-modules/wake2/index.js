@@ -14,7 +14,9 @@ module.exports = async () => {
                 uri: item.url,
             });
         } catch (e) {
-            http.post(`https://console.leancloud.app/1.1/engine/groups/web/production/version?gitTag=${item.git_tag}&token=${item.deploy_token}`);
+            http.post({
+                uri: `https://console.leancloud.app/1.1/engine/groups/web/production/version?gitTag=${item.git_tag}&token=${item.deploy_token}`
+            });
         }
     });
 
