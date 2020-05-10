@@ -143,6 +143,11 @@ const cloudFuncConfig = [
         module: 'wake',
         info: '定时唤醒',
     },
+    {
+        name: 'wake2',
+        module: 'wake2',
+        info: '定时唤醒',
+    },
 ];
 
 cloudFuncConfig.forEach((config) => {
