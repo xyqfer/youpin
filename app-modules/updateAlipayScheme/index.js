@@ -10,7 +10,7 @@ module.exports = async () => {
     const dbName = 'ipa';
     const name = 'Alipay';
 
-    const { Version: ver, path: downUrl } = await http.get({
+    let { Version: ver, path: downUrl } = await http.get({
         json: true,
         uri: 'https://app4.i4.cn/appinfo.xhtml?appid=150879&pkagetype=1&model=iPhone&from=1&ts=1',
         headers: {
@@ -31,6 +31,7 @@ module.exports = async () => {
         });
 
         setTimeout(() => {
+            downUrl = Buffer.from(downUrl).toString('base64');
             http.get({
                 uri: `https://extract-ipa.herokuapp.com/extract?url=${downUrl}&token=${process.env.ipaToken}&ver=${ver}`,
             });
