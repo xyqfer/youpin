@@ -10,16 +10,11 @@ module.exports = async () => {
     const dbName = 'ipa';
     const name = 'Alipay';
 
-    const { ver, downUrl } = await http.post({
+    const { Version: ver, path: downUrl } = await http.get({
         json: true,
-        uri: 'http://ppmac2.25pp.com/pp_api/proxy.php?name=pptool_local_appdetail',
+        uri: 'https://app4.i4.cn/appinfo.xhtml?appid=150879&pkagetype=1&model=iPhone&from=1&ts=1',
         headers: {
             'User-Agent': params.ua.pc,
-        },
-        form: {
-            site: 3,
-            clFlag: 0,
-            id: 333206289,
         },
     });
     const [dbData] = await getDbData({
