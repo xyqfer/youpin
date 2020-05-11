@@ -38,12 +38,12 @@ module.exports = async (req, res) => {
             title: 'Alipay Schemes 有更新',
             data: [{}],
             template: () => `
-          <div style="margin-bottom: 50px">
-              <a href="https://ibdkopi6vn.avosapps.us/alipayschemes" target="_blank">
-                  <h4>版本${ver}</h4>
-              </a>
-          </div>
-        `,
+                <div style="margin-bottom: 50px">
+                    <a href="https://ibdkopi6vn.avosapps.us/alipayschemes" target="_blank">
+                        <h4>版本${ver}</h4>
+                    </a>
+                </div>
+            `,
         });
 
         res.json({
