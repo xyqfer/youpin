@@ -55,12 +55,12 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCBNweekly', 'updateTerminus', 'getRandomAppleDoc'],
+        module: ['updateBook', 'updateCBNweekly', 'updateTerminus'],
         info: '每日更新',
     },
     {
         name: 'updateBlog',
-        module: ['updateBlog', 'updateXincao', 'getRandomMDN'],
+        module: ['updateBlog', 'updateXincao'],
         info: '每日更新 blog',
     },
     {
