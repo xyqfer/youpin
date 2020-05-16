@@ -8,7 +8,12 @@
 <body>
     <input type="text" id="J-text1">
     <br>
-    <button id="J-test1">Test Cloud Function</button>
+    <button id="J-test1">Test Module Function</button>
+    <br>
+    <br>
+    <input type="text" id="J-text3">
+    <br>
+    <button id="J-test3">Test Cloud Function</button>
     <br>
     <br>
     <input type="text" id="J-text2">
@@ -18,8 +23,10 @@
     <script>
         const $text1 = document.getElementById('J-text1');
         const $text2 = document.getElementById('J-text2');
+        const $text3 = document.getElementById('J-text3');
         const $btn1 = document.getElementById('J-test1');
         const $btn2 = document.getElementById('J-test2');
+        const $btn3 = document.getElementById('J-test3');
         const token = '<%=token%>';
         const imageProxy = '<%=imageProxy%>';
     </script>
@@ -29,6 +36,23 @@
 
             if (name && name !== '') {
                 fetch('/module-test', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        token,
+                        name,
+                    }),
+                });
+            }
+        });
+
+        $btn3.addEventListener('click', () => {
+            const name = $text3.value;
+
+            if (name && name !== '') {
+                fetch('/cloud-test', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
