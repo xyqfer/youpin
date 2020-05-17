@@ -13,14 +13,14 @@ module.exports = async () => {
             mail: {
                 title: '文学博客有更新',
                 template: ({ title = '', url = '' }) => `
-              <div style="margin-bottom: 50px">
-                  <a href="${url}" target="_blank">
-                    <h4>${title}</h4>
-                  </a>
-              </div>
-          `,
+                    <div style="margin-bottom: 50px">
+                        <a href="${url}" target="_blank">
+                            <h4>${title}</h4>
+                        </a>
+                    </div>
+                `,
                 device: 'device1',
-                open: 'safari',
+                open: 'chrome',
             },
             getTargetData: () =>
                 fetchRSS({
