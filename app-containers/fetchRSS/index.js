@@ -18,7 +18,7 @@ const mapKey = (item) => {
     return item;
 };
 
-module.exports = async ({ source, field = ['title', 'link'], map = mapKey }) => {
+module.exports = async ({ source, appendTitle = false, field = ['title', 'link'], map = mapKey }) => {
     const dbData = await getDbData({
         dbName: source,
         query: {
@@ -35,7 +35,14 @@ module.exports = async ({ source, field = ['title', 'link'], map = mapKey }) => 
             });
             const data = feed.items.map((item) =>
                 field.reduce((acc, key) => {
-                    acc[key] = item[key] || '';
+                    const value = item[key] || '';
+
+                    if (key === 'title' && appendTitle) {
+                        acc[key] = `[${feed.title}] - ` + value;
+                    } else {
+                        acc[key] = value;
+                    }
+
                     return acc;
                 }, {})
             );

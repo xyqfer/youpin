@@ -27,6 +27,7 @@ module.exports = async () => {
             getTargetData: () =>
                 fetchRSS({
                     source: 'RSS_TechBlog',
+                    appendTitle: true,
                 }),
         });
     } catch (err) {
