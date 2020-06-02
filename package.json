@@ -65,7 +65,7 @@
     "uuid": "8.1.0",
     "webtorrent": "0.108.5",
     "youtube-captions-scraper": "1.0.3",
-    "ytdl-core": "2.1.5"
+    "ytdl-core": "3.0.0"
   },
   "devDependencies": {
     "eslint": "7.1.0",
