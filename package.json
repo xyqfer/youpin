@@ -39,7 +39,7 @@
     "express-ws": "4.0.0",
     "follow-redirects": "1.11.0",
     "glob": "7.1.6",
-    "got": "11.1.4",
+    "got": "11.2.0",
     "iconv-lite": "0.5.1",
     "isomorphic-fetch": "2.2.1",
     "kuroshiro": "1.1.2",
