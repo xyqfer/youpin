@@ -46,7 +46,7 @@ module.exports = (req, res) => {
 
                     const chatData = {
                         id,
-                        avatar: `https:${$table.find('.avatar').attr('src')}`,
+                        avatar: `${$table.find('.avatar').attr('src')}`,
                         title: $table.find('.item_title > a').text(),
                         reply: $table.find('.count_livid').text() || 0,
                         time: (

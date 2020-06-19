@@ -36,7 +36,7 @@ module.exports = (req, res) => {
             data.topic = {
                 title: $header.find('.header > h1').text(),
                 author: $header.find('.gray > a').text(),
-                avatar: `https:${$header.find('.avatar').attr('src')}`,
+                avatar: `${$header.find('.avatar').attr('src')}`,
                 createTime: $header
                     .find('.gray')
                     .text()
@@ -97,7 +97,7 @@ module.exports = (req, res) => {
                     const replyItem = {
                         at,
                         content,
-                        avatar: `https:${$item.find('.avatar').attr('src')}`,
+                        avatar: `${$item.find('.avatar').attr('src')}`,
                         author: $item.find('.dark').text(),
                         floor: $item.find('.no').text(),
                     };
