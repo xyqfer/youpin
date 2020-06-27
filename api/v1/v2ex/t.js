@@ -104,7 +104,7 @@ module.exports = (req, res) => {
 
                     const $thankItem = $item.find('.small.fade');
                     if ($thankItem.length > 0) {
-                        replyItem.thank = $thankItem.text();
+                        replyItem.thank = '❤️' + $thankItem.text().trim();
                     }
 
                     data.reply.push(replyItem);
