@@ -23,7 +23,7 @@ module.exports = (req, res) => {
             const $main = $('#Main');
 
             const data = {
-                avatar: `http:${$main.find('.avatar').attr('src')}`,
+                avatar: $main.find('.avatar').attr('src'),
                 name: $main.find('h1').text(),
                 info: $main
                     .find('.box')
