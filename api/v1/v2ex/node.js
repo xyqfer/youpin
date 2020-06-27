@@ -54,7 +54,7 @@ module.exports = (req, res) => {
                         reply: $table.find('.count_livid').text() || 0,
                         time: (
                             $table
-                                .find('.small.fade')
+                                .find('.topic_info')
                                 .text()
                                 .split('•')[1] || ''
                         ).trim(),
