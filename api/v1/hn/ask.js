@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
             const title = $link.text();
             const { id } = url.parse($link.attr('href'), true).query;
 
-            const $info = $item.nextSibling();
+            const $info = $($item[0].nextSibling());
             const author = $info.find('.hnuser').text();
             const time = $info.find('.age').text();
             let comments = parseInt($info.find('.subtext > a').last().text());
