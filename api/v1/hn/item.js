@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
             const indent = parseInt($comment.find('.ind > img').attr('width'));
             
             $comment.find('.comment .reply').remove();
+            $comment.find('.comment a').addClass('external').attr('target', '_blank');
             const text = $comment.find('.comment').html();
             
             return {
