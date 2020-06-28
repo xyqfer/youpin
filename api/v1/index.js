@@ -156,4 +156,6 @@ router.get('/outline', require('./outline'));
 router.get('/wewe/groups', require('./wewe/groups'));
 router.get('/wewe/group', require('./wewe/group'));
 
+router.get('/hn/item', require('./hn/item'));
+
 module.exports = router;
