@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
 
             for (let i = index - 1; i >= 0; i--) {
                 if (indent - comments[i].indent === 40) {
-                    return comments.id;
+                    return comments[i].id;
                 }
             }
 
