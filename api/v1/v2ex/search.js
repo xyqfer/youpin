@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
         });
     
         const htmlString = await rp.get({
-            uri: `https://www.dogedoge.com/results?q=site%3Av2ex.com+${encodeURIComponent(q)}&p=${p}`,
+            uri: `https://www.dogedoge.com/results?q=site%3Av2ex.com+${q}&p=${p}`,
             headers,
         });
     
