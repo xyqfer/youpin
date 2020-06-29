@@ -1,17 +1,12 @@
-'use strict';
+const rp = require('request-promise');
+const cheerio = require('cheerio');
+const { params } = require('app-libs');
 
-/**
- * 搜索帖子
- */
 module.exports = (req, res) => {
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const { params } = require('app-libs');
-
     const { q = '', p = 1 } = req.query;
 
     rp.get({
-        uri: `https://wecodexyz.avosapps.us/?q=site%3Av2ex.com%20${encodeURIComponent(q)}&categories=general&pageno=${p}&time_range=None`,
+        uri: `https://www.dogedoge.com/results?q=site%3Av2ex.com+${encodeURIComponent(q)}&p=${p}`,
         headers: {
             'User-Agent': params.ua.pc,
         },
@@ -20,18 +15,18 @@ module.exports = (req, res) => {
             const $ = cheerio.load(htmlString);
             const data = [];
 
-            $('#main_results > .result').each(function() {
+            $('#links > .result').each(function() {
                 const $elem = $(this);
-                const $link = $elem.find('.result_header > a');
+                const $link = $elem.find('a.result__a');
 
                 const post = {
                     title: $link
                         .text()
-                        .replace(/- V2EX$/, '')
+                        .replace(/ - V2EX$/, '')
                         .trim(),
-                    url: $link.attr('href').replace(/^https:\/\/www\.v2ex\.com/, ''),
+                    url: $elem.find('.result__url__domain').text().trim().replace(/^https:\/\/www\.v2ex\.com/, ''),
                     desc: $elem
-                        .find('.result-content')
+                        .find('.result__snippet')
                         .text()
                         .trim(),
                 };
