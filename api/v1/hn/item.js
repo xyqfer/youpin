@@ -49,12 +49,16 @@ module.exports = async (req, res) => {
             return a.id - b.id;
         });
 
+        let link = $('.storylink').attr('href');
+        if (link.startsWith('item?')) link = 'https://news.ycombinator.com/' + link;
+
         const data = {
             id,
             author: itemInfo.by,
             title: itemInfo.title,
             text: itemInfo.text,
             comments,
+            link,
         };
 
         res.json({
