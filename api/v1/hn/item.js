@@ -18,7 +18,18 @@ module.exports = async (req, res) => {
             const indent = parseInt($comment.find('.ind > img').attr('width'));
             
             $comment.find('.comment .reply').remove();
-            $comment.find('.comment a').addClass('external').attr('target', '_blank');
+            $comment.find('.comment a').each(function() {
+                const $link = $(this);
+                const urlObject = $link.attr('href');
+
+                if (urlObject.host === 'news.ycombinator.com' &&
+                    urlObject.pathname === '/item' &&
+                    urlObject.searchParams.get('id')) {
+                    $link.attr('href', `/item/${urlObject.searchParams.get('id')}`);
+                } else {
+                    $link.addClass('external').attr('target', '_blank');
+                }
+            });
             const text = $comment.find('.comment').html();
             
             return {
