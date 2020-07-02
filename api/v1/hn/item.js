@@ -4,11 +4,13 @@ module.exports = async (req, res) => {
     const { id } = req.query;
 
     try {
-        const itemInfo = await http.get({
-            uri: `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
-            json: true,
-        });
-        const $ = await crawler(`https://news.ycombinator.com/item?id=${id}`);
+        const [ itemInfo, $ ] = await Promise.all([
+            http.get({
+                uri: `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+                json: true,
+            }),
+            crawler(`https://news.ycombinator.com/item?id=${id}`),
+        ]);
 
         const $comments = $('.comment-tree .athing.comtr');
         let comments = $comments.map(function() {
