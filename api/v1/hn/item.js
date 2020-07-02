@@ -61,6 +61,7 @@ module.exports = async (req, res) => {
         });
 
         let link = $('.storylink').attr('href');
+        if (!link) link = $('.comhead .storyon a').attr('href');
         if (link.startsWith('item?')) link = 'https://news.ycombinator.com/' + link;
 
         const data = {
