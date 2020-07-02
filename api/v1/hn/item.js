@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
             $comment.find('.comment .reply').remove();
             $comment.find('.comment a').each(function() {
                 const $link = $(this);
-                const urlObject = $link.attr('href');
+                const urlObject = new URL($link.attr('href'));
 
                 if (urlObject.host === 'news.ycombinator.com' &&
                     urlObject.pathname === '/item' &&
