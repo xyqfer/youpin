@@ -64,10 +64,13 @@ module.exports = async (req, res) => {
         if (!link) link = $('.comhead .storyon a').attr('href');
         if (link.startsWith('item?')) link = 'https://news.ycombinator.com/' + link;
 
+        let title = itemInfo.title;
+        if (!title) title = $('.comhead .storyon a').text();
+
         const data = {
             id,
             author: itemInfo.by,
-            title: itemInfo.title,
+            title,
             text: itemInfo.text,
             comments,
             link,
