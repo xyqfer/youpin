@@ -37,27 +37,10 @@ module.exports = async (req, res) => {
                 author,
                 indent,
                 text,
+                parent: 0,
             };
-        }).get();
-        const getParent = (indent, index) => {
-            if (indent === 0) {
-                return 0;
-            }
-
-            for (let i = index - 1; i >= 0; i--) {
-                if (indent - comments[i].indent === 40) {
-                    return comments[i].id;
-                }
-            }
-
-            return 0;
-        };
-
-        comments.forEach((comment, index) => {
-            comment.parent = getParent(comment.indent, index);
-        });
-        comments.sort((a, b) => {
-            return a.id - b.id;
+        }).get().filter(({ indent }) => {
+            return indent === 0;
         });
 
         let link = $('.storylink').attr('href');
