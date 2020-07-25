@@ -14,15 +14,14 @@ module.exports = async () => {
             mail: {
                 title: 'Term 有更新',
                 template: ({ title = '', url = '' }) => `
-                        <div style="margin-bottom: 30px">
-                            <a href="${url}" target="_blank">
-                                <h4>${title}</h4>
-                            </a>
-                        </div>
-                    `,
+                    <div style="margin-bottom: 30px">
+                        <a href="${url}" target="_blank">
+                            <h4>${title}</h4>
+                        </a>
+                    </div>
+                `,
                 device: 'device1',
-                open: 'jsbox',
-                proxy: false,
+                open: 'chrome',
             },
             getTargetData: () =>
                 fetchRSS({
