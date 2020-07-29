@@ -1,18 +1,4 @@
-# 米家有品上新邮件提醒工具+吃什么机器人+技术活动提醒机器人
-
-## 米家有品上新邮件提醒工具
-
-![](https://github.com/xyqfer/blog/raw/master/img/youpin_1.png)
-
-## 吃什么机器人
-
-![](https://github.com/xyqfer/blog/raw/master/img/ele_1.png)
-
-![](https://github.com/xyqfer/blog/raw/master/img/ele_2.png)
-
-## 技术活动提醒机器人
-
-![](https://github.com/xyqfer/blog/raw/master/img/tech.png)
+# 自己用的信息整合平台
 
 ## 本地运行
 
