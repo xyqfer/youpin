@@ -159,5 +159,6 @@ router.get('/wewe/group', require('./wewe/group'));
 router.get('/hn/item', require('./hn/item'));
 router.get('/hn/news', require('./hn/news'));
 router.get('/hn/random', require('./hn/random'));
+router.get('/hn/links', require('./hn/links'));
 
 module.exports = router;
