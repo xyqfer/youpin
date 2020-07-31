@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const _ = require('lodash');
 const { http } = require('app-libs');
 
 const getChild = (data, res) => {
@@ -44,7 +45,7 @@ module.exports = async (req, res) => {
             success: true,
             data: {
                 title: itemInfo.title,
-                links,
+                links: _.uniqBy(links, 'url'),
             },
         });
     } catch (err) {
