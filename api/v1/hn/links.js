@@ -5,17 +5,22 @@ const getChild = (data, res) => {
     if (!data.children || data.children.length === 0) return;
 
     data.children.forEach((item) => {
-        const $ = cheerio.load(item.text);
-        $('a').each(function() {
-            const $link = $(this);
+        try {
+            const $ = cheerio.load(item.text);
+            $('a').each(function() {
+                const $link = $(this);
 
-            res.push({
-                title: $link.text(),
-                url: $link.attr('href'),
+                res.push({
+                    title: $link.text(),
+                    url: $link.attr('href'),
+                });
             });
-        });
+        } catch(e) {
+            console.error(e);
+            console.log(item.id, item.text);
+        }
 
-        getChild(item);
+        getChild(item, res);
     });
 };
 
