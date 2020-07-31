@@ -5,7 +5,7 @@ const getChild = (data, res) => {
     if (!data.children || data.children.length === 0) return;
 
     data.children.forEach((item) => {
-        try {
+        if (item.text) {
             const $ = cheerio.load(item.text);
             $('a').each(function() {
                 const $link = $(this);
@@ -15,9 +15,6 @@ const getChild = (data, res) => {
                     url: $link.attr('href'),
                 });
             });
-        } catch(e) {
-            console.error(e);
-            console.log(item.id, item.text);
         }
 
         getChild(item, res);
