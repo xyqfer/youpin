@@ -56,7 +56,7 @@
     "request-promise": "4.2.6",
     "rimraf": "3.0.2",
     "rss-parser": "3.9.0",
-    "rxjs": "6.6.0",
+    "rxjs": "6.6.2",
     "set-cookie-parser": "2.4.6",
     "shelljs": "0.8.4",
     "simple-plist": "1.1.0",
