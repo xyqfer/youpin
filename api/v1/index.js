@@ -161,4 +161,9 @@ router.get('/hn/news', require('./hn/news'));
 router.get('/hn/random', require('./hn/random'));
 router.get('/hn/links', require('./hn/links'));
 
+router.get('/todo/list', require('./todo/list'));
+router.post('/todo/add', require('./todo/add'));
+router.post('/todo/edit', require('./todo/edit'));
+router.post('/todo/delete', require('./todo/delete'));
+
 module.exports = router;
