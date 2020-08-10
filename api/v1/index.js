@@ -166,4 +166,6 @@ router.post('/todo/add', require('./todo/add'));
 router.post('/todo/edit', require('./todo/edit'));
 router.post('/todo/delete', require('./todo/delete'));
 
+router.get('/theinitium/article', require('./theinitium/article'));
+
 module.exports = router;
