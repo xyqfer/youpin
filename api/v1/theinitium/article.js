@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     $('.p-article .c-wall').remove();
     $('.p-article .p-article__side-right').remove();
     $('.p-article .c-tag-list').remove();
-    $('.p-article .p-article__cover').css('margin', '0');
+    $('.p-article figure.image').css('margin', '0');
 
     res.render('archive', {
         title: '',
