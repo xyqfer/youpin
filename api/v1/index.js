@@ -168,4 +168,6 @@ router.post('/todo/delete', require('./todo/delete'));
 
 router.get('/theinitium/article', require('./theinitium/article'));
 
+router.get('/substack/article', require('./substack/article'));
+
 module.exports = router;
