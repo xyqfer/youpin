@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
     const content = data.digests.reduce((acc, { article }) => {
         const img = process.env.IMAGE_PROXY + encodeURIComponent(article.preview.web.url);
-        const time = article.date.spilt('T')[0];
+        const time = article.date || '';
 
         acc += `
             <div style="margin-bottom: 30px">
