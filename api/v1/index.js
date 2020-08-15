@@ -167,6 +167,7 @@ router.post('/todo/edit', require('./todo/edit'));
 router.post('/todo/delete', require('./todo/delete'));
 
 router.get('/theinitium/article', require('./theinitium/article'));
+router.get('/theinitium/random/:name', require('./theinitium/random'));
 
 router.get('/substack/article', require('./substack/article'));
 
