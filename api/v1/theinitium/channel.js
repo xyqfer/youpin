@@ -15,15 +15,20 @@ const getData = async (name, page = 1) => {
 
 module.exports = async (req, res) => {
     const { name } = req.params;
+    const { random } = req.query;
 
     await rp.get({
         uri: `https://theinitium.com/channel/${name}`,
     });
 
+    let page = 1;
     let data = await getData(name);
-    const totalPages = Math.floor(data.count / data.digests.length);
-    const page = Math.floor(totalPages * Math.random());
-    data = await getData(name, page);
+
+    if (random) {
+        const totalPages = Math.floor(data.count / data.digests.length);
+        page = Math.floor(totalPages * Math.random());
+        data = await getData(name, page);
+    }
 
     const content = data.digests.reduce((acc, { article }) => {
         const img = process.env.IMAGE_PROXY + encodeURIComponent(article.preview.web.url);
