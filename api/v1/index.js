@@ -171,4 +171,6 @@ router.get('/theinitium/channel/:name', require('./theinitium/channel'));
 
 router.get('/substack/article', require('./substack/article'));
 
+router.get('/coolapk/feed/:id', require('./coolapk/feed'));
+
 module.exports = router;
