@@ -1,10 +1,11 @@
 'use strict';
 
-module.exports = async () => {
-    const getRSSData = require('./getRSSData');
-    const { db, http } = require('app-libs');
-    const { cache } = db;
+const getRSSData = require('./getRSSData');
+const { db, http } = require('app-libs');
+const lark = require('app-libs/mail/sendLark');
+const { cache } = db;
 
+module.exports = async () => {
     try {
         const dbName = 'RSSDATA';
         const filterKey = 'link';
@@ -42,6 +43,21 @@ module.exports = async () => {
                     message: message,
                 },
             });
+
+            lark.sendPost(process.env.LARK_USER, {
+              title: 'RSSBOT 有更新:',
+              content: [
+                newData.map(({ title, link }) => {
+                  return [
+                    {
+                      tag: 'a',
+                      text: title,
+                      href: link,
+                    }
+                  ];
+                })
+              ],
+          });
         }
 
         return {
