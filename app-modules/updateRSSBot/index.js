@@ -47,8 +47,14 @@ module.exports = async () => {
             const content = newData.reduce((acc, { title, link }) => {
               acc.push([
                 {
-                  'tag': 'a',
+                  'tag': 'text',
                   'text': title,
+                }
+              ]);
+              acc.push([
+                {
+                  'tag': 'a',
+                  'text': link,
                   'href': link
                 }
               ]);
