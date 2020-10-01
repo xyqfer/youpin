@@ -44,20 +44,22 @@ module.exports = async () => {
                 },
             });
 
+            const content = newData.reduce((acc, { title, link }) => {
+              acc.push([
+                {
+                  'tag': 'a',
+                  'text': title,
+                  'href': link
+                }
+              ]);
+              acc.push([]);
+              return acc;
+            }, []);
+
             lark.sendPost(process.env.LARK_USER, {
               title: 'RSSBOT 有更新:',
-              content: [
-                newData.map(({ title, link }) => {
-                  return [
-                    {
-                      tag: 'a',
-                      text: title,
-                      href: link,
-                    }
-                  ];
-                })
-              ],
-          });
+              content,
+            });
         }
 
         return {
