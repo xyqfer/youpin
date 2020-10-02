@@ -247,6 +247,33 @@ app.post('/cloud-test', async (req, res) => {
     });
 });
 
+app.post('/lark-test', async (req, res) => {
+  const { token, content } = req.body;
+  if (token !== process.env.MODULE_TEST_TOKEN) {
+      res.status(400).send('Bad Request');
+      return;
+  }
+
+  const lark = require('app-libs/mail/sendLark');
+
+  console.log(content);
+  lark.sendPost(process.env.LARK_USER, {
+    title: 'test lark:',
+    content: [
+      [
+        {
+          'tag': 'text',
+          'text': content,
+        }
+      ]
+    ],
+  });
+  
+  res.json({
+      success: true,
+  });
+});
+
 app.get('/theinitium', async (req, res) => {
     const cheerio = require('cheerio');
     const { slug } = req.query;

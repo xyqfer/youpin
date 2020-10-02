@@ -19,14 +19,21 @@
     <input type="text" id="J-text2">
     <br>
     <button id="J-test2">Test Proxy</button>
+    <br>
+    <br>
+    <input type="text" id="J-text4">
+    <br>
+    <button id="J-test4">Test Lark</button>
     
     <script>
         const $text1 = document.getElementById('J-text1');
         const $text2 = document.getElementById('J-text2');
         const $text3 = document.getElementById('J-text3');
+        const $text4 = document.getElementById('J-text4');
         const $btn1 = document.getElementById('J-test1');
         const $btn2 = document.getElementById('J-test2');
         const $btn3 = document.getElementById('J-test3');
+        const $btn4 = document.getElementById('J-test4');
         const token = '<%=token%>';
         const imageProxy = '<%=imageProxy%>';
     </script>
@@ -67,6 +74,23 @@
 
         $btn2.addEventListener('click', () => {
             window.open(imageProxy + encodeURIComponent($text2.value));
+        });
+
+        $btn4.addEventListener('click', () => {
+            const content = $text4.value;
+
+            if (content && content !== '') {
+                fetch('/lark-test', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        token,
+                        content,
+                    }),
+                });
+            }
         });
     </script>
 </body>
