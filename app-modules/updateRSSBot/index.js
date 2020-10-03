@@ -35,14 +35,19 @@ module.exports = async () => {
                 acc += `${title.trim()} ${link}${isLast ? '' : '\n\n'}`;
                 return acc;
             }, 'RSSBOT 有更新:\n\n');
-            http.post({
-                uri: process.env.qqboturl,
-                json: true,
-                body: {
-                    group_id: parseInt(process.env.qqbotgroupid),
-                    message: message,
-                },
-            });
+
+            try {
+              await http.post({
+                  uri: process.env.qqboturl,
+                  json: true,
+                  body: {
+                      group_id: parseInt(process.env.qqbotgroupid),
+                      message: message,
+                  },
+              });
+            } catch(err) {
+              console.error(err);
+            }
 
             const content = newData.reduce((acc, { title, link }) => {
               acc.push([
@@ -62,10 +67,16 @@ module.exports = async () => {
               return acc;
             }, []);
 
-            lark.sendPost(process.env.LARK_USER, {
-              title: 'RSSBOT 有更新:',
-              content,
-            });
+            try {
+              const res = await lark.sendPost(process.env.LARK_USER, {
+                title: 'RSSBOT 有更新:',
+                content,
+              });
+              console.log(res.body);
+            } catch(err) {
+              console.error(err);
+              console.log(content);
+            }
         }
 
         return {

@@ -4,7 +4,7 @@ let token;
 
 const getToken = async () => {
     const { LARK_APP_ID, LARK_APP_SECRET } = process.env;
-    const resp = await got.post('https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/', {
+    const resp = await got.post('https://open.larksuite.com/open-apis/auth/v3/tenant_access_token/internal/', {
         json: {
             app_id: LARK_APP_ID,
             app_secret: LARK_APP_SECRET,
@@ -20,7 +20,7 @@ const sendText = async (user, msg) => {
         token = await getToken();
     }
 
-    await got.post('https://open.feishu.cn/open-apis/message/v4/send/', {
+    return await got.post('https://open.larksuite.com/open-apis/message/v4/send/', {
         json: {
             email: user,
             msg_type: 'text',
@@ -40,7 +40,7 @@ const sendPost = async (user, msg) => {
         token = await getToken();
     }
 
-    await got.post('https://open.feishu.cn/open-apis/message/v4/send/', {
+    return await got.post('https://open.larksuite.com/open-apis/message/v4/send/', {
         json: {
             email: user,
             msg_type: 'post',
