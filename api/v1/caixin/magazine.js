@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       news_list.forEach((news) => {
         acc += `
           <div style="margin-bottom: 50px">
-              <a href="${url}" target="_blank">
+              <a href="./article?id=${news.id}" target="_blank">
                   <h4>${news.title}</h4>
               </a>
               <div>
