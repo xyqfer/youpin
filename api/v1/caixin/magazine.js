@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
         uri: `https://mappsv5.caixin.com/magazine_detailv5/${id}.json`,
         json: true,
     });
-    const data = response.data.data;
+    const data = response.data;
     const content = data.list.reduce((acc, { news_list }) => {
       news_list.forEach((news) => {
         acc += `
