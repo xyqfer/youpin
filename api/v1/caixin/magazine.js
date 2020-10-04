@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
 
     const response = await http.get({
         uri: `https://mappsv5.caixin.com/magazine_detailv5/${id}.json`,
+        json: true,
     });
     const data = response.data.data;
     const content = data.list.reduce((acc, { news_list }) => {
