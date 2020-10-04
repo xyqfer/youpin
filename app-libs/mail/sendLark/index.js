@@ -1,7 +1,5 @@
 const got = require('got');
 
-let token;
-
 const getToken = async () => {
     const { LARK_APP_ID, LARK_APP_SECRET } = process.env;
     const resp = await got.post('https://open.larksuite.com/open-apis/auth/v3/tenant_access_token/internal/', {
@@ -16,9 +14,7 @@ const getToken = async () => {
 };
 
 const sendText = async (user, msg) => {
-    if (!token) {
-        token = await getToken();
-    }
+    const token = await getToken();
 
     return await got.post('https://open.larksuite.com/open-apis/message/v4/send/', {
         json: {
@@ -36,9 +32,7 @@ const sendText = async (user, msg) => {
 };
 
 const sendPost = async (user, msg) => {
-    if (!token) {
-        token = await getToken();
-    }
+    const token = await getToken();
 
     return await got.post('https://open.larksuite.com/open-apis/message/v4/send/', {
         json: {
