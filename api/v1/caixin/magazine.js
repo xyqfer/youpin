@@ -10,14 +10,18 @@ module.exports = async (req, res) => {
     const data = response.data;
     const content = data.list.reduce((acc, { news_list }) => {
       news_list.forEach((news) => {
+        const img = news.pics === '' ? 
+            '' : 
+            `<div>
+                <img src="${news.pics}" alt="">
+            </div>`;
+
         acc += `
           <div style="margin-bottom: 50px">
               <a href="./article?id=${news.id}" target="_blank">
                   <h4>${news.title}</h4>
               </a>
-              <div>
-                  <img src="${news.pics === '' ? 'https://file.caixin.com/webchannel/all/img/logo.png' : news.pics}" alt="">
-              </div>
+              ${img}
               <p>
                   ${news.summary}
               </p>
