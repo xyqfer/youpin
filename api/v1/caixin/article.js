@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
         $(this).attr('referrerpolicy', 'no-referrer');
     });
 
-    res.render('archive4', {
+    res.render('archive', {
         title: '',
         content: $('.cx-app-content-main').html(),
     });
