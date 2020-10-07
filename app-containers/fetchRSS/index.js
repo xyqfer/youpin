@@ -3,8 +3,13 @@
 const _ = require('lodash');
 const retry = require('async-retry');
 const Parser = require('rss-parser');
-const parser = new Parser();
 const { getDbData } = require('app-libs/db');
+const { params } = require('app-libs')
+const parser = new Parser({
+  headers: {
+    'User-Agent': params.ua.pc
+  },
+});
 
 const mapKey = (item) => {
     item.url = item.link;
