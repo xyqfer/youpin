@@ -4,7 +4,7 @@ const utils = require('./utils');
 const parseContentFromRaw = (raw) =>
     raw.map((i) => {
         if (i.type === 'text') {
-            return `<p>${i.message}</p>`;
+            return `<p>${i.message.split('\n').join('<br>')}</p>`;
         } else if (i.type === 'image') {
             return `<div class="img-container" style="text-align: center;">
                 <img referrerpolicy="no-referrer" src="${i.url}">
