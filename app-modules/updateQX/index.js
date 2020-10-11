@@ -18,6 +18,7 @@ module.exports = async () => {
                             <h4>${title}</h4>
                         </a>
                         <div>
+                            <style>pre {width: initial !important;}</style>
                             ${summary}
                         </div>
                     </div>
