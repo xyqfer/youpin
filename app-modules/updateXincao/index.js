@@ -1,7 +1,6 @@
 'use strict';
 const moment = require('moment');
 const { mail: sendMail } = require('app-libs');
-const getLianboData = require('./getLianboData');
 
 module.exports = async () => {
     const since = moment().format('YYYY-MM-DD');
@@ -29,9 +28,6 @@ module.exports = async () => {
                 url: 'alipays://platformapi/startapp?appId=20000193',
             });
         }
-
-        const lianboNews = await getLianboData();
-        data.push(lianboNews);
 
         sendMail({
             title,
