@@ -22,11 +22,19 @@ module.exports = async () => {
             },
         ];
         const now = new Date();
-        if (now.getDate() === 26) {
+        const date = now.getDate();
+        if (date === 26) {
             data.push({
                 title: '燃气费',
                 url: 'alipays://platformapi/startapp?appId=20000193',
             });
+        }
+
+        if (date === 5 || date === 6 || date === 7) {
+          data.push({
+            title: '中行充话费优惠',
+            url: 'bocmbciphone://',
+          })
         }
 
         sendMail({
