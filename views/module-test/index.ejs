@@ -24,16 +24,23 @@
     <input type="text" id="J-text4">
     <br>
     <button id="J-test4">Test Lark</button>
+    <br>
+    <br>
+    <input type="text" id="J-text5">
+    <br>
+    <button id="J-test5">Test Reader View</button>
     
     <script>
         const $text1 = document.getElementById('J-text1');
         const $text2 = document.getElementById('J-text2');
         const $text3 = document.getElementById('J-text3');
         const $text4 = document.getElementById('J-text4');
+        const $text5 = document.getElementById('J-text5');
         const $btn1 = document.getElementById('J-test1');
         const $btn2 = document.getElementById('J-test2');
         const $btn3 = document.getElementById('J-test3');
         const $btn4 = document.getElementById('J-test4');
+        const $btn5 = document.getElementById('J-test5');
         const token = '<%=token%>';
         const imageProxy = '<%=imageProxy%>';
     </script>
@@ -91,6 +98,10 @@
                     }),
                 });
             }
+        });
+
+        $btn5.addEventListener('click', () => {
+            window.open('/api/v1/readability/view?url=' + encodeURIComponent($text5.value));
         });
     </script>
 </body>
