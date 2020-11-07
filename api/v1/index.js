@@ -176,4 +176,6 @@ router.get('/coolapk/feed/:id', require('./coolapk/feed'));
 router.get('/caixin/article', require('./caixin/article'));
 router.get('/caixin/magazine', require('./caixin/magazine'));
 
+router.get('/readability/view', require('./readability/view'));
+
 module.exports = router;
