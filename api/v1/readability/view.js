@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         const $elem = $(this);
         const src = $elem.attr('src');
 
-        if (!src.startsWith('data:')) {
+        if (src && !src.startsWith('data:')) {
             $elem.attr('src', process.env.IMAGE_PROXY + encodeURIComponent(src));
         }
     });

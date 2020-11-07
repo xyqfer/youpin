@@ -24,6 +24,7 @@ module.exports = async () => {
                     </div>
                 `,
                 device: 'device1',
+                open: 'safari'
             },
             getTargetData: () =>
                 fetchRSS({
