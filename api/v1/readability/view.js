@@ -23,6 +23,8 @@ module.exports = async (req, res) => {
         if (src && !src.startsWith('data:')) {
             $elem.attr('src', process.env.IMAGE_PROXY + encodeURIComponent(src));
         }
+
+        $elem.removeAttr('srcset');
     });
 
     res.render('archive', {
