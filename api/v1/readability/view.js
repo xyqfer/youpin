@@ -25,6 +25,9 @@ module.exports = async (req, res) => {
         }
 
         $elem.removeAttr('srcset');
+        $elem.removeAttr('width');
+        $elem.removeAttr('height');
+        $elem.removeAttr('sizes');
     });
 
     res.render('archive', {
