@@ -67,7 +67,8 @@
     "youtube-captions-scraper": "1.0.3",
     "ytdl-core": "4.0.3",
     "@mozilla/readability": "0.3.0",
-    "jsdom": "16.4.0"
+    "jsdom": "16.4.0",
+    "qs": "6.9.4"
   },
   "devDependencies": {
     "eslint-config-prettier": "6.15.0",
