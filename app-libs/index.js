@@ -7,4 +7,5 @@ module.exports = {
     telegram: require('./telegram'),
     http: require('./http'),
     crawler: require('./crawler'),
+    translate: require('./translate'),
 };
