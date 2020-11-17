@@ -8,10 +8,10 @@ const translate = async (params) => {
   }, '');
   const tk = getTK(text);
   const body = qs.stringify(params.q, {
-    encoder: () => {
-      return 'q';
+    encoder: (str, defaultEncoder, charset, type) => {
+      return type === 'key' ? 'q' : encodeURIComponent(str);
     }
-  })
+  });
   let res = await http.post({
     uri: `https://translate.googleapis.com/translate_a/t?anno=3&client=te_lib&format=html&v=1.0&key=${process.env.GOOGLE_TRANSLATE_KEY}&logld=vTE_20200506_00&sl=en&tl=zh-CN&sp=nmt&tc=1&sr=1&tk=${tk}&mode=1`,
     headers: {
@@ -22,7 +22,7 @@ const translate = async (params) => {
   });
 
   res = JSON.parse(res);
-  return params.q.length > 1 ? res : [res]
+  return params.q.length > 1 ? res : [res];
 };
 
 module.exports = translate;
