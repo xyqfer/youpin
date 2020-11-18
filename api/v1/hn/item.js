@@ -1,4 +1,4 @@
-const { http, crawler, translate } = require('app-libs');
+const { http, crawler } = require('app-libs');
 
 module.exports = async (req, res) => {
     const { id } = req.query;
@@ -43,17 +43,6 @@ module.exports = async (req, res) => {
             };
         }).get().filter(({ indent }) => {
             return indent === 0;
-        });
-
-        const originalText = comments.map((item) => {
-          return item.text;
-        });
-        const translatedText = await translate({
-          q: originalText
-        });
-        comments.map((item, index) => {
-          item.text = translatedText[index];
-          return item;
         });
 
         let link = $('.storylink').attr('href');
