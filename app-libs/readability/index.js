@@ -32,6 +32,10 @@ module.exports = async (url) => {
         $(this).removeAttr('class');
     });
 
+    $('a').each(function() {
+        $(this).addClass('external').attr('target', '_blank');
+    });
+
     article.content = $('body').html();
     return article;
 };
