@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
                 parent: 0,
             };
         }).get().filter(({ indent }) => {
-            return indent === 0;
+            return indent <= 40;
         });
 
         let link = $('.storylink').attr('href');
