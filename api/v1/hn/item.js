@@ -45,14 +45,18 @@ module.exports = async (req, res) => {
             return indent <= 40;
         });
 
+        let content = '';
         let link = $('.storylink').attr('href');
         if (!link) link = $('.comhead .storyon a').attr('href');
-        if (link.startsWith('item?')) link = 'https://news.ycombinator.com/' + link;
+        if (link.startsWith('item?')) {
+          link = 'https://news.ycombinator.com/' + link;
+        } else {
+          const article = await readability(link);
+          content = article.content;
+        }
 
         let title = itemInfo.title;
         if (!title) title = $('.comhead .storyon a').text();
-
-        const { content } = await readability(link);
 
         const data = {
             id,
