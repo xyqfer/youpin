@@ -28,6 +28,10 @@ module.exports = async (url) => {
         $elem.removeAttr('sizes');
     });
 
+    $('.page').each(function() {
+        $(this).removeAttr('class');
+    });
+
     article.content = $('body').html();
     return article;
 };
