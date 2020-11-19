@@ -1,4 +1,4 @@
-const { http, crawler } = require('app-libs');
+const { http, crawler, readability } = require('app-libs');
 
 module.exports = async (req, res) => {
     const { id } = req.query;
@@ -52,6 +52,8 @@ module.exports = async (req, res) => {
         let title = itemInfo.title;
         if (!title) title = $('.comhead .storyon a').text();
 
+        const { content } = await readability(link);
+
         const data = {
             id,
             author: itemInfo.by,
@@ -59,6 +61,7 @@ module.exports = async (req, res) => {
             text: itemInfo.text,
             comments,
             link: `${process.env.READER_VIEW_URL}${encodeURIComponent(link)}`,
+            content,
         };
 
         res.json({

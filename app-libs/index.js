@@ -8,4 +8,5 @@ module.exports = {
     http: require('./http'),
     crawler: require('./crawler'),
     translate: require('./translate'),
+    readability: require('./readability'),
 };
