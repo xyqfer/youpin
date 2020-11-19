@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
             title,
             text: itemInfo.text,
             comments,
-            link: `${process.env.IMAGE_PROXY}${encodeURIComponent(link)}`,
+            link: `${process.env.READER_VIEW_URL}${encodeURIComponent(link)}`,
         };
 
         res.json({
