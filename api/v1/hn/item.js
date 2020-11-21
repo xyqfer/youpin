@@ -1,7 +1,7 @@
 const { http, crawler, readability } = require('app-libs');
 
 module.exports = async (req, res) => {
-    const { id } = req.query;
+    const { id, all = false } = req.query;
 
     try {
         const [ itemInfo, $ ] = await Promise.all([
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
                 parent: 0,
             };
         }).get().filter(({ indent }) => {
-            return indent <= 40;
+            return all ? true : indent <= 40;
         });
 
         let content = '';
