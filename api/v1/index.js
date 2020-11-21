@@ -160,6 +160,7 @@ router.get('/hn/item', require('./hn/item'));
 router.get('/hn/news', require('./hn/news'));
 router.get('/hn/random', require('./hn/random'));
 router.get('/hn/links', require('./hn/links'));
+router.get('/hn/story', require('./hn/story'));
 
 router.get('/todo/list', require('./todo/list'));
 router.post('/todo/add', require('./todo/add'));
