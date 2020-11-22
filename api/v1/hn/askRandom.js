@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
         const list = $('.storylink').map(function() {
           const $link = $(this).find('a');
           const link = $link.attr('href');
+          if (!link) return null;
+
           const u = new URL(link);
 
           return {
@@ -24,7 +26,7 @@ module.exports = async (req, res) => {
             site: 'news.ycombinator.com',
             title: $link.text().trim(),
           };
-        }).get();
+        }).get().filter((item) => !!item);
 
         res.json({
             success: true,
