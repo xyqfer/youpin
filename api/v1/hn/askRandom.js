@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
           const u = new URL(link);
 
           return {
-            id: u.search.get('id'),
+            id: u.searchParams.get('id'),
             link,
             site: 'news.ycombinator.com',
             title: item.title,
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
         console.log(err);
         res.json({
             success: false,
-            msg: `hn ask random ${date} 获取失败`,
+            msg: 'hn ask random 获取失败',
         });
     }
 };
