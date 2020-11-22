@@ -162,6 +162,7 @@ router.get('/hn/random', require('./hn/random'));
 router.get('/hn/links', require('./hn/links'));
 router.get('/hn/story', require('./hn/story'));
 router.get('/hn/ask', require('./hn/ask'));
+router.get('/hn/askRandom', require('./hn/askRandom'));
 
 router.get('/todo/list', require('./todo/list'));
 router.post('/todo/add', require('./todo/add'));
