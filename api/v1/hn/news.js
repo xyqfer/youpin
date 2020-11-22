@@ -25,7 +25,12 @@ module.exports = async (req, res) => {
             if (isNaN(comments)) comments = 0;
 
             let site = $item.find('.sitestr').text();
-            if (!site || site === '') site = 'news.ycombinator.com';
+            if (!site || site === '') {
+              site = 'news.ycombinator.com';
+            } else {
+              const u = new URL(`https://${site}`);
+              site = u.host;
+            }
 
             list.push({
                 id,
