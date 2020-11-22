@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
             id: u.searchParams.get('id'),
             link,
             site: 'news.ycombinator.com',
-            title: item.title,
+            title: $link.text().trim(),
           };
         }).get();
 
