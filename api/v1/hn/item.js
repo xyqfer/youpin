@@ -51,8 +51,13 @@ module.exports = async (req, res) => {
         if (link.startsWith('item?')) {
           link = 'https://news.ycombinator.com/' + link;
         } else {
-          const article = await readability(link);
-          content = article.content;
+          try {
+            const article = await readability(link);
+            content = article.content;
+          } catch(err) {
+            content = '';
+            console.error(err);
+          }
         }
 
         let title = itemInfo.title;

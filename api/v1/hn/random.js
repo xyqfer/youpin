@@ -9,7 +9,8 @@ module.exports = async (req, res) => {
 
     try {
         const list = [];
-        const date = moment(randomDate(new Date(2006, 9, 9), new Date())).format('YYYY-MM-DD');
+        // const date = moment(randomDate(new Date(2006, 9, 9), new Date())).format('YYYY-MM-DD');
+        const date = moment(randomDate(new Date(2014, 12, 30), new Date())).format('YYYY-MM-DD');
         const $ = await crawler(`https://news.ycombinator.com/front?day=${date}`);
 
         const hasNext = $('.morelink').length > 0;
