@@ -120,7 +120,7 @@ app.get('/archives', function(req, res) {
             const content = archives.reduce((acc, item) => {
                 acc += `
                 <div style="margin-bottom: 50px">
-                    <a href="${process.env.hostName}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
+                    <a href="${process.env.ARCHIVE_HOST}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
                         <h4>${item.title}</h4>
                     </a>
                     <h5>${item.createdAt}</h5>
