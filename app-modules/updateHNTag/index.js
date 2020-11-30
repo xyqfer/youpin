@@ -1,10 +1,15 @@
 'use strict';
 const updateContainer = require('app-containers/update');
 const fetchRSS = require('app-containers/fetchRSS');
+const createLInkPreview = require('./createLinkPreview');
+const { http } = require('app-libs');
 
 module.exports = async () => {
     const filterKey = 'url';
     const dbName = 'Konachan';
+    let hasCreateLinkPreview = false;
+
+    http.get(process.env.SCREENSHOT_URL2);
 
     try {
         return await updateContainer({
@@ -12,7 +17,14 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: 'hn-show 有更新',
-                template: ({ title = '', summary = '', url = '' }) => `
+                template: ({ title = '', summary = '', url = '' }, data) => {
+                  if (!hasCreateLinkPreview) {
+                    hasCreateLinkPreview = true;
+                    const urls = data.map((item) => item.url);
+                    createLInkPreview(urls);
+                  }
+
+                  return `
                     <div style="margin-bottom: 30px">
                         <a href="${url}" target="_blank">
                             <h4>${title}</h4>
@@ -22,7 +34,8 @@ module.exports = async () => {
                             ${summary}
                         </div>
                     </div>
-                `,
+                  `;
+                },
                 device: 'device1',
                 open: 'safari'
             },

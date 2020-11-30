@@ -10,7 +10,7 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
     const params = require('../params');
     const { mailReceivers: receivers } = process.env;
 
-    let content = data.map((item) => template(item)).join('');
+    let content = data.map((item) => template(item, data)).join('');
     const $ = cheerio.load(content);
     $('a').each(function() {
         $(this).attr('target', '_blank');
