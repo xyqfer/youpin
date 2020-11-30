@@ -37,7 +37,7 @@ module.exports = async (urls) => {
         });
 
         await http.post({
-            uri: `${process.env.CF_KV}${encodeURIComponent(item)}`,
+            uri: `${process.env.CF_KV}${encodeURIComponent(url)}`,
             body: resp.body,
             headers: {
                 'Content-Type': 'image/png'
