@@ -65,7 +65,7 @@
     "uuid": "8.3.1",
     "webtorrent": "0.112.0",
     "youtube-captions-scraper": "1.0.3",
-    "ytdl-core": "4.1.0",
+    "ytdl-core": "4.1.1",
     "@mozilla/readability": "0.3.0",
     "jsdom": "16.4.0",
     "qs": "6.9.4"
