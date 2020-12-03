@@ -10,7 +10,12 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
     const params = require('../params');
     const { mailReceivers: receivers } = process.env;
 
-    let content = data.map((item) => template(item, data)).join('');
+    let content = data.map((item) => {
+      item.title = item.title.replace(/<\/?select>/gi, '');
+      if (item.summary) item.summary = item.summary.replace(/<\/?select>/gi, '');
+
+      return item;
+    }).map((item) => template(item, data)).join('');
     const $ = cheerio.load(content);
     $('a').each(function() {
         $(this).attr('target', '_blank');
