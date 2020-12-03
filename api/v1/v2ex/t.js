@@ -89,6 +89,8 @@ module.exports = (req, res) => {
                 });
             }
 
+            let left = [];
+            let right = [];
             $body.find('.cell').each(function() {
                 const $item = $(this);
                 const { at, content } = convertContent($item.find('.reply_content').html());
@@ -105,11 +107,16 @@ module.exports = (req, res) => {
                     const $thankItem = $item.find('.small.fade');
                     if ($thankItem.length > 0) {
                         replyItem.thank = '❤️' + $thankItem.text().trim();
+                        left.push(replyItem);
+                    } else {
+                      right.push(replyItem);
                     }
-
-                    data.reply.push(replyItem);
                 }
             });
+            left.sort((a, b) => {
+              return parseInt(a.thank.replace('❤️', '')) - parseInt(b.thank.replace('❤️', ''));
+            });
+            data.reply = left.concat(right);
 
             const $pageInput = $('.page_input');
 
