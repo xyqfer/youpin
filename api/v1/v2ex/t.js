@@ -114,7 +114,7 @@ module.exports = (req, res) => {
                 }
             });
             left.sort((a, b) => {
-              return parseInt(a.thank.replace('❤️', '')) - parseInt(b.thank.replace('❤️', ''));
+              return parseInt(b.thank.replace('❤️', '')) - parseInt(a.thank.replace('❤️', ''));
             });
             data.reply = left.concat(right);
 
