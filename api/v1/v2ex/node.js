@@ -66,10 +66,14 @@ module.exports = (req, res) => {
                 data.total = +$pageInput.attr('max');
             }
 
-            res.json({
-                success: true,
-                data,
-            });
+            if (!data.node.count) {
+              throw new Error('need login');
+            } else {
+              res.json({
+                  success: true,
+                  data,
+              });
+            }
         })
         .catch(async (err) => {
             try {
