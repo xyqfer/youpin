@@ -1,14 +1,10 @@
-'use strict';
+const rp = require('request-promise');
+const cheerio = require('cheerio');
+const url = require('url');
+const moment = require('moment');
+const { params } = require('app-libs');
 
-/**
- * 获取节点信息
- */
 module.exports = (req, res) => {
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const url = require('url');
-    const { params } = require('app-libs');
-
     const { name } = req.params;
     const { p = 1 } = req.query;
 
@@ -76,10 +72,39 @@ module.exports = (req, res) => {
             });
         })
         .catch((err) => {
-            console.log(err);
-            res.json({
-                success: false,
-                msg: `v2ex ${name} node 获取失败`,
-            });
+            try {
+              moment.locale('zh-cn');
+              const list = await rp.get({
+                uri: `https://www.v2ex.com/api/topics/show.json?node_name=${name}`,
+                json: true,
+              });
+
+              const data = {
+                  total: list.length,
+                  node: {
+                      count: list[0].node.topics,
+                      name: list[0].node.title,
+                  },
+                  list: list.map((item) => {
+                    return {
+                      id: item.id,
+                      title: item.title,
+                      avatar: item.member.avatar_normal,
+                      reply: `${item.replies}`,
+                      time: moment(item.created * 1000).fromNow(),
+                    };
+                  }),
+              };
+
+              res.json({
+                  success: true,
+                  data,
+              });
+            } catch(err) {
+              res.json({
+                  success: false,
+                  msg: `v2ex ${name} node 获取失败`,
+              });
+            }
         });
 };
