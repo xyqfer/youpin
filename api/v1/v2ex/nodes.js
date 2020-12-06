@@ -63,6 +63,15 @@ module.exports = (req, res) => {
                     data.push(nodeData);
                 });
 
+            data[0].nodes.unshift({
+              name: 'Chamber',
+              url: '/go/chamber'
+            });
+            data[0].nodes.unshift({
+              name: '水深火热',
+              url: '/go/flamewar'
+            });
+
             res.json({
                 success: true,
                 data,
