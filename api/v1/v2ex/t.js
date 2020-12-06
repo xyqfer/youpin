@@ -1,14 +1,11 @@
 'use strict';
 
-/**
- * 获取聊天详情
- */
-module.exports = (req, res) => {
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const { params } = require('app-libs');
-    const convertContent = require('./utils/convertContent');
+const rp = require('request-promise');
+const cheerio = require('cheerio');
+const { params } = require('app-libs');
+const convertContent = require('./utils/convertContent');
 
+module.exports = (req, res) => {
     const { id } = req.params;
     const { p = 1 } = req.query;
 
@@ -141,11 +138,60 @@ module.exports = (req, res) => {
                 data,
             });
         })
-        .catch((err) => {
-            console.log(err);
-            res.json({
-                success: false,
-                msg: `v2ex ${id} t 获取失败`,
-            });
+        .catch(async (err) => {
+            try {
+              const data = {
+                  topic: {},
+                  reply: [],
+                  total: 1,
+              };
+              const [ info ] = await rp.get({
+                uri: `https://www.v2ex.com/api/topics/show.json?id=${id}`,
+                json: true,
+              });
+
+              data.topic = {
+                  title: info.title,
+                  author: info.member.username,
+                  avatar: info.member.avatar_normal,
+                  createTime: '',
+                  click: '',
+                  node: {
+                      name: info.node.title,
+                      url: `/go/${info.node.name}`,
+                  },
+                  count: `${info.replies} 条回复  •  ${(new Date(info.created * 1000)).toUTCString()}`,
+                  content: info.content_rendered,
+                  tag: [],
+              };
+
+              const replyList = await rp.get({
+                uri: `https://www.v2ex.com/api/replies/show.json?topic_id=${id}&page=${p}&page_size=100`,
+                json: true,
+              });
+
+              replyList.forEach((item, index) => {
+                const { at, content } = convertContent(item.content_rendered);
+                const replyItem = {
+                    at,
+                    content,
+                    avatar: item.member.avatar_normal,
+                    author: item.member.username,
+                    floor: `${index + 1}`,
+                };
+
+                data.reply.push(replyItem);
+              });
+
+              res.json({
+                  success: true,
+                  data,
+              });
+            } catch(err) {
+              res.json({
+                  success: false,
+                  msg: `v2ex ${id} t 获取失败`,
+              });
+            }
         });
 };
