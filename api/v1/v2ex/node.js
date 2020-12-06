@@ -71,7 +71,7 @@ module.exports = (req, res) => {
                 data,
             });
         })
-        .catch((err) => {
+        .catch(async (err) => {
             try {
               moment.locale('zh-cn');
               const list = await rp.get({
