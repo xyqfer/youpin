@@ -69,6 +69,11 @@ const cloudFuncConfig = [
         info: '更新 updateXincao',
     },
     {
+        name: 'updateQX',
+        module: 'updateQX',
+        info: '更新 updateQX',
+    },
+    {
         name: 'updateLianbo',
         module: 'updateLianbo',
         info: '更新 updateLianbo',
