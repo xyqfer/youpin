@@ -5,7 +5,7 @@ module.exports = async () => {
     const fetchRSS = require('app-containers/fetchRSS');
 
     const filterKey = 'url';
-    const dbName = 'WechatAnnounce';
+    const dbName = 'DATA_TECH';
 
     try {
         return await updateContainer({

@@ -74,10 +74,10 @@ const cloudFuncConfig = [
         info: '更新 updateQX',
     },
     {
-      name: 'updateCounter',
-      module: 'updateCounter',
-      info: '更新 updateCounter',
-  },
+        name: 'updateCounter',
+        module: 'updateCounter',
+        info: '更新 updateCounter',
+    },
     {
         name: 'updateLianbo',
         module: 'updateLianbo',

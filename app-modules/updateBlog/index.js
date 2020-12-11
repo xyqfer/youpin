@@ -6,7 +6,9 @@ module.exports = async () => {
 
     try {
         await updateTechBlog();
-        await updateLiteratureBlog();
+        setTimeout(() => {
+          updateLiteratureBlog();
+        }, 4 * 60 * 1000);
 
         return {
             success: true,
