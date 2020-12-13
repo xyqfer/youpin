@@ -33,7 +33,7 @@ module.exports = (content) => {
         }
 
         if (/\.png|jpg$/ig.test(link) && $children.length === 0) {
-          $elem.after(`<p><img referrerpolicy="no-referrer" src="${link}" /></p>`);
+          $elem.after(`<p><img style="width: 100%;" referrerpolicy="no-referrer" src="${link}" /></p>`);
         }
     });
 
