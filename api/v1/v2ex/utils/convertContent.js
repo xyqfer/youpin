@@ -39,8 +39,8 @@ module.exports = (content) => {
 
     $('img').each(function() {
       const $elem = $(this);
-      const fallbackUrl = process.env.IMAGE_PROXY + encodeURIComponent($elem.attr('src'));
-      $elem.attr('onerror', `this.onerror=null;this.src='${fallbackUrl}'`);
+      const src = process.env.IMAGE_PROXY + encodeURIComponent($elem.attr('src'));
+      $elem.attr('src', src);
     });
 
     return {
