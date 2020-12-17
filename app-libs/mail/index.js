@@ -11,8 +11,8 @@ module.exports = async ({ title = '', data = [], render = 'archive', device = 'd
     const { mailReceivers: receivers } = process.env;
 
     let content = data.map((item) => {
-      item.title = item.title.replace(/<\/?select>/gi, '');
-      if (item.summary) item.summary = item.summary.replace(/<\/?select>/gi, '');
+      item.title = item.title.replace(/<\/?select>/gi, '').replace(/<\/?title>/gi, '');
+      if (item.summary) item.summary = item.summary.replace(/<\/?select>/gi, '').replace(/<\/?title>/gi, '');
 
       return item;
     }).map((item) => template(item, data)).join('');
