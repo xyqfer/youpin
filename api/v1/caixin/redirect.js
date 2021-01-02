@@ -7,8 +7,9 @@ module.exports = async (req, res) => {
     const id = path.basename(u.pathname, '.html');
 
     const response = await http.get({
+        json: true,
         uri: `https://gateway.caixin.com/api/purchase/article/get/${id}`,
     });
     
-    res.redirect(`/api/v1/caixin/article?id=${response.data.data.id}`);
+    res.redirect(`/api/v1/caixin/article?id=${response.data.id}`);
 };
