@@ -10,5 +10,5 @@ module.exports = async (req, res) => {
         uri: `https://gateway.caixin.com/api/purchase/article/get/${id}`,
     });
     
-    res.redirct(`/api/v1/caixin/article?id=${response.data.data.id}`);
+    res.redirect(`/api/v1/caixin/article?id=${response.data.data.id}`);
 };
