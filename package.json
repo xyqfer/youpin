@@ -65,15 +65,15 @@
     "uuid": "8.3.2",
     "webtorrent": "0.112.0",
     "youtube-captions-scraper": "1.0.3",
-    "ytdl-core": "4.3.0",
+    "ytdl-core": "4.4.0",
     "@mozilla/readability": "0.4.0",
     "jsdom": "16.4.0",
     "qs": "6.9.4"
   },
   "devDependencies": {
     "eslint-config-prettier": "7.1.0",
-    "eslint": "7.16.0",
     "eslint-plugin-prettier": "3.3.1",
+    "eslint": "7.17.0",
     "jest": "26.6.3",
     "prettier": "2.2.1",
     "prettier-check": "2.0.0",

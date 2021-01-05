@@ -9,9 +9,9 @@ function createScreenshotUrls(url) {
   const width = 375;
   const height = 2000;
   const url1 = 'https://render-tron.appspot.com/screenshot/' + encodeUrl(url) + `?width=${width}&height=${height}`;
-  const url2 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
+  const url2 = process.env.SCREENSHOT_URL2 + encodeUrl(url) + `?width=${width}&height=${height}`;
   const url3 = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot&embed=screenshot.url&fullPage`;
-  const url4 = process.env.SCREENSHOT_URL2 + encodeUrl(url) + `?width=${width}&height=${height}`;
+  const url4 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
 
   return [
     url1,
