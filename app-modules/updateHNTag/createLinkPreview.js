@@ -46,7 +46,7 @@ module.exports = async (urls) => {
 
         break;
       } catch(err) {
-        console.error(err);
+        console.error(url);
       }
     }
   });
