@@ -26,6 +26,7 @@ module.exports = async () => {
             getTargetData: () =>
                 fetchRSS({
                     source: 'RSS_Terminus',
+                    appendTitle: true,
                     field: ['title', 'link'],
                     map: (item) => {
                         if (item.link) {
