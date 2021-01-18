@@ -4,6 +4,8 @@ const { mail: sendMail } = require('app-libs');
 
 module.exports = async () => {
     const since = moment().format('YYYY-MM-DD');
+    const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+    const historyLink = encodeURIComponent(`https://abriefhistoryofyesterday.com/fetch?date=${yesterday}`);
 
     try {
         const title = '刷书啦';
@@ -20,6 +22,10 @@ module.exports = async () => {
                 title: '领蚂蚁积分',
                 url: 'alipays://platformapi/startapp?appId=20000160',
             },
+            {
+                title: 'A Brief History of Yesterday',
+                url: `${process.env.IMAGE_PROXY}${historyLink}`,
+            }
         ];
         const now = new Date();
         const date = now.getDate();
