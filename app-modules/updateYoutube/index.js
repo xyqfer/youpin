@@ -15,7 +15,7 @@ module.exports = async () => {
             dbName,
             filterKey,
             mail: {
-                title: 'hn-show 有更新',
+                title: 'youtube 有更新',
                 template: ({ title = '', summary = '', url = '' }, data) => {
                   if (!hasCreateLinkPreview) {
                     hasCreateLinkPreview = true;
@@ -40,7 +40,7 @@ module.exports = async () => {
             },
             getTargetData: () =>
                 fetchRSS({
-                    source: 'RSS_HN',
+                    source: 'RSS_Youtube',
                     field: ['title', 'link', 'content'],
                 }),
         });

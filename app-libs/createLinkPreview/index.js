@@ -1,4 +1,4 @@
-const { http } = require('app-libs');
+const http = require('../http');
 
 function encodeUrl(fullUrl) {
   const url = new URL(fullUrl);
