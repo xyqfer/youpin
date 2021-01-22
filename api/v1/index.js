@@ -182,4 +182,6 @@ router.get('/caixin/redirect', require('./caixin/redirect'));
 
 router.get('/readability/view', require('./readability/view'));
 
+router.get('/screenshot', require('./screenshot'));
+
 module.exports = router;
