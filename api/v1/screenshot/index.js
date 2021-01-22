@@ -5,7 +5,8 @@ module.exports = async (req, res) => {
     const code = `
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
-      await page.goto('http://example.com');
+      await page.setViewport({ width: ${width}, height: ${height}, });
+      await page.goto('${url}');
       await page.screenshot({path: 'example.png'});
       await browser.close();
     `;
