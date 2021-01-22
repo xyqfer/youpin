@@ -1,7 +1,7 @@
 const { http } = require('app-libs');
 
 module.exports = async (req, res) => {
-    const { url, width, height } = req.params;
+    const { url, width, height } = req.query;
     const code = `
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
