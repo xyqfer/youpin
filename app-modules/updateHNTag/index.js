@@ -20,7 +20,7 @@ module.exports = async () => {
                   if (!hasCreateLinkPreview) {
                     hasCreateLinkPreview = true;
                     const urls = data.map((item) => item.url);
-                    createLinkPreview(urls);
+                    createLinkPreview(urls, 'HN');
                   }
 
                   return `

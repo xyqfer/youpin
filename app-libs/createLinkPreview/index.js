@@ -5,7 +5,7 @@ function encodeUrl(fullUrl) {
   return url.origin + url.pathname + encodeURIComponent(url.search) + encodeURIComponent(url.hash);
 }
 
-function createScreenshotUrls(url) {
+function createScreenshotUrls(url, tag = '') {
   const width = 375;
   const height = 2000;
   const url1 = 'https://render-tron.appspot.com/screenshot/' + encodeUrl(url) + `?width=${width}&height=${height}`;
@@ -51,5 +51,6 @@ module.exports = async (urls) => {
     }
   });
 
-  http.get(`https://api.day.app/${process.env.device1}/${encodeURIComponent('HN 预加载完成')}`);
+  const text = `${tag} 预加载完成`;
+  http.get(`https://api.day.app/${process.env.device1}/${encodeURIComponent(text)}`);
 };
