@@ -5,23 +5,25 @@ function encodeUrl(fullUrl) {
   return url.origin + url.pathname + encodeURIComponent(url.search) + encodeURIComponent(url.hash);
 }
 
-function createScreenshotUrls(url, tag = '') {
+function createScreenshotUrls(url) {
   const width = 375;
   const height = 2000;
   const url1 = 'https://render-tron.appspot.com/screenshot/' + encodeUrl(url) + `?width=${width}&height=${height}`;
-  const url2 = process.env.SCREENSHOT_URL2 + encodeUrl(url) + `?width=${width}&height=${height}`;
-  const url3 = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot&embed=screenshot.url&fullPage`;
-  const url4 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
+  const url2 = `${process.env.hostName}/api/v1/screenshot?url=${encodeURIComponent(url)}&width=${width}&height=${height}`;
+  const url3 = process.env.SCREENSHOT_URL2 + encodeUrl(url) + `?width=${width}&height=${height}`;
+  const url4 = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot&embed=screenshot.url&fullPage`;
+  const url5 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
 
   return [
     url1,
     url2,
     url3,
-    url4
+    url4,
+    url5,
   ];
 }
 
-module.exports = async (urls) => {
+module.exports = async (urls, tag = '') => {
   await Promise.each(urls, async (url) => {
     const screenshotUrls = createScreenshotUrls(url);
 
