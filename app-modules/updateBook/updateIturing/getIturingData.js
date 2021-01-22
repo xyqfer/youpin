@@ -1,48 +1,22 @@
-'use strict';
+const flatten = require('lodash/flatten');
+const { http } = require('app-libs');
 
-module.exports = async ({ offsets = [0] }) => {
-    const rp = require('request-promise');
-    const cheerio = require('cheerio');
-    const flatten = require('lodash/flatten');
-    const { params } = require('app-libs');
-
-    const hostPrefix = 'http://www.ituring.com.cn';
-
+module.exports = async ({ offsets = [1] }) => {
     try {
         const results = await Promise.mapSeries(offsets, async (page) => {
             try {
-                const htmlString = await rp.get({
-                    uri: `http://www.ituring.com.cn/book?sort=newest&page=${page}`,
-                    headers: {
-                        'User-Agent': params.ua.pc,
-                    },
+                const res = await http.get({
+                    uri: `https://api.ituring.com.cn/api/Book?sort=new&page=${page}&tab=book`,
                 });
 
-                const $ = cheerio.load(htmlString);
-                const newBookList = [];
-
-                $('.block-books li').each(function() {
-                    newBookList.push({
-                        title: $(this)
-                            .find('.name a')
-                            .text()
-                            .trim(),
-                        url:
-                            hostPrefix +
-                            $(this)
-                                .find('.book-img a')
-                                .attr('href'),
-                        cover: $(this)
-                            .find('.book-img img')
-                            .attr('src'),
-                        desc: $(this)
-                            .find('.intro')
-                            .text()
-                            .trim(),
-                    });
+                return res.bookItems.map((item) => {
+                  return {
+                    title: item.name,
+                    url: `${process.env.FUNC_URL}/ituring-book?id=${item.id}`,
+                    cover: `https://file.ituring.com.cn/LargeCover/${item.coverKey}`,
+                    desc: item.abstract
+                  };
                 });
-
-                return newBookList;
             } catch (err) {
                 console.error(err);
                 return [];

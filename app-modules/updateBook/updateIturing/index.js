@@ -6,7 +6,7 @@ module.exports = async () => {
 
     const offsets = [];
 
-    for (let offset = 0; offset <= 4; offset += 1) {
+    for (let offset = 1; offset <= 5; offset += 1) {
         offsets.push(offset);
     }
 
