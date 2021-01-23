@@ -54,6 +54,8 @@ module.exports = async (params = {}) => {
         const targetData = uniqBy(await this.getTargetData(), this.filterKey);
         const newData = await this.filterData(dbData, targetData);
 
+        console.error(`${this.mail.title}: key: ${this.filterKey}, db-count: ${dbData.length}, target-count: ${targetData.length}, new-count: ${newData.length}`);
+
         if (newData.length > 0) {
             const saveDataResult = this.saveData(newData);
             const notifyResult = this.notify(newData);
