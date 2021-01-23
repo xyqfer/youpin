@@ -6,6 +6,7 @@ module.exports = async ({ offsets = [1] }) => {
         const results = await Promise.mapSeries(offsets, async (page) => {
             try {
                 const res = await http.get({
+                    json: true,
                     uri: `https://api.ituring.com.cn/api/Book?sort=new&page=${page}&tab=book`,
                 });
 
