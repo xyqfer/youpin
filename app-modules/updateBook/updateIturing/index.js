@@ -20,12 +20,12 @@ module.exports = async () => {
                             <a href="${url}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
-                            <p>
-                                ${desc}
-                            </p>
                             <div>
                                 <img src="${cover}" alt="">
                             </div>
+                            <p>
+                                ${desc}
+                            </p>
                         </div>
                     `,
             },
