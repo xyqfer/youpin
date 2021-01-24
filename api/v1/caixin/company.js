@@ -19,12 +19,13 @@ module.exports = async (req, res) => {
 
       acc += `
         <div style="margin-bottom: 50px">
+            <div>${time}</div>
             <a href="./redirect?url=${encodeURIComponent(news.url)}" target="_blank">
               <h4>${news.title}</h4>
             </a>
             ${img}
             <p>
-              ${time} ${news.guide}
+              ${news.guide}
             </p>
         </div>
       `;
