@@ -51,10 +51,12 @@ module.exports = async (params = {}) => {
     const mergeParams = Object.assign({}, baseParams, params);
     return async function() {
         const dbData = await this.getDbData();
+        const dbCount = dbData.length;
         const targetData = uniqBy(await this.getTargetData(), this.filterKey);
+        const targetDataCount = targetData.length;
         const newData = await this.filterData(dbData, targetData);
 
-        console.error(`${this.mail.title}: key: ${this.filterKey}, db-count: ${dbData.length}, target-count: ${targetData.length}, new-count: ${newData.length}`);
+        console.error(`${this.mail.title}: key: ${this.filterKey}, db-count: ${dbCount} -> ${dbData.length}, target-count: ${targetDataCount}, new-count: ${newData.length}`);
 
         if (newData.length > 0) {
             const saveDataResult = this.saveData(newData);
