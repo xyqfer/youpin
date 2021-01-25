@@ -372,10 +372,6 @@ app.get('/cf-log0', async (req, res) => {
     res.json(data[0]);
 });
 
-app.get('/tmp-test', (req, res) => {
-  res.send(require('/tmp/target1.json'));
-});
-
 // error handlers
 app.use(function(req, res) {
     console.log(req.originalUrl);

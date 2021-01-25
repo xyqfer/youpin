@@ -50,21 +50,8 @@ module.exports = async (params = {}) => {
     const mergeParams = Object.assign({}, baseParams, params);
     return async function() {
         const dbData = await this.getDbData();
-        const dbCount = dbData.length;
         const targetData = uniqBy(await this.getTargetData(), this.filterKey);
-        const targetDataCount = targetData.length;
-
-        // todo
-        let a = differenceBy(targetData, dbData, this.filterKey);
-        console.error(`${this.mail.title}: pre: ${a.length}`);
-        if (this.dbName === 'DATA_TECH') {
-          const fs = require('fs');
-          fs.writeFileSync('/tmp/target1.json', JSON.stringify(targetData));
-        }
-
         const newData = await this.filterData(dbData, targetData);
-
-        console.error(`${this.mail.title}: key: ${this.filterKey}, db-count: ${dbCount} -> ${dbData.length}, target-count: ${targetDataCount}, new-count: ${newData.length}`);
 
         if (newData.length > 0) {
             const saveDataResult = this.saveData(newData);
