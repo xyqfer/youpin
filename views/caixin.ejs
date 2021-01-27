@@ -76,15 +76,13 @@
     </div>
 
     <script>
-      function takeScreenshot() {
+      function takeScreenshot(btn) {
         const generateScreenshot = () => {
           html2canvas(document.body, {proxy: '/pxy'}).then(canvas => {
             canvas.toBlob(function(blob) { 
                 const item = new ClipboardItem({ 'image/png': blob });
                 navigator.clipboard.write([item]);
-                setTimeout(() => {
-                  alert('copy');
-                }, 1500);
+                btn.innerHTML += '1';
             });
           });
         };
@@ -99,8 +97,12 @@
         }
       }
 
-      btn1.onclick = takeScreenshot;
-      btn2.onclick = takeScreenshot;
+      btn1.onclick = () => {
+        takeScreenshot(btn1);
+      };
+      btn2.onclick = () => {
+        takeScreenshot(btn2);
+      };
     </script>
   </body>
 </html>
