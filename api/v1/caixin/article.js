@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     const $ = cheerio.load(response);
     $('script').remove();
     $('.cx-app-content-main img').each(function() {
-        $(this).attr('referrerpolicy', 'no-referrer');
+        $(this).attr('referrerpolicy', 'no-referrer').attr('crossorigin', 'anonymous');
     });
 
     res.render('archive', {
