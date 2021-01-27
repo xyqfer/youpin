@@ -1,13 +1,13 @@
 const { http } = require('app-libs');
 
 module.exports = async (req, res) => {
-    const { url, width, height } = req.query;
+    const { url, width, height, fullPage = false } = req.query;
     const code = `
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
       await page.setViewport({ width: ${width}, height: ${height}, });
       await page.goto('${url}');
-      await page.screenshot({path: 'example.png'});
+      await page.screenshot({path: 'example.png', fullPage: ${fullPage}});
       await browser.close();
     `;
     const options = {
