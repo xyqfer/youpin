@@ -68,7 +68,8 @@
     "ytdl-core": "4.4.4",
     "@mozilla/readability": "0.4.1",
     "jsdom": "16.4.0",
-    "qs": "6.9.6"
+    "qs": "6.9.6",
+    "html2canvas-proxy": "1.0.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "7.2.0",

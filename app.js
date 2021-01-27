@@ -11,6 +11,7 @@ const expressWs = require('express-ws');
 const deployMiddleware = require('@xyqfer/deploy-middleware');
 const leancloudGraphQL = require('@xyqfer/leancloud-graphql-express-middleware').express;
 const bluebird = require('bluebird');
+const proxy = require('html2canvas-proxy');
 
 global.Promise = bluebird;
 
@@ -42,6 +43,8 @@ app.use(AV.Cloud.HttpsRedirect());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(cookieParser());
+
+app.use('/pxy', proxy());
 
 app.use(
     cors({
