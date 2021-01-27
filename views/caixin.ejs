@@ -88,12 +88,12 @@
         };
 
         if (typeof html2canvas === 'undefined') {
-          generateScreenshot();
-        } else {
           const script = document.createElement('script');
           script.onload = generateScreenshot;
           script.src = '<%=cdnHost%>/html2canvas.min.js';
           document.body.append(script);
+        } else {
+          generateScreenshot();
         }
       }
 
