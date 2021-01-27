@@ -28,6 +28,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('x-powered-by', false);
 
+app.locals.cdnHost = process.env.CDN_HOST;
+
 app.use(express.static('public'));
 
 // 设置默认超时时间
