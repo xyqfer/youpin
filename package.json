@@ -37,7 +37,7 @@
     "epub-gen": "0.1.0",
     "express": "4.17.1",
     "express-ws": "4.0.0",
-    "follow-redirects": "1.13.1",
+    "follow-redirects": "1.13.2",
     "glob": "7.1.6",
     "got": "11.8.1",
     "iconv-lite": "0.6.2",
