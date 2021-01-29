@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
       const page = await browser.newPage();
       await page.setViewport({ width: ${width}, height: ${height}, });
       await page.goto('${url}');
-      await page.screenshot({path: 'example-${Date.now()}.png', fullPage: ${fullPage}});
+      await page.screenshot({path: 'example${Date.now()}.png', fullPage: ${fullPage}});
       await browser.close();
     `;
     const options = {
