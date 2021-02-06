@@ -55,7 +55,7 @@
     "request": "2.88.2",
     "request-promise": "4.2.6",
     "rimraf": "3.0.2",
-    "rss-parser": "3.10.0",
+    "rss-parser": "3.11.0",
     "rxjs": "6.6.3",
     "set-cookie-parser": "2.4.7",
     "shelljs": "0.8.4",
