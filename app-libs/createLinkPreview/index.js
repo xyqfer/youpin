@@ -53,6 +53,6 @@ module.exports = async (urls, tag = '') => {
     }
   });
 
-  const text = `${tag} 预加载完成`;
+  const text = `${tag} 预加载完成 / ${urls.length}条消息`;
   http.get(`https://api.day.app/${process.env.device1}/${encodeURIComponent(text)}`);
 };
