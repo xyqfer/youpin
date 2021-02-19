@@ -1,4 +1,3 @@
-'use strict';
 const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
 const uniqBy = require('lodash/uniqBy');
@@ -11,11 +10,23 @@ module.exports = async () => {
         });
         const $ = cheerio.load(htmlString);
         const targetUrlList = [];
+        const bookList = [];
 
         $('.nb_sec1').each(function() {
           const url = $(this).find('.nb_sec1_left h1 a').attr('href');
 
-          if (url) targetUrlList.push(url);
+          if (url) {
+            targetUrlList.push(url);
+          } else {
+            $(this).find('.tabct').eq(0).find('ul > li').each(function() {
+              const $link = $(this).find('.pname > a');
+
+              bookList.push({
+                name: $link.text(),
+                url: $link.attr('href'),
+              });
+            });
+          }
         });
 
         const result = await Promise.map(targetUrlList, async (url) => {
@@ -29,8 +40,6 @@ module.exports = async () => {
                 return null;
             }
         });
-
-        const bookList = [];
 
         result.forEach((htmlString) => {
             /* eslint-disable eqeqeq */
