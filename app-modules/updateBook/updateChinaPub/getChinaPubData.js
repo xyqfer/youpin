@@ -13,11 +13,9 @@ module.exports = async () => {
         const targetUrlList = [];
 
         $('.nb_sec1').each(function() {
-            targetUrlList.push(
-                $(this)
-                    .find('.nb_sec1_left h1 a')
-                    .attr('href')
-            );
+          const url = $(this).find('.nb_sec1_left h1 a').attr('href');
+
+          if (url) targetUrlList.push(url);
         });
 
         const result = await Promise.map(targetUrlList, async (url) => {
