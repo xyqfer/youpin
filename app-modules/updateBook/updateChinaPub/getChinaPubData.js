@@ -7,8 +7,9 @@ module.exports = async () => {
     try {
         const htmlString = await http.get({
             uri: 'http://www.china-pub.com/xinshu/',
+            encoding: null,
         });
-        const $ = cheerio.load(htmlString);
+        const $ = cheerio.load(iconv.decode(htmlString, 'gb2312'));
         const targetUrlList = [];
         const bookList = [];
 
