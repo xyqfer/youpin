@@ -68,7 +68,7 @@
     "ytdl-core": "4.5.0",
     "@mozilla/readability": "0.4.1",
     "jsdom": "16.5.1",
-    "qs": "6.10.0",
+    "qs": "6.10.1",
     "html2canvas-proxy": "1.0.1"
   },
   "devDependencies": {
