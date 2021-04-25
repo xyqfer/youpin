@@ -30,6 +30,12 @@ app.set('x-powered-by', false);
 
 app.locals.cdnHost = process.env.CDN_HOST;
 
+app.use((req, res, next) => {
+  res.append('Permissions-Policy', 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()');
+
+  next();
+});
+
 app.use(express.static('public'));
 
 // 设置默认超时时间
@@ -59,12 +65,6 @@ app.use((req, res, next) => {
     console.log(`${req.originalUrl}, user IP: ${ipAddress}`);
 
     next();
-});
-
-app.use((req, res, next) => {
-  res.append('Permissions-Policy', 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()');
-
-  next();
 });
 
 const GRAPHQL_TOKEN = params.env.isProd ? process.env.GRAPHQL_TOKEN : '';
