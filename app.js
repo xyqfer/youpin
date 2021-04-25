@@ -61,6 +61,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+  res.append('Permissions-Policy', 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()');
+
+  next();
+});
+
 const GRAPHQL_TOKEN = params.env.isProd ? process.env.GRAPHQL_TOKEN : '';
 app.use(
     `/graphql${GRAPHQL_TOKEN}`,
