@@ -31,7 +31,7 @@ module.exports = (req, res) => {
             data.topic = {
                 title: $header.find('.header > h1').text(),
                 author: $header.find('.gray > a').text(),
-                avatar: `${$header.find('.avatar').attr('src')}`,
+                avatar: process.env.IMAGE_PROXY + encodeURIComponent($header.find('.avatar').attr('src')),
                 createTime: $header
                     .find('.gray')
                     .text()
@@ -94,7 +94,7 @@ module.exports = (req, res) => {
                     const replyItem = {
                         at,
                         content,
-                        avatar: `${$item.find('.avatar').attr('src')}`,
+                        avatar: process.env.IMAGE_PROXY + encodeURIComponent($item.find('.avatar').attr('src')),
                         author: $item.find('.dark').text(),
                         floor: $item.find('.no').text(),
                     };
@@ -151,7 +151,7 @@ module.exports = (req, res) => {
               data.topic = {
                   title: info.title,
                   author: info.member.username,
-                  avatar: info.member.avatar_normal,
+                  avatar: process.env.IMAGE_PROXY + encodeURIComponent(info.member.avatar_normal),
                   createTime: '',
                   click: '',
                   node: {
@@ -173,7 +173,7 @@ module.exports = (req, res) => {
                 const replyItem = {
                     at,
                     content,
-                    avatar: item.member.avatar_normal,
+                    avatar: process.env.IMAGE_PROXY + encodeURIComponent(item.member.avatar_normal),
                     author: item.member.username,
                     floor: `${index + 1}`,
                 };
