@@ -1,0 +1,50 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "21:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: cos-nodejs-sdk-v5
+    versions:
+    - 2.9.10
+    - 2.9.11
+    - 2.9.7
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.0.0
+    - 8.1.0
+    - 8.2.0
+  - dependency-name: puppeteer-core
+    versions:
+    - 6.0.0
+    - 7.0.0
+    - 7.0.1
+    - 7.0.4
+    - 7.1.0
+    - 8.0.0
+  - dependency-name: dropbox
+    versions:
+    - 9.0.0
+    - 9.1.0
+    - 9.2.0
+    - 9.4.0
+    - 9.5.0
+  - dependency-name: webtorrent
+    versions:
+    - 0.115.0
+    - 0.115.1
+    - 0.115.2
+    - 0.115.3
+    - 0.116.2
+  - dependency-name: jsdom
+    versions:
+    - 16.5.0
+  - dependency-name: follow-redirects
+    versions:
+    - 1.13.3
+  - dependency-name: eslint
+    versions:
+    - 7.21.0
