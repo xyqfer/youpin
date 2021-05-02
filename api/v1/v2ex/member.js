@@ -23,7 +23,7 @@ module.exports = (req, res) => {
             const $main = $('#Main');
 
             const data = {
-                avatar: $main.find('.avatar').attr('src'),
+                avatar: process.env.IMAGE_PROXY + encodeURIComponent($main.find('.avatar').attr('src')),
                 name: $main.find('h1').text(),
                 info: $main
                     .find('.box')

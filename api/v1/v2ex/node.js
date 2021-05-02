@@ -45,7 +45,7 @@ module.exports = (req, res) => {
 
                     const chatData = {
                         id,
-                        avatar: `${$table.find('.avatar').attr('src')}`,
+                        avatar: process.env.IMAGE_PROXY + encodeURIComponent($table.find('.avatar').attr('src')),
                         title: $table.find('.item_title > a').text(),
                         reply: $table.find('.count_livid').text() || 0,
                         time: (
@@ -93,7 +93,7 @@ module.exports = (req, res) => {
                     return {
                       id: item.id,
                       title: item.title,
-                      avatar: item.member.avatar_normal,
+                      avatar: process.env.IMAGE_PROXY + encodeURIComponent(item.member.avatar_normal),
                       reply: `${item.replies}`,
                       time: moment(item.created * 1000).fromNow(),
                     };

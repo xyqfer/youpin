@@ -29,7 +29,7 @@ module.exports = (htmlString) => {
 
                 const chatData = {
                     id,
-                    avatar: `${$table.find('.avatar').attr('src')}`,
+                    avatar: process.env.IMAGE_PROXY + encodeURIComponent($table.find('.avatar').attr('src')),
                     title: $table.find('.item_title > a').text(),
                     node: $table.find('.node').text(),
                     reply: $table.find('.count_livid').text() || 0,
