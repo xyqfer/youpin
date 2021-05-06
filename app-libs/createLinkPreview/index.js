@@ -24,10 +24,15 @@ function createScreenshotUrls(url) {
 }
 
 module.exports = async (urls, tag = '') => {
+  const log = [];
+
   await Promise.each(urls, async (url) => {
     const screenshotUrls = createScreenshotUrls(url);
+    let i = 0;
 
     for (let item of screenshotUrls) {
+      i++;
+
       try {
         const resp = await http.get({
             uri: item,
@@ -46,6 +51,9 @@ module.exports = async (urls, tag = '') => {
             }
         });
 
+        if (!log[i]) log[i] = 0;
+        log[i]++;
+
         break;
       } catch(err) {
         console.error(url);
@@ -53,6 +61,6 @@ module.exports = async (urls, tag = '') => {
     }
   });
 
-  const text = `${tag} 预加载完成 / ${urls.length}条消息`;
+  const text = `${tag} 预加载完成 / ${urls.length}条消息 / ${log.toString()}`;
   http.get(`https://api.day.app/${process.env.device1}/${encodeURIComponent(text)}`);
 };
