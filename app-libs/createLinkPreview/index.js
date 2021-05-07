@@ -15,8 +15,8 @@ function createScreenshotUrls(url) {
   const url5 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
 
   return [
-    url1,
     url2,
+    url1,
     url3,
     url4,
     url5,
