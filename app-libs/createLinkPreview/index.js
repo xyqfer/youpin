@@ -17,9 +17,9 @@ function createScreenshotUrls(url) {
   return [
     url2,
     url1,
+    url5,
     url3,
     url4,
-    url5,
   ];
 }
 

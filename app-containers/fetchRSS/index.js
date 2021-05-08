@@ -54,7 +54,7 @@ module.exports = async ({ source, appendTitle = false, field = ['title', 'link']
 
             return data;
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             console.error(url);
             return [];
         }
