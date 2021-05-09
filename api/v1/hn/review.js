@@ -1,4 +1,5 @@
-const { crawler, http } = require('app-libs');
+const axios = require('axios');
+const { crawler } = require('app-libs');
 
 function getCommentId(url) {
   const u = new URL(url);
