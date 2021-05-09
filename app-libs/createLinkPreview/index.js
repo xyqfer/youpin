@@ -31,8 +31,6 @@ module.exports = async (urls, tag = '') => {
     let i = 0;
 
     for (let item of screenshotUrls) {
-      i++;
-
       try {
         const resp = await http.get({
             uri: item,
@@ -58,6 +56,8 @@ module.exports = async (urls, tag = '') => {
       } catch(err) {
         console.error(url);
       }
+
+      i++;
     }
   });
 
