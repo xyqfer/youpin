@@ -13,11 +13,13 @@ function createScreenshotUrls(url) {
   const url3 = process.env.SCREENSHOT_URL2 + encodeUrl(url) + `?width=${width}&height=${height}`;
   const url4 = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot&embed=screenshot.url&fullPage`;
   const url5 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
+  const url6 = process.env.STATELESS_SERVER + `/api/v1/screenshot2?url=${encodeURIComponent(url)}&width=${width}&height=${height}`;
 
   return [
     url2,
     url1,
     url5,
+    url6,
     url3,
     url4,
   ];
@@ -54,7 +56,7 @@ module.exports = async (urls, tag = '') => {
 
         break;
       } catch(err) {
-        console.error(url);
+        console.error(`${url} ${i}`);
       }
 
       i++;
