@@ -3,7 +3,7 @@ const { http } = require('app-libs');
 
 module.exports = async (req, resp) => {
   const { url, width = 375, height = 2000 } = req.query;
-  const res = await rp.post({
+  const res = await http.post({
     uri: 'https://cp82i7sfi4.execute-api.us-east-1.amazonaws.com/prod/capture',
     body: {
         "url": url,
