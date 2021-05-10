@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
     .get();
   
   const list = await Promise.all(listPromise);
-  const content = list.reduce((acc, { title, link, description }) => {
+  let content = list.reduce((acc, { title, link, description }) => {
     acc += `
       <div style="margin-bottom: 30px">
         <a class="notranslate" translate="no" href="${link}" target="_blank">
@@ -80,6 +80,13 @@ module.exports = async (req, res) => {
     `;
     return acc;
   }, '');
+
+  content += `
+    <br>
+    <div>
+      <a href="/api/v1/hn/review?year=${year}&i=${parseInt(i) + 1}">下一页</a>
+    </div>
+  `;
 
   res.render('archive', {
     title: `${year}-${i}`,
