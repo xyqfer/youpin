@@ -16,12 +16,12 @@ function createScreenshotUrls(url) {
   const url6 = `${process.env.hostName}/api/v1/screenshot2?url=${encodeURIComponent(url)}&width=${width}&height=${height}`;
 
   return [
-    url2,
     url1,
-    url5,
     url6,
-    url3,
     url4,
+    url2,
+    url5,
+    url3,
   ];
 }
 
