@@ -34,7 +34,15 @@ module.exports = async () => {
           data.push({
             title: '中行充话费优惠',
             url: 'bocmbciphone://',
-          })
+          });
+          data.push({
+            title: '查看电信话费',
+            url: 'ctclient://',
+          });
+          data.push({
+            title: '查看联通话费',
+            url: 'chinaunicom://',
+          });
         }
 
         sendMail({
