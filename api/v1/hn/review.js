@@ -86,6 +86,8 @@ module.exports = async (req, res) => {
     <div>
       <a href="/api/v1/hn/review?year=${year}&i=${parseInt(i) + 1}">下一页</a>
     </div>
+    <br>
+    <br>
   `;
 
   res.render('archive', {
