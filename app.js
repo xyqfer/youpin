@@ -155,6 +155,66 @@ app.get('/archives', function(req, res) {
         });
 });
 
+app.get('/archives-review', async function(req, res) {
+  const moment = require('moment');
+  let { token, year = 2020, i = 1 } = req.query;
+  if (token !== process.env.ARCHIVES_TOKEN) {
+    res.status(400).send('Bad Request');
+    return;
+  }
+
+  const { getDbData } = require('app-libs/db');
+
+  try {
+    i = parseInt(i);
+    const baseDate = `${year}-01-01`;
+    const startDate = new Date(moment(baseDate).add(i - 1, 'day').format('YYYY-MM-DD'));
+    const endDate = new Date(moment(baseDate).add(i, 'day').format('YYYY-MM-DD'));
+    const archives = await getDbData({
+      dbName: 'Archive',
+      limit: 50,
+      query: {
+        descending: ['createdAt'],
+        greaterThanOrEqualTo: ['createdAt', startDate],
+        lessThan: ['createdAt', endDate],
+      },
+    });
+
+    let content = archives.reduce((acc, item) => {
+      acc += `
+        <div style="margin-bottom: 50px">
+          <a href="${process.env.ARCHIVE_HOST}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
+              <h4>${item.title}</h4>
+          </a>
+          <h5>${item.createdAt}</h5>
+        </div>
+      `;
+
+      return acc;
+    }, '');
+
+    content += `
+      <br>
+      <div>
+        <a href="/archives-review?token=${token}&year=${year}&i=${i + 1}">下一页</a>
+      </div>
+      <br>
+      <br>
+    `;
+
+    res.render('archive', {
+      title: `Archives-${moment(baseDate).add(i - 1, 'day').format('YYYY-MM-DD')}`,
+      content,
+    });
+  } catch(err) {
+    console.error(err);
+    res.render('archive', {
+      title: '',
+      content: '',
+    });
+  }
+});
+
 app.get('/notes', async (req, res) => {
     const { token } = req.query;
     if (token !== process.env.NOTES_TOKEN) {
