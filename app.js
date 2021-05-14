@@ -164,10 +164,10 @@ app.get('/archives-review', async function(req, res) {
   }
 
   const { getDbData } = require('app-libs/db');
+  i = parseInt(i);
+  const baseDate = `${year}-01-01`;
 
   try {
-    i = parseInt(i);
-    const baseDate = `${year}-01-01`;
     const startDate = new Date(moment(baseDate).add(i - 1, 'day').format('YYYY-MM-DD'));
     const endDate = new Date(moment(baseDate).add(i, 'day').format('YYYY-MM-DD'));
     const archives = await getDbData({
