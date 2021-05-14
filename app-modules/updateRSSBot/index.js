@@ -22,6 +22,7 @@ module.exports = async () => {
         };
 
         const [, rssData] = await Promise.all([initCache(), getRSSData()]);
+        console.error(`${dbName}: ${rssData.length}`);
 
         const newData = await cache.findAndSet({
             dbName,
