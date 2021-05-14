@@ -50,9 +50,14 @@ module.exports = async (params = {}) => {
     const mergeParams = Object.assign({}, baseParams, params);
     return async function() {
         const dbData = await this.getDbData();
-        const targetData = uniqBy(await this.getTargetData(), this.filterKey);
-        console.error(`${this.dbName}: ${targetData.length}`);
-        const newData = await this.filterData(dbData, targetData);
+        let newData = [];
+
+        if (this.getNewData) {
+          newData = await this.getNewData(dbData);
+        } else {
+          const targetData = uniqBy(await this.getTargetData(), this.filterKey);
+          newData = await this.filterData(dbData, targetData);
+        }
 
         if (newData.length > 0) {
             const saveDataResult = this.saveData(newData);

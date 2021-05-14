@@ -3,6 +3,7 @@
 module.exports = async () => {
     const updateContainer = require('app-containers/update');
     const fetchRSS = require('app-containers/fetchRSS');
+    const filterNewData = require('app-containers/filterNewData');
 
     const filterKey = 'url';
     const dbName = 'DATA_TECH';
@@ -23,11 +24,21 @@ module.exports = async () => {
                 device: 'device1',
                 open: 'chrome',
             },
-            getTargetData: () =>
-                fetchRSS({
-                    source: 'RSS_TechBlog',
-                    appendTitle: true,
-                }),
+            async getNewData(dbData) {
+              return await filterNewData({
+                dbData, 
+                filterKey,
+                rss: {
+                  source: 'RSS_TechBlog',
+                  appendTitle: true,
+                },
+              });
+            },
+            // getTargetData: () =>
+            //     fetchRSS({
+            //         source: 'RSS_TechBlog',
+            //         appendTitle: true,
+            //     }),
         });
     } catch (err) {
         console.error(err);
