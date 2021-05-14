@@ -51,6 +51,7 @@ module.exports = async (params = {}) => {
     return async function() {
         const dbData = await this.getDbData();
         const targetData = uniqBy(await this.getTargetData(), this.filterKey);
+        console.error(`${this.dbName}: ${targetData.length}`);
         const newData = await this.filterData(dbData, targetData);
 
         if (newData.length > 0) {
