@@ -37,16 +37,18 @@ const findNewData = async ({ dbName, data, key, }) => {
             select: [key],
         },
     });
-    newData = _.differenceBy(newData, containedData, key);
 
-    if (containedData.length < 1000) break;
+    if (containedData.length <= 0) {
+      break;
+    } else {
+      newData = _.differenceBy(newData, containedData, key);
+    }
   }
 
   return newData;
 };
 
 module.exports = async ({ dbData, dbName, filterKey, rss: { source, appendTitle = false, field = ['title', 'link'], map = mapKey } }) => {
-  console.error(`dbdata: ${dbData.length}, filterKey: ${filterKey}`);
   const rssList = await getDbData({
       dbName: source,
       query: {
@@ -87,8 +89,6 @@ module.exports = async ({ dbData, dbName, filterKey, rss: { source, appendTitle 
         console.error(url);
     }
   }
-
-  console.error(`count: ${count}`);
 
   data = _.uniqBy(data, filterKey);
 
