@@ -53,6 +53,7 @@ module.exports = async (params = {}) => {
         let newData = [];
 
         if (this.getNewData) {
+          console.error('has getNewData');
           newData = await this.getNewData(dbData);
         } else {
           const targetData = uniqBy(await this.getTargetData(), this.filterKey);

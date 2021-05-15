@@ -24,7 +24,8 @@ const mapKey = (item) => {
 };
 
 module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false, field = ['title', 'link'], map = mapKey } }) => {
-    const rssList = await getDbData({
+  console.error(`dbdata: ${dbData.length}`);
+  const rssList = await getDbData({
         dbName: source,
         query: {
             ascending: ['createdAt'],
@@ -33,35 +34,36 @@ module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false,
     });
 
     let data = [];
-    await Promise.each(rssList, async ({ url }) => {
-        try {
-            const feed = await retry(async () => await parser.parseURL(url), {
-                retries: 2,
-                minTimeout: 5000,
-            });
-            const feedData = feed.items.map((item) =>
-                field.reduce((acc, key) => {
-                    const value = item[key] || '';
+    for (let { url } of rssList) {
+      try {
+        const feed = await retry(async () => await parser.parseURL(url), {
+            retries: 2,
+            minTimeout: 5000,
+        });
+        const feedData = feed.items.map((item) =>
+            field.reduce((acc, key) => {
+                const value = item[key] || '';
 
-                    if (key === 'title' && appendTitle) {
-                        acc[key] = `[${feed.title}] - ` + value;
-                    } else {
-                        acc[key] = value;
-                    }
+                if (key === 'title' && appendTitle) {
+                    acc[key] = `[${feed.title}] - ` + value;
+                } else {
+                    acc[key] = value;
+                }
 
-                    return acc;
-                }, {})
-            ).map(map);
+                return acc;
+            }, {})
+        ).map(map);
 
-            const newData = _.differenceBy(feedData, dbData, filterKey);
-            if (newData.length > 0) {
-              data = data.concat(newData);
-            }
-        } catch (err) {
-            // console.error(err);
-            console.error(url);
+        console.error(feedData[0], dbData[0]);
+        const newData = _.differenceBy(feedData, dbData, filterKey);
+        if (newData.length > 0) {
+          data = data.concat(newData);
         }
-    });
+      } catch (err) {
+          // console.error(err);
+          console.error(url);
+      }
+    }
 
     return _.uniqBy(data, filterKey);
 };

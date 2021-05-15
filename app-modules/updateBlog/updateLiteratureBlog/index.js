@@ -1,6 +1,7 @@
 'use strict';
 const updateContainer = require('app-containers/update');
 const fetchRSS = require('app-containers/fetchRSS');
+const filterNewData = require('app-containers/filterNewData');
 
 module.exports = async () => {
     const filterKey = 'url';
@@ -22,11 +23,21 @@ module.exports = async () => {
                 device: 'device1',
                 open: 'chrome',
             },
-            getTargetData: () =>
-                fetchRSS({
-                    source: 'RSS_LiteratureBlog',
-                    appendTitle: true,
-                }),
+            async getNewData(dbData) {
+              return await filterNewData({
+                dbData, 
+                filterKey,
+                rss: {
+                  source: 'RSS_LiteratureBlog',
+                  appendTitle: true,
+                },
+              });
+            },
+            // getTargetData: () =>
+            //     fetchRSS({
+            //         source: 'RSS_LiteratureBlog',
+            //         appendTitle: true,
+            //     }),
         });
     } catch (err) {
         console.error(err);
