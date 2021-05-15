@@ -1,12 +1,9 @@
-'use strict';
-
-const plist = require('simple-plist');
-const decompress = require('decompress-zip');
-const rimraf = require('rimraf');
-const glob = require('glob');
-const fs = require('fs');
-
 module.exports = function(file, callback) {
+    const plist = require('simple-plist');
+    const decompress = require('decompress-zip');
+    const rimraf = require('rimraf');
+    const glob = require('glob');
+    const fs = require('fs');
     const outputPath = '/tmp/ipaExtract/';
     fs.mkdirSync(outputPath);
     const data = {};
