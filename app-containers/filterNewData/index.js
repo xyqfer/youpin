@@ -24,7 +24,7 @@ const mapKey = (item) => {
 };
 
 module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false, field = ['title', 'link'], map = mapKey } }) => {
-  console.error(`dbdata: ${dbData.length}`);
+  console.error(`dbdata: ${dbData.length}, filterKey: ${filterKey}`);
   const rssList = await getDbData({
         dbName: source,
         query: {
@@ -34,6 +34,7 @@ module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false,
     });
 
     let data = [];
+    let count = 0;
     for (let { url } of rssList) {
       try {
         const feed = await retry(async () => await parser.parseURL(url), {
@@ -54,7 +55,7 @@ module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false,
             }, {})
         ).map(map);
 
-        console.error(feedData[0], dbData[0]);
+        count += feedData.length;
         const newData = _.differenceBy(feedData, dbData, filterKey);
         if (newData.length > 0) {
           data = data.concat(newData);
@@ -64,6 +65,8 @@ module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false,
           console.error(url);
       }
     }
+
+    console.error(`count: ${count}`);
 
     return _.uniqBy(data, filterKey);
 };
