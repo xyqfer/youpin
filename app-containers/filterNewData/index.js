@@ -23,50 +23,82 @@ const mapKey = (item) => {
     return item;
 };
 
+const findNewData = async ({ dbName, data, key, }) => {
+  let newData = data;
+
+  while (true) {
+    const containedInKeys = newData.map((item) => {
+        return item[key];
+    });
+    const containedData = await getDbData({
+        dbName,
+        query: {
+            containedIn: [key, containedInKeys],
+            select: [key],
+        },
+    });
+    newData = _.differenceBy(newData, containedData, key);
+
+    if (containedData.length < 1000) break;
+  }
+
+  return newData;
+};
+
 module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false, field = ['title', 'link'], map = mapKey } }) => {
   console.error(`dbdata: ${dbData.length}, filterKey: ${filterKey}`);
   const rssList = await getDbData({
-        dbName: source,
-        query: {
-            ascending: ['createdAt'],
-            select: ['url'],
-        },
-    });
+      dbName: source,
+      query: {
+          ascending: ['createdAt'],
+          select: ['url'],
+      },
+  });
 
-    let data = [];
-    let count = 0;
-    for (let { url } of rssList) {
-      try {
-        const feed = await retry(async () => await parser.parseURL(url), {
-            retries: 2,
-            minTimeout: 5000,
-        });
-        const feedData = feed.items.map((item) =>
-            field.reduce((acc, key) => {
-                const value = item[key] || '';
+  let data = [];
+  let count = 0;
+  for (let { url } of rssList) {
+    try {
+      const feed = await retry(async () => await parser.parseURL(url), {
+          retries: 2,
+          minTimeout: 5000,
+      });
+      const feedData = feed.items.map((item) =>
+          field.reduce((acc, key) => {
+              const value = item[key] || '';
 
-                if (key === 'title' && appendTitle) {
-                    acc[key] = `[${feed.title}] - ` + value;
-                } else {
-                    acc[key] = value;
-                }
+              if (key === 'title' && appendTitle) {
+                  acc[key] = `[${feed.title}] - ` + value;
+              } else {
+                  acc[key] = value;
+              }
 
-                return acc;
-            }, {})
-        ).map(map);
+              return acc;
+          }, {})
+      ).map(map);
 
-        count += feedData.length;
-        const newData = _.differenceBy(feedData, dbData, filterKey);
-        if (newData.length > 0) {
-          data = data.concat(newData);
-        }
-      } catch (err) {
-          // console.error(err);
-          console.error(url);
+      count += feedData.length;
+      const newData = _.differenceBy(feedData, dbData, filterKey);
+      if (newData.length > 0) {
+        data = data.concat(newData);
       }
+    } catch (err) {
+        // console.error(err);
+        console.error(url);
     }
+  }
 
-    console.error(`count: ${count}`);
+  console.error(`count: ${count}`);
 
-    return _.uniqBy(data, filterKey);
+  data = _.uniqBy(data, filterKey);
+
+  if (data.length > 0) {
+    data = await findNewData({
+      dbName,
+      data,
+      key: filterKey,
+    });
+  }
+
+  return data;
 };
