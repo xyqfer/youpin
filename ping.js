@@ -7,7 +7,7 @@ const ping = () => {
     const hour = date.getHours();
 
     if (hour >= 0 && hour <= 16) {
-        setTimeout(ping, 5000);
+        setTimeout(ping, 10 * 1000);
     }
 };
 ping();

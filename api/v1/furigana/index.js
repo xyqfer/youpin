@@ -1,6 +1,5 @@
-const yahoo = require('./yahoo');
-
 module.exports = async (req, res) => {
+    const yahoo = require('./yahoo');
     const { content } = req.body;
 
     try {

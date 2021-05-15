@@ -6,16 +6,6 @@ const restaurant = require('./restaurant');
 const activities = require('./activities');
 const redirectBook = require('./redirectBook');
 
-const uplabsAll = require('./uplabs/all');
-const uplabsiOS = require('./uplabs/ios');
-const uplabsAndroid = require('./uplabs/android');
-const uplabsAnimation = require('./uplabs/animation');
-const uplabsRefreshOSS = require('./uplabs/refreshOSS');
-const uplabsPost = require('./uplabs/post');
-const uplabsCollection = require('./uplabs/collection');
-const uplabsCollections = require('./uplabs/collections');
-const uplabsAuthor = require('./uplabs/author');
-
 const { today: getTodayStatusLog, history: getHistoryStatusLog, update: updateTodayStatusLog } = require('./dailyStatusLog');
 
 const {
@@ -58,17 +48,6 @@ router.get('/activities', activities);
 
 router.get('/book/redirect', redirectBook);
 
-/* eslint-disable no-useless-escape */
-router.get(/^\/uplabs\/uplabs_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAll);
-router.get(/^\/uplabs\/uplabs_ios_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsiOS);
-router.get(/^\/uplabs\/uplabs_android_(\d{4})\-(\d{2})\-(\d{2})_(\d+)\.json$/, uplabsAndroid);
-router.get(/^\/uplabs\/uplabs_animation_(\d+)\.json$/, uplabsAnimation);
-router.get(/^\/uplabs\/author\/(.+)\.json$/, uplabsAuthor);
-router.get(/^\/uplabs\/(\d+)\.json$/, uplabsPost);
-router.get('/uplabs/collection', uplabsCollection);
-router.get('/uplabs/collections/:name', uplabsCollections);
-router.get('/uplabs/refreshOSS', uplabsRefreshOSS);
-
 router.get('/v2ex/hot', v2exHot);
 router.get('/v2ex/new', v2exNew);
 router.get('/v2ex/nodes', v2exNodes);
@@ -95,8 +74,6 @@ router.get('/bigText', require('./bigText'));
 router.get('/zhihu/question/:id', require('./zhihu/question'));
 
 router.post('/azbook', require('./azbook'));
-
-router.get('/ping', require('./ping'));
 
 router.get('/dearmeal/list', require('./dearmeal/list'));
 router.get('/dearmeal/detail/:id', require('./dearmeal/detail'));

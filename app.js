@@ -11,7 +11,6 @@ const expressWs = require('express-ws');
 const deployMiddleware = require('@xyqfer/deploy-middleware');
 const leancloudGraphQL = require('@xyqfer/leancloud-graphql-express-middleware').express;
 const bluebird = require('bluebird');
-const proxy = require('html2canvas-proxy');
 
 global.Promise = bluebird;
 
@@ -51,8 +50,6 @@ app.use(AV.Cloud.HttpsRedirect());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(cookieParser());
-
-app.use('/pxy', proxy());
 
 app.use(
     cors({
@@ -345,45 +342,6 @@ app.post('/lark-test', async (req, res) => {
   });
 });
 
-app.get('/theinitium', async (req, res) => {
-    const cheerio = require('cheerio');
-    const { slug } = req.query;
-
-    const render = 'archive';
-    try {
-        const { http, params } = require('app-libs');
-        const response = await http.get({
-            uri: `https://api.theinitium.com/api/v1/article/detail/?language=zh-hans&slug=${slug}`,
-            json: true,
-            headers: {
-                'User-Agent': params.ua.pc,
-                Authorization: `Basic ${process.env.THEINITIUM_TOKEN}`,
-            },
-        });
-
-        const $ = cheerio.load(response.content);
-        $('img').each(function() {
-            const $elem = $(this);
-            const src = $elem.attr('src');
-
-            if (!src.startsWith('data:')) {
-                $elem.attr('src', process.env.IMAGE_PROXY + src);
-            }
-        });
-
-        res.render(render, {
-            title: response.headline,
-            content: $.html(),
-        });
-    } catch (err) {
-        console.error(err);
-        res.render(render, {
-            title: '',
-            content: '',
-        });
-    }
-});
-
 app.get('/bbcproxy', async function(req, res) {
     const render = 'archive';
 
@@ -415,33 +373,6 @@ app.use('/api', require('./api/index'));
 app.get('/youtube/transcript', require('./routes/youtube/transcript'));
 
 expressWs(app);
-
-app.ws('/echo', function(ws) {
-    ws.on('message', function(msg) {
-        ws.send(msg);
-        setTimeout(() => {
-            ws.send(msg + 1);
-            setTimeout(() => {
-                ws.send(msg + 2);
-            }, 2000);
-        }, 1000);
-    });
-});
-
-app.get('/cf-log0', async (req, res) => {
-    const { http } = require('app-libs');
-
-    const result = await http.get({
-        uri: `https://api.cntv.cn/list/getWxArticleList?id=PAGEb3A73LquTUFIbR5GjLgg180411&serviceId=lianboplus&date=&rand=${Date.now()}`,
-        json: true,
-    });
-    const data = result.videoList.map((item) => ({
-        title: item.article_title,
-        url: item.article_url,
-    }));
-
-    res.json(data[0]);
-});
 
 // error handlers
 app.use(function(req, res) {

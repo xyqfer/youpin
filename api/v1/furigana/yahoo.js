@@ -1,7 +1,6 @@
 const { http } = require('app-libs');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const jisx0208 = fs.readFileSync(`${__dirname}/jis-x-0208-utf8.txt`);
 const fetchFurigana = async (sentence) => {
     const data = await http.post({
         uri: 'https://jlp.yahooapis.jp/FuriganaService/V1/furigana',
@@ -43,6 +42,7 @@ const fetchFurigana = async (sentence) => {
 };
 
 module.exports = async (content = '') => {
+    const jisx0208 = fs.readFileSync(`${__dirname}/jis-x-0208-utf8.txt`);
     let result = [];
 
     try {

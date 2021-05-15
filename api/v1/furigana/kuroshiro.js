@@ -1,8 +1,7 @@
-const Kuroshiro = require('kuroshiro');
-const KuromojiAnalyzer = require('kuroshiro-analyzer-kuromoji');
-const cheerio = require('cheerio');
-
 module.exports = async (req, res) => {
+    const Kuroshiro = require('kuroshiro');
+    const KuromojiAnalyzer = require('kuroshiro-analyzer-kuromoji');
+    const cheerio = require('cheerio');
     const { content } = req.body;
 
     try {

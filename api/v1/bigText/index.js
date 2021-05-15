@@ -1,10 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const puppeteer = require('puppeteer-core');
-const { params } = require('app-libs');
-
 async function makeText(text) {
+    const puppeteer = require('puppeteer-core');
+    const { params } = require('app-libs');
     const filename = `./${Date.now()}.png`;
     let config = {};
 
@@ -54,6 +52,7 @@ async function makeText(text) {
 }
 
 module.exports = (req, res) => {
+    const fs = require('fs');
     const { text = '' } = req.query;
 
     makeText(text)

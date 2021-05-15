@@ -1,7 +1,6 @@
-const moment = require('moment');
-const { http } = require('app-libs');
-
 module.exports = async (req, res) => {
+    const moment = require('moment');
+    const { http } = require('app-libs');
     const { page = 1 } = req.query;
 
     try {

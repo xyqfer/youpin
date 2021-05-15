@@ -1,9 +1,6 @@
-'use strict';
-
-const request = require('request');
-const utils = require('./utils');
-
 module.exports = async (req, res) => {
+    const request = require('request');
+    const utils = require('./utils');
     const { id } = req.params;
     const url = await utils.getUrl(id);
     const headers = {};

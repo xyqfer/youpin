@@ -1,8 +1,5 @@
-'use strict';
-
-const utils = require('./utils');
-
 module.exports = async (req, res) => {
+    const utils = require('./utils');
     const { id } = req.params;
     const url = await utils.getUrl(id);
 

@@ -1,4 +1,3 @@
-const differenceBy = require('lodash/differenceBy');
 const uniqBy = require('lodash/uniqBy');
 const { db, mail: sendMail } = require('app-libs');
 const { saveDbData, cache } = db;
@@ -53,7 +52,6 @@ module.exports = async (params = {}) => {
         let newData = [];
 
         if (this.getNewData) {
-          console.error('has getNewData');
           newData = await this.getNewData(dbData);
         } else {
           const targetData = uniqBy(await this.getTargetData(), this.filterKey);
