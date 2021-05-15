@@ -25,7 +25,8 @@ module.exports = async () => {
             },
             async getNewData(dbData) {
               return await filterNewData({
-                dbData, 
+                dbData,
+                dbName, 
                 filterKey,
                 rss: {
                   source: 'RSS_LiteratureBlog',

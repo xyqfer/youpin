@@ -45,7 +45,7 @@ const findNewData = async ({ dbName, data, key, }) => {
   return newData;
 };
 
-module.exports = async ({ dbData, filterKey, rss: { source, appendTitle = false, field = ['title', 'link'], map = mapKey } }) => {
+module.exports = async ({ dbData, dbName, filterKey, rss: { source, appendTitle = false, field = ['title', 'link'], map = mapKey } }) => {
   console.error(`dbdata: ${dbData.length}, filterKey: ${filterKey}`);
   const rssList = await getDbData({
       dbName: source,
