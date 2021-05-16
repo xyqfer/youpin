@@ -58,7 +58,6 @@ module.exports = async ({ dbData, dbName, filterKey, rss: { source, appendTitle 
   });
 
   let data = [];
-  let count = 0;
   for (let { url } of rssList) {
     try {
       const feed = await retry(async () => await parser.parseURL(url), {
@@ -79,10 +78,9 @@ module.exports = async ({ dbData, dbName, filterKey, rss: { source, appendTitle 
           }, {})
       ).map(map);
 
-      count += feedData.length;
       const newData = _.differenceBy(feedData, dbData, filterKey);
       if (newData.length > 0) {
-        data = data.concat(newData);
+        data.push.apply(data, newData);
       }
     } catch (err) {
         // console.error(err);

@@ -15,7 +15,7 @@ module.exports = async (params = {}) => {
                 query: {
                     select: [this.filterKey],
                 },
-                count: 5 * 1000,
+                count: 2 * 1000,
             });
         },
         getTargetData: () => [],
