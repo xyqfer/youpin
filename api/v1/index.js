@@ -164,4 +164,6 @@ router.get('/readability/view', require('./readability/view'));
 router.get('/screenshot', require('./screenshot'));
 router.get('/screenshot2', require('./screenshot/index2'));
 
+router.post('/push', require('./screenshot/push'));
+
 module.exports = router;
