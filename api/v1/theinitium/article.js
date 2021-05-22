@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     $('.p-article .c-tag-list').remove();
     $('.p-article figure.image').css('margin', '0');
 
-    res.render('archive', {
+    res.render('theinitium', {
         title: '',
         content: $('.p-article').html(),
     });

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="referrer" content="never">
+    <title><%=title%></title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background-color: rgb(248, 241, 227);
+      }
+
+      img, video, table {
+        display: block;
+        max-width: 100%;
+      }
+
+      body {
+        padding: 0 18px;
+        font-family: -apple-system-font, Georgia, "Helvetica Neue", PingFang-SC-Regular, Helvetica, sans-serif;
+        font-size: 17px;
+        line-height: 1.74;
+        color: rgb(79, 50, 28);
+        word-break: break-word;
+      }
+
+      blockquote {
+          color: rgb(140, 112, 79);
+          border-left: 3px solid rgba(154, 128, 92, 0.1);
+          margin-left: 2px;
+          margin-right: 6px;
+          padding-left: 16px;
+      }
+
+      @media screen and (min-width: 704px) {
+        body {
+          padding-left: 42px; 
+          padding-right: 42px; 
+        }
+      }
+
+      @media screen and (min-width: 736px) {
+        body { 
+          padding-left: 60px; 
+          padding-right: 60px;
+          font-size: 18px;
+          line-height: 1.7;
+        }
+      }
+
+      a {
+        color: rgb(209, 150, 0);
+        text-decoration: none;
+      }
+
+      code, pre {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><%=title%></h2>
+    <div>
+      <button id="btn1">screenshot</button>
+    </div>
+    <div>
+        <%-content%>
+    </div>
+    <br>
+    <div>
+      <button id="btn2">screenshot</button>
+    </div>
+
+    <script>
+      function takeScreenshot() {
+        const url = encodeURIComponent(location.href);
+        const width = 375;
+        const height = 812;
+        const fullPage = true;
+
+        window.open(`/api/v1/screenshot2?url=${url}&width=${width}&height=${height}&fullPage=${fullPage}`);
+      }
+
+      btn1.onclick = takeScreenshot;
+      btn2.onclick = takeScreenshot;
+    </script>
+  </body>
+</html>
