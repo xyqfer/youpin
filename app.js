@@ -177,7 +177,18 @@ app.get('/archives-review', async function(req, res) {
       },
     });
 
-    let content = archives.reduce((acc, item) => {
+    const nextPage = `
+      <div>
+        <a href="/archives-review?token=${token}&year=${year}&i=${i + 1}">下一页</a>
+      </div>
+    `;
+
+    let content = `
+      ${nextPage}
+      <br>
+    `;
+
+    content += archives.reduce((acc, item) => {
       acc += `
         <div style="margin-bottom: 50px">
           <a href="${process.env.ARCHIVE_HOST}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
@@ -192,9 +203,7 @@ app.get('/archives-review', async function(req, res) {
 
     content += `
       <br>
-      <div>
-        <a href="/archives-review?token=${token}&year=${year}&i=${i + 1}">下一页</a>
-      </div>
+      ${nextPage}
       <br>
       <br>
     `;
