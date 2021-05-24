@@ -68,7 +68,7 @@
     "youtube-captions-scraper": "1.0.3",
     "ytdl-core": "4.8.0",
     "@mozilla/readability": "0.4.1",
-    "jsdom": "16.5.3",
+    "jsdom": "16.6.0",
     "qs": "6.10.1"
   },
   "engines": {
