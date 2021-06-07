@@ -37,7 +37,7 @@
     "ejs": "3.1.6",
     "epub-gen": "0.1.0",
     "express": "4.17.1",
-    "express-ws": "4.0.0",
+    "express-ws": "5.0.2",
     "follow-redirects": "1.14.1",
     "glob": "7.1.7",
     "got": "11.8.2",
