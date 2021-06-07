@@ -342,7 +342,15 @@ app.post('/lark-test', async (req, res) => {
           'tag': 'text',
           'text': content,
         }
-      ]
+      ],
+      [],
+      [
+        {
+          'tag': 'a',
+          'text': 'chrome link',
+          'href': 'googlechromes://www.baidu.com',
+        }
+      ],
     ],
   });
   
