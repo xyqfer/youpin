@@ -13,11 +13,13 @@ function createScreenshotUrls(url) {
   const url3 = process.env.SCREENSHOT_URL2 + encodeUrl(url) + `?width=${width}&height=${height}`;
   const url4 = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot&embed=screenshot.url&fullPage`;
   const url5 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
-  const url6 = `${process.env.hostName}/api/v1/screenshot2?url=${encodeURIComponent(url)}&width=${width}&height=${height}`;
+
+  const translateUrl = `https://translate.google.com/translate?sl=en&tl=zh-CN&u=${encodeURIComponent(url)}`;
+  const url6 = `${process.env.hostName}/api/v1/screenshot2?url=${encodeURIComponent(translateUrl)}&width=${width}&height=${height + 500}&delay=3`;
 
   return [
-    url1,
     url6,
+    url1,
     url4,
     url2,
     url5,

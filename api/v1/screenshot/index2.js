@@ -2,7 +2,7 @@ const request = require('request');
 const { http } = require('app-libs');
 
 module.exports = async (req, resp) => {
-  const { url, width = 375, height = 2000, fullPage = false, } = req.query;
+  const { url, width = 375, height = 2000, fullPage = false, delay = false, } = req.query;
   const res = await http.post({
     uri: 'https://cp82i7sfi4.execute-api.us-east-1.amazonaws.com/prod/capture',
     body: {
@@ -14,7 +14,7 @@ module.exports = async (req, resp) => {
             "enabled": true
         }],
         "options": {
-            "delay": false,
+            "delay": delay,
             "fullPage": fullPage,
         }
     },
