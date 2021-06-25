@@ -33,7 +33,7 @@ module.exports = async ({ title = '', content = '', render, device = 'device1', 
 
         const response = await rp.get({
             json: true,
-            uri: `https://api.day.app/${process.env[device]}/${encodeURIComponent(title)}?url=${url}`,
+            uri: `${process.env.PUSH_URL}/${process.env[device]}/${encodeURIComponent(title)}?url=${url}`,
         });
 
         console.log(response);
