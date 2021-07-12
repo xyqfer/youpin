@@ -15,7 +15,7 @@ function createScreenshotUrls(url) {
   const url5 = process.env.SCREENSHOT_URL + encodeUrl(url) + `?width=${width}&height=${height}`;
 
   const translateUrl = `https://translate.google.com/translate?sl=en&tl=zh-CN&u=${encodeURIComponent(url)}`;
-  const url6 = `${process.env.hostName}/api/v1/screenshot2?url=${encodeURIComponent(translateUrl)}&width=${width}&height=${height + 500}&delay=3`;
+  const url6 = `${process.env.hostName}/api/v1/screenshot2?url=${encodeURIComponent(translateUrl)}&width=${width}&height=${height + 500}&delay=5`;
 
   return [
     url6,
