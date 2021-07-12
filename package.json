@@ -20,7 +20,7 @@
     "@xyqfer/init-leancloud-engine": "1.1.1",
     "@xyqfer/leancloud-db": "1.6.1",
     "@xyqfer/leancloud-graphql-express-middleware": "1.1.3",
-    "ali-oss": "6.15.2",
+    "ali-oss": "6.16.0",
     "async-retry": "1.3.1",
     "axios": "0.18.1",
     "bluebird": "3.7.2",
