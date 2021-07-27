@@ -13,6 +13,15 @@ module.exports = async (req, res) => {
     $('.cx-app-content-main img').each(function() {
         $(this).attr('referrerpolicy', 'no-referrer');
     });
+    $('a').each(function() {
+        const $elem = $(this);
+        let link = $elem.attr('href');
+
+        if (link.startsWith('link://') || link.startsWith('links://')) {
+          link = link.replace('link://', 'https://').replace('links://', 'https://');
+          $elem.attr('href', link);
+        }
+    });
 
     res.render('caixin', {
         title: '',
