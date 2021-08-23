@@ -38,32 +38,19 @@ module.exports = async () => {
 
             try {
               await http.post({
-                  uri: process.env.qqboturl,
+                  uri: process.env.qqboturl2,
                   json: true,
                   body: {
-                      group_id: parseInt(process.env.qqbotgroupid),
-                      message: message,
+                      "sessionKey": process.env.qqbotsessionkey,
+                      "target": parseInt(process.env.qqbotgroupid),
+                      "messageChain": [{
+                          "type": "Plain",
+                          "text": message,
+                      }]
                   },
               });
             } catch(err) {
               console.error(err);
-                
-              try {
-                await http.post({
-                      uri: process.env.qqboturl2,
-                      json: true,
-                      body: {
-                          "sessionKey": process.env.qqbotsessionkey,
-                          "target": parseInt(process.env.qqbotgroupid),
-                          "messageChain": [{
-                              "type": "Plain",
-                              "text": message,
-                          }]
-                      },
-                  });
-              } catch (err) {
-                console.error(err);
-              }
             }
 
             const content = newData.reduce((acc, { title, link }) => {
