@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
             Cookie: `SA_USER_UID=${process.env.CX_USER_UID}; SA_USER_UNIT=1; SA_USER_DEVICE_TYPE=5; USER_LOGIN_CODE=${code};`,
         }
     });
-    const content = JSON.parse(response.data.slice(17, -1));
+    const { content } = JSON.parse(response.data.slice(17, -1));
 
     const $ = cheerio.load(content);
     $('script').remove();
