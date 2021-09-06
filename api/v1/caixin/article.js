@@ -18,9 +18,6 @@ module.exports = async (req, res) => {
         }
     });
     const { content } = JSON.parse(response.data.slice(17, -1));
-    
-    console.log(`https://gateway.caixin.com/api/newauth/checkAuthByIdJsonp?type=0&id=${id}&page=0`);
-    console.log(`SA_USER_UID=${process.env.CX_USER_UID}; SA_USER_UNIT=1; SA_USER_DEVICE_TYPE=5; USER_LOGIN_CODE=${code};`);
 
     const $ = cheerio.load(content);
     $('script').remove();
@@ -29,7 +26,7 @@ module.exports = async (req, res) => {
     });
     $('a').each(function() {
         const $elem = $(this);
-        let link = $elem.attr('href');
+        let link = $elem.attr('href') || '';
 
         if (link.startsWith('link://') || link.startsWith('links://')) {
           link = link.replace('link://', 'https://').replace('links://', 'https://');
