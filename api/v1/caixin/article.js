@@ -39,6 +39,8 @@ module.exports = async (req, res) => {
         json: true,
     });
     
+    console.log(response);
+    
     const title = response.data.articleProperties.share.title;
 
     res.render('caixin', {
