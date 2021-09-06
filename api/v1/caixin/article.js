@@ -18,6 +18,9 @@ module.exports = async (req, res) => {
         }
     });
     const { content } = JSON.parse(response.data.slice(17, -1));
+    
+    console.log(code);
+    console.log(content);
 
     const $ = cheerio.load(content);
     $('script').remove();
