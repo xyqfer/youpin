@@ -19,6 +19,7 @@ module.exports = async (req, res) => {
     });
     const { content } = JSON.parse(response.data.slice(17, -1));
     
+    console.log(`https://gateway.caixin.com/api/newauth/checkAuthByIdJsonp?type=0&id=${id}&page=0`);
     console.log(`SA_USER_UID=${process.env.CX_USER_UID}; SA_USER_UNIT=1; SA_USER_DEVICE_TYPE=5; USER_LOGIN_CODE=${code};`);
 
     const $ = cheerio.load(content);
