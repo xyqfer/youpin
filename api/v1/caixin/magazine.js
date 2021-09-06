@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
 
         acc += `
           <div style="margin-bottom: 50px">
-              <a href="./article?id=${news.id}" target="_blank">
+              <a href="./article?id=${news.source_id}" target="_blank">
                   <h4>${news.title}</h4>
               </a>
               ${img}
