@@ -35,11 +35,9 @@ module.exports = async (req, res) => {
     });
     
     response = await http.get({
-        uri: `https://gateway.caixin.com/api/app-api/auth/validate?uid=${process.env.CX_USER_UID}&code=${code}&unit=1&articleId=${id}&deviceType=1&productCodeList=QZSF,PRO_LITE,PRO,DATABASE_BASIC`,
+        uri: `https://gateway.caixin.com/api/app-api/auth/validate?uid=${process.env.CX_USER_UID}&code=${code}&unit=1&articleId=${id}&deviceType=5&productCodeList=QZSF,PRO_LITE,PRO,DATABASE_BASIC`,
         json: true,
     });
-    
-    console.log(`https://gateway.caixin.com/api/app-api/auth/validate?uid=${process.env.CX_USER_UID}&code=${code}&unit=1&articleId=${id}&deviceType=1&productCodeList=QZSF,PRO_LITE,PRO,DATABASE_BASIC`);
     
     const title = response.data.articleProperties.share.title;
 
