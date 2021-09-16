@@ -31,7 +31,7 @@
     "connect-timeout": "1.9.0",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
-    "cos-nodejs-sdk-v5": "2.9.18",
+    "cos-nodejs-sdk-v5": "2.10.3",
     "decompress-zip": "0.3.3",
     "dropbox": "5.2.1",
     "ejs": "3.1.6",
