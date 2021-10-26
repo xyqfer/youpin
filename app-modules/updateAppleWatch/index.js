@@ -23,7 +23,7 @@ module.exports = async () => {
 
             if (min >= 5 && min < 6 && second > 20) {
                 try {
-                    const res = await lark.sendText(process.env.LARK_USER, `定时播报: ${info0}-${info1}`);
+                    const res = await lark.sendText(process.env.LARK_USER, `定时播报: ${info0}`);
                 } catch(err) {
                     console.error(err);
                 }
