@@ -16,18 +16,6 @@ module.exports = async () => {
             } catch(err) {
                 console.error(err);
             }
-        } else {
-            const now = new Date()
-            const min = now.getMinutes()
-            const second = now.getSeconds()
-
-            if (min >= 5 && min < 6 && second > 20) {
-                try {
-                    const res = await lark.sendText(process.env.LARK_USER, `定时播报: ${info0}`);
-                } catch(err) {
-                    console.error(err);
-                }
-            }
         }
 
         return {
