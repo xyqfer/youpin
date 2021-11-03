@@ -33,7 +33,7 @@
     "cors": "2.8.5",
     "cos-nodejs-sdk-v5": "2.9.18",
     "decompress-zip": "0.3.3",
-    "dropbox": "5.2.1",
+    "dropbox": "10.16.0",
     "ejs": "3.1.6",
     "epub-gen": "0.1.0",
     "express": "4.17.1",
