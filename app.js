@@ -28,6 +28,7 @@ app.set('view engine', 'ejs');
 app.set('x-powered-by', false);
 
 app.locals.cdnHost = process.env.CDN_HOST;
+app.locals.ntHost = process.env.NT_HOST;
 
 app.use((req, res, next) => {
   res.append('Permissions-Policy', 'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()');

@@ -167,7 +167,12 @@ const cloudFuncConfig = [
         name: 'updateAppleWatch',
         module: 'updateAppleWatch',
         info: '获取 Apple Watch',
-    }
+    },
+    {
+        name: 'updateNT',
+        module: 'updateNT',
+        info: '更新 nt',
+    },
 ];
 
 cloudFuncConfig.forEach((config) => {
