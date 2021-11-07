@@ -17,10 +17,15 @@ function extractData({content, link}) {
 
     const $date = $('.tweet-date > a');
     const date = $date.attr('title');
-    $date.text(date);
+    $date.text('');
 
-    const fullname = $('.fullname').eq(0).attr('title');
-    const username = $('.username').eq(0).attr('title');
+    const $fullname = $('.fullname').eq(0);
+    const $username = $('.username').eq(0);
+    const fullname = $fullname.attr('title');
+    const username = $username.attr('title');
+
+    $('.fullname').addClass('notranslate').attr('translate', 'no');
+    $('.username').addClass('notranslate').attr('translate', 'no');
 
     return {
         content: $.html(),
