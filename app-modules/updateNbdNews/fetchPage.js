@@ -8,6 +8,7 @@ module.exports = async (data) =>
         $('.n-on-h-more-read')
             .add('.n-on-h-more-read-a')
             .remove();
+        $('.nbd-mzsm').remove();
         const content = $('.g-articl-text').html();
 
         item.title = title;
