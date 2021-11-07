@@ -44,6 +44,7 @@ async function getTargetData() {
     }
 
     // return res.sort((a, b) => new Date(b.date) - new Date(a.date))
+    console.log(res.length)
     return res
 }
 
