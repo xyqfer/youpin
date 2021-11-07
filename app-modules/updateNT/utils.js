@@ -36,7 +36,7 @@ async function getTargetData() {
     const RSSHost = process.env.NT_RSS;
     const res = []
 
-    for (let user in userList) {
+    for (let user of userList) {
         const feed = await parser.parseURL(`${RSSHost}${user}`);
         feed.items.forEach((item) => {
             res.push(extractData(item))
@@ -44,7 +44,6 @@ async function getTargetData() {
     }
 
     // return res.sort((a, b) => new Date(b.date) - new Date(a.date))
-    console.log(res.length)
     return res
 }
 
