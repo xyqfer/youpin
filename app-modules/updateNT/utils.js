@@ -77,4 +77,5 @@ async function getFriends(user = '') {
 
 module.exports = {
     getTargetData,
+    getFriends,
 }
