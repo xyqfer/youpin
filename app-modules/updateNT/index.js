@@ -1,24 +1,15 @@
-const updateContainer = require('app-containers/update');
-const { getTargetData } = require('./utils');
+const update = require('./update');
+const { db } = require('app-libs');
 
 module.exports = async () => {
-    const filterKey = 'link';
-    const dbName = 'NT_DATA';
-
     try {
-        return await updateContainer({
-            dbName,
-            filterKey,
-            mail: {
-                title: 'nt 有更新',
-                render: 'nt',
-                template: ({ content = '' }) => {
-                  return content;
-                },
-                device: 'device1',
-            },
-            getTargetData,
+        const username = await db.getDbData({
+            dbName: 'NT_USER',
+            limit: 1000,
         });
+        const userList = username.map(({ name }) => name)
+
+        return await update(userList)
     } catch (err) {
         console.error(err);
         return {

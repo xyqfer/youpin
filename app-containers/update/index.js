@@ -10,29 +10,38 @@ module.exports = async (params = {}) => {
             template: () => '',
         },
         getDbData: async function() {
-            return await cache.init({
-                dbName: this.dbName,
-                query: {
-                    select: [this.filterKey],
-                },
-                count: 2 * 1000,
-            });
+            if (this.dbName) {
+                return await cache.init({
+                    dbName: this.dbName,
+                    query: {
+                        select: [this.filterKey],
+                    },
+                    count: 2 * 1000,
+                });
+            }
+
+            return []
         },
         getTargetData: () => [],
         filterKey: '',
         alreadySaved: false,
         filterData: async function(dbData, targetData) {
-            const newData = await cache.findAndSet({
-                dbName: this.dbName,
-                source: targetData,
-                key: this.filterKey,
-            });
-            this.alreadySaved = true;
+            if (this.dbName) {
+                const newData = await cache.findAndSet({
+                    dbName: this.dbName,
+                    source: targetData,
+                    key: this.filterKey,
+                });
+                
+                this.alreadySaved = true;
+                return newData;
+            }
 
-            return newData;
+            this.alreadySaved = true;
+            return targetData
         },
         saveData: function(data = []) {
-            if (!this.alreadySaved) {
+            if (!this.alreadySaved && this.dbName) {
                 this.alreadySaved = true;
 
                 return saveDbData({

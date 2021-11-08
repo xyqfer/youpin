@@ -1,3 +1,4 @@
+const moment = require('moment');
 const cheerio = require('cheerio');
 const Parser = require('rss-parser');
 const { params } = require('app-libs')
@@ -6,11 +7,6 @@ const parser = new Parser({
     'User-Agent': params.ua.pc
   },
 });
-
-const userList = [
-    'googlechrome',
-    'v8js',
-]
 
 function extractData({content, link}) {
     const $ = cheerio.load(content, null, false);
@@ -36,10 +32,10 @@ function extractData({content, link}) {
     }
 }
 
-async function getTargetData() {
+async function getTargetData(userList, sort = false) {
     const host = process.env.NT_HOST;
     const RSSHost = process.env.NT_RSS;
-    const res = []
+    let res = [];
 
     for (let user of userList) {
         const feed = await parser.parseURL(`${RSSHost}${user}`);
@@ -48,7 +44,14 @@ async function getTargetData() {
         })
     }
 
-    // return res.sort((a, b) => new Date(b.date) - new Date(a.date))
+    res = res.filter(({ date }) => {
+        return moment(date, 'DD/MM/YYYY HH:mm:ss').add(1, 'month').isAfter(moment(Date.now()))
+    })
+
+    if (sort) {
+        return res.sort((a, b) => new Date(b.date) - new Date(a.date))
+    }
+
     return res
 }
 
