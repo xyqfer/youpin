@@ -56,6 +56,25 @@ async function getTargetData(userList, sort = false) {
     return res
 }
 
+async function getFriends(user = '') {
+    const userList = [];
+    let cursor = -1
+
+    while (cursor) {
+        const result = await axios({
+            method: 'get',
+            url: `https://api.twitter.com/1.1/friends/list.json?screen_name=${user}&count=200&cursor${cursor}`,
+            headers: {
+                'Authorization': `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
+            },
+        });
+
+        result.data.users.forEach((item) => userList.push(item.screen_name));
+        cursor = result.data.next_cursor
+    }
+    return userList;
+}
+
 module.exports = {
     getTargetData,
 }
