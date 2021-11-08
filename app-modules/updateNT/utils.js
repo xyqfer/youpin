@@ -13,7 +13,7 @@ function extractData({content, link}) {
 
     const $date = $('.tweet-date > a');
     const date = $date.attr('title');
-    $date.text('');
+    $date.text(date);
 
     const $fullname = $('.fullname').eq(0);
     const $username = $('.username').eq(0);
@@ -22,6 +22,7 @@ function extractData({content, link}) {
 
     $('.fullname').addClass('notranslate').attr('translate', 'no');
     $('.username').addClass('notranslate').attr('translate', 'no');
+    $date.addClass('notranslate').attr('translate', 'no');
 
     return {
         content: $.html(),
