@@ -386,6 +386,21 @@ app.get('/bbcproxy', async function(req, res) {
     }
 });
 
+app.get('/nt/timeline', async function(req, res) {
+    const { user, token } = req.query;
+
+    if (token !== process.env.NT_TOKEN) {
+        res.send('err');
+        return;
+    }
+
+    require('./app-modules/updateNT/timeline')(user);
+
+    res.json({
+        success: true
+    })
+});
+
 app.use('/api', require('./api/index'));
 
 app.get('/youtube/transcript', require('./routes/youtube/transcript'));
