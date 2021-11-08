@@ -64,7 +64,7 @@ async function getFriends(user = '') {
     while (cursor) {
         const result = await axios({
             method: 'get',
-            url: `https://api.twitter.com/1.1/friends/list.json?screen_name=${user}&count=200&cursor${cursor}`,
+            url: `https://api.twitter.com/1.1/friends/list.json?screen_name=${user}&count=200&cursor=${cursor}`,
             headers: {
                 'Authorization': `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
             },
