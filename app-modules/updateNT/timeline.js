@@ -1,4 +1,3 @@
-const axios = require('axios');
 const update = require('./update');
 const { getFriends } = require('./utils');
 
