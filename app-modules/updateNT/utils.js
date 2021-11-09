@@ -14,7 +14,7 @@ function extractData({content, link}) {
 
     const $date = $('.tweet-date > a');
     const date = $date.attr('title');
-    $date.text(date);
+    $date.text(moment(date, 'DD/MM/YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss'));
 
     const $fullname = $('.fullname').eq(0);
     const $username = $('.username').eq(0);
