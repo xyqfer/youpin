@@ -40,10 +40,14 @@ async function getTargetData(userList, sort = false) {
     let res = [];
 
     for (let user of userList) {
-        const feed = await parser.parseURL(`${RSSHost}${user}`);
-        feed.items.forEach((item) => {
-            res.push(extractData(item))
-        })
+        try {
+            const feed = await parser.parseURL(`${RSSHost}${user}`);
+            feed.items.forEach((item) => {
+                res.push(extractData(item))
+            })
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     res = res.filter(({ date }) => {
