@@ -13,8 +13,9 @@ function extractData({content, link}) {
     const $ = cheerio.load(content, null, false);
 
     const $date = $('.tweet-date > a');
-    const date = $date.attr('title');
-    $date.text(moment(date, 'DD/MM/YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss'));
+    let date = $date.attr('title');
+    date = moment(date, 'DD/MM/YYYY, HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
+    $date.text(date);
 
     const $fullname = $('.fullname').eq(0);
     const $username = $('.username').eq(0);
@@ -51,7 +52,7 @@ async function getTargetData(userList, sort = false) {
     }
 
     res = res.filter(({ date }) => {
-        return moment(date, 'DD/MM/YYYY HH:mm:ss').add(1, 'month').isAfter(moment(Date.now()))
+        return moment(date).add(1, 'month').isAfter(moment(Date.now()))
     })
 
     if (sort) {
