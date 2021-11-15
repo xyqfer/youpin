@@ -52,7 +52,7 @@ async function getTargetData(userList, sort = false) {
     }
 
     res = res.filter(({ date }) => {
-        return moment(date).add(1, 'month').isAfter(moment(Date.now()))
+        return moment(date).add(0.5, 'month').isAfter(moment(Date.now()))
     })
 
     if (sort) {
