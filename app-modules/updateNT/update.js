@@ -16,6 +16,7 @@ module.exports = async (userList = [], sort = false) => {
                   return content;
                 },
                 device: 'device1',
+                open: 'safari',
             },
             getTargetData: () => {
                 return getTargetData(userList, sort)
