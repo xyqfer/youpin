@@ -189,7 +189,9 @@ app.get('/archives-review', async function(req, res) {
       <br>
     `;
 
-    content += archives.reduce((acc, item) => {
+    content += archives.filter((item) => {
+        return item.title.includes('科技博客')
+    }).reduce((acc, item) => {
       acc += `
         <div style="margin-bottom: 50px">
           <a href="${process.env.ARCHIVE_HOST}/archive?id=${item.uuid}&render=archive" target="_blank" rel="noreferrer">
