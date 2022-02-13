@@ -30,11 +30,13 @@ module.exports = async () => {
         });
 
         if (newData.length > 0) {
-            const message = newData.reduce((acc, { title, link }, index) => {
-                const isLast = index === newData.length - 1;
-                acc += `${title.trim()} ${link}${isLast ? '' : '\n\n'}`;
+            const message = newData.reduce((acc, { title, link }) => {
+                acc.push({
+                  title,
+                  url: link,
+                })
                 return acc;
-            }, 'RSSBOT 有更新:\n\n');
+            }, []);
 
             try {
               await http.post({
@@ -42,11 +44,7 @@ module.exports = async () => {
                   json: true,
                   body: {
                       "sessionKey": process.env.qqbotsessionkey,
-                      "target": parseInt(process.env.qqbotgroupid),
-                      "messageChain": [{
-                          "type": "Plain",
-                          "text": message,
-                      }]
+                      "data": message,
                   },
               });
             } catch(err) {
