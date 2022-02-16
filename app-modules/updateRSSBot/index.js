@@ -32,7 +32,7 @@ module.exports = async () => {
         if (newData.length > 0) {
             const message = newData.reduce((acc, { title, link }) => {
                 acc.push({
-                  title,
+                  title: title.trim(),
                   url: link,
                 })
                 return acc;
@@ -55,7 +55,7 @@ module.exports = async () => {
               acc.push([
                 {
                   'tag': 'text',
-                  'text': title,
+                  'text': title.trim(),
                 }
               ]);
               acc.push([
