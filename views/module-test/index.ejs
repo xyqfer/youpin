@@ -34,6 +34,11 @@
     <input type="text" id="J-text6">
     <br>
     <button id="J-test6">caixin redirect</button>
+    <br>
+    <br>
+    <input type="text" id="J-text7">
+    <br>
+    <button id="J-test7">github redirect</button>
     
     <script>
         const $text1 = document.getElementById('J-text1');
@@ -48,6 +53,7 @@
         const $btn4 = document.getElementById('J-test4');
         const $btn5 = document.getElementById('J-test5');
         const $btn6 = document.getElementById('J-test6');
+        const $btn7 = document.getElementById('J-test7');
         const token = '<%=token%>';
         const imageProxy = '<%=imageProxy%>';
     </script>
@@ -113,6 +119,12 @@
 
         $btn6.addEventListener('click', () => {
             window.open('/api/v1/caixin/redirect?url=' + encodeURIComponent($text6.value));
+        });
+
+        $btn7.addEventListener('click', () => {
+            const u = new URL($text7.value)
+            u.host = 'github.rc1844.workers.dev'
+            window.open(u.toString());
         });
     </script>
 </body>
