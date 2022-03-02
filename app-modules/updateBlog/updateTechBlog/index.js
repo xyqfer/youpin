@@ -14,13 +14,21 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '科技博客有更新',
-                template: ({ title = '', url = '' }) => `
-                    <div style="margin-bottom: 50px">
-                        <a href="${url}" target="_blank">
-                            <h4>${title}</h4>
-                        </a>
-                    </div>
-                `,
+                template: ({ title = '', url = '' }) => {
+                    const u = new URL(url)
+
+                    if (u.host === 'github.com') {
+                        u.host = 'github.rc1844.workers.dev'
+                    }
+
+                    return `
+                        <div style="margin-bottom: 50px">
+                            <a href="${u.toString()}" target="_blank">
+                                <h4>${title}</h4>
+                            </a>
+                        </div>
+                    `
+                },
                 device: 'device1',
                 open: 'chrome',
             },
