@@ -38,7 +38,12 @@
     <br>
     <input type="text" id="J-text7">
     <br>
-    <button id="J-test7">github redirect</button>
+    <button id="J-test7">github redirect1</button>
+    <br>
+    <br>
+    <input type="text" id="J-text8">
+    <br>
+    <button id="J-test8">github redirect2</button>
     
     <script>
         const $text1 = document.getElementById('J-text1');
@@ -48,6 +53,7 @@
         const $text5 = document.getElementById('J-text5');
         const $text6 = document.getElementById('J-text6');
         const $text7 = document.getElementById('J-text7');
+        const $text8 = document.getElementById('J-text8');
 
         const $btn1 = document.getElementById('J-test1');
         const $btn2 = document.getElementById('J-test2');
@@ -56,6 +62,8 @@
         const $btn5 = document.getElementById('J-test5');
         const $btn6 = document.getElementById('J-test6');
         const $btn7 = document.getElementById('J-test7');
+        const $btn8 = document.getElementById('J-test8');
+
         const token = '<%=token%>';
         const imageProxy = '<%=imageProxy%>';
     </script>
@@ -126,6 +134,12 @@
         $btn7.addEventListener('click', () => {
             const u = new URL($text7.value)
             u.host = 'github.rc1844.workers.dev'
+            window.open(u.toString());
+        });
+
+        $btn8.addEventListener('click', () => {
+            const u = new URL($text8.value)
+            u.host = '<%=githubHost2%>'
             window.open(u.toString());
         });
     </script>
