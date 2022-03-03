@@ -18,7 +18,7 @@ module.exports = async () => {
                     const u = new URL(url)
 
                     if (u.host === 'github.com') {
-                        u.host = 'github.rc1844.workers.dev'
+                        u.host = process.env.GITHUB_HOST2
                     }
 
                     return `
