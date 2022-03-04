@@ -13,16 +13,24 @@ module.exports = async () => {
             filterKey,
             mail: {
                 title: '36kr 文章有更新',
-                template: ({ title = '', summary = '', url = '' }) => `
+                template: ({ title = '', summary = '', url = '' }) => {
+                    const u = new URL(url)
+
+                    if (u.host === 'github.com') {
+                        u.host = process.env.GITHUB_HOST2
+                    }
+
+                    return `
                         <div style="margin-bottom: 30px">
-                            <a href="${url}" target="_blank">
+                            <a href="${u.toString()}" target="_blank">
                                 <h4>${title}</h4>
                             </a>
                             <div>
                                 ${summary}
                             </div>
                         </div>
-                    `,
+                    `
+                },
                 device: 'device1',
             },
             getTargetData: () =>
