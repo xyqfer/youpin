@@ -14,6 +14,13 @@ module.exports = (content) => {
             return;
         }
 
+        const u = new URL(link)
+
+        if (u.host === 'github.com') {
+            u.host = process.env.GITHUB_HOST2
+            $elem.attr('href', u.toString());
+        }
+
         const reg = /^https:\/\/www\.v2ex\.com/;
         link = url.resolve('https://www.v2ex.com', link);
         const $children = $elem.children();
