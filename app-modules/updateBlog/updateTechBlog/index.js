@@ -21,6 +21,10 @@ module.exports = async () => {
                         u.host = process.env.GITHUB_HOST2
                     }
 
+                    if (u.host === 'developer.chrome.com') {
+                        u.host = process.env.GOOGLE_DEV_HOST2
+                    }
+
                     return `
                         <div style="margin-bottom: 50px">
                             <a href="${u.toString()}" target="_blank">
