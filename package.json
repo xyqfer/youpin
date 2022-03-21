@@ -50,7 +50,7 @@
     "lodash": "4.17.21",
     "module-alias": "2.2.2",
     "moment": "2.29.1",
-    "nodemailer": "6.6.2",
+    "nodemailer": "6.7.3",
     "puppeteer-core": "5.5.0",
     "qcloud-cdn-node-sdk": "1.0.0",
     "request": "2.88.2",
