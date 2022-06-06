@@ -70,7 +70,13 @@ module.exports = async () => {
             }, []);
 
             try {
-              const res = await lark.sendPost(process.env.LARK_USER, {
+              let res = await lark.sendPost(process.env.LARK_USER, {
+                title: 'RSSBOT 有更新:',
+                content,
+              });
+              console.log(res.body);
+
+              res = await lark.sendBotMsg(process.env.LARK_BOT1, {
                 title: 'RSSBOT 有更新:',
                 content,
               });

@@ -51,7 +51,22 @@ const sendPost = async (user, msg) => {
     });
 };
 
+const sendBotMsg = async (botUrl, msg) => {
+    return await got.post(botUrl, {
+        json: {
+            msg_type: 'post',
+            content: {
+                post: {
+                    "zh_cn": msg,
+                },
+            },
+        },
+        responseType: 'json',
+    });
+};
+
 module.exports = {
     sendText,
     sendPost,
+    sendBotMsg,
 };
