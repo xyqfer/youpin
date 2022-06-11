@@ -79,7 +79,7 @@ module.exports = async () => {
 
               const day = moment().day();
 
-              if (day !== 0 || day !== 6) {
+              if (day !== 0 && day !== 6) {
                 res = await lark.sendBotMsg(process.env.LARK_BOT1, {
                   title: 'RSSBOT 有更新:',
                   content,
