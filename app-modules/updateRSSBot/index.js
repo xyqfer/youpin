@@ -1,5 +1,6 @@
 'use strict';
 
+const moment = require('moment');
 const getRSSData = require('./getRSSData');
 const { db, http } = require('app-libs');
 const lark = require('app-libs/mail/sendLark');
@@ -76,11 +77,16 @@ module.exports = async () => {
               });
               console.log(res.body);
 
-              res = await lark.sendBotMsg(process.env.LARK_BOT1, {
-                title: 'RSSBOT 有更新:',
-                content,
-              });
-              console.log(res.body);
+              const day = moment().day();
+
+              if (day !== 0 || day !== 6) {
+                res = await lark.sendBotMsg(process.env.LARK_BOT1, {
+                  title: 'RSSBOT 有更新:',
+                  content,
+                });
+
+                console.log(res.body);
+              }
             } catch(err) {
               console.error(err);
               console.log(content);
