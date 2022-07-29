@@ -5,7 +5,7 @@ module.exports = async () => {
     const Parser = require('rss-parser');
     const { params, http } = require('app-libs');
 
-    const formatLink = (link, title) => `https://ibdkopi6vn.avosapps.us/poliwag#!/content?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}&region=te`;
+    const formatLink = (link, title) => `https://ibdkopi6vn.erjsnfs.com/poliwag#!/content?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}&region=te`;
 
     const host = 'https://www.economist.com';
     const htmlString = await http.get({

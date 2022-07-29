@@ -6,12 +6,12 @@ const ProcessImage = ($, e, c) => {
 
         // handle cover image and lazy-loading images
         if (img[0].attribs.src) {
-            message = `<figure><img referrerpolicy="no-referrer" alt='${img[0].attribs.alt ? img[0].attribs.alt : ''}' src='https://ibdkopi6vn.avosapps.us/api/v1/proxyimage?url=${img[0].attribs.src.replace(
+            message = `<figure><img referrerpolicy="no-referrer" alt='${img[0].attribs.alt ? img[0].attribs.alt : ''}' src='https://ibdkopi6vn.erjsnfs.com/api/v1/proxyimage?url=${img[0].attribs.src.replace(
                 /(?<=\/news\/).*?(?=\/cpsprodpb)/,
                 '600'
             )}'><br><figcaption>`;
         } else {
-            message = `<figure><img referrerpolicy="no-referrer" alt='${img[0].attribs['data-alt'] ? img[0].attribs['data-alt'] : ''}' src='https://ibdkopi6vn.avosapps.us/api/v1/proxyimage?url=${img[0].attribs['data-src'].replace(
+            message = `<figure><img referrerpolicy="no-referrer" alt='${img[0].attribs['data-alt'] ? img[0].attribs['data-alt'] : ''}' src='https://ibdkopi6vn.erjsnfs.com/api/v1/proxyimage?url=${img[0].attribs['data-src'].replace(
                 /(?<=\/news\/).*?(?=\/cpsprodpb)/,
                 '600'
             )}'><br><figcaption>`;
