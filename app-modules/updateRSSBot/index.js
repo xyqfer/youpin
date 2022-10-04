@@ -81,7 +81,7 @@ module.exports = async () => {
               const date = moment().date();
               const month = moment().month();
 
-              if ((day !== 0 && day !== 6) || !(month === 9 && date >= 1 && date <= 7)) {
+              if ((day !== 0 && day !== 6) && !(month === 9 && date >= 1 && date <= 7)) {
                 res = await lark.sendBotMsg(process.env.LARK_BOT1, {
                   title: 'RSSBOT 有更新:',
                   content,
