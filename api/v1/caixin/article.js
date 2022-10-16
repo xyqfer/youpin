@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
     
     const { url } = response.data;
 
-    res.redirect(url);
+    res.redirect(url + '?p0');
 
     // res.render('caixin', {
     //     title,
