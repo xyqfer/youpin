@@ -39,18 +39,18 @@ module.exports = async () => {
                 return acc;
             }, []);
 
-            try {
-              await http.post({
-                  uri: process.env.qqboturl2,
-                  json: true,
-                  body: {
-                      "sessionKey": process.env.qqbotsessionkey,
-                      "data": message,
-                  },
-              });
-            } catch(err) {
-              console.error(err);
-            }
+            // try {
+            //   await http.post({
+            //       uri: process.env.qqboturl2,
+            //       json: true,
+            //       body: {
+            //           "sessionKey": process.env.qqbotsessionkey,
+            //           "data": message,
+            //       },
+            //   });
+            // } catch(err) {
+            //   console.error(err);
+            // }
 
             const content = newData.reduce((acc, { title, link }) => {
               acc.push([
@@ -81,7 +81,7 @@ module.exports = async () => {
               const date = moment().date();
               const month = moment().month();
 
-              if ((day !== 0 && day !== 6) && true) {
+              if ((day !== 0 && day !== 6) && false) {
                 res = await lark.sendBotMsg(process.env.LARK_BOT1, {
                   title: 'RSSBOT 有更新:',
                   content,
