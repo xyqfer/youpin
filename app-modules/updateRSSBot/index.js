@@ -1,10 +1,22 @@
 'use strict';
 
 const moment = require('moment');
+const axios = require('axios');
 const getRSSData = require('./getRSSData');
 const { db, http } = require('app-libs');
 const lark = require('app-libs/mail/sendLark');
 const { cache } = db;
+
+async function getFlag() {
+  try {
+    const rsp = await axios(process.env.CTR1);
+
+    return rsp.data.flag;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}
 
 module.exports = async () => {
     try {
@@ -81,7 +93,8 @@ module.exports = async () => {
               const date = moment().date();
               const month = moment().month();
 
-              if ((day !== 0 && day !== 6) && true) {
+              const flag = await getFlag()
+              if ((day !== 0 && day !== 6) && flag) {
                 res = await lark.sendBotMsg(process.env.LARK_BOT1, {
                   title: 'RSSBOT 有更新:',
                   content,
