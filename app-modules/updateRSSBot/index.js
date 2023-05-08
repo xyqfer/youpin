@@ -51,18 +51,18 @@ module.exports = async () => {
                 return acc;
             }, []);
 
-            // try {
-            //   await http.post({
-            //       uri: process.env.qqboturl2,
-            //       json: true,
-            //       body: {
-            //           "sessionKey": process.env.qqbotsessionkey,
-            //           "data": message,
-            //       },
-            //   });
-            // } catch(err) {
-            //   console.error(err);
-            // }
+            try {
+              await http.post({
+                  uri: process.env.qqboturl2,
+                  json: true,
+                  body: {
+                      "sessionKey": process.env.qqbotsessionkey,
+                      "data": message,
+                  },
+              });
+            } catch(err) {
+              console.error(err);
+            }
 
             const content = newData.reduce((acc, { title, link }) => {
               acc.push([
