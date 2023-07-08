@@ -16,7 +16,7 @@ module.exports = async () => {
         await updateEpubit();
         await updateBroadview();
         await updateDangdang();
-        await updateKobo();
+        // await updateKobo();
 
         return {
             success: true,
