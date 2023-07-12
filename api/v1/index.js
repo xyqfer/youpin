@@ -99,6 +99,25 @@ router.get('/proxyimage', async (req, res) => {
         .pipe(res);
 });
 
+router.get('/proxyimage2', async (req, res) => {
+    const { url } = req.query;
+    const headers = {
+        'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+        'referer': 'https://book.douban.com/'
+    };
+
+    if (req.headers.range) {
+        headers.Range = req.headers.range;
+    }
+
+    request
+        .get({
+            url,
+            headers,
+        })
+        .pipe(res);
+});
+
 router.get('/readeer/zhihu/list', require('./readeer/zhihu/list'));
 router.get('/readeer/zhihu/content', require('./readeer/zhihu/content'));
 router.get('/readeer/zhihu/random', require('./readeer/zhihu/random'));
