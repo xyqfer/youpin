@@ -32,13 +32,6 @@ updates:
     - 9.2.0
     - 9.4.0
     - 9.5.0
-  - dependency-name: webtorrent
-    versions:
-    - 0.115.0
-    - 0.115.1
-    - 0.115.2
-    - 0.115.3
-    - 0.116.2
   - dependency-name: jsdom
     versions:
     - 16.5.0
