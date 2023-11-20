@@ -35,7 +35,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily_en',
-        module: ['updateSSpaiMatrix', 'update36krArticle', 'updateFraudInfo', 'updateNBD'],
+        module: ['updateFraudInfo', 'updateNBD'],
         info: '每日更新_en',
     },
     {
@@ -55,7 +55,7 @@ const cloudFuncConfig = [
     },
     {
         name: 'updateDaily',
-        module: ['updateBook', 'updateCBNweekly', 'updateTerminus'],
+        module: ['updateBook', 'updateCBNweekly'],
         info: '每日更新',
     },
     {
